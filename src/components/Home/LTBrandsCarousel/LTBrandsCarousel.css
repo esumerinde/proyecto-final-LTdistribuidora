@@ -1,0 +1,281 @@
+/* LTBrandsCarousel - Carrusel de marcas */
+.LTBrandsCarouselWrapper {
+  width: 100%;
+  background-color: var(--lt-background-color);
+  padding: 3rem 0;
+}
+
+.LTBrandsCarouselContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  overflow: visible;
+}
+
+/* Header del carrusel */
+.LTBrandsCarouselHeader {
+  text-align: center;
+  margin-bottom: var(--lt-spacing-2xl);
+}
+
+.LTBrandsCarouselTitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-2xl);
+  font-weight: 700;
+  color: var(--lt-text-color);
+  margin: 0;
+}
+
+/* Contenedor del carrusel */
+.LTBrandsCarouselTrack {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.LTBrandsCarouselTrack::before,
+.LTBrandsCarouselTrack::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 48px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.LTBrandsCarouselTrack::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    var(--lt-background-color) 0%,
+    rgba(252, 248, 245, 0) 100%
+  );
+}
+
+.LTBrandsCarouselTrack::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    var(--lt-background-color) 0%,
+    rgba(252, 248, 245, 0) 100%
+  );
+}
+
+/* Slide del carrusel */
+.LTBrandsCarouselSlide {
+  display: flex;
+  align-items: center;
+  gap: 4rem; /* Aumentado de 3rem a 4rem */
+  animation: scrollBrands 45s linear infinite; /* Aumentado de 30s a 45s por más marcas */
+  flex-shrink: 0;
+  overflow: visible;
+  padding-left: 48px; /* Aumentado para evitar corte de logos */
+  padding-right: 48px; /* Aumentado para evitar corte de logos */
+  height: 120px;
+}
+
+/* Animación de scroll infinito */
+@keyframes scrollBrands {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Item individual de marca */
+.LTBrandsCarouselItem {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px; /* Aumentado de 120px a 150px */
+  height: 72px;
+  background: white;
+  border: 1px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  padding: var(--lt-spacing-sm);
+  margin: 0 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Espaciador invisible para crear separación */
+.LTBrandsCarouselSpacer {
+  flex-shrink: 0;
+  width: 0rem; /* Reducido de 2rem a 1rem para un gap más natural */
+  height: 100px;
+  margin: 0;
+  background: transparent;
+}
+
+/* Espaciador especial entre Nikon y Samsung */
+.LTBrandsCarouselSpacer--nikon-samsung {
+  width: 0.9rem !important; /* Puedes ajustar el ancho si lo prefieres */
+  margin-left: -9rem; /* Ajusta este valor para acercar más las marcas */
+  margin-right: -2rem; /* Puedes modificar ambos lados según lo que necesites */
+  padding: 0; /* Si prefieres usar padding, puedes cambiar aquí */
+}
+
+.LTBrandsCarouselItem:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-color: var(--lt-primary-color);
+}
+
+/* Logo de la marca */
+.LTBrandsCarouselLogo {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.LTBrandsCarouselItem:hover .LTBrandsCarouselLogo {
+  transform: none;
+}
+
+/* Ajustes específicos para logos pequeños */
+.LTBrandsCarouselLogo[alt="LG"] {
+  width: 120px;
+  max-width: 120px;
+}
+
+.LTBrandsCarouselLogo[alt="Sony"] {
+  width: 110px;
+  max-width: 110px;
+}
+
+.LTBrandsCarouselLogo[alt="Nintendo"] {
+  width: 130px;
+  max-width: 130px;
+}
+
+.LTBrandsCarouselLogo[alt="Canon"] {
+  width: 115px;
+  max-width: 115px;
+}
+
+.LTBrandsCarouselLogo[alt="Nikon"] {
+  width: 110px;
+  max-width: 110px;
+}
+
+.LTBrandsCarouselLogo[alt="Motorola"] {
+  width: 120px;
+  max-width: 120px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .LTBrandsCarouselWrapper {
+    padding: 2rem 0;
+  }
+
+  .LTBrandsCarouselTitle {
+    font-size: var(--lt-font-size-xl);
+  }
+
+  .LTBrandsCarouselSlide {
+    gap: 2.5rem; /* Aumentado para mantener separación en tablet */
+    animation-duration: 35s; /* Ajustado para más marcas */
+  }
+
+  .LTBrandsCarouselItem {
+    width: 120px;
+    height: 60px;
+    padding: var(--lt-spacing-sm);
+    margin: 0 0.5rem; /* Margin reducido pero presente */
+  }
+
+  /* Ajustes de logos para tablet */
+  .LTBrandsCarouselLogo[alt="LG"] {
+    width: 90px;
+    max-width: 90px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Sony"] {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Nintendo"] {
+    width: 95px;
+    max-width: 95px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Canon"] {
+    width: 85px;
+    max-width: 85px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Nikon"] {
+    width: 80px;
+    max-width: 80px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Motorola"] {
+    width: 85px;
+    max-width: 85px;
+  }
+}
+
+@media (max-width: 480px) {
+  .LTBrandsCarouselSlide {
+    gap: 2rem; /* Mantenido para móvil */
+    animation-duration: 30s; /* Ajustado para más marcas */
+  }
+
+  .LTBrandsCarouselItem {
+    width: 100px;
+    height: 50px;
+    padding: var(--lt-spacing-xs);
+    margin: 0 0.25rem; /* Margin mínimo para móvil */
+  }
+
+  /* Ajustes de logos para móvil */
+  .LTBrandsCarouselLogo[alt="LG"] {
+    width: 70px;
+    max-width: 70px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Sony"] {
+    width: 65px;
+    max-width: 65px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Nintendo"] {
+    width: 75px;
+    max-width: 75px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Canon"] {
+    width: 65px;
+    max-width: 65px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Nikon"] {
+    width: 65px;
+    max-width: 65px;
+  }
+
+  .LTBrandsCarouselLogo[alt="Motorola"] {
+    width: 70px;
+    max-width: 70px;
+  }
+}
+
+.lt-big-title {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  margin: 0;
+}

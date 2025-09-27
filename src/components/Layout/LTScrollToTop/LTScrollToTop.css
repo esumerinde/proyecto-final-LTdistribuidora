@@ -1,0 +1,48 @@
+﻿/* BotÃ³n Scroll to Top */
+.LTScrollToTopButton {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 999;
+  box-shadow: 0 6px 24px rgba(116, 123, 191, 0.22),
+    0 2px 12px rgba(0, 0, 0, 0.12);
+  border: 2px solid var(--lt-accent-color-dark);
+}
+
+.LTScrollToTopButton:hover {
+  background-color: var(--lt-accent-color-variant);
+  color: var(--lt-black-text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(168, 187, 163, 0.4);
+}
+
+.LTScrollToTopButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(168, 187, 163, 0.3);
+}
+
+.LTScrollToTopIcon {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  transition: transform 0.2s ease;
+}
+
+.LTScrollToTopButton:hover .LTScrollToTopIcon {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+
+/* Evitar conflicto con chat widget */

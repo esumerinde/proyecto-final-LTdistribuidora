@@ -1,0 +1,169 @@
+/* Wrapper para las cards */
+.LTPromoBannersCards {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+/* LTPromoBanners - Banners promocionales estilo farmaonline */
+.LTPromoBannersWrapper {
+  width: 100%;
+  background-color: var(--lt-background-color);
+  padding: var(--lt-spacing-2xl) 0;
+}
+
+.LTPromoBannersContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+}
+
+.LTPromoBannersTitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-2xl);
+  font-weight: 700;
+  color: var(--lt-text-color);
+  text-align: center;
+  margin: 0 0 var(--lt-spacing-2xl) 0;
+}
+
+/* Grid de banners */
+.LTPromoBannersGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lt-spacing-lg);
+}
+
+/* Card base */
+.LTPromoBannerCard {
+  border-radius: var(--lt-border-radius-lg);
+  overflow: hidden;
+  position: relative;
+  min-height: 200px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--lt-black-text-color);
+  will-change: transform;
+}
+
+.LTPromoBannerCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03) translateY(-2px);
+  z-index: 2;
+}
+
+/* Variaciones de color con nueva paleta */
+
+/* Contenido del banner */
+.LTPromoBannerContent {
+  padding: var(--lt-spacing-lg);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+/* Fecha */
+.LTPromoBannerDate {
+  font-family: var(--lt-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: var(--lt-spacing-sm);
+  color: var(--lt-black-text-color);
+}
+
+/* Contenido principal */
+.LTPromoBannerMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LTPromoBannerTitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-xl);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: var(--lt-spacing-xs);
+  color: var(--lt-black-text-color);
+}
+
+.LTPromoBannerSubtitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-lg);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--lt-spacing-sm);
+  color: var(--lt-black-text-color);
+}
+
+.LTPromoBannerDescription {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-sm);
+  font-weight: 500;
+  line-height: 1.3;
+  opacity: 0.9;
+  margin-bottom: var(--lt-spacing-md);
+  color: var(--lt-black-text-color);
+}
+
+/* Placeholder para imagen */
+.LTPromoBannerImagePlaceholder {
+  position: absolute;
+  top: 50%;
+  right: var(--lt-spacing-lg);
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  opacity: 0.2;
+  z-index: 1;
+}
+
+.LTPromoBannerImageIcon {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTPromoBannerImageIcon svg {
+  width: 40px;
+  height: 40px;
+  fill: currentColor;
+  opacity: 0.6;
+}
+
+/* Elimino estilos específicos del botón de promo banners para que use solo el global lt-button-light */
+/* .LTPromoBannersButton {
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  border: 2px solid var(--lt-black-text-color);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  align-self: flex-start;
+}
+.LTPromoBannersButton:hover {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-background-color);
+}
+*/
+/* Responsive Design */
+
+/* Animación de entrada escalonada */

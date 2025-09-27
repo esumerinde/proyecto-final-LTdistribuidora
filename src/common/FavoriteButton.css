@@ -1,0 +1,29 @@
+.FavoriteButton {
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  border: 1px solid var(--lt-border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.FavoriteButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2);
+}
+
+.FavoriteButton.active {
+  background: #f8d6e5;
+  border-color: var(--lt-border-color);
+}
+
+.FavoriteButtonIcon {
+  width: 18px;
+  height: 18px;
+  transition: fill 0.3s ease;
+}

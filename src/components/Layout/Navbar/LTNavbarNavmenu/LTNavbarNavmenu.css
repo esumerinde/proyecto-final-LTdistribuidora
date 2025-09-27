@@ -1,0 +1,79 @@
+﻿/* Subrayado animado específico para el navbar */
+.lt-menu-hover-navbar {
+  position: relative;
+}
+.lt-menu-hover-navbar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%) scaleX(0);
+  width: 100%;
+  height: 2px;
+  background: var(--lt-hover-text-menu);
+  transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  border-radius: 1px;
+  pointer-events: none;
+}
+.lt-menu-hover-navbar:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+/* LTNavbarNavmenu - Menú de navegación horizontal */
+.LTNavmenuWrapper {
+  width: 100%;
+  min-width: unset;
+  overflow-x: visible;
+  transform: none;
+  display: flex;
+  justify-content: center;
+  margin-left: 50px; /* Ajusta el valor según lo que necesites */
+}
+
+.LTNavmenuRowContainer {
+  width: auto;
+}
+
+.LTNavmenuList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-x: visible;
+  min-width: unset;
+  max-width: 400px;
+  width: auto;
+}
+
+.LTNavmenuItem {
+  flex-shrink: 0;
+}
+
+.LTNavmenuLink {
+  display: block;
+  padding: 8px 0;
+  color: var(--lt-black-text-color); /* negro de la paleta */
+  font-size: 15px;
+  font-family: var(--lt-font-family);
+  font-weight: 500;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: color 0.2s, text-decoration 0.2s, transform 0.2s;
+  border-bottom: none !important;
+  background: transparent;
+}
+
+.LTNavmenuLink:hover {
+  color: var(--lt-hover-text-menu);
+  border-bottom: none !important;
+  transform: translateY(-2px);
+}
+
+.LTNavmenuLink:active,
+.LTNavmenuLink.active {
+  color: var(--lt-hover-text-menu);
+  border-bottom: none !important;
+  font-weight: 600;
+}

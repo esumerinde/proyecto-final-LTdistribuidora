@@ -1,0 +1,184 @@
+/* LTNewsletter - Newsletter subscription component */
+.LTNewsletterWrapper {
+  width: 100%;
+  background: var(--lt-background-color);
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.LTNewsletterWrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(116, 123, 191, 0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  pointer-events: none;
+}
+
+.LTNewsletterContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.LTNewsletterContent {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(116, 123, 191, 0.2);
+  border: 1px solid rgba(116, 123, 191, 0.3);
+  color: var(--lt-black-text-color);
+}
+
+.LTNewsletterIcon {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  background: var(--lt-accent-color-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(116, 123, 191, 0.3);
+}
+
+.LTNewsletterIconSvg {
+  width: 30px;
+  height: 30px;
+  fill: var(--lt-background-color);
+}
+
+.LTNewsletterText {
+  flex: 1;
+  min-width: 0;
+}
+
+.LTNewsletterTitle {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  margin: 0 0 0.375rem 0;
+  line-height: 1.2;
+}
+
+.LTNewsletterDescription {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  color: var(--lt-black-text-color);
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+.LTNewsletterForm {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 280px;
+}
+
+.LTNewsletterInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.LTNewsletterInput {
+  padding: 0.75rem 0.875rem;
+  border: 1px solid var(--lt-border-color);
+  border-radius: 0.5rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  background: white;
+  transition: all 0.3s ease;
+  outline: none;
+  color: var(--lt-muted-text-color);
+}
+
+.LTNewsletterInput:focus {
+  border-color: var(--lt-primary-color);
+  box-shadow: 0 0 0 3px rgba(116, 123, 191, 0.1);
+}
+
+.LTNewsletterInput::placeholder {
+  color: var(--lt-muted-text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .LTNewsletterWrapper {
+    padding: 1.5rem 0;
+  }
+
+  .LTNewsletterContainer {
+    padding: 0 1rem;
+  }
+
+  .LTNewsletterContent {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .LTNewsletterIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .LTNewsletterIconSvg {
+    width: 25px;
+    height: 25px;
+  }
+
+  .LTNewsletterTitle {
+    font-size: 1.25rem;
+  }
+
+  .LTNewsletterDescription {
+    font-size: 0.8rem;
+  }
+
+  .LTNewsletterForm {
+    min-width: 100%;
+    width: 100%;
+  }
+
+  .LTNewsletterInputs {
+    width: 100%;
+  }
+
+  .LTNewsletterInput {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 480px) {
+  .LTNewsletterContainer {
+    padding: 0 0.75rem;
+  }
+
+  .LTNewsletterContent {
+    padding: 1rem;
+  }
+
+  .LTNewsletterTitle {
+    font-size: 1.125rem;
+  }
+}

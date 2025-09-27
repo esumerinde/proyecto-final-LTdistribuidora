@@ -1,0 +1,271 @@
+﻿.LTNavbarSticky .LTNavbarCategorias,
+.LTNavbarSticky .LTNavbarCategoriasButton,
+.LTNavbarSticky .LTNavbarNavmenu,
+.LTNavbarSticky .LTNavmenuWrapper,
+.LTNavbarSticky .LTNavmenuList,
+.LTNavbarSticky .LTNavmenuItem,
+.LTNavbarSticky .LTNavmenuLink {
+  opacity: 1 !important;
+}
+.LTNavbarSticky .LTNavbarCategorias,
+.LTNavbarSticky .LTNavbarCategoriasButton,
+.LTNavbarSticky .LTNavbarNavmenu {
+  opacity: 1 !important;
+}
+@media (max-width: 600px) {
+  .LTNavbarWrapper {
+    display: none !important;
+  }
+}
+/* Navbar Styles */
+.LTNavbarWrapper {
+  width: 100%;
+  height: 55px;
+  background: var(--lt-accent-color);
+  border-bottom: 1px solid var(--lt-accent-color);
+  position: fixed;
+  /* top is set dynamically via React inline style */
+  z-index: 1090;
+  border-bottom: none !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 18px rgba(116, 123, 191, 0.18);
+  transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+}
+
+.LTNavbarSticky {
+  /* No opacity, navbar stays solid */
+}
+
+.LTNavbarContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md); /* 0px arriba y abajo para alineación más ajustada */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Categorías Button */
+.LTNavbarCategorias {
+  position: relative;
+  flex-shrink: 0;
+}
+.LTNavbarCategoriasButton.active {
+  background: var(--lt-accent-color-dark);
+  border-color: var(--lt-accent-color-dark);
+}
+.LTNavbarCategoriasButton.active .LTNavbarCategoriasArrow {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
+}
+
+.LTNavbarNavmenu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: -20px;
+}
+
+.LTNavmenuList {
+  display: flex;
+  gap: 18px;
+  width: auto;
+  max-width: 400px;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 auto;
+}
+/* Submenu */
+.LTNavbarSubmenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 250px;
+  background: var(--lt-background-color);
+  border: 1px solid var(--lt-border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(116, 123, 191, 0.15);
+  z-index: 1000;
+  margin-top: 4px;
+  pointer-events: auto;
+  animation: fadeInMenu 0.28s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+.LTNavbarSubmenuContent {
+  padding: 12px 0;
+}
+
+.LTNavbarSubmenuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.LTNavbarSubmenuItem {
+  position: relative;
+}
+
+.LTNavbarSubmenuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  color: var(--lt-text-color);
+  text-decoration: none;
+  font-size: 14px;
+  font-family: var(--lt-font-family);
+  transition: all 0.2s ease;
+  /* El subrayado animado se maneja por la clase global lt-menu-hover */
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+.LTNavbarSubmenuLink:hover {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+  transition: background 0.2s, color 0.2s;
+  /* El subrayado animado se maneja por la clase global lt-menu-hover */
+}
+
+.LTNavbarSubmenuArrow {
+  width: 12px;
+  height: 12px;
+  fill: var(--lt-text-light);
+  transition: fill 0.2s ease;
+}
+
+.LTNavbarSubmenuLink:hover .LTNavbarSubmenuArrow {
+  fill: var(--lt-primary-color);
+}
+
+/* Expanded Submenu */
+.LTNavbarSubmenuExpanded {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  min-width: 280px;
+  background: var(--lt-background-color);
+  border: 1px solid var(--lt-border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(116, 123, 191, 0.15);
+  z-index: 1001;
+  margin-left: 8px;
+  pointer-events: auto;
+}
+
+.LTNavbarSubmenuExpandedContent {
+  padding: 16px;
+}
+
+.LTNavbarSubmenuExpandedTitle {
+  font-family: var(--lt-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--lt-primary-color);
+  margin: 0 0 12px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--lt-border-color);
+}
+
+.LTNavbarSubmenuExpandedList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4px;
+}
+
+.LTNavbarSubmenuExpandedLink {
+  display: block;
+  padding: 8px 12px;
+  color: var(--lt-text-color);
+  text-decoration: none;
+  font-size: 13px;
+  font-family: var(--lt-font-family);
+  border-radius: 4px;
+  /* El subrayado animado se maneja por la clase global lt-menu-hover */
+  /* El subrayado animado se maneja solo por la clase global lt-menu-hover */
+  border-bottom: none !important;
+  text-decoration: none !important;
+}
+
+.LTNavbarSubmenuExpandedLink:hover {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+  transition: background 0.2s, color 0.2s;
+  border-bottom: none !important;
+  text-decoration: none !important;
+  /* El subrayado animado se maneja por la clase global lt-menu-hover */
+}
+
+/* Special Badge */
+.LTNavbarSpecial {
+  flex-shrink: 0;
+}
+
+.LTNavbarSpecialBadge {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-black-text-color);
+  padding: 12px 20px; /* Mismo padding que Categorías */
+  border-radius: 6px; /* Mismo border-radius que Categorías */
+  font-size: 15px; /* Mismo font-size que Categorías */
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lt-navbar-button-small {
+  min-width: 120px;
+  padding: 0 20px;
+  height: 30px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 2px solid var(--lt-accent-color-dark);
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  box-shadow: none;
+  outline: none;
+  letter-spacing: 0.5px;
+}
+.lt-navbar-button-small.active {
+  background: var(--lt-accent-color-dark);
+  border-color: var(--lt-accent-color-dark);
+}
+.lt-navbar-button-small .LTNavbarCategoriasArrow {
+  margin-left: 6px;
+  transition: transform 0.2s;
+}
+.lt-navbar-button-small.active .LTNavbarCategoriasArrow {
+  transform: rotate(180deg);
+}
+
+@keyframes fadeInMenu {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.LTNavbarSubmenu {
+  animation: fadeInMenu 0.28s cubic-bezier(0.4, 0.2, 0.2, 1);
+}

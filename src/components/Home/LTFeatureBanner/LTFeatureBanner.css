@@ -1,0 +1,284 @@
+﻿@media (max-width: 600px) {
+  .LTFeatureBannerWrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+/* LTFeatureBanner - Banner de características estilo farmaonline */
+.LTFeatureBannerWrapper {
+  width: 100%;
+  background-color: var(--lt-background-color);
+  padding: var(--lt-spacing-lg) 0; /* Aumentado de var(--lt-spacing-md) (1rem) a var(--lt-spacing-lg) (1.5rem) */
+  min-height: 85px; /* Aumentado de 70px a 85px */
+}
+
+.LTFeatureBannerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  display: flex;
+  align-items: center; /* Volviendo a center */
+  justify-content: space-between;
+  gap: 2.5rem; /* Aumenta el gap entre cards */
+  min-height: 50px; /* Reducido de 100px a 50px */
+  transition: transform 0.7s cubic-bezier(0.7, 0.2, 0.3, 1),
+    opacity 0.7s cubic-bezier(0.7, 0.2, 0.3, 1);
+  will-change: transform;
+  opacity: 1;
+}
+
+.LTFeatureBannerContainer.fade {
+  opacity: 0;
+}
+
+.LTFeatureBannerItem {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+  padding: var(--lt-spacing-sm) calc(var(--lt-spacing-md) + 8px); /* Más espacio horizontal */
+  border-radius: var(--lt-border-radius);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  flex: 1;
+  min-width: 0; /* Para que se ajuste el texto */
+  max-width: 260px;
+  height: 100px; /* Altura fija para todos los cards */
+  min-height: 100px;
+  max-height: 100px; /* Evitar que crezcan más */
+  position: relative;
+  opacity: 1;
+}
+
+.LTFeatureBannerContainer .fade-card {
+  opacity: 1;
+}
+
+.LTFeatureBannerItem:hover {
+  background-color: var(--lt-accent-color-variant);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+.LTFeatureBannerItem:hover .LTFeatureBannerTitle {
+  color: var(--lt-text-color); /* Mantener el título en negro */
+}
+
+.LTFeatureBannerItem:hover .LTFeatureBannerSubtitle {
+  color: var(--lt-white-text); /* Solo el subtítulo se vuelve beige */
+}
+
+.LTFeatureBannerItem:hover .LTFeatureBannerIcon {
+  filter: var(--lt-white-svg-filter);
+  transform: scale(1.08);
+}
+
+.LTFeatureBannerItem:hover .LTFeatureBannerArrow svg {
+  fill: var(--lt-white-text);
+}
+
+.LTFeatureBannerIconContainer {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--lt-accent-color);
+  border-radius: 50%;
+  padding: var(--lt-spacing-xs);
+}
+
+.LTFeatureBannerIcon {
+  width: 24px;
+  height: 24px;
+  filter: none;
+  fill: var(--lt-white-text-color);
+}
+
+.LTFeatureBannerContent {
+  flex: 1;
+  min-width: 120px; /* Más espacio horizontal para el texto */
+}
+
+.LTFeatureBannerTitle {
+  font-family: var(--lt-font-family);
+  font-size: 0.85rem; /* Más pequeño que antes */
+  font-weight: 600;
+  color: var(--lt-text-color);
+  margin: 0 0 2px 0;
+  line-height: 1.2;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.LTFeatureBannerSubtitle {
+  font-family: var(--lt-font-family);
+  font-size: 0.7rem !important;
+  color: var(--lt-text-light);
+  margin: 0;
+  line-height: 1.3 !important;
+  overflow: hidden;
+  text-align: left !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Máximo 3 líneas */
+  line-clamp: 3; /* Estándar para compatibilidad */
+  -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+}
+
+/* Removed hover text expansion to maintain consistent card sizes */
+
+.LTFeatureBannerArrow {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.LTFeatureBannerArrow svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--lt-text-light);
+}
+
+.LTFeatureBannerItem:hover .LTFeatureBannerArrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Carousel Layout */
+.LTFeatureBannerCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: var(--lt-spacing-md);
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Indicators Styles (copied from LTProductsCarousel) */
+.LTFeatureBannerIndicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lt-spacing-xs);
+  margin: 18px 0 0 0;
+  width: auto;
+  max-width: none;
+}
+.LTFeatureBannerIndicator {
+  width: 18px;
+  height: 8px;
+  border-radius: 8px;
+  background: var(--lt-background-color);
+  border: 1px solid var(--lt-accent-color);
+  transition: background 0.3s, border-color 0.3s;
+  cursor: pointer;
+  margin: 0 2px;
+  opacity: 0.7;
+}
+.LTFeatureBannerIndicator.active {
+  background: var(--lt-accent-color);
+  border-color: var(--lt-accent-color-dark);
+  opacity: 1;
+}
+
+/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
+/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
+/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
+.LTFeatureBannerArrowNav {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--lt-accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--lt-accent-color-dark);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.LTFeatureBannerArrowNav:first-of-type {
+  left: 8px;
+}
+.LTFeatureBannerArrowNav:last-of-type {
+  right: 8px;
+}
+.LTFeatureBannerArrowNav:hover:not(.disabled) {
+  background: var(--lt-accent-color);
+  transform: translateY(-50%);
+}
+.LTFeatureBannerArrowNav.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  transition: opacity 0.7s, visibility 0.7s;
+}
+.LTFeatureBannerArrowNav svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--lt-black-text-color);
+  transition: fill 0.3s ease;
+}
+.LTFeatureBannerArrowNav:hover:not(.disabled) {
+  background: var(--lt-accent-color);
+}
+.LTFeatureBannerArrowNav.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  transition: opacity 0.7s, visibility 0.7s;
+}
+.LTFeatureBannerArrowNav svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--lt-black-text-color);
+  transition: fill 0.3s ease;
+}
+
+/* Responsive Design */
+
+/* Ocultar flechas de navegación en mobile */
+@media (max-width: 600px) {
+  .LTFeatureBannerArrowNav {
+    display: none !important;
+  }
+
+  .LTFeatureBannerContainer {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0 !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  .LTFeatureBannerItem {
+    flex: 0 1 100%;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}

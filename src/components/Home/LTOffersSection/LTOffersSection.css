@@ -1,0 +1,219 @@
+@media (max-width: 600px) {
+  .LTOffersSectionCircle {
+    padding-right: 32px !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 600px) {
+  .LTOffersSectionTitle {
+    padding-right: 32px !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 600px) {
+  .LTOffersSectionWrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    padding: 0 32px 0 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* Mobile navigation for LTOffersSection */
+@media (max-width: 600px) {
+  .LTOffersSectionMobileNav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    max-width: 100vw;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 0 32px 0 0 !important;
+    gap: 0;
+    position: relative;
+  }
+  .LTOffersSectionMobileArrow {
+    background: var(--lt-accent-color);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: background 0.2s;
+    z-index: 2;
+    margin: 0 !important;
+  }
+  .LTOffersSectionMobileArrow svg {
+    width: 24px;
+    height: 24px;
+    fill: var(--lt-black-text-color);
+  }
+  .LTOffersSectionMobileArrow:active {
+    background: var(--lt-accent-color-dark);
+  }
+  .LTOffersSectionItemMobile {
+    max-width: 340px;
+    width: 100%;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+/* LTOffersSection - Ofertas destacadas con círculos */
+.LTOffersSectionWrapper {
+  width: 100%;
+  background-color: var(--lt-background-color);
+  padding: 4rem 0;
+  margin-top: 1rem; /* Más arriba aún */
+}
+
+.LTOffersSectionTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--lt-spacing-2xl);
+  color: var(--lt-black-text-color);
+  width: 100%;
+  display: block;
+}
+
+.LTOffersSectionContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  display: block;
+}
+
+.LTOffersSectionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lt-spacing-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius-lg);
+}
+
+.LTOffersSectionItem:hover {
+  transform: translateY(-4px);
+}
+
+.LTOffersSectionIcon {
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color),
+    var(--lt-accent-color-variant)
+  );
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(168, 187, 163, 0.15);
+}
+
+.LTOffersSectionIconSvg {
+  width: 32px;
+  height: 32px;
+  margin: 0 auto 6px auto;
+  display: block;
+}
+
+.LTOffersSectionLabel {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-md);
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  text-align: center;
+}
+
+.LTOffersSectionCircle {
+  background: var(--lt-accent-color);
+  transition: background 0.2s, box-shadow 0.3s, transform 0.3s;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+/* efecto overlay igual a LTProductsCategories */
+.LTOffersSectionCircle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.LTOffersSectionItem:hover .LTOffersSectionCircle {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(168, 187, 163, 0.3);
+  background: var(--lt-accent-color-variant);
+}
+.LTOffersSectionItem:hover .LTOffersSectionCircle::before {
+  opacity: 1;
+}
+
+.LTOffersSectionText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: auto;
+  max-width: 80px;
+  margin: 0 auto;
+  font-family: "Montserrat", var(--lt-font-family), sans-serif;
+  color: var(--lt-black-text-color);
+}
+
+.LTOffersSectionMain {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  font-family: "Montserrat", var(--lt-font-family), sans-serif;
+  line-height: 1.1;
+}
+
+.LTOffersSectionSub {
+  font-size: 0.7rem;
+  color: var(--lt-black-text-color);
+  font-family: "Montserrat", var(--lt-font-family), sans-serif;
+  font-weight: 400;
+}
+
+.LTOffersSectionGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--lt-spacing-xl);
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+}

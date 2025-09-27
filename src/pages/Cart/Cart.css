@@ -1,0 +1,10 @@
+﻿/* Cart Page Styles */
+.lt-cart-wrapper {
+  min-height: 100vh;
+  padding-top: 140px; /* Espacio para header + navbar */
+}
+
+.lt-cart-wrapper .lt-container {
+  padding: var(--lt-spacing-2xl) var(--lt-spacing-md);
+}
+

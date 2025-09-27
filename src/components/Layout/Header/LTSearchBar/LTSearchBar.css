@@ -1,0 +1,105 @@
+﻿/* Cuando el header está sticky, fuerza opacidad y fondo sólido */
+.LTHeaderSticky .LTSearchBarWrapper,
+.LTHeaderSticky .LTSearchBarInputContainer,
+.LTHeaderSticky .LTSearchBarInput,
+.LTHeaderSticky .LTSearchBarButton {
+  opacity: 1 !important;
+  background: var(--lt-search-bar-focus) !important;
+}
+/* LTSearchBar - Barra de búsqueda estilo farmaonline */
+.LTSearchBarWrapper {
+  width: 100%;
+  max-width: 600px;
+  margin-left: -10px; /* Mueve la barra de búsqueda a la izquierda para alinear con el navmenu */
+}
+
+.LTSearchBarForm {
+  width: 100%;
+}
+
+.LTSearchBarInputContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--lt-search-bar-focus);
+  border: 1.5px solid var(--lt-search-bar-color);
+  border-radius: var(--lt-border-radius-lg);
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.LTSearchBarInputContainer:hover {
+  border-color: var(--lt-search-bar-hover);
+}
+
+.LTSearchBarInputContainer:focus-within {
+  border-color: var(--lt-search-bar-hover);
+  background: linear-gradient(
+    to bottom,
+    rgba(74, 81, 85, 0.07),
+    var(--lt-search-bar-focus)
+  );
+  box-shadow: 0 0 0 2px rgba(116, 123, 191, 0.12);
+}
+
+.LTSearchBarInput {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: var(--lt-font-family);
+  color: var(--lt-search-bar-color);
+  outline: none;
+}
+
+.LTSearchBarInput::placeholder {
+  color: var(--lt-muted-text-color);
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.LTSearchBarButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: var(--lt-text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 48px;
+}
+
+.LTSearchBarButton:hover {
+  color: var(--lt-primary-color);
+  background: rgba(116, 123, 191, 0.1); /* Actualizado para nueva paleta */
+}
+
+.LTSearchBarButton:active {
+  transform: scale(0.98);
+}
+
+.LTSearchBarIcon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .LTSearchBarInput {
+    padding: 10px 12px;
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+
+  .LTSearchBarButton {
+    padding: 10px 12px;
+    min-width: 44px;
+  }
+
+  .LTSearchBarInputContainer {
+    border-radius: 6px;
+  }
+}

@@ -1,0 +1,60 @@
+.LTHeaderOfferBar {
+  width: 100vw;
+  min-height: 32px;
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  position: static;
+  top: unset;
+  left: unset;
+  z-index: 1300;
+  box-shadow: 0 2px 8px rgba(116, 123, 191, 0.12);
+  border-bottom: 1px solid rgba(116, 123, 191, 0.18);
+}
+
+.LTHeaderOfferText {
+  padding: 0 24px;
+  white-space: nowrap;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  text-overflow: unset;
+  max-width: 100vw;
+  min-width: 0;
+  flex-shrink: 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--lt-accent-color) #eee;
+  touch-action: pan-x;
+}
+
+/* Show scrollbar for mobile offer bar text */
+.LTHeaderOfferText::-webkit-scrollbar {
+  height: 4px;
+}
+.LTHeaderOfferText::-webkit-scrollbar-thumb {
+  background: var(--lt-accent-color);
+  border-radius: 2px;
+}
+.LTHeaderOfferText::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+.LTHeaderOfferSlideRight {
+  animation: offerSlideRight 0.5s;
+}
+
+@keyframes offerSlideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

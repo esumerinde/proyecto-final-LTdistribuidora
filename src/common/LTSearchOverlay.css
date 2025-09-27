@@ -1,0 +1,217 @@
+/* Spinner circular para animación de carga en búsqueda mobile */
+.LTSearchBarMobileSpinner {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #e0e0e0;
+  border-top: 5px solid var(--lt-accent-color-variant);
+  border-radius: 50%;
+  animation: LTSearchBarMobileSpin 0.8s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes LTSearchBarMobileSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* Input de búsqueda en el overlay, editable por el usuario */
+.LTSearchOverlay__input {
+  flex: 0 0 76%;
+  width: 80%;
+  height: 48px;
+  box-sizing: border-box;
+  margin: 0;
+}
+/* Overlay principal para mobile */
+.LTSearchBarMobileOverlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 90vw;
+  max-width: 350px;
+  height: 100vh;
+  background: #fff;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+  overflow-y: auto;
+}
+.LTSearchBarMobileOverlay.slideOutRight {
+  animation: slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+/* Header del overlay: input y X alineados */
+.LTSearchBarMobileOverlayHeader {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px 2px 12px;
+  position: relative;
+}
+.LTSearchBarMobileClose {
+  position: static;
+  margin-left: auto;
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  font-family: var(--lt-font-family);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  cursor: pointer;
+  min-width: 40px;
+  min-height: 40px;
+}
+
+.LTSearchBarMobileCloseIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--lt-black-text-color);
+  display: block;
+}
+
+.LTSearchBarMobileClose:focus {
+  outline: none;
+  border-color: var(--lt-black-text-color);
+}
+
+.LTSearchBarMobileResultsBlock {
+  width: 100%;
+  padding: 0 0 16px 0;
+  background: #fff;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.LTSearchBarMobileResultsTitle {
+  font-family: "Montserrat", Arial, sans-serif;
+  font-size: 1.08rem;
+  color: #222;
+  font-weight: 600;
+  margin: 18px 0 10px 18px;
+  letter-spacing: 0.04em;
+  display: block;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.LTSearchBarMobileProducts {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0 12px;
+}
+.LTSearchBarMobileProductCardBig {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 10px;
+  margin-bottom: 8px;
+  min-height: 80px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+.LTSearchBarMobileProductCardBig.last {
+  margin-bottom: 0 !important;
+}
+.LTSearchBarMobileProductImgBig {
+  width: 54px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 12px;
+  background: #f3f3f3;
+  flex-shrink: 0;
+}
+.LTSearchBarMobileProductInfoBig {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.LTSearchBarMobileProductBrandBig {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 700;
+  margin-bottom: 0px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.LTSearchBarMobileProductTitleBig {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0px;
+  line-height: 1.18;
+}
+.LTSearchBarMobileProductPriceRowBig {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 2px;
+}
+.LTSearchBarMobileProductOldPriceBig {
+  font-size: 0.88rem;
+  color: #999;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+.LTSearchBarMobileProductPriceBig {
+  font-size: 0.98rem;
+  color: #1a7e1a;
+  font-weight: 700;
+}
+.LTSearchBarMobileResultsFooter {
+  width: 100%;
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+.LTSearchBarMobileResultsText {
+  font-size: 0.8rem;
+  color: var(--lt-muted-text-color);
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  display: block;
+  font-family: "Montserrat", Arial, sans-serif;
+  margin-top: 20px;
+}

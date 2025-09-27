@@ -1,0 +1,447 @@
+﻿@media (max-width: 600px) {
+  .LTFooterWrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--lt-tertiary-color);
+  }
+  .LTFooterContainer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lt-spacing-md);
+    align-items: stretch;
+  }
+  .LTFooterSection {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: var(--lt-spacing-md) 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .LTFooterLogoImg {
+    margin: 0 0 var(--lt-spacing-md) 0 !important;
+    width: 100px !important;
+    height: auto !important;
+  }
+  .LTFooterSocialMedia {
+    justify-content: center !important;
+    margin-bottom: var(--lt-spacing-md) !important;
+  }
+  .LTFooterQRCode {
+    margin: 0 auto !important;
+  }
+  .LTFooterList {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    text-align: center !important;
+  }
+  .LTFooterList li {
+    margin-bottom: var(--lt-spacing-xs) !important;
+  }
+  .LTFooterLink {
+    text-align: center !important;
+    width: 100vw !important;
+    display: block !important;
+  }
+  .LTFooterProfessionalItem {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: var(--lt-spacing-md) 0 !important;
+  }
+  .LTFooterBottom {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: var(--lt-spacing-md) 0 !important;
+    text-align: center !important;
+  }
+  .LTFooterBottomContainer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--lt-spacing-xs);
+  }
+  .LTFooterCopyright {
+    width: 100vw !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+@media (max-width: 600px) {
+  .LTFooterWrapper {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: var(--lt-tertiary-color);
+  }
+  .LTFooterContainer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--lt-spacing-md);
+    align-items: stretch;
+  }
+  .LTFooterSection {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: var(--lt-spacing-md) 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .LTFooterLogoImg {
+    margin: 0 0 var(--lt-spacing-md) 0 !important;
+    width: 100px !important;
+    height: auto !important;
+  }
+  .LTFooterSocialMedia {
+    justify-content: center !important;
+    margin-bottom: var(--lt-spacing-md) !important;
+  }
+  .LTFooterQRCode {
+    margin: 0 auto !important;
+  }
+  .LTFooterList {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100vw !important;
+    text-align: center !important;
+  }
+  .LTFooterList li {
+    margin-bottom: var(--lt-spacing-xs) !important;
+  }
+  .LTFooterLink {
+    text-align: center !important;
+    width: 100vw !important;
+    display: block !important;
+  }
+  .LTFooterProfessionalItem {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    padding: var(--lt-spacing-md) 0 !important;
+  }
+  .LTFooterBottom {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: var(--lt-spacing-md) 0 !important;
+    text-align: center !important;
+  }
+  .LTFooterBottomContainer {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--lt-spacing-xs);
+  }
+  .LTFooterCopyright {
+    width: 100vw !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+/* LTFooter - Footer principal estilo farmaonline */
+.LTFooterWrapper {
+  background-color: var(--lt-tertiary-color);
+  color: var(--lt-text-color);
+  padding-top: var(--lt-spacing-xl);
+  margin-top: var(--lt-spacing-xl);
+}
+
+.LTFooterContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: var(--lt-spacing-lg);
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+/* Logo y redes sociales */
+
+.LTFooterLogoImg {
+  width: 120px;
+  height: auto;
+  display: block;
+  margin: 0 0 var(--lt-spacing-md) 0;
+}
+
+.LTFooterLogoAccent {
+  font-weight: 400;
+  color: var(--lt-text-light);
+}
+
+.LTFooterSocialMedia {
+  display: flex;
+  gap: var(--lt-spacing-sm);
+  margin-bottom: var(--lt-spacing-md);
+}
+
+.LTFooterSocialLink {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background-color: var(--lt-accent-color-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.LTFooterSocialLink:hover {
+  background-color: var(--lt-accent-color-variant);
+  transform: translateY(-2px) scale(1.08);
+}
+
+.LTFooterSocialIcon {
+  width: 18px;
+  height: 18px;
+  fill: var(--lt-black-text-color);
+  transition: fill 0.3s ease, transform 0.2s;
+}
+
+.LTFooterSocialLink:hover .LTFooterSocialIcon {
+  fill: var(--lt-hover-text-menu);
+  transform: scale(1.12);
+}
+
+/* QR Code */
+.LTFooterQRSection {
+  margin-top: var(--lt-spacing-md);
+}
+
+.LTFooterQRCode {
+  width: 80px;
+  height: 80px;
+  background-color: var(--lt-background-color);
+  border: 2px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTFooterQRPlaceholder {
+  font-size: var(--lt-font-size-sm);
+  color: var(--lt-text-light);
+  font-weight: 400;
+}
+
+/* Secciones del footer */
+.LTFooterSectionTitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-md);
+  font-weight: 600;
+  color: var(--lt-big-text-color); /* Títulos con big text color */
+  margin: 0 0 var(--lt-spacing-md) 0;
+  line-height: 1.3;
+}
+
+.LTFooterList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.LTFooterList li {
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.LTFooterLink {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-sm);
+  color: var(--lt-black-text-color); /* Resto con black text color */
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s, text-decoration 0.2s, transform 0.2s;
+}
+/* Ajuste de subrayado animado para links del footer */
+.LTFooterLink.lt-menu-hover::after {
+  bottom: -3px;
+}
+
+/* Professional placeholder items */
+.LTFooterProfessionalItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lt-spacing-sm);
+  margin-bottom: var(--lt-spacing-lg);
+  padding: var(--lt-spacing-md);
+  border: none;
+  border-radius: var(--lt-border-radius);
+  background-color: var(--lt-background-color);
+  cursor: pointer;
+  font-family: var(--lt-font-family);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.LTFooterProfessionalItem:hover {
+  background-color: var(--lt-accent-color-dark);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.LTFooterProfessionalIcon {
+  width: 24px;
+  height: 24px;
+  fill: var(--lt-black-text-color);
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: fill 0.3s ease, transform 0.2s;
+}
+
+.LTFooterProfessionalItem:hover .LTFooterProfessionalIcon {
+  fill: var(--lt-white-text-color);
+  transform: scale(1.12);
+}
+
+.LTFooterProfessionalTitle {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-sm);
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin: 0 0 var(--lt-spacing-xs) 0;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.LTFooterProfessionalItem:hover .LTFooterProfessionalTitle {
+  color: var(--lt-white-text-color);
+}
+
+.LTFooterProfessionalText {
+  font-family: var(--lt-font-family);
+  font-size: 0.85rem;
+  font-weight: var(--lt-font-weight-light);
+  color: var(--lt-black-text-color);
+  margin: 0;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.LTFooterProfessionalItem:hover .LTFooterProfessionalText {
+  color: var(--lt-white-text-color);
+}
+
+/* Botón de Arrepentimiento integrado */
+.LTFooterRegretButtonIntegrated {
+  margin-top: var(--lt-spacing-sm);
+  padding-top: 0;
+}
+
+.LTFooterRegretBtn {
+  background-color: var(--lt-accent-color-dark);
+  color: var(--lt-black-text-color);
+  border: none;
+  padding: var(--lt-spacing-xs) var(--lt-spacing-md);
+  border-radius: 18px;
+  font-family: var(--lt-font-family);
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-light);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: auto;
+  max-width: 180px;
+}
+
+/* Footer Bottom */
+.LTFooterBottom {
+  background-color: var(--lt-footer-footer-color);
+  color: var(--lt-white-text-color);
+  padding: var(--lt-spacing-md) 0;
+  font-family: var(--lt-font-family);
+}
+
+.LTFooterBottomContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--lt-spacing-md);
+}
+
+.LTFooterCopyright {
+  text-align: center;
+  width: 100%;
+}
+
+.LTFooterCopyright p {
+  margin: 0;
+  font-size: var(--lt-font-size-xs);
+  line-height: 1.4;
+  opacity: 0.9;
+  color: var(--lt-white-text-color);
+  font-family: var(--lt-font-family);
+}
+
+.LTFooterCopyright p:first-child {
+  margin-bottom: var(--lt-spacing-xs);
+  font-weight: 600;
+}
+
+.LTFooterSectionTitle,
+.LTFooterProfessionalTitle,
+.LTFooterLogo {
+  font-weight: var(--lt-font-weight-medium);
+}
+
+.LTFooterList li,
+.LTFooterLink,
+.LTFooterProfessionalText,
+.LTFooterCopyright p,
+.LTFooterQRPlaceholder {
+  font-weight: var(--lt-font-weight-light);
+}
+
+.lt-button-hover {
+  background-color: var(--lt-accent-color-variant);
+  color: var(--lt-black-text-color);
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+}
+
+.lt-button-hover:hover {
+  background-color: var(--lt-accent-color-dark);
+  transform: translateY(-2px) scale(1.03);
+}

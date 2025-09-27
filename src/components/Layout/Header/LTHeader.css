@@ -1,0 +1,202 @@
+﻿.LTHeaderSticky .LTHeaderDivSearchBar,
+.LTHeaderSticky .LTHeaderSearchBar,
+.LTHeaderSticky input[type="search"],
+.LTHeaderSticky input[type="text"] {
+  opacity: 1 !important;
+  background: var(--lt-background-color) !important;
+}
+.LTHeaderSticky .LTHeaderDivSearchBar,
+.LTHeaderSticky .LTHeaderSearchBar,
+.LTHeaderSticky input,
+.LTHeaderSticky button {
+  opacity: 1 !important;
+}
+.LTHeaderSticky .LTHeaderDivSearchBar,
+.LTHeaderSticky .LTHeaderSearchBar {
+  opacity: 1 !important;
+}
+/* LTHeader - Header principal con nueva paleta */
+
+.LTHeaderWrapper {
+  position: fixed;
+  /* top is set dynamically via React inline style */
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  background-color: var(--lt-background-color);
+  box-shadow: var(--lt-shadow-md);
+  height: 75px;
+  display: flex;
+  align-items: center;
+  transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+}
+
+.LTHeaderOffer {
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.LTHeaderOffer--hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.LTHeaderSticky {
+  /* No opacity, header stays solid */
+}
+
+.LTHeaderRowContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.LTHeaderDivLogo {
+  flex-shrink: 0;
+  min-width: 120px;
+  max-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTHeaderDivMenu {
+  flex-shrink: 0;
+}
+
+/* Logo Section */
+.LTHeaderDivLogo {
+  flex-shrink: 0;
+  min-width: 120px;
+  max-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Imagen del logo en el header */
+  .LTHeaderLogoImg {
+    width: 120px;
+    height: auto;
+    display: block;
+  }
+}
+
+.LTHeaderLogo {
+  font-family: var(--lt-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--lt-accent-color-dark);
+  margin: 0;
+  cursor: pointer;
+  letter-spacing: -0.5px;
+}
+
+.LTHeaderLogoAccent {
+  font-weight: 400;
+  color: var(--lt-accent-color-variant);
+}
+
+/* Search Bar Section */
+.LTHeaderDivSearchBar {
+  max-width: 500px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Barra de búsqueda */
+.LTHeaderSearchBar {
+  width: 100%;
+  padding: 8px 16px;
+  border: 1.5px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius-lg);
+  background: var(--lt-background-color);
+  color: var(--lt-small-text-color);
+  font-family: var(--lt-font-family);
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.LTHeaderSearchBar:focus,
+.LTHeaderSearchBar:hover {
+  border-color: var(--lt-hover-text-menu);
+  box-shadow: 0 0 0 2px rgba(5, 18, 95, 0.08);
+  outline: none;
+}
+
+/* Header Menu Section */
+.LTHeaderDivMenu {
+  flex-shrink: 0;
+  min-width: 280px;
+}
+
+.LTHeaderMenu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: flex-end;
+}
+
+/* Botones del menú con efecto hover y subrayado solo en texto */
+.LTHeaderMenuButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  color: var(--lt-small-text-color);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--lt-font-family);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+/* Iconos del menú */
+.LTHeaderMenuIcon {
+  width: 18px;
+  height: 18px;
+  stroke: var(--lt-svg-dark);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+  transition: stroke 0.2s, transform 0.2s;
+}
+.LTHeaderMenuButton:hover .LTHeaderMenuIcon,
+.LTHeaderMenuButton:focus .LTHeaderMenuIcon {
+  stroke: var(--lt-hover-text-menu);
+}
+
+/* Contador del carrito */
+.LTHeaderCartContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTHeaderCartCount {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+  border-radius: 50%;
+  width: 15px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+}

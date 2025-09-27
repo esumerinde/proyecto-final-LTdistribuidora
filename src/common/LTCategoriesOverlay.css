@@ -1,0 +1,267 @@
+.LTCategoriesOverlay__bottomMenuContainer {
+  flex-shrink: 0;
+  background: #fff;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
+  border-top: 1px solid #eee;
+  margin-top: 0;
+  padding-top: 0;
+  height: unset;
+  position: relative;
+  top: 48px;
+}
+
+.LTCategoriesOverlay__bottomMenuContainer .LTCategoriesOverlay__menuitem {
+  justify-content: flex-start;
+  width: 100%;
+  padding: 8px 22px;
+  position: static;
+  background: #fff;
+  z-index: 1;
+}
+
+.LTCategoriesOverlay__menuitem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  font-size: 0.96rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: #f7f7f7;
+  margin: 6px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.LTCategoriesOverlay__menuitemIcon {
+  width: 0.94rem;
+  height: 0.94rem;
+}
+.LTCategoriesOverlay__menuitemText {
+  margin: 0;
+  display: inline-block;
+  font-size: 0.96rem;
+}
+.LTCategoriesOverlay__menuitem img {
+  width: 0.94rem;
+  height: 0.94rem;
+  margin-right: 7px;
+}
+.LTCategoriesOverlay__menuitemInner {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+@media (max-width: 400px) {
+  .LTCategoriesOverlay__item,
+  .LTCategoriesOverlay__item span,
+  .LTCategoriesOverlay__menuitem,
+  .LTCategoriesOverlay__menuitemText,
+  .LTCategoriesOverlay__subitem {
+    font-size: 0.92rem !important;
+    padding: 6px 14px !important;
+    margin: 3px 0 !important;
+    height: 28px !important;
+  }
+}
+/* Overlay de categorías para mobile */
+.LTCategoriesOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90vw;
+  max-width: 350px;
+  height: 100vh;
+  background: #fff;
+  z-index: 2100;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.LTCategoriesOverlay__menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+.LTCategoriesOverlay__menuitem:hover {
+  background: #eaeaea;
+}
+.LTCategoriesOverlay__menuitem span {
+  margin: 0;
+}
+.LTCategoriesOverlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px 6px 14px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.LTCategoriesOverlay__close {
+  background: var(--lt-accent-color);
+  border-radius: 8px;
+  color: var(--lt-black-text-color);
+  cursor: pointer;
+  padding: 8px 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+.LTCategoriesOverlay__closeIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--lt-black-text-color);
+  display: block;
+}
+.LTCategoriesOverlay__list {
+  display: flex;
+  flex-direction: column;
+  flex: unset;
+  min-height: unset;
+  height: unset;
+  gap: 0;
+}
+
+.LTCategoriesOverlay__categories {
+  flex: unset;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  height: unset;
+  min-height: unset;
+  max-height: unset;
+}
+
+.LTCategoriesOverlay__bottomMenuContainer {
+  flex-shrink: 0;
+  margin-top: 0;
+  padding-top: 0;
+  height: unset;
+  position: relative;
+  top: 48px;
+}
+
+.LTCategoriesOverlay__menu {
+  margin-top: 0;
+  padding-top: 0;
+}
+.LTCategoriesOverlay__menu--hidden {
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0s, 0s;
+}
+.LTCategoriesOverlay__menu--visible {
+  max-height: 300px;
+  opacity: 1;
+  pointer-events: auto;
+  transition-delay: 0s, 0s;
+}
+.LTCategoriesOverlay__item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  font-size: 0.96rem;
+  font-family: var(--lt-font-family);
+  color: #222;
+  background: #fff;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-sizing: border-box;
+  border-radius: 0;
+  margin: 6px 0;
+  height: 36px;
+}
+.LTCategoriesOverlay__item span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.LTCategoriesOverlay__item.expanded,
+.LTCategoriesOverlay__item:active {
+  background: var(--lt-accent-color-dark);
+  color: #fff;
+}
+.LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
+  color: #fff;
+}
+.LTCategoriesOverlay__item:hover {
+  background: #f7f7f7;
+  color: #222;
+}
+.LTCategoriesOverlay__caret {
+  margin-left: 8px;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+  color: #888;
+}
+.LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
+  color: #fff;
+}
+.LTCategoriesOverlay__sublist {
+  width: 100%;
+  background: #f9f9f9;
+  padding: 0 0 0 32px;
+  transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.LTCategoriesOverlay__sublist--open {
+  padding-top: 4px;
+  padding-bottom: 8px;
+}
+.LTCategoriesOverlay__subitem {
+  width: 100%;
+  padding: 6px 14px;
+  font-size: 0.92rem;
+  color: #222;
+  background: #fff;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin: 4px 0;
+  height: 28px;
+  transition: background 0.2s, color 0.2s;
+}
+.LTCategoriesOverlay__subitem:hover {
+  background: #ececec;
+  color: var(--lt-accent-color-dark);
+}
+.LTCategoriesOverlay__empty {
+  color: #aaa;
+  text-align: center;
+  margin-top: 32px;
+}
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.LTCategoriesOverlay.slideOutLeft {
+  animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}

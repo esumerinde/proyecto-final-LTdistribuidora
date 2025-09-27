@@ -1,0 +1,9 @@
+/* Estilos base para el menú de navegación mobile */
+.LTNavbarNavmenuMobile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #fff;
+  border-top: 1px solid #eee;
+  z-index: 999;
+}
