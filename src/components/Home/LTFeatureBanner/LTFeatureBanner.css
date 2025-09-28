@@ -205,7 +205,6 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--lt-accent-color-dark);
   position: absolute;
   top: 50%;
   transform: translateY(-50%);

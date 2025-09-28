@@ -1,25 +1,11 @@
-﻿.LTHeaderSticky .LTHeaderDivSearchBar,
-.LTHeaderSticky .LTHeaderSearchBar,
-.LTHeaderSticky input[type="search"],
-.LTHeaderSticky input[type="text"] {
-  opacity: 1 !important;
-  background: var(--lt-background-color) !important;
-}
-.LTHeaderSticky .LTHeaderDivSearchBar,
-.LTHeaderSticky .LTHeaderSearchBar,
-.LTHeaderSticky input,
-.LTHeaderSticky button {
-  opacity: 1 !important;
-}
-.LTHeaderSticky .LTHeaderDivSearchBar,
-.LTHeaderSticky .LTHeaderSearchBar {
-  opacity: 1 !important;
-}
-/* LTHeader - Header principal con nueva paleta */
+﻿/* ===================
+  Estilos base del header desktop
+  =================== */
+
+/* Contenedor principal del header */
 
 .LTHeaderWrapper {
   position: fixed;
-  /* top is set dynamically via React inline style */
   left: 0;
   right: 0;
   z-index: 1100;
@@ -28,11 +14,13 @@
   height: 75px;
   display: flex;
   align-items: center;
-  transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
 }
 
+/* Barra de ofertas animada */
+
 .LTHeaderOffer {
-  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+  transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1),
     transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 1;
   transform: translateY(0);
@@ -44,9 +32,11 @@
   pointer-events: none;
 }
 
-.LTHeaderSticky {
-  /* No opacity, header stays solid */
-}
+/* Header sticky: sin opacidad extra, solo mantiene el fondo sólido */
+
+/* Header sticky: sin opacidad extra, solo mantiene el fondo sólido */
+
+/* Fila principal del header: layout horizontal */
 
 .LTHeaderRowContainer {
   max-width: 1200px;
@@ -59,6 +49,8 @@
   gap: 24px;
 }
 
+/* Sección del logo */
+
 .LTHeaderDivLogo {
   flex-shrink: 0;
   min-width: 120px;
@@ -67,26 +59,13 @@
   align-items: center;
   justify-content: center;
 }
-
-.LTHeaderDivMenu {
-  flex-shrink: 0;
+.LTHeaderLogoImg {
+  width: 120px;
+  height: auto;
+  display: block;
 }
 
-/* Logo Section */
-.LTHeaderDivLogo {
-  flex-shrink: 0;
-  min-width: 120px;
-  max-width: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* Imagen del logo en el header */
-  .LTHeaderLogoImg {
-    width: 120px;
-    height: auto;
-    display: block;
-  }
-}
+/* Logo en texto (si se usa) */
 
 .LTHeaderLogo {
   font-family: var(--lt-font-family);
@@ -97,13 +76,13 @@
   cursor: pointer;
   letter-spacing: -0.5px;
 }
-
 .LTHeaderLogoAccent {
   font-weight: 400;
   color: var(--lt-accent-color-variant);
 }
 
-/* Search Bar Section */
+/* Sección de barra de búsqueda */
+
 .LTHeaderDivSearchBar {
   max-width: 500px;
   width: 500px;
@@ -111,7 +90,8 @@
   margin-right: auto;
 }
 
-/* Barra de búsqueda */
+/* Input de búsqueda */
+
 .LTHeaderSearchBar {
   width: 100%;
   padding: 8px 16px;
@@ -130,12 +110,12 @@
   outline: none;
 }
 
-/* Header Menu Section */
+/* Sección de menú de acciones */
+
 .LTHeaderDivMenu {
   flex-shrink: 0;
   min-width: 280px;
 }
-
 .LTHeaderMenu {
   display: flex;
   align-items: center;
@@ -143,7 +123,8 @@
   justify-content: flex-end;
 }
 
-/* Botones del menú con efecto hover y subrayado solo en texto */
+/* Botones del menú con iconos y efecto hover */
+
 .LTHeaderMenuButton {
   display: flex;
   align-items: center;
@@ -160,20 +141,68 @@
   transition: all 0.2s ease;
   white-space: nowrap;
 }
+.LTHeaderMenu {
+  /* Iconos de los botones del menú */
 
-/* Iconos del menú */
-.LTHeaderMenuIcon {
-  width: 18px;
-  height: 18px;
-  stroke: var(--lt-svg-dark);
-  fill: none;
-  stroke-width: 1.5;
-  flex-shrink: 0;
-  transition: stroke 0.2s, transform 0.2s;
-}
-.LTHeaderMenuButton:hover .LTHeaderMenuIcon,
-.LTHeaderMenuButton:focus .LTHeaderMenuIcon {
-  stroke: var(--lt-hover-text-menu);
+  .LTHeaderMenuIcon {
+    width: 18px;
+    height: 18px;
+    stroke: var(--lt-svg-dark);
+    fill: none;
+    stroke-width: 1.5;
+    flex-shrink: 0;
+    transition: stroke 0.2s, transform 0.2s;
+  }
+  .LTHeaderMenuButton:hover .LTHeaderMenuIcon,
+  .LTHeaderMenuButton:focus .LTHeaderMenuIcon {
+    stroke: var(--lt-hover-text-menu);
+  }
+
+  /* Contenedor y contador del carrito */
+
+  .LTHeaderCartContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .LTHeaderCartCount {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--lt-accent-color-dark);
+    color: var(--lt-white-text-color);
+    border-radius: 50%;
+    width: 15px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  /* ===================
+   Estilos sticky para header y búsqueda
+   =================== */
+  .LTHeaderSticky .LTHeaderDivSearchBar,
+  .LTHeaderSticky .LTHeaderSearchBar,
+  .LTHeaderSticky input[type="search"],
+  .LTHeaderSticky input[type="text"] {
+    opacity: 1 !important;
+    background: var(--lt-background-color) !important;
+  }
+  .LTHeaderSticky .LTHeaderDivSearchBar,
+  .LTHeaderSticky .LTHeaderSearchBar,
+  .LTHeaderSticky input,
+  .LTHeaderSticky button {
+    opacity: 1 !important;
+  }
+  .LTHeaderSticky .LTHeaderDivSearchBar,
+  .LTHeaderSticky .LTHeaderSearchBar {
+    opacity: 1 !important;
+  }
 }
 
 /* Contador del carrito */

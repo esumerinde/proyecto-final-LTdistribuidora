@@ -1,44 +1,58 @@
 import React, { useState } from "react";
 import "./LTChatWidget.css";
 import logoBlancoChico from "../../../assets/images/logos/logo-blanco-chico.png";
+import { isMobile } from "../../../common/isMobile";
 
+/**
+ * Componente de chat flotante para desktop.
+ * No se renderiza en mobile (usa isMobile.js).
+ */
 const LTChatWidget = () => {
+  // Estado para abrir/cerrar el chat
   const [isOpen, setIsOpen] = useState(false);
+  // Animación de cierre eliminada
+  // Estado para mostrar el loader al abrir el chat
   const [isLoading, setIsLoading] = useState(false);
+  // Estado para el texto de consulta
   const [consultaText, setConsultaText] = useState("");
 
+  // Solo renderiza el widget si NO es mobile
+  if (isMobile()) return null;
+
+  // Abre/cierra el chat, muestra loader al abrir
   const handleToggleChat = () => {
     if (!isOpen) {
       setIsLoading(true);
-      // Simular tiempo de carga como en farmaonline
       setTimeout(() => {
         setIsLoading(false);
         setIsOpen(true);
-      }, 600); // Reducido de 1500ms a 600ms
+      }, 600);
     } else {
       setIsOpen(false);
+      setIsLoading(false);
     }
   };
 
+  // Cierra el chat y el loader instantáneamente
   const handleClose = () => {
     setIsOpen(false);
     setIsLoading(false);
   };
 
+  // Maneja el envío de la consulta (a implementar)
   const handleSubmitConsulta = (e) => {
     e.preventDefault();
-    console.log("Consulta:", consultaText);
-    // Aquí iría la lógica para enviar la consulta
+    // TODO: lógica para enviar la consulta
   };
 
-  const handleActionClick = (action) => {
-    console.log("Acción:", action);
-    // Aquí iría la lógica para cada acción
+  // Maneja las acciones rápidas del chat (a implementar)
+  const handleActionClick = () => {
+    // TODO: lógica para cada acción
   };
 
   return (
     <>
-      {/* Botón flotante */}
+      {/* Botón flotante solo desktop */}
       <div className="LTChatWidgetButton" onClick={handleToggleChat}>
         {isLoading ? (
           <div className="LTChatWidgetLoader">
@@ -54,7 +68,7 @@ const LTChatWidget = () => {
         )}
       </div>
 
-      {/* Modal del Chat */}
+      {/* Modal del Chat: solo desktop */}
       {isOpen && (
         <div className="LTChatWidgetModal">
           <div className="LTChatWidgetModalContent">
@@ -152,7 +166,7 @@ const LTChatWidget = () => {
         </div>
       )}
 
-      {/* Overlay */}
+      {/* Overlay: solo desktop */}
       {isOpen && (
         <div className="LTChatWidgetOverlay" onClick={handleClose}></div>
       )}

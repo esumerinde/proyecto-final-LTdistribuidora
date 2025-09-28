@@ -10,6 +10,8 @@
   --lt-accent-color: #9fa3cf;
   --lt-accent-color-dark: #747bbf;
   --lt-accent-color-variant: #8a8fc7;
+  --lt-accent-color-variant2: #ffd6a5;
+  --lt-accent-color-variant2-dark: #f7b15d;
   --lt-muted-text-color: #7c828f;
   --lt-white-text-color: #fefefe;
   --lt-black-text-color: #0d0d0d;
@@ -246,32 +248,4 @@ a {
 .lt-search-bar::placeholder {
   color: var(--lt-muted-text-color);
   font-weight: 400;
-}
-
-/* Ajuste de ancho para mobile fuera de :root */
-@media (max-width: 600px) {
-  body {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  .lt-container {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    box-sizing: border-box !important;
-  }
-  .LTHeaderMobile {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1200;
-  }
 }

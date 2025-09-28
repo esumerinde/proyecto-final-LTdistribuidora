@@ -1,12 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LTProductsCarousel.css";
 import FavoriteButton from "../../../common/FavoriteButton";
-// Importar SVGs desde assets
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
+import LTProductsCarouselMobile from "./LTProductsCarouselMobile";
+
+const MOBILE_BREAKPOINT = 600;
 
 const LTProductsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= MOBILE_BREAKPOINT
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Productos de ejemplo con datos placeholder - 12 productos
   const products = [
@@ -108,7 +121,11 @@ const LTProductsCarousel = () => {
     },
   ];
 
-  // Configuración del carousel
+  if (isMobile) {
+    return <LTProductsCarouselMobile products={products} />;
+  }
+
+  // ...existing code...
   const itemsPerSlide = 4;
   const totalSlides = Math.ceil(products.length / itemsPerSlide);
 

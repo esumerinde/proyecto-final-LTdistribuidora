@@ -1,49 +1,37 @@
-import React, { useState, useEffect } from "react";
-import useHeaderSticky from "../../../common/useHeaderSticky";
+// Importación de React y dependencias
+
+import React, { useState } from "react";
+import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
 import LTSearchBar from "./LTSearchBar/LTSearchBar";
-import LTHeaderMobile from "../../../common/LTHeaderMobile";
+import LTHeaderMobile from "./LTHeaderMobile";
 import LTHeaderOffer from "./LTHeaderOffer/LTHeaderOffer";
 import "./LTHeader.css";
 import logoBlanco from "../../../assets/images/logos/logo-blanco.png";
 
-function useIsMobile() {
-  // Solo detecta mobile para mostrar LTHeaderMobile, no aplica lógica ni estilos responsive aquí
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  return isMobile;
-}
-
 const LTHeader = () => {
   const [cartCount] = useState(0);
-  const isMobile = useIsMobile();
-  const isSticky = useHeaderSticky(75, 32); // 75px header, 32px offer bar
+  const { isSticky, headerTop, animation } = useHeaderReaccommodation({
+    offerHeight: 32,
+    headerHeight: 75,
+  });
 
-  if (isMobile) {
-    // Renderiza el header mobile, los estilos y lógica responsive están en LTHeaderMobile.jsx y LTHeaderMobile.css
-    return <LTHeaderMobile />;
-  }
-
-  // Calcula el top dinámico según sticky
-  const headerTop = isSticky ? 0 : 32; // 32px es la altura de la barra de ofertas
-
+  // Renderiza siempre el header desktop
   return (
     <>
-      {/* Offer bar animada, visible solo cuando NO está sticky */}
+      {/* Barra de ofertas animada, se oculta si el header está sticky */}
       <LTHeaderOffer
         className={
           isSticky ? "LTHeaderOffer LTHeaderOffer--hidden" : "LTHeaderOffer"
         }
+        style={{ transition: `top ${animation}, opacity ${animation}` }}
       />
+      {/* Header principal desktop */}
       <header
         className={`LTHeaderWrapper${isSticky ? " LTHeaderSticky" : ""}`}
-        style={{ top: headerTop }}
+        style={{ top: headerTop, transition: `top ${animation}` }}
       >
         <div className="LTHeaderRowContainer">
-          {/* Logo Section */}
+          {/* Sección del logo */}
           <div className="LTHeaderDivLogo">
             <img
               src={logoBlanco}
@@ -52,15 +40,14 @@ const LTHeader = () => {
               style={{ width: "200px", height: "auto" }}
             />
           </div>
-
-          {/* Search Bar Section */}
+          {/* Sección de barra de búsqueda */}
           <div className="LTHeaderDivSearchBar">
             <LTSearchBar />
           </div>
-
-          {/* Header Menu Section */}
+          {/* Sección de menú de acciones */}
           <div className="LTHeaderDivMenu">
             <div className="LTHeaderMenu">
+              {/* Botón Mi Cuenta */}
               <button className="LTHeaderMenuButton LTHeaderMenuButtonPedidos">
                 <span
                   className="lt-menu-hover"
@@ -94,6 +81,7 @@ const LTHeader = () => {
                   Mi Cuenta
                 </span>
               </button>
+              {/* Botón Favoritos */}
               <button className="LTHeaderMenuButton LTHeaderMenuButtonFavoritos">
                 <span className="lt-menu-hover">
                   <svg
@@ -114,6 +102,7 @@ const LTHeader = () => {
                   </svg>
                 </span>
               </button>
+              {/* Botón Notificaciones */}
               <button className="LTHeaderMenuButton LTHeaderMenuButtonNotificaciones">
                 <span className="lt-menu-hover">
                   <svg
@@ -132,6 +121,7 @@ const LTHeader = () => {
                   </svg>
                 </span>
               </button>
+              {/* Botón Carrito */}
               <button className="LTHeaderMenuButton LTHeaderMenuButtonCarrito">
                 <div className="LTHeaderCartContainer">
                   <span

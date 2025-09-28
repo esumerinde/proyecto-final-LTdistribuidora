@@ -1,0 +1,79 @@
+/* Mobile navigation for LTOffersSectionMobile */
+/* Mejor layout mobile: flechas a los costados, card centrada, espacio entre elementos */
+.LTOffersSectionMobileNav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  max-width: 100vw;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+  gap: 0;
+  position: relative;
+  min-height: 220px;
+}
+.LTOffersSectionMobileArrow {
+  background: var(--lt-accent-color);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+  z-index: 2;
+  margin: 0 !important;
+}
+.LTOffersSectionMobileArrow svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--lt-black-text-color);
+}
+.LTOffersSectionMobileArrow:active {
+  background: var(--lt-accent-color-dark);
+}
+.LTOffersSectionItemMobile {
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--lt-background-color, #f7f7f2);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 24px 12px 18px 12px;
+  position: relative;
+}
+
+/* Track para la card, centrado y con espacio */
+.LTOffersSectionMobile__slideTrack {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  overflow: visible;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+
+.LTOffersSectionMobileTitle {
+  text-align: center;
+  font-family: var(--lt-font-family, "Inter", sans-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--lt-black-text-color, #222);
+  margin: 32px 0 18px 0;
+  width: 100vw;
+  display: block;
+  line-height: 1.1;
+}

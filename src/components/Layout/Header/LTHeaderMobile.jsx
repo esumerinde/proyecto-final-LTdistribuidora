@@ -1,31 +1,56 @@
+// Import React and required hooks
 import React, { useState } from "react";
-import HamburgerMenuIcon from "../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
-import useHeaderSticky from "./useHeaderSticky";
+// Import icon and assets
+import HamburgerMenuIcon from "../../../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
+// Import custom hook for sticky header logic
+import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
+// Import mobile detection utility
+// Import styles
 import "./LTHeaderMobile.css";
-import logoBlancoChico from "../assets/images/logos/logo-blanco-chico.png";
-import LTCategoriesOverlay from "./LTCategoriesOverlay";
-import LTSearchOverlay from "./LTSearchOverlay";
-import LTHeaderOffer from "../components/Layout/Header/LTHeaderOffer/LTHeaderOffer";
+// Import logo image
+import logoBlancoChico from "../../../assets/images/logos/logo-blanco-chico.png";
+// Import overlays for categories and search
+import LTCategoriesOverlay from "../../../common/LTCategoriesOverlay";
+import LTSearchOverlay from "../../../common/LTSearchOverlay";
+// Import offer bar component
+import LTHeaderOffer from "./LTHeaderOffer/LTHeaderOffer";
 
+// Componente principal para el header en mobile
 const LTHeaderMobile = ({ onLogoClick }) => {
+  // Estado para controlar la apertura del overlay de búsqueda
   const [searchOpen, setSearchOpen] = useState(false);
+  // Estado para controlar la apertura del overlay de categorías
   const [categoriesOpen, setCategoriesOpen] = useState(false);
-  const isSticky = useHeaderSticky(70, 32); // 70px header, 32px offer bar
+  // Hook para sincronizar header/navbar/offer (mobile)
+  const { isSticky, headerTop, animation } = useHeaderReaccommodation({
+    offerHeight: 32,
+    headerHeight: 70,
+  });
+
+  // Renderiza siempre el header mobile
 
   return (
     <>
-      {/* Offer bar animada, visible solo cuando NO está sticky */}
-      {/* Oculta el contenedor de la barra de ofertas cuando está sticky para evitar espacio vacío */}
       {!isSticky && (
-        <div className="LTHeaderOfferBar">
+        <div
+          className="LTHeaderOfferBar"
+          style={{ transition: `top ${animation}, opacity ${animation}` }}
+        >
           <LTHeaderOffer />
         </div>
       )}
-      <header className="LTHeaderMobile" style={{ top: isSticky ? 0 : 32 }}>
+      {/* /Header principal con logo y acciones */}
+      <header
+        className="LTHeaderMobile"
+        style={{ top: headerTop, transition: `top ${animation}` }}
+      >
+        {/* Logo de la empresa, clickeable para ir al home */}
         <div className="LTHeaderMobile__logo" onClick={onLogoClick}>
           <img src={logoBlancoChico} alt="Logo LT Distribuidora" />
         </div>
+        {/* Botones de acciones principales: menú de categorías y búsqueda */}
         <div className="LTHeaderMobile__actions">
+          {/* Botón para abrir el overlay de categorías */}
           <button
             className="lt-button-light LTHeaderMobile__categoriesBtn"
             aria-label="Categorías"
@@ -46,6 +71,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
               />
             </span>
           </button>
+          {/* Botón para abrir el overlay de búsqueda */}
           <button
             className="lt-button-light LTHeaderMobile__searchBtn"
             onClick={() => setSearchOpen(true)}
@@ -67,7 +93,9 @@ const LTHeaderMobile = ({ onLogoClick }) => {
             </span>
           </button>
         </div>
+        {/* Menú inferior con accesos rápidos a secciones principales */}
         <nav className="LTHeaderMobile__menu">
+          {/* Botón para acceder a la cuenta del usuario */}
           <button className="LTHeaderMobile__menuBtn" aria-label="Mi Cuenta">
             <svg width="22" height="22" viewBox="0 0 24 24">
               <path
@@ -86,6 +114,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
               />
             </svg>
           </button>
+          {/* Botón para acceder a favoritos */}
           <button className="LTHeaderMobile__menuBtn" aria-label="Favoritos">
             <svg width="22" height="22" viewBox="0 0 24 24">
               <path
@@ -99,6 +128,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
               />
             </svg>
           </button>
+          {/* Botón para acceder a notificaciones */}
           <button
             className="LTHeaderMobile__menuBtn"
             aria-label="Notificaciones"
@@ -113,6 +143,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
               />
             </svg>
           </button>
+          {/* Botón para acceder al carrito */}
           <button className="LTHeaderMobile__menuBtn" aria-label="Carrito">
             <svg width="22" height="22" viewBox="0 0 24 24">
               <path
@@ -125,11 +156,11 @@ const LTHeaderMobile = ({ onLogoClick }) => {
             </svg>
           </button>
         </nav>
-        {/* Overlay de búsqueda mobile */}
+        {/* Overlay de búsqueda, se muestra cuando searchOpen es true */}
         <LTSearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)}>
           <input type="text" />
         </LTSearchOverlay>
-        {/* Overlay de categorías mobile */}
+        {/* Overlay de categorías, se muestra cuando categoriesOpen es true */}
         <LTCategoriesOverlay
           open={categoriesOpen}
           onClose={() => setCategoriesOpen(false)}
@@ -139,4 +170,5 @@ const LTHeaderMobile = ({ onLogoClick }) => {
   );
 };
 
+// Exporta el componente para su uso en otros archivos
 export default LTHeaderMobile;

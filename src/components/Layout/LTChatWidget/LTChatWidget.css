@@ -1,4 +1,24 @@
-﻿/* LTChatWidget - Chat flotante estilo farmaonline */
+﻿.LTChatWidgetModalContent--closing {
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.7, 0.2, 0.3, 1);
+}
+/* Animación de salida para el modal del chat desktop */
+@keyframes chatModalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+.LTChatWidgetModal--closing {
+  animation: chatModalOut 0.35s cubic-bezier(0.7, 0.2, 0.3, 1);
+  overflow: hidden;
+}
+/* LTChatWidget - Chat flotante estilo farmaonline */
 
 /* BotÃ³n flotante */
 .LTChatWidgetButton {
@@ -6,7 +26,7 @@
   bottom: 24px;
   right: 24px;
   z-index: 1050;
-  background: var(--lt-accent-color);
+  background: var(--lt-accent-color-variant2);
   color: var(--lt-black-text-color);
   border-radius: 24px;
   padding: 12px 20px;
@@ -17,14 +37,17 @@
   transition: all 0.3s ease;
   box-shadow: 0 6px 24px rgba(116, 123, 191, 0.22),
     0 2px 12px rgba(0, 0, 0, 0.12);
-  border: 2px solid var(--lt-accent-color-dark);
+  border: 1px solid var(--lt-black-text-color);
   font-family: var(--lt-font-family);
   min-width: 140px;
+  /* ===============================
+     Animaciones de cierre y modal
+  =============================== */
   justify-content: center;
 }
 
 .LTChatWidgetButton:hover {
-  background: var(--lt-accent-color-variant);
+  background: var(--lt-accent-color-variant2-dark);
   color: var(--lt-black-text-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(168, 187, 163, 0.4);
@@ -40,6 +63,9 @@
 .LTChatWidgetText {
   font-size: 14px;
   font-weight: 600;
+  /* ===============================
+     Botón flotante del chat
+  =============================== */
   white-space: nowrap;
 }
 
@@ -84,6 +110,9 @@
 
 /* Modal */
 .LTChatWidgetModal {
+  /* ===============================
+     Loader y spinner de carga
+  =============================== */
   position: fixed;
   bottom: 100px;
   right: 24px;
@@ -110,6 +139,9 @@
 }
 
 .LTChatWidgetModalContent {
+  /* ===============================
+     Overlay y modal del chat
+  =============================== */
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -154,6 +186,9 @@
   transform: translateY(-2px) scale(1.08);
   box-shadow: 0 6px 16px rgba(168, 187, 163, 0.28);
 }
+/* ===============================
+     Header del chat
+  =============================== */
 
 .LTChatWidgetCloseButton svg {
   width: 16px;
@@ -199,6 +234,9 @@
 .LTChatWidgetInputContainer {
   position: relative;
 }
+/* ===============================
+     Contenido principal del chat
+  =============================== */
 
 .LTChatWidgetInput {
   width: 100%;
@@ -228,6 +266,9 @@
 .LTChatWidgetActions {
   display: flex;
   flex-direction: column;
+  /* ===============================
+     Formulario de consulta
+  =============================== */
   gap: 12px;
 }
 
@@ -260,6 +301,9 @@
   border: 1px solid var(--lt-border-color);
 }
 
+/* ===============================
+     Botones de acción del chat
+  =============================== */
 .LTChatWidgetActionSecondary:hover {
   background: var(--lt-accent-color-variant);
   border-color: var(--lt-accent-color);

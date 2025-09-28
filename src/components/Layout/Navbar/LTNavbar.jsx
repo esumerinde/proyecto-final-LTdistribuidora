@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import HamburgerMenuIcon from "../../../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
-import useHeaderSticky from "../../../common/useHeaderSticky";
+import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
 import LTNavbarNavmenu from "./LTNavbarNavmenu/LTNavbarNavmenu";
 import "./LTNavbar.css";
 
@@ -8,12 +8,10 @@ const LTNavbar = () => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const submenuRef = useRef(null);
-  const isSticky = useHeaderSticky(75, 32); // 75px header, 32px offer bar
-  const [navbarTop, setNavbarTop] = useState(isSticky ? 75 : 107);
-
-  useEffect(() => {
-    setNavbarTop(isSticky ? 75 : 107);
-  }, [isSticky]);
+  const { isSticky, navbarTop, animation } = useHeaderReaccommodation({
+    offerHeight: 32,
+    headerHeight: 75,
+  });
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -155,7 +153,7 @@ const LTNavbar = () => {
   return (
     <nav
       className={`LTNavbarWrapper${isSticky ? " LTNavbarSticky" : ""}`}
-      style={{ top: navbarTop }}
+      style={{ top: navbarTop, transition: `top ${animation}` }}
     >
       <div
         className="LTNavbarContainer"

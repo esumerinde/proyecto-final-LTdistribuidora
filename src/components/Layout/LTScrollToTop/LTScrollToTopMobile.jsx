@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import "./LTScrollToTop.css";
+import "./LTScrollToTopMobile.css";
 import { isMobile } from "../../../common/isMobile";
 
 /**
- * Botón Scroll to Top para desktop.
- * - Solo se renderiza en desktop usando isMobile.js
+ * Botón Scroll to Top para mobile.
+ * - Solo se renderiza en dispositivos móviles usando isMobile.js
  * - Muestra el botón solo si el usuario scrollea más de 300px
- * - Sin lógica redundante ni duplicada
+ * - Elimina cualquier otra lógica redundante de detección de mobile
  */
-const LTScrollToTop = () => {
+
+const LTScrollToTopMobile = () => {
   // Estado para mostrar/ocultar el botón según el scroll
   const [isVisible, setIsVisible] = useState(false);
   // Estado para animación de salida
   const [hideAnim, setHideAnim] = useState(false);
 
-  // Escucha el scroll y actualiza la visibilidad del botón
   useEffect(() => {
     const toggleVisibility = () => {
       setIsVisible(window.pageYOffset > 300);
@@ -32,8 +32,8 @@ const LTScrollToTop = () => {
     }
   }, [isVisible]);
 
-  // Solo renderiza el botón si NO es mobile (desktop)
-  if (isMobile()) return null;
+  // Solo renderiza el botón si es mobile
+  if (!isMobile()) return null;
 
   // Función para scrollear suavemente hacia arriba
   const scrollToTop = () => {
@@ -71,4 +71,4 @@ const LTScrollToTop = () => {
   );
 };
 
-export default LTScrollToTop;
+export default LTScrollToTopMobile;

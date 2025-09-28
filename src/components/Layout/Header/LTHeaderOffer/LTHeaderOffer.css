@@ -1,7 +1,7 @@
 .LTHeaderOfferBar {
   width: 100vw;
   min-height: 32px;
-  background: var(--lt-accent-color);
+  background: var(--lt-accent-color-variant2);
   color: var(--lt-black-text-color);
   display: flex;
   align-items: center;
