@@ -2,32 +2,12 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "./LTSearchOverlay.css";
 
-const EXAMPLE_CELULARES = [
-  {
-    brand: "SAMSUNG",
-    title: "Galaxy S21 Ultra 5G",
-    price: "$299.999",
-    oldPrice: "$399.999",
-    discount: "-25%",
-    img: "https://via.placeholder.com/60x60?text=Samsung",
-  },
-  {
-    brand: "XIAOMI",
-    title: "Redmi Note 10 Pro",
-    price: "$189.999",
-    oldPrice: "$249.999",
-    discount: "-24%",
-    img: "https://via.placeholder.com/60x60?text=Xiaomi",
-  },
-  {
-    brand: "APPLE",
-    title: "iPhone 13",
-    price: "$799.999",
-    oldPrice: "$899.999",
-    discount: "-11%",
-    img: "https://via.placeholder.com/60x60?text=iPhone",
-  },
-];
+import { products as products1 } from "../mocks/products";
+import { products as products2 } from "../mocks/products2";
+import { products as products3 } from "../mocks/products3";
+
+// Unifica todos los productos en un solo array
+const ALL_PRODUCTS = [...products1, ...products2, ...products3];
 
 export default function LTSearchOverlay({ open, onClose, children }) {
   const [search, setSearch] = useState("");
@@ -35,7 +15,6 @@ export default function LTSearchOverlay({ open, onClose, children }) {
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
 
-  // Bloquear/desbloquear scroll de body cuando el overlay está abierto (igual que LTCategoriesOverlay)
   useEffect(() => {
     if (open || closing) {
       document.body.style.overflow = "hidden";
@@ -47,7 +26,6 @@ export default function LTSearchOverlay({ open, onClose, children }) {
     };
   }, [open, closing]);
 
-  // Debounce: muestra spinner solo después de 1s sin escribir, y luego los resultados
   useEffect(() => {
     if (search.trim().length === 0) {
       setLoading(false);
@@ -77,8 +55,15 @@ export default function LTSearchOverlay({ open, onClose, children }) {
     }, 250);
   };
 
-  const showCelulares =
-    search.trim().toLowerCase().includes("celular") && ready;
+  // Filtra productos por nombre o marca
+  const filteredProducts =
+    ready && search.trim().length > 0
+      ? ALL_PRODUCTS.filter(
+          (prod) =>
+            prod.name.toLowerCase().includes(search.trim().toLowerCase()) ||
+            prod.brand.toLowerCase().includes(search.trim().toLowerCase())
+        )
+      : [];
 
   if (!open && !closing) return null;
 
@@ -159,38 +144,47 @@ export default function LTSearchOverlay({ open, onClose, children }) {
           <div className="LTSearchBarMobileSpinner" />
         </div>
       )}
-      {showCelulares && (
+      {ready && search.trim().length > 0 && (
         <div className="LTSearchBarMobileResultsBlock">
           <div className="LTSearchBarMobileResultsTitle">
-            PRODUCTOS PARA CELULAR
+            {filteredProducts.length > 0
+              ? `RESULTADOS PARA "${search}"`
+              : "Sin resultados"}
           </div>
           <div className="LTSearchBarMobileProducts">
             <div className="LTSearchBarMobileProductsList">
-              {EXAMPLE_CELULARES.map((prod, idx) => (
+              {filteredProducts.map((prod, idx) => (
                 <div
                   className={`LTSearchBarMobileProductCard LTSearchBarMobileProductCardBig${
-                    idx < EXAMPLE_CELULARES.length - 1 ? "" : " last"
+                    idx < filteredProducts.length - 1 ? "" : " last"
                   }`}
                   key={idx}
                 >
                   <img
                     className="LTSearchBarMobileProductImgBig"
-                    src={prod.img}
-                    alt={prod.title}
+                    src={prod.image}
+                    alt={prod.name}
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      objectFit: "contain",
+                      background: "#fff",
+                      borderRadius: "8px",
+                    }}
                   />
                   <div className="LTSearchBarMobileProductInfoBig">
                     <div className="LTSearchBarMobileProductBrandBig">
                       {prod.brand}
                     </div>
                     <div className="LTSearchBarMobileProductTitleBig">
-                      {prod.title}
+                      {prod.name}
                     </div>
                     <div className="LTSearchBarMobileProductPriceRowBig">
                       <span className="LTSearchBarMobileProductOldPriceBig">
-                        {prod.oldPrice}
+                        {prod.originalPrice ? `$${prod.originalPrice}` : ""}
                       </span>
                       <span className="LTSearchBarMobileProductPriceBig">
-                        {prod.price}
+                        {prod.discountPrice ? `$${prod.discountPrice}` : ""}
                       </span>
                     </div>
                   </div>
@@ -201,7 +195,9 @@ export default function LTSearchOverlay({ open, onClose, children }) {
           <div className="LTSearchBarMobileResultsFooter">
             <div className="LTSearchBarMobileResultsLinkWrapper">
               <span className="LTSearchBarMobileResultsText">
-                {`Mostrar todos los productos para ${search}`}
+                {filteredProducts.length > 0
+                  ? `Mostrar todos los productos para "${search}"`
+                  : ""}
               </span>
             </div>
           </div>

@@ -1,4 +1,126 @@
-/* Centra la card y los indicadores en el carousel, sin mover las flechas */
+/* Título destacado mobile, igual al desktop pero adaptado */
+.LTProductsCarouselMobileGradientTitle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--lt-font-family, "Inter", sans-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: #222 1px 1px 1px;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  line-height: 1.1;
+  white-space: pre-line;
+}
+/* Fondo violeta con patrón SVG */
+.LTProductsCarouselMobile__wrapper {
+  width: 100vw;
+  min-height: 540px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 0 32px 0;
+  background-color: #8a8fc7;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239fa3cf' fill-opacity='0.66'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Banner gradient violeta */
+.LTProductsCarouselMobileBanner {
+  background: linear-gradient(120deg, #9fa3cf 60%, #6c6fae 100%);
+  color: #fff;
+  border-radius: 1.2rem;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 1.5rem 1.1rem 1.2rem 1.1rem;
+  margin-bottom: 1.3rem;
+}
+.LTProductsCarouselMobileBanner::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: 10px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  z-index: 0;
+}
+.LTProductsCarouselMobileBannerTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: #6c6fae;
+  color: #fff;
+  border-radius: 1rem;
+  display: inline-block;
+  padding: 0.18rem 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  max-width: 70vw;
+  min-width: 120px;
+  text-align: center;
+}
+.LTProductsCarouselMobileBannerSubtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.LTProductsCarouselMobileBannerOffer {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #6c6fae;
+  margin-bottom: 0.2rem;
+}
+.LTProductsCarouselMobileBannerOfferMain {
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.LTProductsCarouselMobileBannerOfferText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin-left: 0.2rem;
+}
+.LTProductsCarouselMobileBannerCategory {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.LTProductsCarouselMobileBannerDesc {
+  font-size: 0.98rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+.LTProductsCarouselMobileBannerButton {
+  margin-top: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: #6c6fae;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+/* Carrusel mobile */
 .LTProductsCarouselMobileNav {
   position: relative;
   display: flex;
@@ -23,29 +145,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
   flex-direction: column;
-  padding-bottom: 0;
-}
-.LTProductsCarouselMobile__indicators {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 24px auto 0 auto;
-  position: relative;
-  left: unset;
-  right: unset;
-  bottom: unset;
-  z-index: 20;
-}
-/* Navigation arrows styles (copied from LTOffersSectionMobile) */
-.LTProductsCarouselMobileNav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  padding-bottom: 64px;
 }
 .LTProductsCarouselMobileNav__arrow {
   position: absolute;
@@ -59,130 +161,33 @@
 .LTProductsCarouselMobileNav__arrow--right {
   right: 0;
 }
-
 .LTProductsCarouselMobileArrow {
-  background: var(--lt-accent-color);
-  border: none;
+  background: #8a8fc7;
+  border: 1px solid #6c6fae;
+  color: #fff;
   border-radius: 50%;
-  width: 36px;
-  height: 36px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: background 0.2s;
-  z-index: 2;
-  margin: 0 !important;
-}
-.LTProductsCarouselMobileArrow svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--lt-black-text-color);
+  transition: box-shadow 0.2s;
 }
 .LTProductsCarouselMobileArrow:active {
-  background: var(--lt-accent-color-dark);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
-/* Track para las cards, asegura visibilidad y centra verticalmente */
-/* Increased min-height and padding-bottom to prevent card cut-off and indicator overlap */
-/* Further increased min-height and padding-bottom to guarantee card and indicator visibility */
-.LTProductsCarouselMobile__slideTrack {
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  flex-direction: column;
-  padding-bottom: 64px; /* Even more space for indicators below cards */
-}
-
-/* Indicadores de navegación (dots) debajo de la card */
-/* Indicators are now larger, with border and moved up for visibility */
-/* Indicators are now positioned directly below the card, inside slideTrack */
-.LTProductsCarouselMobile__indicators {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 24px auto 0 auto;
-  position: relative;
-  left: unset;
-  right: unset;
-  bottom: unset;
-  z-index: 20;
-}
-/* Larger, more visible indicator dots with border and shadow */
-/* Restored indicator dots to original size, kept border/shadow for visibility */
-.LTProductsCarouselMobile__indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #bfc8f7;
-  opacity: 0.6;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.2s, box-shadow 0.2s;
-}
-.LTProductsCarouselMobile__indicator--active {
-  opacity: 1;
-  background: #8a98d6;
-}
-/* Fondo igual al desktop, con gradient y color */
-/* Increased min-height for wrapper to ensure enough space for card and indicators */
-/* Further increased min-height for wrapper to guarantee card and indicator visibility */
-.LTProductsCarouselMobile__wrapper {
-  width: 100vw;
-  min-height: 540px;
-  background: #8a8fc7;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239fa3cf' fill-opacity='0.66'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 32px 0 32px 0;
-}
-
-.LTProductsCarouselMobile__container {
-  width: 100vw;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--lt-spacing-md) 32px var(--lt-spacing-md);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-}
-
-.LTProductsCarouselMobile__title {
-  text-align: center;
-  font-family: var(--lt-font-family, "Inter", sans-serif);
-  font-size: 2.3rem;
-  font-weight: 700;
-  color: var(--lt-white-text-color, #fff);
-  margin: 32px 0 24px 0;
-  width: 100vw;
+.LTProductsCarouselMobileArrow svg {
   display: block;
-  line-height: 1.1;
+  width: 28px;
+  height: 28px;
+  fill: #fff;
 }
 
-/* Increased min-height for nav to ensure enough space for card and indicators */
-/* Further increased min-height for nav to guarantee card and indicator visibility */
-.LTProductsCarouselMobile__nav {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100vw;
-  gap: 0;
-  min-height: 480px;
-}
-
-/* Card centrada y con ancho limitado */
+/* Card */
 .LTProductsCarouselMobile__card {
-  background: var(--lt-background-color, #f7f7f2);
+  background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -195,107 +200,18 @@
   justify-content: flex-start;
   padding: 18px 12px 16px 12px;
   position: relative;
-  border: 1px solid var(--lt-accent-color, #bfc8f7);
+  border: 1px solid #6c6fae;
   transition: box-shadow 0.2s, transform 0.5s cubic-bezier(0.7, 0.2, 0.3, 1),
     opacity 0.5s cubic-bezier(0.7, 0.2, 0.3, 1);
   will-change: transform, opacity;
   opacity: 1;
 }
-
-/* Nueva animación de slide horizontal simple */
-/* Animación de slide horizontal clásica: una card sale y la otra entra */
-
-.slide-out-left {
-  animation: slideOutLeftFade 0.45s cubic-bezier(0.7, 0.2, 0.3, 1) forwards;
-  z-index: 2;
-}
-.slide-out-right {
-  animation: slideOutRightFade 0.45s cubic-bezier(0.7, 0.2, 0.3, 1) forwards;
-  z-index: 2;
-}
-.slide-in-left {
-  animation: slideInLeftBounce 0.45s cubic-bezier(0.7, 0.2, 0.3, 1) forwards;
-  z-index: 3;
-}
-.slide-in-right {
-  animation: slideInRightBounce 0.45s cubic-bezier(0.7, 0.2, 0.3, 1) forwards;
-  z-index: 3;
-}
-
-@keyframes slideOutLeftFade {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.85;
-  }
-  60% {
-    opacity: 0.5;
-  }
-  85% {
-    opacity: 0.15;
-  }
-  100% {
-    transform: translateX(-110%);
-    opacity: 0;
-  }
-}
-@keyframes slideOutRightFade {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  30% {
-    opacity: 0.85;
-  }
-  60% {
-    opacity: 0.5;
-  }
-  85% {
-    opacity: 0.15;
-  }
-  100% {
-    transform: translateX(110%);
-    opacity: 0;
-  }
-}
-@keyframes slideInLeftBounce {
-  0% {
-    transform: translateX(110%);
-    opacity: 0;
-  }
-  20% {
-    transform: translateX(100%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slideInRightBounce {
-  0% {
-    transform: translateX(-110%);
-    opacity: 0;
-  }
-  20% {
-    transform: translateX(-100%);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* Resto de tus estilos */
 .LTProductsCarouselMobile__discount {
   position: absolute;
   top: 12px;
   right: 12px;
-  background: var(--lt-accent-color-dark, #8a98d6);
-  color: var(--lt-white-text-color, #fff);
+  background: #6c6fae;
+  color: #fff;
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -308,7 +224,7 @@
 .LTProductsCarouselMobile__image {
   width: 100%;
   height: 200px;
-  background: var(--lt-accent-color, #bfc8f7);
+  background: #8a8fc7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,7 +234,7 @@
 .LTProductsCarouselMobile__image svg {
   width: 40px;
   height: 40px;
-  fill: var(--lt-text-color, #222);
+  fill: #6c6fae;
   opacity: 0.6;
 }
 .LTProductsCarouselMobile__info {
@@ -327,11 +243,11 @@
   margin-bottom: 12px;
   padding: 0 4px;
 }
-.LTProductsCarouselMobile__category {
+.LTProductsCarouselMobile__brand {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 500;
-  color: var(--lt-primary-color, #8a8fc7);
+  color: #6c6fae;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 8px;
@@ -340,7 +256,7 @@
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: var(--lt-black-text-color, #222);
+  color: #222;
   margin: 0 0 12px 0;
   line-height: 1.4;
   display: -webkit-box;
@@ -352,7 +268,7 @@
 .LTProductsCarouselMobile__priceOld {
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  color: var(--lt-text-muted, #888);
+  color: #888;
   text-decoration: line-through;
   margin-bottom: 2px;
 }
@@ -360,7 +276,7 @@
   font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: var(--lt-accent-color-dark, #8a98d6);
+  color: #6c6fae;
   display: flex;
   align-items: baseline;
   margin-bottom: 8px;
@@ -373,8 +289,8 @@
 }
 .LTProductsCarouselMobile__addBtn {
   flex: 1;
-  background: var(--lt-accent-color, #bfc8f7);
-  color: var(--lt-black-text-color, #222);
+  background: #9fa3cf;
+  color: #222;
   border: none;
   padding: 10px 16px;
   border-radius: 8px;
@@ -388,12 +304,8 @@
   gap: 8px;
   justify-content: center;
   height: 40px;
-  border: var(--lt-border-color, #bfc8f7) solid 1px;
+  border: #bfc8f7 solid 1px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-.LTProductsCarouselMobile__addBtn:hover {
-  background: var(--lt-accent-color-variant, #aab0e6);
-  transform: translateY(-1px);
 }
 .LTProductsCarouselMobile__actionIcon {
   width: 16px;
@@ -409,8 +321,31 @@
   align-items: center;
   justify-content: center;
 }
-.LTProductsCarouselMobile__favBtn svg {
-  stroke: var(--lt-accent-color, #bfc8f7);
-  fill: none;
-  stroke-width: 2;
+
+/* Indicadores violetas */
+.LTProductsCarouselMobile__indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 0 auto;
+  position: relative;
+  left: unset;
+  right: unset;
+  bottom: unset;
+  z-index: 20;
+}
+.LTProductsCarouselMobile__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9fa3cf;
+  opacity: 0.6;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.LTProductsCarouselMobile__indicator--active {
+  opacity: 1;
+  background: #6c6fae;
 }

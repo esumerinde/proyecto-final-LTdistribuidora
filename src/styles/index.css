@@ -155,7 +155,6 @@ a {
   color: var(--lt-hover-text-menu);
   transform: translateY(-2px);
 }
-
 .lt-menu-hover:hover::after {
   transform: translateX(-50%) scaleX(1);
 }
@@ -221,6 +220,36 @@ a {
   color: var(--lt-white-text-color);
   text-shadow: #0d0d0d 0 0 5px;
   transform: none;
+}
+
+.lt-button-variant2 {
+  padding: 0.75rem 1.5rem;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  border: 1px solid var(--lt-black-text-color);
+  font-weight: var(--lt-font-weight-light);
+  font-family: var(--lt-font-family);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s,
+    transform 0.2s;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.lt-button-variant2:focus {
+  outline: none;
+  border-color: var(--lt-black-text-color);
+}
+.lt-button-variant2:hover {
+  background: var(--lt-accent-color-variant2);
+  color: var(--lt-black-text-color);
+  border-color: var(--lt-black-text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0 0 3px rgba(13, 13, 13, 0.15);
+}
+.lt-button-variant2:active {
+  transform: translateY(0);
 }
 
 /* Input global estilo barra de búsqueda */

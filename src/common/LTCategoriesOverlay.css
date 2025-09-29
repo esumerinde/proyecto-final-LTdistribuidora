@@ -1,3 +1,4 @@
+/* Contenedor del menú inferior con accesos rápidos */
 .LTCategoriesOverlay__bottomMenuContainer {
   flex-shrink: 0;
   background: #fff;
@@ -10,6 +11,7 @@
   top: 48px;
 }
 
+/* Ítems del menú inferior, alineados a la izquierda */
 .LTCategoriesOverlay__bottomMenuContainer .LTCategoriesOverlay__menuitem {
   justify-content: flex-start;
   width: 100%;
@@ -19,6 +21,7 @@
   z-index: 1;
 }
 
+/* Estilos generales para los ítems del menú */
 .LTCategoriesOverlay__menuitem {
   display: flex;
   flex-direction: row;
@@ -34,25 +37,30 @@
   cursor: pointer;
   transition: background 0.2s;
 }
+/* Icono de cada ítem del menú */
 .LTCategoriesOverlay__menuitemIcon {
   width: 0.94rem;
   height: 0.94rem;
 }
+/* Texto de cada ítem del menú */
 .LTCategoriesOverlay__menuitemText {
   margin: 0;
   display: inline-block;
   font-size: 0.96rem;
 }
+/* Icono SVG dentro del ítem */
 .LTCategoriesOverlay__menuitem img {
   width: 0.94rem;
   height: 0.94rem;
   margin-right: 7px;
 }
+/* Contenedor interno para icono y texto */
 .LTCategoriesOverlay__menuitemInner {
   display: flex;
   align-items: center;
   gap: 7px;
 }
+/* Ajustes responsivos para ítems y subítems en pantallas pequeñas */
 @media (max-width: 400px) {
   .LTCategoriesOverlay__item,
   .LTCategoriesOverlay__item span,
@@ -65,6 +73,7 @@
     height: 28px !important;
   }
 }
+/* Overlay de categorías para mobile */
 /* Overlay de categorías para mobile */
 .LTCategoriesOverlay {
   position: fixed;
@@ -81,18 +90,22 @@
   overflow: hidden;
   animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+/* Contenedor de la lista de categorías */
 .LTCategoriesOverlay__menu {
   display: flex;
   flex-direction: column;
   margin-top: 0;
   padding-bottom: 0;
 }
+/* Hover sobre ítems del menú */
 .LTCategoriesOverlay__menuitem:hover {
   background: #eaeaea;
 }
+/* Estilos para el span dentro del ítem */
 .LTCategoriesOverlay__menuitem span {
   margin: 0;
 }
+/* Header del overlay, con botón de cierre */
 .LTCategoriesOverlay__header {
   display: flex;
   align-items: center;
@@ -101,6 +114,7 @@
   font-size: 1.2rem;
   font-weight: 600;
 }
+/* Botón de cierre del overlay */
 .LTCategoriesOverlay__close {
   background: var(--lt-accent-color);
   border-radius: 8px;
@@ -114,12 +128,14 @@
   min-width: 40px;
   min-height: 40px;
 }
+/* Icono SVG del botón de cierre */
 .LTCategoriesOverlay__closeIcon {
   width: 1.1rem;
   height: 1.1rem;
   stroke: var(--lt-black-text-color);
   display: block;
 }
+/* Contenedor de la lista principal de categorías */
 .LTCategoriesOverlay__list {
   display: flex;
   flex-direction: column;
@@ -129,6 +145,7 @@
   gap: 0;
 }
 
+/* Lista de categorías principales */
 .LTCategoriesOverlay__categories {
   flex: unset;
   margin-bottom: 0;
@@ -151,18 +168,21 @@
   margin-top: 0;
   padding-top: 0;
 }
+/* Menú oculto (transición y pointer-events) */
 .LTCategoriesOverlay__menu--hidden {
   max-height: 0;
   opacity: 0;
   pointer-events: none;
   transition-delay: 0s, 0s;
 }
+/* Menú visible (transición y pointer-events) */
 .LTCategoriesOverlay__menu--visible {
   max-height: 300px;
   opacity: 1;
   pointer-events: auto;
   transition-delay: 0s, 0s;
 }
+/* Ítem de categoría principal */
 .LTCategoriesOverlay__item {
   width: 100%;
   display: flex;
@@ -180,33 +200,40 @@
   box-sizing: border-box;
   border-radius: 0;
   margin: 6px 0;
-  height: 36px;
+  height: 48px;
 }
+/* Span dentro del ítem de categoría */
 .LTCategoriesOverlay__item span {
   display: flex;
   align-items: center;
   height: 100%;
 }
+/* Ítem expandido o activo */
 .LTCategoriesOverlay__item.expanded,
 .LTCategoriesOverlay__item:active {
   background: var(--lt-accent-color-dark);
   color: #fff;
 }
+/* Icono caret cuando el ítem está expandido */
 .LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
   color: #fff;
 }
+/* Hover sobre ítem de categoría */
 .LTCategoriesOverlay__item:hover {
   background: #f7f7f7;
   color: #222;
 }
+/* Icono caret para expandir/cerrar subcategorías */
 .LTCategoriesOverlay__caret {
   margin-left: 8px;
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
   color: #888;
 }
+/* Caret expandido */
 .LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
   color: #fff;
 }
+/* Lista de subcategorías (animación de apertura/cierre) */
 .LTCategoriesOverlay__sublist {
   width: 100%;
   background: #f9f9f9;
@@ -214,16 +241,19 @@
   transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
     opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* Sublista abierta (padding extra) */
 .LTCategoriesOverlay__sublist--open {
   padding-top: 4px;
   padding-bottom: 8px;
 }
+/* Ítem de subcategoría */
 .LTCategoriesOverlay__subitem {
   width: 100%;
   padding: 6px 14px;
   font-size: 0.92rem;
   color: #222;
   background: #fff;
+
   border-radius: 0;
   border: none;
   box-shadow: none;
@@ -232,10 +262,12 @@
   height: 28px;
   transition: background 0.2s, color 0.2s;
 }
+/* Hover sobre subcategoría */
 .LTCategoriesOverlay__subitem:hover {
   background: #ececec;
   color: var(--lt-accent-color-dark);
 }
+/* Mensaje de lista vacía */
 .LTCategoriesOverlay__empty {
   color: #aaa;
   text-align: center;

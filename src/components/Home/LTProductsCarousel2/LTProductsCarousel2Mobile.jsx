@@ -1,16 +1,17 @@
 import React, { useState, useRef } from "react";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
-import "./LTProductsCarouselMobile.css";
-import { products } from "../../../mocks/products";
+import "./LTProductsCarousel2Mobile.css";
+import { products as products2 } from "../../../mocks/products2";
 
-const LTProductsCarouselMobile = () => {
+const LTProductsCarousel2Mobile = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState(null);
   const [nextIdx, setNextIdx] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const touch = useRef({ startX: null, endX: null });
+  const products = products2;
 
   const handleNext = React.useCallback(() => {
     if (animating) return;
@@ -90,15 +91,37 @@ const LTProductsCarouselMobile = () => {
   if (!products || !products.length) return null;
 
   return (
-    <section className="LTProductsCarouselMobile__wrapper">
-      <div className="LTProductsCarouselMobile__container">
-        <div className="LTProductsCarouselMobileGradientTitle">
-          Descubrí nuestras mejores ofertas
+    <section className="LTProductsCarousel2Mobile__wrapper">
+      <div className="LTProductsCarousel2Mobile__container">
+        <div className="LTProductsCarousel2MobileBanner">
+          <div className="LTProductsCarousel2MobileBannerTitle">
+            ELECTRÓNICA
+          </div>
+          <div className="LTProductsCarousel2MobileBannerSubtitle">
+            Válido hasta el 31 de diciembre
+          </div>
+          <div className="LTProductsCarousel2MobileBannerOffer">
+            <span className="LTProductsCarousel2MobileBannerOfferMain">
+              HASTA 40%
+            </span>
+            <span className="LTProductsCarousel2MobileBannerOfferText">
+              OFF
+            </span>
+          </div>
+          <div className="LTProductsCarousel2MobileBannerCategory">
+            Electrónica
+          </div>
+          <div className="LTProductsCarousel2MobileBannerDesc">
+            Los mejores dispositivos y componentes
+          </div>
+          <button className="LTProductsCarousel2MobileBannerButton">
+            Ver ofertas
+          </button>
         </div>
-        <div className="LTProductsCarouselMobileNav">
-          <div className="LTProductsCarouselMobileNav__arrow LTProductsCarouselMobileNav__arrow--left">
+        <div className="LTProductsCarousel2MobileNav">
+          <div className="LTProductsCarousel2MobileNav__arrow LTProductsCarousel2MobileNav__arrow--left">
             <button
-              className="LTProductsCarouselMobileArrow"
+              className="LTProductsCarousel2MobileArrow"
               onClick={handlePrev}
               aria-label="Anterior"
               type="button"
@@ -109,15 +132,15 @@ const LTProductsCarouselMobile = () => {
               </svg>
             </button>
           </div>
-          <div className="LTProductsCarouselMobileNav__center">
+          <div className="LTProductsCarousel2MobileNav__center">
             <div
-              className="LTProductsCarouselMobile__slideTrack"
+              className="LTProductsCarousel2Mobile__slideTrack"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
               <div
-                className={`LTProductsCarouselMobile__card${
+                className={`LTProductsCarousel2Mobile__card${
                   animating && direction ? ` slide-out-${direction}` : ""
                 }`}
                 style={{
@@ -130,10 +153,10 @@ const LTProductsCarouselMobile = () => {
                 }}
               >
                 {/* Card content actual */}
-                <div className="LTProductsCarouselMobile__discount">
+                <div className="LTProductsCarousel2Mobile__discount">
                   -{products[currentIdx].discount}%
                 </div>
-                <div className="LTProductsCarouselMobile__image">
+                <div className="LTProductsCarousel2Mobile__image">
                   {products[currentIdx].image ? (
                     <img
                       src={products[currentIdx].image}
@@ -151,7 +174,7 @@ const LTProductsCarouselMobile = () => {
                   ) : (
                     <svg
                       viewBox="0 0 24 24"
-                      className="LTProductsCarouselMobile__placeholderIcon"
+                      className="LTProductsCarousel2Mobile__placeholderIcon"
                       style={{
                         width: "80px",
                         height: "80px",
@@ -162,26 +185,26 @@ const LTProductsCarouselMobile = () => {
                     </svg>
                   )}
                 </div>
-                <div className="LTProductsCarouselMobile__info">
-                  <div className="LTProductsCarouselMobile__brand">
+                <div className="LTProductsCarousel2Mobile__info">
+                  <div className="LTProductsCarousel2Mobile__brand">
                     {products[currentIdx].brand}
                   </div>
-                  <div className="LTProductsCarouselMobile__titleCard">
+                  <div className="LTProductsCarousel2Mobile__titleCard">
                     {products[currentIdx].name}
                   </div>
-                  <div className="LTProductsCarouselMobile__priceOld">
+                  <div className="LTProductsCarousel2Mobile__priceOld">
                     {formatPrice(products[currentIdx].originalPrice)}
                   </div>
-                  <div className="LTProductsCarouselMobile__priceNew">
+                  <div className="LTProductsCarousel2Mobile__priceNew">
                     {formatPrice(products[currentIdx].discountPrice)}
                   </div>
                 </div>
-                <div className="LTProductsCarouselMobile__actions">
-                  <button className="LTProductsCarouselMobile__addBtn">
+                <div className="LTProductsCarousel2Mobile__actions">
+                  <button className="LTProductsCarousel2Mobile__addBtn">
                     <img
                       src={ShoppingBagIcon}
                       alt="Agregar"
-                      className="LTProductsCarouselMobile__actionIcon"
+                      className="LTProductsCarousel2Mobile__actionIcon"
                       style={{
                         width: "20px",
                         height: "20px",
@@ -199,7 +222,7 @@ const LTProductsCarouselMobile = () => {
               {/* Card nueva que entra */}
               {animating && nextIdx !== null && (
                 <div
-                  className={`LTProductsCarouselMobile__card slide-in-${direction}`}
+                  className={`LTProductsCarousel2Mobile__card slide-in-${direction}`}
                   style={{
                     position: "absolute",
                     top: 0,
@@ -210,10 +233,10 @@ const LTProductsCarouselMobile = () => {
                   }}
                 >
                   {/* Card content nueva */}
-                  <div className="LTProductsCarouselMobile__discount">
+                  <div className="LTProductsCarousel2Mobile__discount">
                     -{products[nextIdx].discount}%
                   </div>
-                  <div className="LTProductsCarouselMobile__image">
+                  <div className="LTProductsCarousel2Mobile__image">
                     {products[nextIdx].image ? (
                       <img
                         src={products[nextIdx].image}
@@ -231,7 +254,7 @@ const LTProductsCarouselMobile = () => {
                     ) : (
                       <svg
                         viewBox="0 0 24 24"
-                        className="LTProductsCarouselMobile__placeholderIcon"
+                        className="LTProductsCarousel2Mobile__placeholderIcon"
                         style={{
                           width: "80px",
                           height: "80px",
@@ -242,26 +265,26 @@ const LTProductsCarouselMobile = () => {
                       </svg>
                     )}
                   </div>
-                  <div className="LTProductsCarouselMobile__info">
-                    <div className="LTProductsCarouselMobile__brand">
+                  <div className="LTProductsCarousel2Mobile__info">
+                    <div className="LTProductsCarousel2Mobile__brand">
                       {products[nextIdx].brand}
                     </div>
-                    <div className="LTProductsCarouselMobile__titleCard">
+                    <div className="LTProductsCarousel2Mobile__titleCard">
                       {products[nextIdx].name}
                     </div>
-                    <div className="LTProductsCarouselMobile__priceOld">
+                    <div className="LTProductsCarousel2Mobile__priceOld">
                       {formatPrice(products[nextIdx].originalPrice)}
                     </div>
-                    <div className="LTProductsCarouselMobile__priceNew">
+                    <div className="LTProductsCarousel2Mobile__priceNew">
                       {formatPrice(products[nextIdx].discountPrice)}
                     </div>
                   </div>
-                  <div className="LTProductsCarouselMobile__actions">
-                    <button className="LTProductsCarouselMobile__addBtn">
+                  <div className="LTProductsCarousel2Mobile__actions">
+                    <button className="LTProductsCarousel2Mobile__addBtn">
                       <img
                         src={ShoppingBagIcon}
                         alt="Agregar"
-                        className="LTProductsCarouselMobile__actionIcon"
+                        className="LTProductsCarousel2Mobile__actionIcon"
                         style={{
                           width: "20px",
                           height: "20px",
@@ -278,22 +301,22 @@ const LTProductsCarouselMobile = () => {
                 </div>
               )}
             </div>
-            <div className="LTProductsCarouselMobile__indicators">
+            <div className="LTProductsCarousel2Mobile__indicators">
               {products.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`LTProductsCarouselMobile__indicator${
+                  className={`LTProductsCarousel2Mobile__indicator${
                     idx === currentIdx
-                      ? " LTProductsCarouselMobile__indicator--active"
+                      ? " LTProductsCarousel2Mobile__indicator--active"
                       : ""
                   }`}
                 />
               ))}
             </div>
           </div>
-          <div className="LTProductsCarouselMobileNav__arrow LTProductsCarouselMobileNav__arrow--right">
+          <div className="LTProductsCarousel2MobileNav__arrow LTProductsCarousel2MobileNav__arrow--right">
             <button
-              className="LTProductsCarouselMobileArrow"
+              className="LTProductsCarousel2MobileArrow"
               onClick={handleNext}
               aria-label="Siguiente"
               type="button"
@@ -310,4 +333,4 @@ const LTProductsCarouselMobile = () => {
   );
 };
 
-export default LTProductsCarouselMobile;
+export default LTProductsCarousel2Mobile;

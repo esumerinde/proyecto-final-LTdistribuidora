@@ -1,4 +1,3 @@
-/* LTProductsCategories - Categorías más vistas con círculos */
 .LTProductsCategoriesWrapper {
   width: 100%;
   background-color: var(--lt-background-color);
@@ -109,14 +108,24 @@
 }
 
 .LTProductsCategoriesIcon {
-  width: 100%;
-  height: 100%;
+  width: 48px;
+  height: 48px;
+  display: block;
   fill: var(--lt-black-text-color);
+  stroke: var(--lt-black-text-color);
   transition: all 0.3s ease;
 }
 
 .LTProductsCategoriesItem:hover .LTProductsCategoriesIcon {
   transform: scale(1.08);
+}
+
+/* Pintar el contorno blanco en hover igual que LTOffersSection */
+.LTProductsCategoriesItem:hover .LTProductsCategoriesIcon path,
+.LTProductsCategoriesItem:hover .LTProductsCategoriesIcon rect,
+.LTProductsCategoriesItem:hover .LTProductsCategoriesIcon circle {
+  stroke: #fff !important;
+  fill: none !important;
 }
 
 .LTProductsCategoriesLabel {

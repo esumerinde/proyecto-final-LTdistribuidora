@@ -1,10 +1,10 @@
-.LTOffersMobileWrapper {
+.LTProductsCategoriesMobileWrapper {
   width: 100%;
   background: var(--lt-background-color);
   padding: 2rem 0 1.5rem 0;
 }
 
-.LTOffersMobileTitle {
+.LTProductsCategoriesMobileTitle {
   font-family: "Montserrat", var(--lt-font-family);
   font-size: 1.5rem;
   font-weight: 700;
@@ -13,7 +13,7 @@
   margin-bottom: 1.5rem;
 }
 
-.LTOffersMobileCarousel {
+.LTProductsCategoriesMobileCarousel {
   position: relative;
   min-height: 440px;
   width: 100vw;
@@ -23,24 +23,24 @@
   overflow: visible;
 }
 
-.LTOffersMobileNav__arrow {
+.LTProductsCategoriesMobileNav__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
 }
 
-.LTOffersMobileNav__arrow--left {
+.LTProductsCategoriesMobileNav__arrow--left {
   left: 50%;
   transform: translate(-200px, -50%);
 }
 
-.LTOffersMobileNav__arrow--right {
+.LTProductsCategoriesMobileNav__arrow--right {
   right: 50%;
   transform: translate(200px, -50%);
 }
 
-.LTOffersMobileArrow {
+.LTProductsCategoriesMobileArrow {
   background: white;
   border: none;
   border-radius: 50%;
@@ -54,18 +54,18 @@
   transition: box-shadow 0.2s;
 }
 
-.LTOffersMobileArrow:active {
+.LTProductsCategoriesMobileArrow:active {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
 }
 
-.LTOffersMobileArrow svg {
+.LTProductsCategoriesMobileArrow svg {
   display: block;
   width: 40px;
   height: 40px;
   fill: #222; /* negro */
 }
 
-.LTOffersMobileItem {
+.LTProductsCategoriesMobileItem {
   flex: 1 1 0;
   min-width: 0;
   max-width: 100vw;
@@ -80,18 +80,18 @@
   opacity: 1;
 }
 
-.LTOffersMobileCircle {
+.LTProductsCategoriesMobileCircle {
   width: 340px;
   height: 340px;
   border-radius: 50%;
-  background: var(--lt-accent-color); /* igual que categorías */
+  background: var(--lt-accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
-.LTOffersMobileIconContainer {
+.LTProductsCategoriesMobileIconContainer {
   width: 200px;
   height: 200px;
   display: flex;
@@ -99,7 +99,7 @@
   justify-content: center;
 }
 
-.LTOffersMobileIcon {
+.LTProductsCategoriesMobileIcon {
   width: 260px;
   height: 260px;
   fill: #222; /* negro */
@@ -107,7 +107,7 @@
   stroke-width: 3px;
 }
 
-.LTOffersMobileLabel {
+.LTProductsCategoriesMobileLabel {
   font-family: var(--lt-font-family);
   font-size: 1.3rem;
   font-weight: 600;
@@ -117,50 +117,50 @@
   margin-top: 0.2rem;
 }
 
-.LTOffersMobileShowAll {
+.LTProductsCategoriesMobileShowAll {
   text-align: center;
   margin-top: 0.7rem;
 }
 
 @media (max-width: 600px) {
-  .LTOffersMobileWrapper {
+  .LTProductsCategoriesMobileWrapper {
     padding: 1.2rem 0 1rem 0;
   }
-  .LTOffersMobileTitle {
+  .LTProductsCategoriesMobileTitle {
     font-size: 1.15rem;
     margin-bottom: 1rem;
   }
-  .LTOffersMobileCircle {
+  .LTProductsCategoriesMobileCircle {
     width: 180px;
     height: 180px;
   }
-  .LTOffersMobileIconContainer {
+  .LTProductsCategoriesMobileIconContainer {
     width: 100px;
     height: 100px;
   }
-  .LTOffersMobileIcon {
+  .LTProductsCategoriesMobileIcon {
     width: 260px;
     height: 260px;
     fill: #222;
     stroke: #222;
   }
-  .LTOffersMobileLabel {
+  .LTProductsCategoriesMobileLabel {
     font-size: 1.05rem;
   }
-  .LTOffersMobileArrow {
+  .LTProductsCategoriesMobileArrow {
     width: 40px;
     height: 40px;
   }
-  .LTOffersMobileArrow svg {
+  .LTProductsCategoriesMobileArrow svg {
     width: 28px;
     height: 28px;
     fill: #222;
   }
-  .LTOffersMobileNav__arrow--left {
+  .LTProductsCategoriesMobileNav__arrow--left {
     left: 50%;
     transform: translate(-180px, -50%);
   }
-  .LTOffersMobileNav__arrow--right {
+  .LTProductsCategoriesMobileNav__arrow--right {
     right: 50%;
     transform: translate(180px, -50%);
   }

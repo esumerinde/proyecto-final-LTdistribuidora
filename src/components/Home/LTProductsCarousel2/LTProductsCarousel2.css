@@ -32,9 +32,8 @@
 .LTProductsCarousel2Banner {
   background: linear-gradient(
     135deg,
-    var(--lt-accent-color-variant) 0%,
-    var(--lt-accent-color) 60%,
-    var(--lt-accent-color-dark) 100%
+    var(--lt-accent-color-variant2) 0%,
+    var(--lt-accent-color-variant2-dark) 100%
   );
   border-radius: 12px;
   padding: 20px;
@@ -62,7 +61,7 @@
 }
 
 .LTProductsCarousel2BannerBadge {
-  background: var(--lt-accent-color-dark);
+  background: var(--lt-accent-color-variant2-dark);
   color: var(--lt-background-color);
   padding: 4px 12px;
   border-radius: 12px;
@@ -154,7 +153,7 @@
   width: 40px;
   height: 40px;
   border: none;
-  background: var(--lt-accent-color);
+  background: var(--lt-accent-color-variant2);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -163,13 +162,13 @@
   transition: visibility 0.7s, opacity 0.7s, box-shadow 0.3s, background 0.3s,
     border 0.3s;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--lt-accent-color-dark);
+  border: 1px solid var(--lt-black-text-color);
   margin: 0 12px;
 }
 
 .LTProductsCarousel2Arrow:hover {
-  background: var(--lt-accent-color-variant);
-  border-color: var(--lt-accent-color-variant);
+  background: var(--lt-accent-color-variant2-dark);
+  border-color: var(--lt-black-text-color);
   color: var(--lt-black-text-color);
 }
 
@@ -231,7 +230,7 @@
 /* Cards de productos */
 .LTProductsCarousel2Card {
   background: var(--lt-background-color);
-  border: 1px solid var(--lt-accent-color);
+  border: 1px solid var(--lt-black-text-color);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -249,10 +248,6 @@
   z-index: 2;
 }
 
-.LTProductsCarousel2Card:hover .LTProductsCarousel2CardImage {
-  transform: scale(1.06);
-}
-
 .LTProductsCarousel2Card:hover .LTProductsCarousel2ActionIcon {
   transform: scale(1.08);
 }
@@ -262,7 +257,7 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  background: var(--lt-accent-color-dark);
+  background: var(--lt-accent-color-variant2-dark);
   color: var(--lt-white-text-color);
   font-family: "Inter", sans-serif;
   font-size: 12px;
@@ -276,7 +271,6 @@
 .LTProductsCarousel2CardImage {
   width: 100%;
   height: 180px;
-  background: var(--lt-accent-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -284,6 +278,7 @@
   flex-shrink: 0;
   transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
   will-change: transform;
+  margin-top: 15px;
 }
 
 .LTProductsCarousel2CardImagePlaceholder {
@@ -336,7 +331,7 @@
 }
 
 .LTProductsCarousel2CardLaunchBadge {
-  background: var(--lt-accent-color-variant); /* Violeta medio para badge */
+  background: var(--lt-secondary-color); /* Violeta medio para badge */
   color: white;
   font-size: 14px;
   font-weight: 600;
@@ -365,7 +360,7 @@
   font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 700;
-  color: var(--lt-accent-color-dark);
+  color: var(--lt-accent-color-variant2-dark);
   display: flex;
   align-items: baseline;
 }
@@ -401,7 +396,7 @@
   flex: 0 0 auto;
   width: 85px;
   height: 40px;
-  background: var(--lt-accent-color);
+  background: var(--lt-accent-color-variant2);
   color: var(--lt-black-text-color);
   border: none;
   padding: 10px 8px;
@@ -419,7 +414,7 @@
 }
 
 .LTProductsCarousel2CardAddToCart:hover {
-  background: var(--lt-accent-color-variant);
+  background: var(--lt-accent-color-variant2-dark);
   transform: translateY(-1px);
 }
 
@@ -454,27 +449,6 @@
 .LTProductsCarousel2CardFavorite:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2); /* Sombra violeta */
-}
-
-.LTProductsCarousel2CardFavorite.active {
-  background: var(--lt-accent-color);
-  border-color: var(--lt-accent-color);
-}
-
-.LTProductsCarousel2CardFavorite.active .LTProductsCarousel2ActionIcon {
-  fill: var(--lt-accent-color-dark);
-}
-
-.LTProductsCarousel2CardFavorite svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--lt-accent-color-dark); /* Violeta principal para corazón */
-  transition: fill 0.3s ease;
-}
-
-.LTProductsCarousel2CardFavorite .LTProductsCarousel2ActionIcon {
-  filter: brightness(0) invert(0);
-  fill: var(--lt-primary-color);
 }
 
 /* Responsive */

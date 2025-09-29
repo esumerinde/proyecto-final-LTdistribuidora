@@ -38,6 +38,20 @@
   transform: translateY(-4px);
 }
 
+.LTOffersSectionItem:hover .LTOffersSectionCircle .LTOffersSectionIconSvg {
+  color: var(--lt-white-text-color);
+}
+
+.LTOffersSectionItem:hover .LTOffersSectionCircle .LTOffersSectionIconSvg path,
+.LTOffersSectionItem:hover .LTOffersSectionCircle .LTOffersSectionIconSvg rect,
+.LTOffersSectionItem:hover
+  .LTOffersSectionCircle
+  .LTOffersSectionIconSvg
+  circle {
+  stroke: var(--lt-white-text-color) !important;
+  fill: none !important;
+}
+
 .LTOffersSectionIcon {
   background: linear-gradient(
     135deg,
@@ -55,10 +69,12 @@
 }
 
 .LTOffersSectionIconSvg {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   margin: 0 auto 6px auto;
   display: block;
+  color: var(--lt-black-text-color); /* color inicial */
+  transition: color 0.2s;
 }
 
 .LTOffersSectionLabel {
@@ -100,7 +116,7 @@
 .LTOffersSectionItem:hover .LTOffersSectionCircle {
   transform: scale(1.06);
   box-shadow: 0 8px 24px rgba(168, 187, 163, 0.3);
-  background: var(--lt-accent-color-variant);
+  background: var(--lt-accent-color-dark);
 }
 .LTOffersSectionItem:hover .LTOffersSectionCircle::before {
   opacity: 1;

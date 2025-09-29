@@ -1,12 +1,12 @@
-import React from "react";
-import "./LTProductsCategories.css";
+import React, { useState } from "react";
+import "./LTProductsCategoriesMobile.css";
 
-// SVGs inline originales, solo outline
+// SVGs iguales a desktop
 const MobileSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -22,9 +22,9 @@ const MobileSvg = (
 );
 const LaptopSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -40,9 +40,9 @@ const LaptopSvg = (
 );
 const TvSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -58,9 +58,9 @@ const TvSvg = (
 );
 const GamingSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -76,9 +76,9 @@ const GamingSvg = (
 );
 const HeadphonesSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -93,9 +93,9 @@ const HeadphonesSvg = (
 );
 const HouseSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
-    width="48"
-    height="48"
+    className="LTProductsCategoriesMobileIcon"
+    width="260"
+    height="260"
     viewBox="0 0 24 24"
     fill="none"
   >
@@ -110,46 +110,76 @@ const HouseSvg = (
   </svg>
 );
 
-const LTProductsCategories = () => {
-  const categories = [
-    { id: 1, name: "Celulares", icon: MobileSvg },
-    { id: 2, name: "Notebooks", icon: LaptopSvg },
-    { id: 3, name: "Televisores", icon: TvSvg },
-    { id: 4, name: "Gaming", icon: GamingSvg },
-    { id: 5, name: "Audio", icon: HeadphonesSvg },
-    { id: 6, name: "Electrodomésticos", icon: HouseSvg },
-  ];
+const categories = [
+  { id: 1, name: "Celulares", icon: MobileSvg },
+  { id: 2, name: "Notebooks", icon: LaptopSvg },
+  { id: 3, name: "Televisores", icon: TvSvg },
+  { id: 4, name: "Gaming", icon: GamingSvg },
+  { id: 5, name: "Audio", icon: HeadphonesSvg },
+  { id: 6, name: "Electrodomésticos", icon: HouseSvg },
+];
+
+const LTProductsCategoriesMobile = () => {
+  const [currentIdx, setCurrentIdx] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIdx((prev) => (prev === 0 ? categories.length - 1 : prev - 1));
+  };
+  const handleNext = () => {
+    setCurrentIdx((prev) => (prev === categories.length - 1 ? 0 : prev + 1));
+  };
+
+  const category = categories[currentIdx];
 
   return (
-    <section className="LTProductsCategoriesWrapper">
-      <div className="LTProductsCategoriesContainer">
-        <div className="LTProductsCategoriesHeader">
-          <h2 className="LTProductsCategoriesTitle lt-big-title">
-            Categorías más vistas
-          </h2>
-          <span className="LTProductsCategoriesViewAll lt-menu-hover">
-            Mostrar todas las categorías
-          </span>
+    <section className="LTProductsCategoriesMobileWrapper">
+      <div className="LTProductsCategoriesMobileHeader">
+        <h2 className="LTProductsCategoriesMobileTitle lt-big-title">
+          Categorías más vistas
+        </h2>
+        <span
+          className="LTProductsCategoriesMobileShowAll LTProductsCategoriesViewAll lt-menu-hover"
+          style={{ display: "block", textAlign: "center", width: "100%" }}
+        >
+          Mostrar todas las categorías
+        </span>
+      </div>
+      <div className="LTProductsCategoriesMobileCarousel">
+        <div className="LTProductsCategoriesMobileNav__arrow LTProductsCategoriesMobileNav__arrow--left">
+          <button
+            className="LTProductsCategoriesMobileArrow"
+            onClick={handlePrev}
+            aria-label="Anterior"
+            type="button"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24">
+              <path d="M15.41,7.41L10.83,12L15.41,16.59L14,18L8,12L14,6L15.41,7.41Z" />
+            </svg>
+          </button>
         </div>
-        <div className="LTProductsCategoriesGrid">
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              className="LTProductsCategoriesItem"
-              onClick={() => console.log(`Clicked on ${category.name}`)}
-            >
-              <div className="LTProductsCategoriesCircle">
-                <div className="LTProductsCategoriesIconContainer">
-                  {category.icon}
-                </div>
-              </div>
-              <div className="LTProductsCategoriesLabel">{category.name}</div>
+        <div className="LTProductsCategoriesMobileItem">
+          <div className="LTProductsCategoriesMobileCircle">
+            <div className="LTProductsCategoriesMobileIconContainer">
+              {category.icon}
             </div>
-          ))}
+          </div>
+          <div className="LTProductsCategoriesMobileLabel">{category.name}</div>
+        </div>
+        <div className="LTProductsCategoriesMobileNav__arrow LTProductsCategoriesMobileNav__arrow--right">
+          <button
+            className="LTProductsCategoriesMobileArrow"
+            onClick={handleNext}
+            aria-label="Siguiente"
+            type="button"
+          >
+            <svg width="28" height="28" viewBox="0 0 24 24">
+              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.59Z" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default LTProductsCategories;
+export default LTProductsCategoriesMobile;

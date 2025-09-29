@@ -22,7 +22,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
   // Estado para controlar la apertura del overlay de categorías
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   // Hook para sincronizar header/navbar/offer (mobile)
-  const { isSticky, headerTop, animation } = useHeaderReaccommodation({
+  const { isSticky, animation } = useHeaderReaccommodation({
     offerHeight: 32,
     headerHeight: 70,
   });
@@ -42,7 +42,7 @@ const LTHeaderMobile = ({ onLogoClick }) => {
       {/* /Header principal con logo y acciones */}
       <header
         className="LTHeaderMobile"
-        style={{ top: headerTop, transition: `top ${animation}` }}
+        style={{ top: !isSticky ? 32 : 0, transition: `top ${animation}` }}
       >
         {/* Logo de la empresa, clickeable para ir al home */}
         <div className="LTHeaderMobile__logo" onClick={onLogoClick}>
