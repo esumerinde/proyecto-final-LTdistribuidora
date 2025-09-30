@@ -17,7 +17,6 @@ import LTBrandsCarousel from "../../components/Home/LTBrandsCarousel/LTBrandsCar
 import LTProductsCarousel2Mobile from "../../components/Home/LTProductsCarousel2/LTProductsCarousel2Mobile";
 
 import LTNewsletter from "../../components/Home/LTNewsletter/LTNewsletter";
-// import LTChatWidget from "../../components/Layout/LTChatWidget/LTChatWidget"; // No se usa actualmente
 import { CarouselSyncProvider } from "../../common/CarouselSyncContext.jsx";
 import "./Home.css";
 

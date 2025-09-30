@@ -1,13 +1,11 @@
+// Botón de favoritos, lo usás para marcar/desmarcar productos como favoritos.
+// Nahuel, si querés que esto mande el favorito al backend, acá iría el axios en el onClick.  (acá podés meter la lógica de guardar en la base)
+// Props:
+// - isFavorite: booleano, si está marcado o no
+// - className: para meterle estilos extra si pinta
 import React from "react";
 import "./FavoriteButton.css";
 
-/**
- * Botón de favorito reutilizable
- * Props:
- * - isFavorite: boolean (si está marcado)
- * - onClick: función para manejar el click
- * - className: string (clases extra)
- */
 const FavoriteButton = ({ isFavorite, onClick, className = "" }) => {
   return (
     <button
@@ -16,6 +14,7 @@ const FavoriteButton = ({ isFavorite, onClick, className = "" }) => {
       aria-label={isFavorite ? "Quitar de favoritos" : "Agregar a favoritos"}
       type="button"
     >
+      {/* este SVG es el corazoncito. Si está marcado, se pinta rosa. Si no, queda vacío. */}
       <svg
         viewBox="0 0 24 24"
         width={18}

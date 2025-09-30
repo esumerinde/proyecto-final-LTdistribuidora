@@ -1,4 +1,6 @@
 import React from "react";
+// Si vas a traer las categorías desde el backend, importá axios o fetch acá
+// import axios from "axios";
 import "./LTProductsCategories.css";
 
 // SVGs inline originales, solo outline
@@ -111,6 +113,14 @@ const HouseSvg = (
 );
 
 const LTProductsCategories = () => {
+  // Si el backend provee las categorías, reemplazá este array por un estado y traelas con useEffect
+  // const [categories, setCategories] = useState([]);
+  // useEffect(() => {
+  //   axios.get("/api/categorias")
+  //     .then(res => setCategories(res.data))
+  //     .catch(err => console.error("Error al traer categorías:", err));
+  // }, []);
+  // Si las categorías tienen íconos personalizados, deberías mapear el nombre o id a cada SVG
   const categories = [
     { id: 1, name: "Celulares", icon: MobileSvg },
     { id: 2, name: "Notebooks", icon: LaptopSvg },
@@ -136,6 +146,8 @@ const LTProductsCategories = () => {
             <div
               key={category.id}
               className="LTProductsCategoriesItem"
+              // Cuando integres el backend, este onClick debería navegar a la página de la categoría o hacer un fetch de productos
+              // Ejemplo: onClick={() => navegarACategoria(category.id) }
               onClick={() => console.log(`Clicked on ${category.name}`)}
             >
               <div className="LTProductsCategoriesCircle">

@@ -1,4 +1,4 @@
-/* LTNewsletter - Newsletter subscription component */
+/* Wrapper principal del newsletter. Ajustá el fondo y el padding según el diseño general. */
 .LTNewsletterWrapper {
   width: 100%;
   background: var(--lt-background-color);
@@ -7,6 +7,7 @@
   overflow: hidden;
 }
 
+/* Fondo decorativo con patrón SVG. Si el backend quiere personalizar el fondo, modificar acá. */
 .LTNewsletterWrapper::before {
   content: "";
   position: absolute;
@@ -18,6 +19,7 @@
   pointer-events: none;
 }
 
+/* Contenedor central. Ajustá el max-width si el diseño cambia. */
 .LTNewsletterContainer {
   max-width: 1200px;
   margin: 0 auto;
@@ -26,6 +28,7 @@
   z-index: 1;
 }
 
+/* Bloque principal del contenido. Fondo con gradiente y blur para destacar el formulario. */
 .LTNewsletterContent {
   display: flex;
   align-items: center;
@@ -43,6 +46,7 @@
   color: var(--lt-black-text-color);
 }
 
+/* Icono circular del newsletter. Solo visual, no requiere integración. */
 .LTNewsletterIcon {
   flex-shrink: 0;
   width: 60px;
@@ -55,17 +59,20 @@
   box-shadow: 0 4px 15px rgba(116, 123, 191, 0.3);
 }
 
+/* SVG del icono. Cambiá el color si el diseño lo requiere. */
 .LTNewsletterIconSvg {
   width: 30px;
   height: 30px;
   fill: var(--lt-background-color);
 }
 
+/* Bloque de texto. El backend puede personalizar el mensaje si lo desea. */
 .LTNewsletterText {
   flex: 1;
   min-width: 0;
 }
 
+/* Título principal del newsletter. */
 .LTNewsletterTitle {
   font-family: "Montserrat", sans-serif;
   font-size: 1.5rem;
@@ -75,6 +82,7 @@
   line-height: 1.2;
 }
 
+/* Descripción del newsletter. */
 .LTNewsletterDescription {
   font-family: "Montserrat", sans-serif;
   font-size: 0.95rem;

@@ -163,9 +163,9 @@ a {
 .lt-button-dark {
   padding: 0.75rem 1.5rem;
   background: var(--lt-accent-color-dark);
-  color: var(--lt-black-text-color);
+  color: var(--lt-white-text-color);
   border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-light);
+  font-weight: var(--lt-font-weight-medium);
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -175,19 +175,13 @@ a {
   font-size: 0.8rem;
   cursor: pointer;
 }
-.lt-button-dark:focus {
-  outline: none;
-  border-color: var(--lt-black-text-color);
-}
+
 .lt-button-dark:hover {
-  background: var(--lt-accent-color);
+  background: var(--lt-accent-color-variant);
   color: var(--lt-black-text-color);
   border-color: var(--lt-black-text-color);
   transform: translateY(-2px);
-  box-shadow: 0 0 0 3px rgba(13, 13, 13, 0.15);
-}
-.lt-button-dark:active {
-  transform: translateY(0);
+  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
 }
 
 /* Botón secundario global estilo promos banners */
@@ -196,7 +190,7 @@ a {
   background: var(--lt-accent-color);
   color: var(--lt-black-text-color);
   border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-light);
+  font-weight: var(--lt-font-weight-medium);
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -206,17 +200,19 @@ a {
   cursor: pointer;
 }
 .lt-button-light:focus {
-  outline: none;
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-black-text-color);
   border-color: var(--lt-black-text-color);
+  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
   color: var(--lt-white-text-color);
   text-shadow: #0d0d0d 0 0 5px;
-  background: var(--lt-accent-color-dark);
+  transform: none;
 }
 .lt-button-light:hover {
   background: var(--lt-accent-color-dark);
   color: var(--lt-black-text-color);
   border-color: var(--lt-black-text-color);
-  box-shadow: 0 0 0 3px rgba(13, 13, 13, 0.15);
+  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
   color: var(--lt-white-text-color);
   text-shadow: #0d0d0d 0 0 5px;
   transform: none;
@@ -227,7 +223,7 @@ a {
   background: var(--lt-accent-color-variant2-dark);
   color: var(--lt-black-text-color);
   border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-light);
+  font-weight: var(--lt-font-weight-medium);
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;

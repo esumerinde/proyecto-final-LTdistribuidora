@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./LTHeroCarousel.css";
 
+// Acá importamos las imágenes del carrusel. Si el backend trae las imágenes, reemplazá estos imports por un fetch y armá el array dinámico.
 import hero1 from "../../../assets/images/hero/hero1.jpg";
 import hero2 from "../../../assets/images/hero/hero2.jpg";
 import hero3 from "../../../assets/images/hero/hero3.jpg";
@@ -27,6 +28,7 @@ import hero23 from "../../../assets/images/hero/hero23.jpg";
 import hero24 from "../../../assets/images/hero/hero24.jpg";
 import hero25 from "../../../assets/images/hero/hero25.jpg";
 
+// Si el backend trae las imágenes, armá este array con los datos que vengan del backend.
 const heroImages = [
   hero1,
   hero2,
@@ -55,14 +57,20 @@ const heroImages = [
   hero25,
 ];
 
+// Carrusel de imágenes principal. Si el backend trae las imágenes, reemplazá heroImages por el array que venga del backend.
 export default function LTHeroCarousel() {
+  // current: índice de la imagen actual. Si querés controlar el slide desde afuera, podés pasar el estado por props.
   const [current, setCurrent] = useState(0);
+
+  // Efecto para cambiar de imagen cada 4 segundos. Si el backend quiere controlar el tiempo, hacelo configurable por props.
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrent((prev) => (prev + 1) % heroImages.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
+
+  // Renderiza el carrusel. Cada slide es una imagen de fondo. El gradiente es para que el texto o las cards se lean mejor arriba.
   return (
     <div
       className="lt-hero-carousel-slider-wrapper"
@@ -78,6 +86,7 @@ export default function LTHeroCarousel() {
             style={{ backgroundImage: `url(${img})` }}
           />
         ))}
+        {/* El gradiente abajo ayuda a que se lea el contenido superpuesto. */}
         <div className="lt-hero-carousel-gradient" />
       </div>
     </div>

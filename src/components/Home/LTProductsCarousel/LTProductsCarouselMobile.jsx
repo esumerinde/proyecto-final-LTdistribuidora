@@ -166,7 +166,15 @@ const LTProductsCarouselMobile = () => {
                   <div className="LTProductsCarouselMobile__brand">
                     {products[currentIdx].brand}
                   </div>
-                  <div className="LTProductsCarouselMobile__titleCard">
+                  <div
+                    className="LTProductsCarouselMobile__titleCard"
+                    style={{
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      width: "100%",
+                    }}
+                  >
                     {products[currentIdx].name}
                   </div>
                   <div className="LTProductsCarouselMobile__priceOld">
@@ -246,7 +254,15 @@ const LTProductsCarouselMobile = () => {
                     <div className="LTProductsCarouselMobile__brand">
                       {products[nextIdx].brand}
                     </div>
-                    <div className="LTProductsCarouselMobile__titleCard">
+                    <div
+                      className="LTProductsCarouselMobile__titleCard"
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        width: "100%",
+                      }}
+                    >
                       {products[nextIdx].name}
                     </div>
                     <div className="LTProductsCarouselMobile__priceOld">

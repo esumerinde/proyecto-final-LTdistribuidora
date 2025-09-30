@@ -5,32 +5,40 @@ import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.
 import LTProductsCarouselMobile from "./LTProductsCarouselMobile";
 import { products } from "../../../mocks/products";
 
+// Componente principal del carrusel de productos. Acá se renderizan los productos y se maneja el slide.
 const LTProductsCarousel = () => {
+  // Estado para el slide actual
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Estado para favoritos (se puede conectar al backend)
   const [favorites, setFavorites] = useState([]);
 
-  // ...existing code...
+  // Cantidad de productos por slide (ajustar según diseño)
   const itemsPerSlide = 4;
+  // Calcula cuántos slides hay en total
   const totalSlides = Math.ceil(products.length / itemsPerSlide);
 
+  // Navegación: ir al slide anterior
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
     );
   };
 
+  // Navegación: ir al slide siguiente
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
     );
   };
 
+  // Marcar/desmarcar favorito (esto se puede conectar al backend)
   const toggleFavorite = (id) => {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
     );
   };
 
+  // Formatea el precio en formato argentino
   const formatPrice = (price) => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -39,19 +47,21 @@ const LTProductsCarousel = () => {
     }).format(price);
   };
 
+  // Render principal del carrusel
   return (
     <section className="LTProductsCarouselWrapper">
       <div className="LTProductsCarouselContainer">
         <div className="LTProductsCarouselGradientBox">
           <div className="LTProductsCarouselGradientRow">
+            {/* Título principal, se puede personalizar desde backend si hace falta */}
             <div className="LTProductsCarouselGradientTitle">
               {`Descubrí nuestras\nmejores ofertas`}
             </div>
+            {/* Flecha para ir al slide anterior */}
             <button
               className={`LTProductsCarouselGradientArrow${
                 currentIndex === 0 ? " disabled" : ""
-              }
-              `}
+              }`}
               onClick={goToPrevious}
               disabled={currentIndex === 0}
             >
@@ -59,6 +69,7 @@ const LTProductsCarousel = () => {
                 <path d="M14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59L14 6z" />
               </svg>
             </button>
+            {/* Carrusel de productos y los indicadores */}
             <div className="LTProductsCarouselCardsAndIndicators">
               <div
                 className="LTProductsCarouselTrack"
@@ -68,6 +79,7 @@ const LTProductsCarousel = () => {
                   display: "flex",
                 }}
               >
+                {/* Renderiza cada slide con sus productos. Cuando el backend esté, mapear los productos reales acá */}
                 {Array.from({ length: totalSlides }).map((_, slideIdx) => (
                   <div
                     key={slideIdx}
@@ -84,9 +96,11 @@ const LTProductsCarousel = () => {
                           key={product.id}
                           className="LTProductsCarouselCard"
                         >
+                          {/* Badge de descuento, viene del backend */}
                           <div className="LTProductsCarouselDiscount">
                             -{product.discount}%
                           </div>
+                          {/* Imagen del producto, reemplazar por la URL real del backend */}
                           <div
                             className="LTProductsCarouselImageContainer"
                             style={{
@@ -113,6 +127,7 @@ const LTProductsCarousel = () => {
                               }}
                             />
                           </div>
+                          {/* Contenido textual: marca, nombre, precios */}
                           <div className="LTProductsCarouselCardContent">
                             <div className="LTProductsCarouselCategory">
                               {product.brand}
@@ -128,6 +143,7 @@ const LTProductsCarousel = () => {
                                 {formatPrice(product.discountPrice)}
                               </div>
                             </div>
+                            {/* Botones de acción: agregar al carrito y favorito. Integrar con backend si hace falta */}
                             <div className="LTProductsCarouselActions">
                               <button className="LTProductsCarouselAddToCart">
                                 <img
@@ -148,6 +164,7 @@ const LTProductsCarousel = () => {
                   </div>
                 ))}
               </div>
+              {/* Indicadores de slide, para mostrar en qué slide está el usuario */}
               <div className="LTProductsCarouselGradientIndicators">
                 {Array.from({ length: totalSlides }, (_, index) => (
                   <button
@@ -160,11 +177,11 @@ const LTProductsCarousel = () => {
                 ))}
               </div>
             </div>
+            {/* Flecha para ir al slide siguiente */}
             <button
               className={`LTProductsCarouselGradientArrow${
                 currentIndex === totalSlides - 1 ? " disabled" : ""
-              }
-              `}
+              }`}
               onClick={goToNext}
               disabled={currentIndex === totalSlides - 1}
             >

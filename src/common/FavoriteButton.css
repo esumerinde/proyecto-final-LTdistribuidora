@@ -1,27 +1,31 @@
+/* Mina, este es el estilo del botón de favoritos. Es cuadradito, blanco y con borde suave. */
 .FavoriteButton {
-  width: 40px;
+  width: 40px; /* Tamaño del botón, ni muy grande ni muy chico */
   height: 40px;
-  background: #fff;
-  border: 1px solid var(--lt-border-color);
-  border-radius: 8px;
+  background: #fff; /* Fondo blanco, clásico */
+  border: 1px solid var(--lt-border-color); /* Borde con color de la app */
+  border-radius: 8px; /* Bordes redondeados, para que no quede duro */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease; /* Animación suave para hover y cambios */
   padding: 0;
 }
 
+/* Cuando pasás el mouse, se levanta un poquito y tira sombra. */
 .FavoriteButton:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2);
 }
 
+/* Si está activo (favorito), el fondo se pone rosita. */
 .FavoriteButton.active {
   background: #f8d6e5;
   border-color: var(--lt-border-color);
 }
 
+/* Nahuel, este es el corazoncito. Se ajusta al tamaño del botón y tiene animación en el fill. */
 .FavoriteButtonIcon {
   width: 18px;
   height: 18px;

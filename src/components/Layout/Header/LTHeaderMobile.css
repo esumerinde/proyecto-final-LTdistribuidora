@@ -54,10 +54,13 @@
   justify-content: center;
   width: 32px;
   height: 32px;
+  min-width: 28px;
+  min-height: 28px;
 }
 .LTHeaderMobile__categoriesIcon {
-  width: 18px;
-  height: 18px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
   flex-shrink: 0;
   transition: stroke 0.2s, transform 0.2s;
@@ -215,15 +218,17 @@
   }
   .LTHeaderMobile__categoriesBtn,
   .LTHeaderMobile__searchBtn {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     padding: 0;
     background: transparent;
     border: none;
     border-radius: 0;
     box-shadow: none;
-    min-width: 0;
-    max-width: 28px;
+    min-width: 28px;
+    max-width: 32px;
+    min-height: 28px;
+    max-height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;

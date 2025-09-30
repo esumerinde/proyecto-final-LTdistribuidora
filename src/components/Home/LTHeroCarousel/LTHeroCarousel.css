@@ -1,4 +1,5 @@
-﻿.lt-hero-carousel-slider {
+﻿/* Carrusel principal, fondo oscuro y layout centrado. Si el backend quiere cambiar el alto, hacerlo por variable. */
+.lt-hero-carousel-slider {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
@@ -10,6 +11,7 @@
   background: #222;
 }
 
+/* Gradiente a la izquierda para que el contenido se lea mejor y no se mezcle con el fondo. */
 .lt-hero-carousel-slider::before {
   content: "";
   position: absolute;
@@ -25,6 +27,7 @@
     rgba(0, 0, 0, 0) 100%
   );
 }
+/* Gradiente a la derecha, igual que el de la izquierda. */
 .lt-hero-carousel-slider::after {
   content: "";
   position: absolute;
@@ -41,6 +44,7 @@
   );
 }
 
+/* Cada slide es una imagen de fondo. Solo el activo se ve, los demás quedan ocultos. */
 .lt-hero-carousel-slide {
   width: 100%;
   height: 100%;
@@ -54,11 +58,13 @@
   z-index: 1;
 }
 
+/* El slide activo se muestra arriba de los demás. */
 .lt-hero-carousel-slide.active {
   opacity: 1;
   z-index: 2;
 }
 
+/* Gradiente abajo para que el texto o las cards se lean bien arriba de la imagen. */
 .lt-hero-carousel-gradient {
   position: absolute;
   left: 0;
@@ -74,6 +80,7 @@
   z-index: 3;
 }
 
+/* Mobile: el carrusel se achica y el gradiente se agranda para que no se pierda el contenido. */
 @media (max-width: 600px) {
   .lt-hero-carousel-slider {
     height: 400px;
@@ -83,6 +90,7 @@
   }
 }
 
+/* Fila de cards superpuestas sobre el carrusel. Si el backend quiere meter cards dinámicas, usar este contenedor. */
 .lt-hero-carousel-cards-row {
   position: absolute;
   left: 50%;
@@ -94,12 +102,14 @@
   width: 100%;
   justify-content: center;
 }
+/* Wrapper principal del carrusel, asegura stacking y espacio abajo. */
 .lt-hero-carousel-slider-wrapper {
   position: relative;
   min-height: 320px;
   margin-bottom: 24px;
 }
 
+/* Card individual del carrusel. Si el backend trae productos, mapearlos usando esta clase. */
 .lt-hero-card {
   background: var(--lt-background-color);
   border-radius: 14px;
@@ -117,14 +127,16 @@
   pointer-events: auto;
   z-index: 101;
 }
-/* Ensure parent wrapper is relative for stacking context */
+/* El wrapper tiene que ser relative para que las cards se apilen bien. */
 .lt-hero-carousel-slider-wrapper {
   position: relative;
 }
+/* Hover: la card se levanta y se resalta. */
 .lt-hero-card:hover {
   transform: translateY(-8px) scale(1.04);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
 }
+/* Etiqueta de descuento en la card. Si el backend trae descuentos, usá esta clase. */
 .lt-hero-card-discount {
   position: absolute;
   top: 14px;
@@ -137,6 +149,7 @@
   padding: 4px 10px;
   z-index: 2;
 }
+/* Imagen del producto en la card. Si el backend trae la URL, ponela acá. */
 .lt-hero-card-image {
   width: 100%;
   height: 80px;
@@ -147,14 +160,17 @@
   border-radius: 14px 14px 0 0;
   margin-bottom: 8px;
 }
+/* Variante de imagen con fondo de color. */
 .lt-hero-card-image-accent {
   background: var(--lt-accent-color);
 }
+/* Icono placeholder si no hay imagen. */
 .lt-hero-card-placeholder-icon {
   width: 60px;
   height: 60px;
   fill: var(--lt-muted-text-color);
 }
+/* Contenido textual de la card. */
 .lt-hero-card-content {
   flex: 1;
   display: flex;
@@ -162,12 +178,14 @@
   justify-content: space-between;
   padding: 0 16px 16px 16px;
 }
+/* Categoría del producto. */
 .lt-hero-card-category {
   color: var(--lt-accent-color-dark);
   font-size: 0.95rem;
   font-weight: 600;
   margin-bottom: 2px;
 }
+/* Nombre del producto. */
 .lt-hero-card-name {
   color: var(--lt-black-text-color);
   font-size: 1.08rem;
@@ -175,28 +193,33 @@
   margin-bottom: 8px;
   margin-top: 0;
 }
+/* Precios del producto, original y con descuento. */
 .lt-hero-card-pricing {
   display: flex;
   flex-direction: column;
   gap: 2px;
   margin-bottom: 10px;
 }
+/* Precio tachado si hay descuento. */
 .lt-hero-card-original-price {
   color: var(--lt-muted-text-color);
   font-size: 0.98rem;
   text-decoration: line-through;
 }
+/* Precio con descuento. */
 .lt-hero-card-discount-price {
   color: var(--lt-accent-color-dark);
   font-size: 1.08rem;
   font-weight: 700;
 }
+/* Botones de acción en la card (agregar, favorito, etc). */
 .lt-hero-card-actions {
   display: flex;
   gap: 10px;
   align-items: center;
   margin-top: auto;
 }
+/* Botón para agregar al carrito. */
 .lt-hero-card-add {
   background: var(--lt-accent-color);
   color: #fff;
@@ -211,18 +234,22 @@
   cursor: pointer;
   transition: background 0.18s cubic-bezier(0.7, 0.2, 0.3, 1);
 }
+/* Hover del botón agregar. */
 .lt-hero-card-add:hover {
   background: var(--lt-accent-color-dark);
 }
+/* Icono del botón agregar. */
 .lt-hero-card-add-icon {
   width: 18px;
   height: 18px;
   filter: brightness(1.1);
 }
+/* Botón de favorito. */
 .lt-hero-card-favorite {
   margin-left: 0;
 }
 
+/* Tablet: las cards se achican y el gap se reduce. */
 @media (max-width: 900px) {
   .lt-hero-carousel-cards-row {
     gap: 18px;
@@ -238,6 +265,7 @@
   }
 }
 
+/* Mobile: las cards se achican bastante y el layout se ajusta para que no se superpongan. */
 @media (max-width: 600px) {
   .lt-hero-carousel-cards-row {
     top: 68%;

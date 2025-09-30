@@ -1,3 +1,4 @@
+/* Título arriba de la card, puede venir del backend si lo quieren personalizar. */
 .lt-hero-products-carousel-card-top-title {
   width: 100%;
   text-align: center;
@@ -13,10 +14,11 @@
   border-bottom: 1px solid #e0e0e0;
   letter-spacing: 0.2px;
 }
-/* Minimal image area for hero product cards */
+
+/* Imagen del producto en la card. Cuando el backend esté, reemplazá el placeholder por la imagen real. */
 .lt-hero-products-carousel-card-image {
   width: 100%;
-  height: 18px;
+  height: 180px;
   background: var(--lt-accent-color);
   display: flex;
   align-items: center;
@@ -26,6 +28,8 @@
   transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
   will-change: transform;
 }
+
+/* Placeholder circular para cuando no hay imagen. */
 .lt-hero-products-carousel-card-image-placeholder {
   width: 18px;
   height: 18px;
@@ -41,6 +45,9 @@
   fill: var(--lt-text-color);
   opacity: 0.6;
 }
+
+/* Flechas de navegación del carrusel. */
+.lt-hero-products-carousel-arrow {
   flex-shrink: 0;
   width: 36px;
   height: 36px;
@@ -72,14 +79,16 @@
   transition: fill 0.3s ease;
 }
 
+/* Contenedor de las cards y los indicadores. */
 .lt-hero-products-carousel-cards-and-indicators {
   flex: 1;
   overflow: hidden;
   width: 100%;
 }
 
+/* Fila de cards del carrusel. Cuando el backend esté, mapear los productos usando esta clase. */
 .lt-hero-products-carousel-cards-row {
-  display: flex;
+  display: grid;
   align-items: flex-end;
   width: 100%;
   max-width: 1200px;
@@ -98,167 +107,14 @@
   cursor: pointer;
   position: relative;
   overflow: visible;
-  display: flex;
-  flex-direction: column;
   height: 160px;
   min-width: 140px;
   max-width: 160px;
   z-index: 2200;
   pointer-events: auto;
 }
-.lt-hero-products-carousel-card:hover {
-  transform: scale(1.04) translateY(-2px);
-  z-index: 2;
-}
-.lt-hero-products-carousel-card:hover .lt-hero-products-carousel-card-image {
-  transform: scale(1.07);
-}
-.lt-hero-products-carousel-card-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--lt-accent-color-dark);
-  color: var(--lt-white-text-color);
-  font-family: "Inter", sans-serif;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 7px;
-  border-radius: 10px;
-  z-index: 10;
-}
-.lt-hero-products-carousel-card-image {
-  width: 100%;
-  height: 18px;
-  background: var(--lt-accent-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex-shrink: 0;
-  transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
-  will-change: transform;
-}
-/* Minimal image area for hero product cards */
-.lt-hero-products-carousel-card-image-placeholder {
-  width: 18px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Removed all favorite and add-to-cart button styles */
-.lt-hero-products-carousel-card-image-placeholder svg {
-  width: 12px;
-  height: 12px;
-  fill: var(--lt-text-color);
-  opacity: 0.6;
-}
-.lt-hero-products-carousel-card-info {
-  padding: 8px 10px 8px 10px;
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  justify-content: flex-end;
-}
-.lt-hero-products-carousel-card-category {
-  font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--lt-text-light);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
-}
-.lt-hero-products-carousel-card-title {
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--lt-black-text-color);
-  margin: 0 0 8px 0;
-  line-height: 1.3;
-  height: 28px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.lt-hero-products-carousel-card-launch-badge {
-  background: var(--lt-accent-color-variant);
-  color: white;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 7px;
-  display: inline-block;
-  margin-bottom: 2px;
-  text-transform: uppercase;
-  font-family: "Inter", sans-serif;
-}
-.lt-hero-products-carousel-card-pricing {
-  margin-bottom: 0;
-}
-.lt-hero-products-carousel-card-original-price {
-  font-family: "Inter", sans-serif;
-  font-size: 11px;
-  color: var(--lt-text-muted);
-  text-decoration: line-through;
-  margin-bottom: 1px;
-}
-.lt-hero-products-carousel-card-final-price {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--lt-accent-color-dark);
-  display: flex;
-  align-items: baseline;
-}
-.lt-hero-products-carousel-card-price-decimals {
-  font-size: 11px;
-  font-weight: 400;
-}
-.lt-hero-products-carousel-card-top-content {
-  flex: 0 0 auto;
-}
-/* Removed all favorite and add-to-cart button styles */
-  fill: var(--lt-accent-color-dark);
-  transition: fill 0.3s ease;
-}
-.lt-hero-products-carousel-card-favorite
-  .lt-hero-products-carousel-card-add-icon {
-  filter: brightness(0) invert(0);
-  fill: var(--lt-primary-color);
-}
 
-@media (max-width: 900px) {
-  .lt-hero-products-carousel-products-container {
-    max-width: 100vw;
-  }
-  .lt-hero-products-carousel-cards-row {
-    grid-template-columns: repeat(20, 1fr);
-    gap: 0.7rem;
-  }
-  .lt-hero-products-carousel-card {
-    min-width: 110px;
-    max-width: 120px;
-    height: 170px;
-  }
-}
-@media (max-width: 600px) {
-  .lt-hero-products-carousel-products-container {
-    max-width: 100vw;
-  }
-  .lt-hero-products-carousel-cards-row {
-    grid-template-columns: repeat(20, 1fr);
-    gap: 0.3rem;
-  }
-  .lt-hero-products-carousel-card {
-    min-width: 80px;
-    max-width: 90px;
-    height: 120px;
-  }
-}
-
+/* Card individual del carrusel. Cuando el backend esté, mapear los productos usando esta clase. */
 .lt-hero-products-carousel-card {
   background: var(--lt-background-color);
   border: 1px solid var(--lt-accent-color);
@@ -272,16 +128,15 @@
   flex-direction: column;
   height: 100%;
 }
-
 .lt-hero-products-carousel-card:hover {
-  transform: scale(1.03) translateY(-2px);
+  transform: scale(1.04) translateY(-2px);
   z-index: 2;
 }
-
 .lt-hero-products-carousel-card:hover .lt-hero-products-carousel-card-image {
-  transform: scale(1.06);
+  transform: scale(1.07);
 }
 
+/* Badge de la card, para mostrar lanzamientos o promos. */
 .lt-hero-products-carousel-card-badge {
   position: absolute;
   top: 12px;
@@ -296,19 +151,58 @@
   z-index: 10;
 }
 
-.lt-hero-products-carousel-card-image {
-  width: 100%;
-  height: 180px;
-  background: var(--lt-accent-color);
+/* Contenido textual de la card. */
+.lt-hero-products-carousel-card-info {
+  padding: 8px 10px 8px 10px;
   display: flex;
-  align-items: center;
-/* Removed all favorite and add-to-cart button styles */
-/* Removed orphaned properties from previous blocks */
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
 
+/* Marca del producto. */
+.lt-hero-products-carousel-card-category {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--lt-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+/* Nombre del producto. */
+.lt-hero-products-carousel-card-title {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+  height: 28px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Badge de lanzamiento. */
+.lt-hero-products-carousel-card-launch-badge {
+  background: var(--lt-accent-color-variant);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 7px;
+  display: inline-block;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+}
+
+/* Precios del producto, original y con descuento. */
 .lt-hero-products-carousel-card-pricing {
   margin-bottom: 0;
 }
-
 .lt-hero-products-carousel-card-original-price {
   font-family: "Inter", sans-serif;
   font-size: 14px;
@@ -316,7 +210,6 @@
   text-decoration: line-through;
   margin-bottom: 2px;
 }
-
 .lt-hero-products-carousel-card-final-price {
   font-family: "Inter", sans-serif;
   font-size: 18px;
@@ -325,16 +218,16 @@
   display: flex;
   align-items: baseline;
 }
-
 .lt-hero-products-carousel-card-price-decimals {
   font-size: 14px;
   font-weight: 400;
 }
 
+/* Contenido superior de la card. */
 .lt-hero-products-carousel-card-top-content {
   flex: 0 0 auto;
 }
-
+/* Contenido inferior de la card. */
 .lt-hero-products-carousel-card-bottom-content {
   margin-top: auto;
   flex: 0 0 auto;
@@ -344,6 +237,7 @@
   justify-content: flex-end;
 }
 
+/* Botones de acción en la card (agregar, favorito, etc). */
 .lt-hero-products-carousel-card-actions {
   display: flex;
   gap: 8px;
@@ -351,6 +245,7 @@
   margin-top: 8px;
 }
 
+/* Botón para agregar al carrito. */
 .lt-hero-products-carousel-card-add {
   flex: 0 0 auto;
   width: 85px;
@@ -371,12 +266,10 @@
   justify-content: center;
   border: var(--lt-border-color) solid 1px;
 }
-
 .lt-hero-products-carousel-card-add:hover {
   background: var(--lt-accent-color-variant);
   transform: translateY(-1px);
 }
-
 .lt-hero-products-carousel-card-add-icon {
   width: 16px;
   height: 16px;
@@ -385,6 +278,7 @@
   transition: fill 0.3s ease;
 }
 
+/* Botón de favorito. */
 .lt-hero-products-carousel-card-favorite {
   flex: 0 0 auto;
   width: 45px;
@@ -398,45 +292,58 @@
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .lt-hero-products-carousel-card-favorite:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2);
 }
-
 .lt-hero-products-carousel-card-favorite.active {
   background: var(--lt-accent-color);
   border-color: var(--lt-accent-color);
 }
-
 .lt-hero-products-carousel-card-favorite.active
   .lt-hero-products-carousel-card-add-icon {
   fill: var(--lt-accent-color-dark);
 }
-
 .lt-hero-products-carousel-card-favorite svg {
   width: 18px;
   height: 18px;
   fill: var(--lt-accent-color-dark);
   transition: fill 0.3s ease;
 }
-
 .lt-hero-products-carousel-card-favorite
   .lt-hero-products-carousel-card-add-icon {
   filter: brightness(0) invert(0);
   fill: var(--lt-primary-color);
 }
 
+/* Tablet: las cards se achican y el gap se reduce. */
 @media (max-width: 900px) {
+  .lt-hero-products-carousel-products-container {
+    max-width: 100vw;
+  }
   .lt-hero-products-carousel-cards-row {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
+  .lt-hero-products-carousel-card {
+    min-width: 110px;
+    max-width: 120px;
+    height: 170px;
+  }
 }
 
+/* Mobile: las cards se achican bastante y el layout se ajusta para que no se superpongan. */
 @media (max-width: 600px) {
+  .lt-hero-products-carousel-products-container {
+    max-width: 100vw;
+  }
   .lt-hero-products-carousel-cards-row {
     grid-template-columns: 1fr;
     gap: 0.5rem;
+  }
+  .lt-hero-products-carousel-card {
+    min-width: 80px;
+    max-width: 90px;
+    height: 120px;
   }
 }

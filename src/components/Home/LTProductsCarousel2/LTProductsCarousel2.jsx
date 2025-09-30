@@ -1,3 +1,9 @@
+// Componente Carrusel de Productos 2 - Estilo Farmacity
+// Este componente muestra un carrusel con banner promocional y productos electrónicos.
+// El backend puede modificar el array 'products' para cambiar los productos mostrados.
+// Los estilos y layout se definen en LTProductsCarousel2.css.
+// Instrucciones backend: para cambiar la cantidad de productos por slide, modificar 'itemsPerView'.
+// Para integrar con API real, reemplazar el import de 'products' por un fetch a la base de datos.
 import React, { useState } from "react";
 import "./LTProductsCarousel2.css";
 import FavoriteButton from "../../../common/FavoriteButton";
@@ -5,28 +11,38 @@ import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.
 import { products } from "../../../mocks/products2";
 
 const LTProductsCarousel2 = () => {
+  // Estado del slide actual del carrusel
   const [currentIndex, setCurrentIndex] = useState(0);
+  // Estado de favoritos (IDs de productos marcados)
   const [favorites, setFavorites] = useState([]);
+  // Cantidad de productos por slide. Modificá este valor para mostrar más/menos productos por vista.
   const itemsPerView = 4;
 
+  // Calcula la cantidad total de slides según la cantidad de productos y el tamaño de la vista
   const totalSlides = Math.ceil(products.length / itemsPerView);
 
+  // Función para ir al slide anterior
   const goToPrevious = () => {
     setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : 0);
   };
 
+  // Función para ir al slide siguiente
   const goToNext = () => {
     setCurrentIndex(
       currentIndex < totalSlides - 1 ? currentIndex + 1 : totalSlides - 1
     );
   };
 
+  // Alterna el estado de favorito para un producto
+  // El backend puede usar este callback para actualizar favoritos en la base de datos
   const toggleFavorite = (id) => {
     setFavorites((prev) =>
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
     );
   };
 
+  // Render principal del carrusel y banner
+  // El backend puede modificar el contenido del banner y los productos desde la API
   return (
     <section className="LTProductsCarousel2Wrapper">
       <div className="LTProductsCarousel2Container">
@@ -35,7 +51,8 @@ const LTProductsCarousel2 = () => {
         </h2>
 
         <div className="LTProductsCarousel2Content">
-          {/* Banner promocional estilo Farmacity variante electrónica */}
+          {/* Banner promocional estilo Farmacity variante electrónica
+              El backend puede modificar el texto, colores y ofertas desde props o API. */}
           <div className="LTProductsCarousel2Banner">
             <div className="LTProductsCarousel2BannerContent">
               <div className="LTProductsCarousel2BannerTop">
@@ -74,9 +91,10 @@ const LTProductsCarousel2 = () => {
             </div>
           </div>
 
-          {/* Sección de productos */}
+          {/* Sección de productos
+              El backend puede modificar la lógica para traer productos desde la base de datos. */}
           <div className="LTProductsCarousel2ProductsContainer">
-            {/* Flecha izquierda */}
+            {/* Flecha izquierda - Navegación del carrusel */}
             <button
               className={`LTProductsCarousel2Arrow LTProductsCarousel2ArrowLeft ${
                 currentIndex === 0 ? "disabled" : ""

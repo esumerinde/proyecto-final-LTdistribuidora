@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./LTHeroProductsCarousel.css";
-// Removed FavoriteButton and ShoppingBagIcon imports
 
-// 20 productos de ejemplo
+// Acá se arman los productos de ejemplo. Cuando el backend esté listo, reemplazá este array por un fetch y mapeá los productos reales.
+
+// 20 productos de ejemplo. Cuando el backend esté, reemplazá esto por los datos reales y asegurate de mapear los campos igual.
 const products = Array.from({ length: 20 }, (_, i) => ({
   id: i + 1,
   name: `Producto ${i + 1} Ejemplo`,
@@ -36,32 +37,33 @@ const products = Array.from({ length: 20 }, (_, i) => ({
 }));
 
 const LTHeroProductsCarousel = () => {
-  // Removed favorites state
+  // currentIndex: slide actual. Si el backend quiere controlar el slide, hacelo por props.
   const [currentIndex, setCurrentIndex] = useState(0);
-  const itemsPerView = 5;
+  const itemsPerView = 5; // Cuántos productos se ven por slide. Si el diseño cambia, ajustar acá.
   const totalSlides = Math.ceil(products.length / itemsPerView);
 
+  // Flecha izquierda: retrocede un slide. Si ya está en el primero, no hace nada.
   const goToPrevious = () => {
     setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : 0);
   };
 
+  // Flecha derecha: avanza un slide. Si ya está en el último, no hace nada.
   const goToNext = () => {
     setCurrentIndex(
       currentIndex < totalSlides - 1 ? currentIndex + 1 : totalSlides - 1
     );
   };
 
-  // Removed toggleFavorite logic
-
-  // Slice products for current slide
+  // Si querés mostrar solo los productos visibles, usá visibleProducts. Acá se renderizan todos para el efecto de carrusel.
   const startIdx = currentIndex * itemsPerView;
   const endIdx = startIdx + itemsPerView;
   const visibleProducts = products.slice(startIdx, endIdx);
 
+  // El carrusel muestra los productos en una fila horizontal. Cuando el backend esté, asegurate de mapear los campos igual.
   return (
     <div className="lt-hero-products-carousel-wrapper">
       <div className="lt-hero-products-carousel-products-container">
-        {/* Flecha izquierda */}
+        {/* Flecha izquierda para navegar el carrusel */}
         <button
           className={`lt-hero-products-carousel-arrow lt-hero-products-carousel-arrow-left${
             currentIndex === 0 ? " disabled" : ""
@@ -91,8 +93,10 @@ const LTHeroProductsCarousel = () => {
               paddingRight: "8px",
             }}
           >
-            {products.map((product, idx) => (
+            {/* Acá se renderizan SOLO los productos visibles. Cuando el backend esté, asegurate de mapear los campos igual. */}
+            {visibleProducts.map((product, idx) => (
               <div key={product.id} className="lt-hero-products-carousel-card">
+                {/* Título arriba de la card, puede venir del backend si lo quieren personalizar. */}
                 <div className="lt-hero-products-carousel-card-top-title">
                   {
                     [
@@ -105,6 +109,7 @@ const LTHeroProductsCarousel = () => {
                     ][idx % 6]
                   }
                 </div>
+                {/* Imagen del producto. Cuando el backend esté, reemplazá el placeholder por la imagen real. */}
                 <div className="lt-hero-products-carousel-card-image">
                   <div className="lt-hero-products-carousel-card-image-placeholder">
                     <svg viewBox="0 0 24 24">
@@ -141,7 +146,7 @@ const LTHeroProductsCarousel = () => {
           </div>
         </div>
 
-        {/* Flecha derecha */}
+        {/* Flecha derecha para navegar el carrusel */}
         <button
           className={`lt-hero-products-carousel-arrow lt-hero-products-carousel-arrow-right${
             currentIndex === totalSlides - 1 ? " disabled" : ""
@@ -158,4 +163,5 @@ const LTHeroProductsCarousel = () => {
   );
 };
 
+// Cuando el backend esté, asegurate de mapear los campos igual y mantener la lógica de navegación.
 export default LTHeroProductsCarousel;

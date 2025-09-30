@@ -12,12 +12,18 @@ import BagIcon from "../assets/icons/svg/bag-shopping-svgrepo-com.svg";
 import MailIcon from "../assets/icons/svg/mail-alt-2-svgrepo-com.svg";
 import QuestionIcon from "../assets/icons/svg/question-svgrepo-com.svg";
 
+// ste es el overlay lateral de categorías.
+// Nahuel, si querés que las categorías vengan del backend, tendrías que reemplazar el array de
+// "categories" por un fetch/axios.
+
 export default function LTCategoriesOverlay({ open, onClose }) {
+  // Componente principal del overlay. Recibe "open" para saber si está abierto y "onClose" para cerrarlo.
   const [closing, setClosing] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [, setMenuDelay] = useState(false);
 
-  // Categorías y subcategorías reales (copiados de LTNavbar.jsx)
+  // estas categorías están hardcodeadas. Si las traés del backend, reemplazá este array
+  // por lo que venga de la API.
   const categories = [
     {
       id: 1,
@@ -125,6 +131,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     },
   ];
 
+  // Menú de abajo, con iconos y labels. Si querés agregar más, sumalos acá.
   const menuItems = [
     {
       label: "Todas las categorías",
@@ -164,6 +171,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     },
   ];
 
+  // Función para cerrar el overlay con animación. Cuando termina, llama al onClose.
   function handleClose() {
     setClosing(true);
     setTimeout(() => {
@@ -172,7 +180,8 @@ export default function LTCategoriesOverlay({ open, onClose }) {
       if (onClose) onClose();
     }, 400); // Duración igual a la animación
   }
-  // Bloquear/desbloquear scroll de body cuando el overlay está abierto
+
+  // Bloquea el scroll del body cuando el overlay está abierto, así no se mueve el fondo.
   React.useEffect(() => {
     if (open || closing) {
       document.body.style.overflow = "hidden";
@@ -192,14 +201,16 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     setMenuDelay(isAnyExpanded);
   }, [isAnyExpanded]);
 
-  // Solo renderizar si está abierto o está cerrando (animación)
+  // Solo renderiza si está abierto o está cerrando (para la animación)
   if (!open && !closing) return null;
 
+  // Render principal del overlay.
   return createPortal(
     <div
       className={`LTCategoriesOverlay${closing ? " slideOutLeft" : ""}`}
       tabIndex={-1}
     >
+      {/* Header con el título y el botón para cerrar */}
       <div className="LTCategoriesOverlay__header">
         <span>Categorías</span>
         <button
@@ -208,6 +219,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
           aria-label="Cerrar"
           type="button"
         >
+          {/* Icono de cerrar (X) */}
           <svg
             className="LTCategoriesOverlay__closeIcon"
             viewBox="0 0 24 24"
@@ -226,9 +238,10 @@ export default function LTCategoriesOverlay({ open, onClose }) {
       </div>
       <div className="LTCategoriesOverlay__list" style={{ gap: 0 }}>
         <div className="LTCategoriesOverlay__categories">
-          {/* Categorías con subcategorías desplegables */}
+          {/* Listado de categorías con subcategorías desplegables */}
           {categories.map((cat, idx) => (
             <React.Fragment key={cat.id}>
+              {/* Item principal de la categoría */}
               <div
                 className={`LTCategoriesOverlay__item LTCategoriesOverlay__expandable${
                   expanded === idx ? " expanded" : ""
@@ -264,6 +277,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                     transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
                   }}
                 >
+                  {/* Flechita para expandir/cerrar la subcategoría */}
                   <svg
                     className="LTCategoriesOverlay__caret"
                     width="20"
@@ -287,6 +301,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                   </svg>
                 </span>
               </div>
+              {/* Subcategorías desplegables */}
               <div
                 className={`LTCategoriesOverlay__sublist${
                   expanded === idx ? " LTCategoriesOverlay__sublist--open" : ""
@@ -316,6 +331,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                       boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
                     }}
                   >
+                    {/* Nombre de la subcategoría */}
                     {sub}
                   </div>
                 ))}
@@ -324,7 +340,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
           ))}
         </div>
       </div>
-      {/* Menú de abajo más arriba, sin espacio */}
+      {/* Menú de abajo, con iconos y opciones extra */}
       <div
         className="LTCategoriesOverlay__bottomMenuContainer"
         style={{ marginTop: 0, paddingTop: 0 }}
@@ -339,6 +355,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                 }`}
                 key={idx}
               >
+                {/* Icono del menú */}
                 {item.icon && (
                   <img
                     src={item.icon}
@@ -346,6 +363,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                     className="LTCategoriesOverlay__menuitemIcon"
                   />
                 )}
+                {/* Texto de la opción */}
                 <span className="LTCategoriesOverlay__menuitemText">
                   {item.label}
                 </span>

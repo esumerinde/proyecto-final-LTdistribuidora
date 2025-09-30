@@ -61,8 +61,6 @@ const LTHeaderMobile = ({ onLogoClick }) => {
                 src={HamburgerMenuIcon}
                 alt="Menú"
                 className="LTHeaderMobile__categoriesIcon"
-                width={28}
-                height={28}
                 style={{
                   display: "block",
                   filter:

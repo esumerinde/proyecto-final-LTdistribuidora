@@ -2,11 +2,17 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import "./LTSearchOverlay.css";
 
+// Estos imports son solo para mock. Reemplazar por la llamada al backend cuando se integre la API.
+// Ejemplo: usar axios/fetch en un useEffect para traer los productos y guardarlos en un estado.
+// import axios from 'axios';
+// useEffect(() => {
+//   axios.get('/api/productos').then(res => setAllProducts(res.data));
+// }, []);
 import { products as products1 } from "../mocks/products";
 import { products as products2 } from "../mocks/products2";
 import { products as products3 } from "../mocks/products3";
 
-// Unifica todos los productos en un solo array
+// Solo para mock. Cuando esté el backend, usar el estado con los productos traídos de la API.
 const ALL_PRODUCTS = [...products1, ...products2, ...products3];
 
 export default function LTSearchOverlay({ open, onClose, children }) {
@@ -55,6 +61,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
     }, 250);
   };
 
+  // Cuando se integre el backend, filtrar sobre el estado con los productos traídos de la API.
   // Filtra productos por nombre o marca
   const filteredProducts =
     ready && search.trim().length > 0
@@ -65,8 +72,15 @@ export default function LTSearchOverlay({ open, onClose, children }) {
         )
       : [];
 
+  // Si el overlay no está abierto ni cerrándose, no renderiza nada
   if (!open && !closing) return null;
 
+  // Renderiza el overlay de búsqueda usando un portal para que esté por encima de todo
+  // El header contiene el input de búsqueda y el botón de cierre
+  // Si el usuario está escribiendo, muestra un spinner de carga
+  // Cuando la búsqueda está lista, muestra los resultados filtrados
+  // Cada resultado muestra imagen, marca, nombre y precios
+  // El footer puede mostrar un link para ver todos los productos filtrados
   return createPortal(
     <div
       className={`LTSearchBarMobileOverlay${closing ? " slideOutRight" : ""}`}
@@ -82,6 +96,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
         ...(closing ? { pointerEvents: "none" } : {}),
       }}
     >
+      {/* Header con input de búsqueda y botón de cerrar */}
       <div className="LTSearchBarMobileOverlayHeader">
         {React.isValidElement(children) ? (
           React.cloneElement(children, {
@@ -131,6 +146,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
           </svg>
         </button>
       </div>
+      {/* Spinner de carga mientras busca productos */}
       {loading && search.trim().length > 0 && (
         <div
           className="LTSearchBarMobileResultsBlock"
@@ -144,13 +160,16 @@ export default function LTSearchOverlay({ open, onClose, children }) {
           <div className="LTSearchBarMobileSpinner" />
         </div>
       )}
+      {/* Resultados de la búsqueda */}
       {ready && search.trim().length > 0 && (
         <div className="LTSearchBarMobileResultsBlock">
+          {/* Título de resultados */}
           <div className="LTSearchBarMobileResultsTitle">
             {filteredProducts.length > 0
               ? `RESULTADOS PARA "${search}"`
               : "Sin resultados"}
           </div>
+          {/* Lista de productos filtrados */}
           <div className="LTSearchBarMobileProducts">
             <div className="LTSearchBarMobileProductsList">
               {filteredProducts.map((prod, idx) => (
@@ -160,6 +179,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
                   }`}
                   key={idx}
                 >
+                  {/* Imagen del producto */}
                   <img
                     className="LTSearchBarMobileProductImgBig"
                     src={prod.image}
@@ -172,6 +192,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
                       borderRadius: "8px",
                     }}
                   />
+                  {/* Info del producto: marca, nombre y precios */}
                   <div className="LTSearchBarMobileProductInfoBig">
                     <div className="LTSearchBarMobileProductBrandBig">
                       {prod.brand}
@@ -192,6 +213,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
               ))}
             </div>
           </div>
+          {/* Footer con link para ver todos los productos filtrados */}
           <div className="LTSearchBarMobileResultsFooter">
             <div className="LTSearchBarMobileResultsLinkWrapper">
               <span className="LTSearchBarMobileResultsText">

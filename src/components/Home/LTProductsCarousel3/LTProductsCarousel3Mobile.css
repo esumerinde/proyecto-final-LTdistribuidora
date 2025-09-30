@@ -47,9 +47,11 @@
 }
 .LTProductsCarousel3MobileNav__arrow--left {
   left: 0;
+  margin-left: 12px;
 }
 .LTProductsCarousel3MobileNav__arrow--right {
   right: 0;
+  margin-right: 12px;
 }
 .LTProductsCarousel3MobileArrow {
   background: white;

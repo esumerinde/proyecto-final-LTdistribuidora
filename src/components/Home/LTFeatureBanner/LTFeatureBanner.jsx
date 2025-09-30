@@ -1,5 +1,7 @@
 import "./LTFeatureBanner.css";
-// Importar SVGs desde assets
+
+// Importa los íconos SVG usados en las cards de features
+// Si se agregan más features, agregar el ícono correspondiente acá
 import TruckIcon from "../../../assets/icons/svg/truck-svgrepo-com.svg";
 import CreditCardIcon from "../../../assets/icons/svg/credit-card-svgrepo-com.svg";
 import ShieldCheckIcon from "../../../assets/icons/svg/shield-check-svgrepo-com.svg";
@@ -9,13 +11,19 @@ import BadgeDollarIcon from "../../../assets/icons/svg/badge-dollar-svgrepo-com.
 import AddressBookIcon from "../../../assets/icons/svg/address-book-svgrepo-com.svg";
 import GridCircleIcon from "../../../assets/icons/svg/grid-circle-svgrepo-com.svg";
 import MapPinIcon from "../../../assets/icons/svg/map-pin-svgrepo-com.svg";
+
+// Contexto para sincronizar el carrusel entre componentes
 import {
   useCarouselSync,
   CarouselSyncProvider,
 } from "../../../common/CarouselSyncContext.jsx";
 
+// Cantidad de cards que se muestran por slide en desktop
 const CARDS_PER_SLIDE = 3;
 
+// Array de features a mostrar en el banner
+// Cuando se pase a backend, este array debe venir de la API
+// Cada feature tiene: ícono, título y subtítulo
 const features = [
   {
     icon: (
@@ -115,9 +123,11 @@ const features = [
 ];
 
 const LTFeatureBanner = () => {
+  // Obtiene el índice actual, función para cambiarlo y cantidad total de slides desde el contexto
   const { currentIndex, setCurrentIndex, totalSlides } = useCarouselSync();
 
-  // Detectar si es mobile
+  // Detecta si es mobile (ancho <= 600px)
+  // En mobile solo se muestra una card por slide, en desktop se muestran 3
   const isMobile = typeof window !== "undefined" && window.innerWidth <= 600;
   const visibleFeatures = isMobile
     ? [features[currentIndex]]
@@ -126,6 +136,7 @@ const LTFeatureBanner = () => {
         currentIndex * CARDS_PER_SLIDE + CARDS_PER_SLIDE
       );
 
+  // Navegación del carrusel: anterior, siguiente y salto a slide específico
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
   };
@@ -136,10 +147,13 @@ const LTFeatureBanner = () => {
     setCurrentIndex(idx);
   };
 
+  // Renderiza el banner de features con carrusel y navegación
+  // Cuando se pase a backend, el array de features debe venir de la API
   return (
     <section className="LTFeatureBannerWrapper">
       <div className="LTFeatureBannerCarousel">
         <div className="LTFeatureBannerContainer">
+          {/* Renderiza las cards visibles según el slide y si es mobile/desktop */}
           {visibleFeatures.map((feature, index) => (
             <div key={index} className={`LTFeatureBannerItem fade-card`}>
               <div className="LTFeatureBannerIconContainer">{feature.icon}</div>
@@ -147,6 +161,7 @@ const LTFeatureBanner = () => {
                 <h3 className="LTFeatureBannerTitle">{feature.title}</h3>
                 <p className="LTFeatureBannerSubtitle">{feature.subtitle}</p>
               </div>
+              {/* Flecha decorativa en cada card */}
               <div className="LTFeatureBannerArrow">
                 <svg viewBox="0 0 24 24">
                   <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
@@ -155,6 +170,7 @@ const LTFeatureBanner = () => {
             </div>
           ))}
         </div>
+        {/* Botones de navegación del carrusel */}
         <div className="LTFeatureBannerNavRow">
           <button
             className="LTFeatureBannerArrowNav"
@@ -176,6 +192,7 @@ const LTFeatureBanner = () => {
           </button>
         </div>
       </div>
+      {/* Indicadores de slide (puntos abajo del carrusel) */}
       <div className="LTFeatureBannerIndicators">
         {[...Array(totalSlides)].map((_, idx) => (
           <button

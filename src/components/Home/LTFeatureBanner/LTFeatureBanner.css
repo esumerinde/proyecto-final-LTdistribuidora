@@ -1,26 +1,29 @@
-﻿@media (max-width: 600px) {
+﻿/* Responsive: en mobile el banner no tiene padding lateral */
+@media (max-width: 600px) {
   .LTFeatureBannerWrapper {
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
 }
-/* LTFeatureBanner - Banner de características estilo farmaonline */
+
+/* Banner principal de features, fondo y padding vertical */
 .LTFeatureBannerWrapper {
   width: 100%;
   background-color: var(--lt-background-color);
-  padding: var(--lt-spacing-lg) 0; /* Aumentado de var(--lt-spacing-md) (1rem) a var(--lt-spacing-lg) (1.5rem) */
-  min-height: 85px; /* Aumentado de 70px a 85px */
+  padding: var(--lt-spacing-lg) 0;
+  min-height: 85px;
 }
 
+/* Contenedor de las cards de features, layout horizontal y centrado */
 .LTFeatureBannerContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--lt-spacing-md);
   display: flex;
-  align-items: center; /* Volviendo a center */
+  align-items: center;
   justify-content: space-between;
-  gap: 2.5rem; /* Aumenta el gap entre cards */
-  min-height: 50px; /* Reducido de 100px a 50px */
+  gap: 2.5rem;
+  min-height: 50px;
   transition: transform 0.7s cubic-bezier(0.7, 0.2, 0.3, 1),
     opacity 0.7s cubic-bezier(0.7, 0.2, 0.3, 1);
   will-change: transform;
@@ -31,20 +34,21 @@
   opacity: 0;
 }
 
+/* Card de feature individual, layout horizontal, icono, texto y flecha */
 .LTFeatureBannerItem {
   display: flex;
   align-items: center;
   gap: var(--lt-spacing-sm);
-  padding: var(--lt-spacing-sm) calc(var(--lt-spacing-md) + 8px); /* Más espacio horizontal */
+  padding: var(--lt-spacing-sm) calc(var(--lt-spacing-md) + 8px);
   border-radius: var(--lt-border-radius);
   transition: all 0.3s ease;
   cursor: pointer;
   flex: 1;
-  min-width: 0; /* Para que se ajuste el texto */
+  min-width: 0;
   max-width: 260px;
-  height: 100px; /* Altura fija para todos los cards */
+  height: 100px;
   min-height: 100px;
-  max-height: 100px; /* Evitar que crezcan más */
+  max-height: 100px;
   position: relative;
   opacity: 1;
 }
@@ -53,6 +57,7 @@
   opacity: 1;
 }
 
+/* Hover: resalta la card y el icono, y muestra sombra */
 .LTFeatureBannerItem:hover {
   background-color: var(--lt-accent-color-variant);
   transform: scale(1.08);
@@ -77,6 +82,7 @@
   fill: var(--lt-white-text);
 }
 
+/* Contenedor circular del icono */
 .LTFeatureBannerIconContainer {
   flex-shrink: 0;
   width: 40px;
@@ -89,6 +95,7 @@
   padding: var(--lt-spacing-xs);
 }
 
+/* Icono SVG dentro de la card */
 .LTFeatureBannerIcon {
   width: 24px;
   height: 24px;
@@ -96,14 +103,16 @@
   fill: var(--lt-white-text-color);
 }
 
+/* Contenido textual de la card */
 .LTFeatureBannerContent {
   flex: 1;
-  min-width: 120px; /* Más espacio horizontal para el texto */
+  min-width: 120px;
 }
 
+/* Título de la card */
 .LTFeatureBannerTitle {
   font-family: var(--lt-font-family);
-  font-size: 0.85rem; /* Más pequeño que antes */
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--lt-text-color);
   margin: 0 0 2px 0;
@@ -114,6 +123,7 @@
   text-overflow: ellipsis;
 }
 
+/* Subtítulo de la card, con máximo 3 líneas */
 .LTFeatureBannerSubtitle {
   font-family: var(--lt-font-family);
   font-size: 0.7rem !important;
@@ -123,14 +133,13 @@
   overflow: hidden;
   text-align: left !important;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Máximo 3 líneas */
-  line-clamp: 3; /* Estándar para compatibilidad */
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   transition: all 0.3s ease;
 }
 
-/* Removed hover text expansion to maintain consistent card sizes */
-
+/* Flecha decorativa en la card */
 .LTFeatureBannerArrow {
   flex-shrink: 0;
   width: 16px;
@@ -139,18 +148,20 @@
   transition: all 0.3s ease;
 }
 
+/* SVG de la flecha decorativa */
 .LTFeatureBannerArrow svg {
   width: 100%;
   height: 100%;
   fill: var(--lt-text-light);
 }
 
+/* Hover: la flecha se mueve y se hace más visible */
 .LTFeatureBannerItem:hover .LTFeatureBannerArrow {
   opacity: 1;
   transform: translateX(4px);
 }
 
-/* Carousel Layout */
+/* Carrusel principal del banner */
 .LTFeatureBannerCarousel {
   display: flex;
   align-items: center;
@@ -162,7 +173,7 @@
   margin: 0 auto;
 }
 
-/* Indicators Styles (copied from LTProductsCarousel) */
+/* Indicadores de slide (puntos debajo del carrusel) */
 .LTFeatureBannerIndicators {
   display: flex;
   justify-content: center;
@@ -189,9 +200,7 @@
   opacity: 1;
 }
 
-/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
-/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
-/* Flechas más cerca y con estilo/animación de LTProductsCarousel */
+/* Flechas de navegación del carrusel, estilo circular y animación */
 .LTFeatureBannerArrowNav {
   flex-shrink: 0;
   width: 40px;
@@ -232,25 +241,8 @@
   fill: var(--lt-black-text-color);
   transition: fill 0.3s ease;
 }
-.LTFeatureBannerArrowNav:hover:not(.disabled) {
-  background: var(--lt-accent-color);
-}
-.LTFeatureBannerArrowNav.disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-  transition: opacity 0.7s, visibility 0.7s;
-}
-.LTFeatureBannerArrowNav svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--lt-black-text-color);
-  transition: fill 0.3s ease;
-}
 
-/* Responsive Design */
-
-/* Ocultar flechas de navegación en mobile */
+/* Responsive: oculta flechas y ajusta layout en mobile */
 @media (max-width: 600px) {
   .LTFeatureBannerArrowNav {
     display: none !important;
