@@ -1,3 +1,8 @@
+body.lt-overlay-open {
+  overflow: hidden !important;
+  position: relative !important;
+  touch-action: none !important;
+}
 /* Ítem de categoría principal, subcategoría y menú: unificados */
 .LTCategoriesOverlay__item,
 .LTCategoriesOverlay__subitem,
@@ -80,7 +85,7 @@
   max-width: 350px;
   height: 100vh;
   background: var(--lt-background-color);
-  z-index: 100001;
+  z-index: 200000;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;

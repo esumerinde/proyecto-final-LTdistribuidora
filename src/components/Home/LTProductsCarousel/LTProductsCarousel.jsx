@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./LTProductsCarousel.css";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
-import LTProductsCarouselMobile from "./LTProductsCarouselMobile";
+import LTProductsCarouselMobile from "./LTProductsCarousel1Mobile";
 import { products } from "../../../mocks/products";
 
 // Componente principal del carrusel de productos. Acá se renderizan los productos y se maneja el slide.

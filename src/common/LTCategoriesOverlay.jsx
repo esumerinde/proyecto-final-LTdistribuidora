@@ -181,15 +181,15 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     }, 400); // Duración igual a la animación
   }
 
-  // Bloquea el scroll del body cuando el overlay está abierto, así no se mueve el fondo.
+  // Bloquea el scroll del body de forma robusta usando una clase global
   React.useEffect(() => {
     if (open || closing) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("lt-overlay-open");
     } else {
-      document.body.style.overflow = "";
+      document.body.classList.remove("lt-overlay-open");
     }
     return () => {
-      document.body.style.overflow = "";
+      document.body.classList.remove("lt-overlay-open");
     };
   }, [open, closing]);
 
@@ -212,6 +212,15 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     <div
       className={`LTCategoriesOverlay${closing ? " slideOutLeft" : ""}`}
       tabIndex={-1}
+      style={{
+        zIndex: 200000,
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "90vw",
+        maxWidth: 350,
+        height: "100vh",
+      }}
     >
       {/* Header con el título y el botón para cerrar */}
       <div className="LTCategoriesOverlay__header">

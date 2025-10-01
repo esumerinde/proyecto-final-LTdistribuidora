@@ -1,4 +1,4 @@
-import LTProductsCarouselMobile from "../../components/Home/LTProductsCarousel/LTProductsCarouselMobile";
+import LTProductsCarousel1Mobile from "../../components/Home/LTProductsCarousel/LTProductsCarousel1Mobile";
 import { useIsMobile } from "../../common/isMobile";
 import React from "react";
 import LTHeroCarousel from "../../components/Home/LTHeroCarousel/LTHeroCarousel";
@@ -31,7 +31,7 @@ const Home = () => {
           <LTFeatureBanner />
         </CarouselSyncProvider>
         {/* 2. Carrusel principal de productos */}
-        {isMobile ? <LTProductsCarouselMobile /> : <LTProductsCarousel />}
+        {isMobile ? <LTProductsCarousel1Mobile /> : <LTProductsCarousel />}
         {/* 3. Sección de ofertas */}
         {isMobile ? <LTOffersSectionMobile /> : <LTOffersSection />}
         {/* 4. Segundo carrusel de productos */}

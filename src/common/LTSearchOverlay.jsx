@@ -108,7 +108,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
       role="dialog"
       aria-modal="true"
       style={{
-        zIndex: 2200,
+        zIndex: 200000,
         position: "fixed",
         right: 0,
         width: "90vw",
@@ -128,8 +128,8 @@ export default function LTSearchOverlay({ open, onClose, children }) {
             },
             value: search,
             onChange: (e) => setSearch(e.target.value),
-            autoFocus: true,
-            placeholder: "Buscar producto o categoría",
+            // autoFocus: true,
+            placeholder: "Buscar producto o catego...",
           })
         ) : (
           <input
@@ -140,8 +140,8 @@ export default function LTSearchOverlay({ open, onClose, children }) {
             }}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            autoFocus
-            placeholder="Buscar producto o categoría"
+            // autoFocus
+            placeholder="Buscar producto"
             type="text"
           />
         )}
@@ -229,7 +229,10 @@ export default function LTSearchOverlay({ open, onClose, children }) {
             style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}
           >
             {filteredProducts.slice(0, 3).map((prod) => (
-              <div className="LTSearchDesktopCard" key={prod.id}>
+              <div
+                className="LTSearchDesktopCard"
+                key={prod.id + "-" + prod.name}
+              >
                 <img
                   className="LTSearchDesktopCardImg"
                   src={prod.image}

@@ -23,9 +23,9 @@
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  overflow: hidden;
   flex-direction: column;
-  padding-bottom: 0;
+  padding-bottom: 64px;
 }
 .LTProductsCarousel3Mobile__indicators {
   display: flex;
@@ -39,19 +39,20 @@
   bottom: unset;
   z-index: 20;
 }
-.LTProductsCarousel3MobileNav__arrow {
+/* Flechas de navegación NUEVO SISTEMA */
+.LTProductsCarousel3MobileNavArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  justify-content: center;
+  cursor: pointer;
   z-index: 2;
 }
-.LTProductsCarousel3MobileNav__arrow--left {
-  left: 0;
-  margin-left: 12px;
+.LTProductsCarousel3MobileNavArrow--left {
+  left: 0.2rem;
 }
-.LTProductsCarousel3MobileNav__arrow--right {
-  right: 0;
-  margin-right: 12px;
+.LTProductsCarousel3MobileNavArrow--right {
+  right: 0.2rem;
 }
 .LTProductsCarousel3MobileArrow {
   background: white;
@@ -74,18 +75,6 @@
   width: 28px;
   height: 28px;
   fill: #222;
-}
-.LTProductsCarousel3Mobile__slideTrack {
-  min-height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  flex-direction: column;
-  padding-bottom: 64px;
 }
 .LTProductsCarousel3Mobile__indicator {
   width: 10px;
@@ -261,7 +250,6 @@
   border: var(--lt-border-color, #bfc8f7) solid 1px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
-
 .LTProductsCarousel3Mobile__actionIcon {
   width: 16px;
   height: 16px;
@@ -325,7 +313,6 @@
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
 .LTProductsCarousel3MobileBannerOfferMain {
   font-size: 2.7rem;
   font-weight: 900;
@@ -465,7 +452,6 @@
 
 /* SOLO MOBILE: 1 card centrada y ancho total */
 @media (max-width: 500px) {
-  /* Banner de oferta mobile: lógica nueva y robusta */
   .LTProductsCarousel3MobileBanner {
     width: 92vw;
     max-width: 480px;
@@ -594,22 +580,6 @@
   gap: 0.5rem;
 }
 
-/* Flechas de navegación */
-/* Flechas de navegación */
-.LTProductsCarousel3MobileNavArrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  justify-content: center;
-  cursor: not-allowed;
-}
-.LTProductsCarousel3MobileNavArrow--left {
-  left: 0.2rem;
-}
-.LTProductsCarousel3MobileNavArrow--right {
-  right: 0.2rem;
-}
-
 /* Indicadores de navegación */
 .LTProductsCarousel3MobileIndicators {
   display: flex;
@@ -629,4 +599,131 @@
 .LTProductsCarousel3MobileIndicator--active {
   opacity: 1;
   background: var(--lt-accent-color-variant2-dark);
+}
+
+/* --- Responsive: todos los breakpoints al final --- */
+
+@media (max-width: 600px) {
+  .LTProductsCarousel3MobileNavArrow {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+  }
+  .LTProductsCarousel3MobileNavArrow--left {
+    left: 8px;
+  }
+  .LTProductsCarousel3MobileNavArrow--right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .LTProductsCarousel3MobileNavArrow {
+    bottom: 18px;
+    width: 34px;
+    height: 34px;
+  }
+  .LTProductsCarousel3MobileNavArrow--left {
+    left: 4px;
+  }
+  .LTProductsCarousel3MobileNavArrow--right {
+    right: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .LTProductsCarousel3MobileNavArrow {
+    bottom: 14px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 375px) {
+  .LTProductsCarousel3MobileNavArrow {
+    bottom: 9px;
+    width: 27px;
+    height: 27px;
+  }
+  .LTProductsCarousel3MobileNavArrow--left {
+    left: 3px;
+  }
+  .LTProductsCarousel3MobileNavArrow--right {
+    right: 3px;
+  }
+  .LTProductsCarousel3Mobile__card {
+    max-width: 220px;
+    min-width: 170px;
+    padding: 1.1rem 0.6rem 1.1rem 0.6rem;
+  }
+  .LTProductsCarousel3MobileIndicators,
+  .LTProductsCarousel3Mobile__indicators {
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel3MobileIndicator,
+  .LTProductsCarousel3Mobile__indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .LTProductsCarousel3MobileNavArrow {
+    bottom: 8px;
+    width: 26px;
+    height: 26px;
+  }
+  .LTProductsCarousel3MobileNavArrow--left {
+    left: 2px;
+  }
+  .LTProductsCarousel3MobileNavArrow--right {
+    right: 2px;
+  }
+  .LTProductsCarousel3Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel3MobileIndicators,
+  .LTProductsCarousel3Mobile__indicators {
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel3MobileIndicator,
+  .LTProductsCarousel3Mobile__indicator {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (max-width: 300px) {
+  .LTProductsCarousel3MobileNavArrow {
+    bottom: 6px;
+    width: 24px;
+    height: 24px;
+  }
+  .LTProductsCarousel3Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel3MobileIndicators,
+  .LTProductsCarousel3Mobile__indicators {
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel3MobileIndicator,
+  .LTProductsCarousel3Mobile__indicator {
+    width: 10px;
+    height: 10px;
+  }
 }

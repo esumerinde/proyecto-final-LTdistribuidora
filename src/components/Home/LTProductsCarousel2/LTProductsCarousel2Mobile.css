@@ -39,19 +39,20 @@
   bottom: unset;
   z-index: 20;
 }
-.LTProductsCarousel2MobileNav__arrow {
+/* Flechas de navegación NUEVO SISTEMA */
+.LTProductsCarousel2MobileNavArrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  justify-content: center;
+  cursor: pointer;
   z-index: 2;
 }
-.LTProductsCarousel2MobileNav__arrow--left {
-  left: 0;
-  margin-left: 12px;
+.LTProductsCarousel2MobileNavArrow--left {
+  left: 0.2rem;
 }
-.LTProductsCarousel2MobileNav__arrow--right {
-  right: 0;
-  margin-right: 12px;
+.LTProductsCarousel2MobileNavArrow--right {
+  right: 0.2rem;
 }
 .LTProductsCarousel2MobileArrow {
   background: white;
@@ -579,22 +580,6 @@
   gap: 0.5rem;
 }
 
-/* Flechas de navegación */
-/* Flechas de navegación */
-.LTProductsCarousel2MobileNavArrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  justify-content: center;
-  cursor: not-allowed;
-}
-.LTProductsCarousel2MobileNavArrow--left {
-  left: 0.2rem;
-}
-.LTProductsCarousel2MobileNavArrow--right {
-  right: 0.2rem;
-}
-
 /* Indicadores de navegación */
 .LTProductsCarousel2MobileIndicators {
   display: flex;
@@ -614,4 +599,131 @@
 .LTProductsCarousel2MobileIndicator--active {
   opacity: 1;
   background: var(--lt-accent-color-variant2-dark);
+}
+
+/* --- Responsive: todos los breakpoints al final --- */
+
+@media (max-width: 600px) {
+  .LTProductsCarousel2MobileNavArrow {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+  }
+  .LTProductsCarousel2MobileNavArrow--left {
+    left: 8px;
+  }
+  .LTProductsCarousel2MobileNavArrow--right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .LTProductsCarousel2MobileNavArrow {
+    bottom: 18px;
+    width: 34px;
+    height: 34px;
+  }
+  .LTProductsCarousel2MobileNavArrow--left {
+    left: 4px;
+  }
+  .LTProductsCarousel2MobileNavArrow--right {
+    right: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .LTProductsCarousel2MobileNavArrow {
+    bottom: 14px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 375px) {
+  .LTProductsCarousel2MobileNavArrow {
+    bottom: 9px;
+    width: 27px;
+    height: 27px;
+  }
+  .LTProductsCarousel2MobileNavArrow--left {
+    left: 3px;
+  }
+  .LTProductsCarousel2MobileNavArrow--right {
+    right: 3px;
+  }
+  .LTProductsCarousel2Mobile__card {
+    max-width: 220px;
+    min-width: 170px;
+    padding: 1.1rem 0.6rem 1.1rem 0.6rem;
+  }
+  .LTProductsCarousel2MobileIndicators,
+  .LTProductsCarousel2Mobile__indicators {
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel2MobileIndicator,
+  .LTProductsCarousel2Mobile__indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .LTProductsCarousel2MobileNavArrow {
+    bottom: 8px;
+    width: 26px;
+    height: 26px;
+  }
+  .LTProductsCarousel2MobileNavArrow--left {
+    left: 2px;
+  }
+  .LTProductsCarousel2MobileNavArrow--right {
+    right: 2px;
+  }
+  .LTProductsCarousel2Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel2MobileIndicators,
+  .LTProductsCarousel2Mobile__indicators {
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel2MobileIndicator,
+  .LTProductsCarousel2Mobile__indicator {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (max-width: 300px) {
+  .LTProductsCarousel2MobileNavArrow {
+    bottom: 6px;
+    width: 24px;
+    height: 24px;
+  }
+  .LTProductsCarousel2Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel2MobileIndicators,
+  .LTProductsCarousel2Mobile__indicators {
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel2MobileIndicator,
+  .LTProductsCarousel2Mobile__indicator {
+    width: 10px;
+    height: 10px;
+  }
 }
