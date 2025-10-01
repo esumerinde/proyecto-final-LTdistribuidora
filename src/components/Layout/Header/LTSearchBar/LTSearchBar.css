@@ -1,12 +1,4 @@
-﻿/* Cuando el header está sticky, fuerza opacidad y fondo sólido */
-.LTHeaderSticky .LTSearchBarWrapper,
-.LTHeaderSticky .LTSearchBarInputContainer,
-.LTHeaderSticky .LTSearchBarInput,
-.LTHeaderSticky .LTSearchBarButton {
-  opacity: 1 !important;
-  background: var(--lt-search-bar-focus) !important;
-}
-/* LTSearchBar - Barra de búsqueda estilo farmaonline */
+﻿/* LTSearchBar - Barra de búsqueda estilo farmaonline */
 .LTSearchBarWrapper {
   width: 100%;
   max-width: 600px;
@@ -22,18 +14,14 @@
   display: flex;
   align-items: center;
   background: var(--lt-search-bar-focus);
-  border: 1.5px solid var(--lt-search-bar-color);
+  border: 1.5px solid var(--lt-muted-text-color);
   border-radius: var(--lt-border-radius-lg);
   overflow: hidden;
   transition: all 0.2s ease;
 }
 
-.LTSearchBarInputContainer:hover {
-  border-color: var(--lt-search-bar-hover);
-}
-
 .LTSearchBarInputContainer:focus-within {
-  border-color: var(--lt-search-bar-hover);
+  border-color: var(--lt-black-text-color);
   background: linear-gradient(
     to bottom,
     rgba(74, 81, 85, 0.07),

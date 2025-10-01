@@ -1,0 +1,30 @@
+/* Columna de sugerencias en el recuadro blanco */
+.LTSearchDesktopSuggestionsCol {
+  display: flex;
+  flex-direction: column;
+  width: 32%;
+  min-width: 220px;
+  max-width: 240px;
+  box-sizing: border-box;
+}
+
+.LTSearchDesktopSuggestionsTitle {
+  font-size: 1.08rem;
+  font-weight: var(--lt-font-weight-medium);
+  margin-bottom: 1.1rem;
+  color: var(--lt-text-color, #222);
+  font-family: var(--lt-font-family-alt);
+}
+
+.LTSearchDesktopSuggestionsList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.LTSearchDesktopSuggestionsList li {
+  margin-bottom: 0.7rem;
+  font-size: 0.97rem;
+  color: var(--lt-text-color, #222);
+  font-weight: var(--lt-font-weight-light);
+}

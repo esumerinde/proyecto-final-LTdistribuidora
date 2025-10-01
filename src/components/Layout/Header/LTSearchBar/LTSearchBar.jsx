@@ -1,14 +1,45 @@
 import React, { useState } from "react";
 import "./LTSearchBar.css";
+import LTSearchDesktop from "../../../../common/LTSearchDesktop";
 
 const LTSearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [inputFocused, setInputFocused] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Lógica de búsqueda aquí
     console.log("Buscar:", searchTerm);
   };
+
+  const handleFocus = () => setInputFocused(true);
+  // Prevent closing when clicking a term
+  const blurTimeoutRef = React.useRef();
+  const handleBlur = () => {
+    blurTimeoutRef.current = setTimeout(() => setInputFocused(false), 120);
+  };
+  const handlePopularTermClick = (term) => {
+    if (blurTimeoutRef.current) clearTimeout(blurTimeoutRef.current);
+    setSearchTerm(term);
+    setInputFocused(true);
+  };
+
+  // Click outside logic
+  React.useEffect(() => {
+    function handleClickOutside(e) {
+      const wrapper = document.querySelector(".LTSearchBarWrapper");
+      if (wrapper && !wrapper.contains(e.target)) {
+        setInputFocused(false);
+        setSearchTerm("");
+      }
+    }
+    if (inputFocused) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [inputFocused]);
 
   return (
     <div className="LTSearchBarWrapper">
@@ -20,6 +51,8 @@ const LTSearchBar = () => {
             placeholder="Buscar producto o categoría"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
           />
           <button
             type="submit"
@@ -32,6 +65,12 @@ const LTSearchBar = () => {
           </button>
         </div>
       </form>
+      {inputFocused && (
+        <LTSearchDesktop
+          searchTerm={searchTerm}
+          onPopularTermClick={handlePopularTermClick}
+        />
+      )}
     </div>
   );
 };

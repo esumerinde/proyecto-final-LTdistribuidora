@@ -202,7 +202,10 @@ export default function LTCategoriesOverlay({ open, onClose }) {
   }, [isAnyExpanded]);
 
   // Solo renderiza si está abierto o está cerrando (para la animación)
-  if (!open && !closing) return null;
+  if (!open && !closing) {
+    if (expanded !== null) setExpanded(null); // Reiniciar expansión al cerrar
+    return null;
+  }
 
   // Render principal del overlay.
   return createPortal(
@@ -219,7 +222,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
           aria-label="Cerrar"
           type="button"
         >
-          {/* Icono de cerrar (X) */}
+          {/* Icono de cerrar */}
           <svg
             className="LTCategoriesOverlay__closeIcon"
             viewBox="0 0 24 24"
@@ -236,139 +239,112 @@ export default function LTCategoriesOverlay({ open, onClose }) {
           </svg>
         </button>
       </div>
-      <div className="LTCategoriesOverlay__list" style={{ gap: 0 }}>
+      {/* Contenedor scrollable con categorías y menú */}
+      <div className="LTCategoriesOverlay__list">
         <div className="LTCategoriesOverlay__categories">
           {/* Listado de categorías con subcategorías desplegables */}
-          {categories.map((cat, idx) => (
-            <React.Fragment key={cat.id}>
-              {/* Item principal de la categoría */}
-              <div
-                className={`LTCategoriesOverlay__item LTCategoriesOverlay__expandable${
-                  expanded === idx ? " expanded" : ""
-                }`}
-                onClick={() => setExpanded(expanded === idx ? null : idx)}
-                style={{
-                  fontWeight: "600",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                  cursor: "pointer",
-                  transition: "background 0.2s, color 0.2s",
-                  background:
-                    expanded === idx ? "var(--lt-accent-color-dark)" : "#fff",
-                  color: expanded === idx ? "#fff" : "#222",
-                  borderRadius: "0px",
-                  boxShadow:
-                    expanded === idx ? "0 2px 8px rgba(74,81,85,0.08)" : "none",
-                  width: "100%",
-                  minWidth: 0,
-                  boxSizing: "border-box",
-                  marginBottom: 0,
-                  paddingBottom: 0,
-                }}
-              >
-                <span style={{ color: expanded === idx ? "#fff" : undefined }}>
-                  {cat.name}
-                </span>
-                <span
+          {categories.map((cat, idx) => {
+            const isExpanded = expanded === idx;
+            return (
+              <React.Fragment key={cat.id}>
+                {/* Item principal de la categoría */}
+                <div
+                  className={`LTCategoriesOverlay__item LTCategoriesOverlay__expandable${
+                    isExpanded ? " expanded" : ""
+                  }`}
+                  onClick={() => setExpanded(isExpanded ? null : idx)}
+                >
+                  <span className={isExpanded ? "expanded" : ""}>
+                    {cat.name}
+                  </span>
+                  <span className="LTCategoriesOverlay__caretContainer">
+                    {/* Flechita para expandir/cerrar la subcategoría */}
+                    <svg
+                      className={`LTCategoriesOverlay__caret${
+                        isExpanded ? " rotated" : ""
+                      }`}
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 15L12 9L18 15"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                {/* Subcategorías desplegables */}
+                <div
+                  className={`LTCategoriesOverlay__sublist${
+                    isExpanded ? " LTCategoriesOverlay__sublist--open open" : ""
+                  }`}
+                  aria-hidden={!isExpanded}
                   style={{
-                    marginLeft: 8,
-                    display: "inline-block",
-                    transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
+                    maxHeight: isExpanded ? "400px" : "0px",
+                    opacity: isExpanded ? 1 : 0,
+                    overflow: "hidden",
+                    transition:
+                      "max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
                   }}
                 >
-                  {/* Flechita para expandir/cerrar la subcategoría */}
-                  <svg
-                    className="LTCategoriesOverlay__caret"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    style={{
-                      transform:
-                        expanded === idx ? "rotate(0deg)" : "rotate(180deg)",
-                      transition: "transform 0.35s cubic-bezier(0.4,0,0.2,1)",
-                    }}
-                  >
-                    <path
-                      d="M6 15L12 9L18 15"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {cat.subcategories.map((sub, subIdx) => (
+                    <div className="LTCategoriesOverlay__subitem" key={subIdx}>
+                      {sub}
+                    </div>
+                  ))}
+                </div>
+              </React.Fragment>
+            );
+          })}
+          {/* Espacio vacío entre categorías y menú de abajo */}
+          <div
+            className="LTCategoriesOverlay__item"
+            style={{
+              pointerEvents: "none",
+              background: "transparent",
+              boxShadow: "none",
+            }}
+          ></div>
+          <div
+            className="LTCategoriesOverlay__item"
+            style={{
+              pointerEvents: "none",
+              background: "transparent",
+              boxShadow: "none",
+            }}
+          ></div>
+          {/* Menú de abajo, con iconos y opciones extra, renderizado al final */}
+          <div className="LTCategoriesOverlay__menu LTCategoriesOverlay__menu--visible">
+            {menuItems
+              .filter((item) => item.label !== "Ayuda")
+              .map((item, idx) => (
+                <div
+                  className={`LTCategoriesOverlay__item LTCategoriesOverlay__menuitem${
+                    idx === 0 ? " first" : ""
+                  }`}
+                  key={idx}
+                >
+                  {/* Icono del menú */}
+                  {item.icon && (
+                    <img
+                      src={item.icon}
+                      alt="icon"
+                      className="LTCategoriesOverlay__menuitemIcon"
                     />
-                  </svg>
-                </span>
-              </div>
-              {/* Subcategorías desplegables */}
-              <div
-                className={`LTCategoriesOverlay__sublist${
-                  expanded === idx ? " LTCategoriesOverlay__sublist--open" : ""
-                }`}
-                style={{
-                  maxHeight: expanded === idx ? "400px" : "0px",
-                  opacity: expanded === idx ? 1 : 0,
-                  overflow: "hidden",
-                  transition:
-                    "max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s",
-                  marginBottom: 0,
-                  paddingBottom: 0,
-                }}
-              >
-                {cat.subcategories.map((sub, subIdx) => (
-                  <div
-                    className="LTCategoriesOverlay__subitem"
-                    key={subIdx}
-                    style={{
-                      padding: "10px 18px",
-                      background: "#f7f7f7",
-                      borderRadius: "6px",
-                      margin: "4px 0",
-                      fontSize: "0.98em",
-                      color: "#222",
-                      fontWeight: 500,
-                      boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-                    }}
-                  >
-                    {/* Nombre de la subcategoría */}
-                    {sub}
-                  </div>
-                ))}
-              </div>
-            </React.Fragment>
-          ))}
-        </div>
-      </div>
-      {/* Menú de abajo, con iconos y opciones extra */}
-      <div
-        className="LTCategoriesOverlay__bottomMenuContainer"
-        style={{ marginTop: 0, paddingTop: 0 }}
-      >
-        <div className="LTCategoriesOverlay__menu LTCategoriesOverlay__menu--visible">
-          {menuItems
-            .filter((item) => item.label !== "Ayuda")
-            .map((item, idx) => (
-              <div
-                className={`LTCategoriesOverlay__item LTCategoriesOverlay__menuitem${
-                  idx === 0 ? " first" : ""
-                }`}
-                key={idx}
-              >
-                {/* Icono del menú */}
-                {item.icon && (
-                  <img
-                    src={item.icon}
-                    alt="icon"
-                    className="LTCategoriesOverlay__menuitemIcon"
-                  />
-                )}
-                {/* Texto de la opción */}
-                <span className="LTCategoriesOverlay__menuitemText">
-                  {item.label}
-                </span>
-              </div>
-            ))}
+                  )}
+                  {/* Texto de la opción */}
+                  <span className="LTCategoriesOverlay__menuitemText">
+                    {item.label}
+                  </span>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>,

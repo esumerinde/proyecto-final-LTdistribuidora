@@ -1,0 +1,103 @@
+/* Layout de columnas para sugerencias y resultados */
+.LTSearchDesktopColumns {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.LTSearchDesktopSuggestionsCol {
+  flex: 0 0 160px;
+  max-width: 160px;
+  min-width: 160px;
+  width: 240px;
+  box-sizing: border-box;
+}
+
+.LTSearchDesktopWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0;
+  font-family: var(--lt-font-family);
+}
+.LTSearchDesktopInput {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  border: 1.5px solid #e0e0e0;
+  font-size: 1.08rem;
+  font-family: inherit;
+  outline: none;
+  background: var(--lt-search-bar-focus, #f7f7f7);
+  color: var(--lt-search-bar-color, #222);
+}
+.LTSearchDesktopSuggestionsBox {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 660px;
+  min-width: 660px;
+  max-width: 660px;
+  height: 550px;
+  min-height: 550px;
+  max-height: 550px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  padding: 2rem 2rem 1.5rem 2rem;
+  box-sizing: border-box;
+}
+.LTSearchDesktopSuggestionsTitle {
+  font-size: 1.08rem;
+  font-weight: var(--lt-font-weight-light);
+  margin-bottom: 1.1rem;
+  color: var(--lt-text-color);
+  font-family: var(--lt-font-family-alt);
+}
+.LTSearchDesktopSuggestionsList {
+  list-style: decimal inside;
+  padding-left: 0;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--lt-muted-text-color);
+}
+.LTSearchDesktopSuggestionsList li {
+  margin-bottom: 0.7rem;
+  cursor: pointer;
+  transition: color 0.18s;
+  font-weight: var(--lt-font-weight-medium);
+  color: var(--lt-black-text-color);
+}
+.LTSearchDesktopSuggestionsList li:hover {
+  color: var(--lt-primary-color, #2a4d9b);
+}
+.LTSearchDesktopResultsBox {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  padding: 2rem 2rem 1.5rem 2rem;
+}
+.LTSearchDesktopResultsList {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.LTSearchDesktopResultName {
+  font-weight: 600;
+  color: var(--lt-text-color, #222);
+}
+.LTSearchDesktopResultBrand {
+  font-weight: 400;
+  color: var(--lt-muted-text-color, #888);
+}
+.LTSearchDesktopNoResults {
+  font-size: 1rem;
+  color: #888;
+}

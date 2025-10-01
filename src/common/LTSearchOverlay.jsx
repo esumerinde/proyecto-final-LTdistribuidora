@@ -8,12 +8,37 @@ import "./LTSearchOverlay.css";
 // useEffect(() => {
 //   axios.get('/api/productos').then(res => setAllProducts(res.data));
 // }, []);
+
 import { products as products1 } from "../mocks/products";
 import { products as products2 } from "../mocks/products2";
 import { products as products3 } from "../mocks/products3";
 
 // Solo para mock. Cuando esté el backend, usar el estado con los productos traídos de la API.
 const ALL_PRODUCTS = [...products1, ...products2, ...products3];
+
+// Extraer términos más buscados dinámicamente
+function getPopularTerms(products, max = 10) {
+  const termCounts = {};
+  products.forEach((p) => {
+    [p.name, p.category, p.brand].forEach((field) => {
+      if (field) {
+        field
+          .toLowerCase()
+          .split(/\s|,|\./)
+          .filter((w) => w.length > 2)
+          .forEach((word) => {
+            termCounts[word] = (termCounts[word] || 0) + 1;
+          });
+      }
+    });
+  });
+  return Object.entries(termCounts)
+    .sort((a, b) => b[1] - a[1])
+    .map(([term]) => term)
+    .slice(0, max);
+}
+
+const popularTerms = getPopularTerms(ALL_PRODUCTS, 10);
 
 export default function LTSearchOverlay({ open, onClose, children }) {
   const [search, setSearch] = useState("");
@@ -68,19 +93,15 @@ export default function LTSearchOverlay({ open, onClose, children }) {
       ? ALL_PRODUCTS.filter(
           (prod) =>
             prod.name.toLowerCase().includes(search.trim().toLowerCase()) ||
-            prod.brand.toLowerCase().includes(search.trim().toLowerCase())
+            prod.brand.toLowerCase().includes(search.trim().toLowerCase()) ||
+            (prod.category &&
+              prod.category.toLowerCase().includes(search.trim().toLowerCase()))
         )
       : [];
 
   // Si el overlay no está abierto ni cerrándose, no renderiza nada
   if (!open && !closing) return null;
 
-  // Renderiza el overlay de búsqueda usando un portal para que esté por encima de todo
-  // El header contiene el input de búsqueda y el botón de cierre
-  // Si el usuario está escribiendo, muestra un spinner de carga
-  // Cuando la búsqueda está lista, muestra los resultados filtrados
-  // Cada resultado muestra imagen, marca, nombre y precios
-  // El footer puede mostrar un link para ver todos los productos filtrados
   return createPortal(
     <div
       className={`LTSearchBarMobileOverlay${closing ? " slideOutRight" : ""}`}
@@ -146,6 +167,21 @@ export default function LTSearchOverlay({ open, onClose, children }) {
           </svg>
         </button>
       </div>
+      {/* Términos más buscados dinámicos estilo desktop */}
+      {search.trim().length === 0 && !loading && !ready && (
+        <div className="LTSearchBarMobileResultsBlock">
+          <div className="LTSearchBarMobileResultsTitle">
+            Términos más buscados
+          </div>
+          <ul className="LTSearchBarMobileSuggestionsList">
+            {popularTerms.map((term) => (
+              <li key={term} onClick={() => setSearch(term)}>
+                <span>{term}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {/* Spinner de carga mientras busca productos */}
       {loading && search.trim().length > 0 && (
         <div
@@ -164,64 +200,78 @@ export default function LTSearchOverlay({ open, onClose, children }) {
       {ready && search.trim().length > 0 && (
         <div className="LTSearchBarMobileResultsBlock">
           {/* Título de resultados */}
-          <div className="LTSearchBarMobileResultsTitle">
-            {filteredProducts.length > 0
-              ? `RESULTADOS PARA "${search}"`
-              : "Sin resultados"}
+          <div
+            className="LTSearchDesktopCardsTitle"
+            style={{
+              fontFamily: "var(--lt-font-family-alt)",
+              fontSize: "1.08rem",
+              fontWeight: "var(--lt-font-weight-light)",
+              marginBottom: "1.1rem",
+              color: "var(--lt-text-color, #222)",
+              paddingLeft: "18px",
+              paddingTop: "18px",
+            }}
+          >
+            {filteredProducts.length > 0 ? (
+              <>
+                RESULTADOS PARA{" "}
+                <span style={{ fontWeight: "var(--lt-font-weight-light)" }}>
+                  &quot;{search}&quot;
+                </span>
+              </>
+            ) : (
+              "Sin resultados"
+            )}
           </div>
           {/* Lista de productos filtrados */}
-          <div className="LTSearchBarMobileProducts">
-            <div className="LTSearchBarMobileProductsList">
-              {filteredProducts.map((prod, idx) => (
-                <div
-                  className={`LTSearchBarMobileProductCard LTSearchBarMobileProductCardBig${
-                    idx < filteredProducts.length - 1 ? "" : " last"
-                  }`}
-                  key={idx}
-                >
-                  {/* Imagen del producto */}
-                  <img
-                    className="LTSearchBarMobileProductImgBig"
-                    src={prod.image}
-                    alt={prod.name}
-                    style={{
-                      width: "60px",
-                      height: "60px",
-                      objectFit: "contain",
-                      background: "#fff",
-                      borderRadius: "8px",
-                    }}
-                  />
-                  {/* Info del producto: marca, nombre y precios */}
-                  <div className="LTSearchBarMobileProductInfoBig">
-                    <div className="LTSearchBarMobileProductBrandBig">
-                      {prod.brand}
-                    </div>
-                    <div className="LTSearchBarMobileProductTitleBig">
-                      {prod.name}
-                    </div>
-                    <div className="LTSearchBarMobileProductPriceRowBig">
-                      <span className="LTSearchBarMobileProductOldPriceBig">
-                        {prod.originalPrice ? `$${prod.originalPrice}` : ""}
-                      </span>
-                      <span className="LTSearchBarMobileProductPriceBig">
-                        {prod.discountPrice ? `$${prod.discountPrice}` : ""}
-                      </span>
-                    </div>
+          <div
+            className="LTSearchDesktopCardsList"
+            style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}
+          >
+            {filteredProducts.slice(0, 3).map((prod) => (
+              <div className="LTSearchDesktopCard" key={prod.id}>
+                <img
+                  className="LTSearchDesktopCardImg"
+                  src={prod.image}
+                  alt={prod.name}
+                />
+                <div className="LTSearchDesktopCardInfo">
+                  <div className="LTSearchDesktopCardBrand">{prod.brand}</div>
+                  <div className="LTSearchDesktopCardTitle">{prod.name}</div>
+                  <div className="LTSearchDesktopCardPriceRow">
+                    <span className="LTSearchDesktopCardOldPrice">
+                      {prod.originalPrice ? `$${prod.originalPrice}` : ""}
+                    </span>
+                    <span
+                      className="LTSearchDesktopCardPrice"
+                      style={{ color: "var(--lt-accent-color-variant)" }}
+                    >
+                      {prod.discountPrice ? `$${prod.discountPrice}` : ""}
+                    </span>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
           {/* Footer con link para ver todos los productos filtrados */}
-          <div className="LTSearchBarMobileResultsFooter">
-            <div className="LTSearchBarMobileResultsLinkWrapper">
-              <span className="LTSearchBarMobileResultsText">
-                {filteredProducts.length > 0
-                  ? `Mostrar todos los productos para "${search}"`
-                  : ""}
+          <div
+            className="LTSearchDesktopCardsFooter"
+            style={{
+              marginTop: "1.7rem",
+              fontSize: "0.98rem",
+              color: "var(--lt-muted-text-color)",
+              fontFamily: "var(--lt-font-family-alt)",
+              paddingLeft: "18px",
+            }}
+          >
+            {filteredProducts.length > 0 && (
+              <span className="LTSearchDesktopCardsShowAll">
+                Mostrar todos los productos para{" "}
+                <span style={{ fontWeight: "var(--lt-font-weight-medium)" }}>
+                  &quot;{search}&quot;
+                </span>
               </span>
-            </div>
+            )}
           </div>
         </div>
       )}

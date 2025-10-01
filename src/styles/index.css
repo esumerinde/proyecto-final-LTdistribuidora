@@ -29,6 +29,7 @@
   /* Tipografía general */
   --lt-font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
+  --lt-font-family-alt: "Inter", sans-serif;
 
   /* Espaciado */
   --lt-spacing-xs: 0.25rem;

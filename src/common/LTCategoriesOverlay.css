@@ -1,43 +1,51 @@
-/* Contenedor del menú inferior con accesos rápidos */
-.LTCategoriesOverlay__bottomMenuContainer {
-  flex-shrink: 0;
-  background: #fff;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.04);
-  border-top: 1px solid #eee;
-  margin-top: 0;
-  padding-top: 0;
-  height: unset;
-  position: relative;
-  top: 48px;
-}
-
-/* Ítems del menú inferior, alineados a la izquierda */
-.LTCategoriesOverlay__bottomMenuContainer .LTCategoriesOverlay__menuitem {
-  justify-content: flex-start;
-  width: 100%;
-  padding: 8px 22px;
-  position: static;
-  background: #fff;
-  z-index: 1;
-}
-
-/* Estilos generales para los ítems del menú */
-/* Nahuel: subo un poco la fuente y el padding para que sean más cómodos, pero sin que se corten */
+/* Ítem de categoría principal, subcategoría y menú: unificados */
+.LTCategoriesOverlay__item,
+.LTCategoriesOverlay__subitem,
 .LTCategoriesOverlay__menuitem {
+  width: 100%;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  padding: 10px 28px 10px 20px !important;
+  font-size: 1rem;
+  font-family: var(--lt-font-family);
+  color: #222;
+  background: var(--lt-background-color);
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  box-sizing: border-box;
+  border-radius: 0;
+  margin: 5px 0;
+  height: 42px;
+  font-weight: 500;
+}
+.LTCategoriesOverlay__menuitem {
+  background: var(--lt-background-color);
   justify-content: flex-start;
   gap: 7px;
-  font-size: 1.02rem;
-  font-weight: 500;
-  padding: 8px 16px;
-  border-radius: 8px;
-  background: #f7f7f7;
-  margin: 5px 0;
-  cursor: pointer;
-  transition: background 0.2s;
 }
+.LTCategoriesOverlay__item.expanded,
+.LTCategoriesOverlay__item:active {
+  background: var(--lt-accent-color-dark) !important;
+  color: var(--lt-white-text-color);
+  box-shadow: 0 2px 8px rgba(74, 81, 85, 0.08);
+}
+.LTCategoriesOverlay__item .expanded {
+  color: var(--lt-white-text-color);
+}
+.LTCategoriesOverlay__item span,
+.LTCategoriesOverlay__subitem span,
+.LTCategoriesOverlay__menuitem span {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
+  color: #fff;
+}
+
 /* Icono de cada ítem del menú */
 .LTCategoriesOverlay__menuitemIcon {
   width: 0.94rem;
@@ -47,7 +55,7 @@
 .LTCategoriesOverlay__menuitemText {
   margin: 0;
   display: inline-block;
-  font-size: 0.96rem;
+  /* font-size eliminado para heredar de los ítems */
 }
 /* Icono SVG dentro del ítem */
 .LTCategoriesOverlay__menuitem img {
@@ -61,21 +69,9 @@
   align-items: center;
   gap: 7px;
 }
-/* Ajustes responsivos para ítems y subítems en pantallas pequeñas */
-@media (max-width: 400px) {
-  .LTCategoriesOverlay__item,
-  .LTCategoriesOverlay__item span,
-  .LTCategoriesOverlay__menuitem,
-  .LTCategoriesOverlay__menuitemText,
-  .LTCategoriesOverlay__subitem {
-    font-size: 0.92rem !important;
-    padding: 6px 14px !important;
-    margin: 3px 0 !important;
-    height: 28px !important;
-  }
-}
-/* Overlay de categorías para mobile */
-/* Nahuel: le saco el overflow: hidden para que el menú pueda scrollear bien en cualquier teléfono, incluso los raros */
+
+/* Overlay de categorías para desktop */
+/* Overlay lateral de categorías para mobile */
 .LTCategoriesOverlay {
   position: fixed;
   top: 0;
@@ -83,16 +79,19 @@
   width: 90vw;
   max-width: 350px;
   height: 100vh;
-  background: #fff;
+  background: var(--lt-background-color);
   z-index: 100001;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  /* overflow: hidden;  // Lo saco para que el menú no se corte en pantallas chicas */
   animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
 }
-/* Contenedor de la lista de categorías */
-/* Nahuel: ahora el menú usa flex y ocupa todo el espacio disponible, nunca se corta y el scroll anda siempre */
+.LTCategoriesOverlay.slideOutLeft {
+  animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Contenedor de la lista de categorías y menú inferior */
 .LTCategoriesOverlay__menu {
   display: flex;
   flex-direction: column;
@@ -102,14 +101,15 @@
   padding-bottom: 0;
   overflow-y: auto;
 }
+
 /* Hover sobre ítems del menú */
-.LTCategoriesOverlay__menuitem:hover {
-  background: #eaeaea;
+.LTCategoriesOverlay__menuitem:hover,
+.LTCategoriesOverlay__item:hover,
+.LTCategoriesOverlay__subitem:hover {
+  background: var(--lt-background-color);
+  color: #222;
 }
-/* Estilos para el span dentro del ítem */
-.LTCategoriesOverlay__menuitem span {
-  margin: 0;
-}
+
 /* Header del overlay, con botón de cierre */
 .LTCategoriesOverlay__header {
   display: flex;
@@ -144,29 +144,21 @@
 .LTCategoriesOverlay__list {
   display: flex;
   flex-direction: column;
-  flex: unset;
-  min-height: unset;
-  height: unset;
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
   gap: 0;
+  overflow-y: auto;
 }
 
 /* Lista de categorías principales */
 .LTCategoriesOverlay__categories {
-  flex: unset;
+  flex: 0 0 auto;
   margin-bottom: 0;
   padding-bottom: 0;
   height: unset;
   min-height: unset;
   max-height: unset;
-}
-
-.LTCategoriesOverlay__bottomMenuContainer {
-  flex-shrink: 0;
-  margin-top: 0;
-  padding-top: 0;
-  height: unset;
-  position: relative;
-  top: 48px;
 }
 
 .LTCategoriesOverlay__menu {
@@ -181,140 +173,47 @@
   transition-delay: 0s, 0s;
 }
 /* Menú visible (transición y pointer-events) */
-/* Nahuel: ahora el menú nunca tapa el header ni el botón, y sigue siendo scrollable en todas las pantallas */
 .LTCategoriesOverlay__menu--visible {
   opacity: 1;
   pointer-events: auto;
   transition-delay: 0s, 0s;
-  max-height: calc(
-    100vh - 80px
-  ); /* Deja espacio para el header y el botón de cierre */
+  max-height: calc(100vh - 80px);
   overflow-y: auto;
 }
-@media (max-width: 400px) {
-  .LTCategoriesOverlay__menu--visible {
-    max-height: none; /* En pantallas chicas, el flexbox lo maneja y no hace falta limitar */
-  }
-}
-/* Ítem de categoría principal */
-/* Nahuel: subo un poco la fuente y el padding para que sean más cómodos, pero sin que se corten */
-.LTCategoriesOverlay__item {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  font-size: 1.02rem;
-  font-family: var(--lt-font-family);
-  color: #222;
-  background: #fff;
-  border: none;
-  box-shadow: none;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-  box-sizing: border-box;
-  border-radius: 0;
-  margin: 5px 0;
-  height: 42px;
-}
-/* Span dentro del ítem de categoría */
-.LTCategoriesOverlay__item span {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-/* Ítem expandido o activo */
-.LTCategoriesOverlay__item.expanded,
-.LTCategoriesOverlay__item:active {
-  background: var(--lt-accent-color-dark);
-  color: #fff;
-}
-/* Icono caret cuando el ítem está expandido */
-.LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
-  color: #fff;
-}
-/* Hover sobre ítem de categoría */
-.LTCategoriesOverlay__item:hover {
-  background: #f7f7f7;
-  color: #222;
-}
-/* Icono caret para expandir/cerrar subcategorías */
-.LTCategoriesOverlay__caret {
-  margin-left: 8px;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
-  color: #888;
-}
-/* Caret expandido */
-.LTCategoriesOverlay__item.expanded .LTCategoriesOverlay__caret {
-  color: #fff;
-}
-/* Lista de subcategorías (animación de apertura/cierre) */
-/* Nahuel: elimino el padding-left para que las subcategorías queden perfectamente alineadas */
-.LTCategoriesOverlay__sublist {
-  width: 100%;
-  background: #f9f9f9;
-  padding: 0;
-  transition: max-height 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (max-width: 400px) {
-  .LTCategoriesOverlay__sublist {
-    padding-left: 0;
-  }
-}
-/* Sublista abierta (padding extra) */
-.LTCategoriesOverlay__sublist--open {
-  padding-top: 4px;
-  padding-bottom: 8px;
-}
-/* Ítem de subcategoría */
-/* Nahuel: el padding horizontal lo maneja el contenedor, el subitem solo tiene padding arriba y abajo */
-.LTCategoriesOverlay__subitem {
-  width: 100%;
-  padding: 6px 0;
-  font-size: 0.92rem;
-  color: #222;
-  background: #fff;
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
-  cursor: pointer;
-  margin: 4px 0;
-  height: 28px;
-  transition: background 0.2s, color 0.2s;
-}
-/* Hover sobre subcategoría */
-.LTCategoriesOverlay__subitem:hover {
-  background: #ececec;
-  color: var(--lt-accent-color-dark);
-}
-/* Mensaje de lista vacía */
-.LTCategoriesOverlay__empty {
-  color: #aaa;
-  text-align: center;
-  margin-top: 32px;
-}
-@keyframes slideInLeft {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-@keyframes slideOutLeft {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
 
-.LTCategoriesOverlay.slideOutLeft {
-  animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+@media (max-width: 600px) {
+  .LTCategoriesOverlay {
+    font-size: 0.85rem;
+  }
+  .LTCategoriesOverlay__item,
+  .LTCategoriesOverlay__menuitem,
+  .LTCategoriesOverlay__subitem {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.15rem 0.25rem 0.15rem;
+    height: 30px;
+  }
+}
+@media (max-width: 420px) {
+  .LTCategoriesOverlay {
+    font-size: 0.8rem;
+  }
+  .LTCategoriesOverlay__item,
+  .LTCategoriesOverlay__menuitem,
+  .LTCategoriesOverlay__subitem {
+    font-size: 0.8rem;
+    padding: 0.18rem 0.08rem 0.18rem 0.08rem;
+    height: 24px;
+  }
+}
+@media (max-width: 360px) {
+  .LTCategoriesOverlay {
+    font-size: 0.75rem;
+  }
+  .LTCategoriesOverlay__item,
+  .LTCategoriesOverlay__menuitem,
+  .LTCategoriesOverlay__subitem {
+    font-size: 0.75rem;
+    padding: 0.12rem 0.04rem 0.12rem 0.04rem;
+    height: 18px;
+  }
 }
