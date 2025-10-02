@@ -212,15 +212,7 @@ export default function LTCategoriesOverlay({ open, onClose }) {
     <div
       className={`LTCategoriesOverlay${closing ? " slideOutLeft" : ""}`}
       tabIndex={-1}
-      style={{
-        zIndex: 200000,
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "90vw",
-        maxWidth: 350,
-        height: "100vh",
-      }}
+      style={closing ? { pointerEvents: "none" } : undefined}
     >
       {/* Header con el título y el botón para cerrar */}
       <div className="LTCategoriesOverlay__header">

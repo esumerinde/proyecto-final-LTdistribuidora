@@ -39,6 +39,7 @@ const LTChatWidgetMobileOverlay = ({ open, onClose }) => {
     <div
       className={`LTChatWidgetMobileOverlay${closing ? " slideOutLeft" : ""}`}
       tabIndex={-1}
+      style={closing ? { pointerEvents: "none" } : undefined}
     >
       <div className="LTChatWidgetMobileOverlay__header">
         <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>

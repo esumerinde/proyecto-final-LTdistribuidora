@@ -1,30 +1,45 @@
 import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthModalProvider } from "./context/AuthModalContext";
 import Home from "./pages/Home/Home";
-import LTScrollToTop from "./components/Layout/LTScrollToTop/LTScrollToTop";
-import LTScrollToTopMobile from "./components/Layout/LTScrollToTop/LTScrollToTopMobile";
-import LTChatWidget from "./components/Layout/LTChatWidget/LTChatWidget";
-import LTChatWidgetMobile from "./components/Layout/LTChatWidget/LTChatWidgetMobile";
+import LTLogin from "./pages/Login/LTLogin";
+import LTRegister from "./pages/Register/LTRegister";
+import LTMyAccount from "./pages/MyAccount/LTMyAccount";
+import MainLayout from "./components/Layout/MainLayout/MainLayout";
+import LoginLayout from "./components/Layout/LoginLayout/LoginLayout";
+import AccountLayout from "./components/Layout/AccountLayout/AccountLayout";
 import "./styles/App.css";
-import LTHeader from "./components/Layout/Header/LTHeader";
-import LTHeaderMobile from "./components/Layout/Header/LTHeaderMobile";
-import LTHeaderOffer from "./components/Layout/Header/LTHeaderOffer/LTHeaderOffer";
-import LTNavbar from "./components/Layout/Navbar/LTNavbar";
-import LTFooter from "./components/Layout/Footer/LTFooter";
-import LTFooterMobile from "./components/Layout/Footer/LTFooterMobile";
-import { useIsMobile } from "./common/isMobile";
 
 function App() {
-  // Usar hook centralizado para detectar mobile
-  const isMobile = useIsMobile();
   return (
-    <div className="lt-app">
-      {isMobile ? <LTHeaderMobile /> : <LTHeader />}
-      <LTNavbar />
-      <Home />
-      {isMobile ? <LTFooterMobile /> : <LTFooter />}
-      {isMobile ? <LTScrollToTopMobile /> : <LTScrollToTop />}
-      {isMobile ? <LTChatWidgetMobile /> : <LTChatWidget />}
-    </div>
+    <BrowserRouter>
+      <AuthModalProvider>
+        {/* Modal de Login - Se renderiza globalmente */}
+        <LTLogin />
+
+        <Routes>
+          {/* Rutas con Layout Principal (Header + Navbar + Footer) */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            {/* Aquí podes agregar más rutas: productos, categorías, etc. */}
+          </Route>
+
+          {/* Rutas con Layout de Autenticación (Header + Footer, sin Navbar ni HeaderOffer) */}
+          <Route element={<LoginLayout />}>
+            <Route path="/register" element={<LTRegister />} />
+          </Route>
+
+          {/* Rutas con Layout de Cuenta (Header sin Offer + Navbar + Footer) */}
+          <Route element={<AccountLayout />}>
+            <Route path="/my-account" element={<LTMyAccount />} />
+          </Route>
+
+          {/* Ruta 404 - Redirige al home */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </AuthModalProvider>
+    </BrowserRouter>
   );
 }
 

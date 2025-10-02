@@ -1,0 +1,537 @@
+/* ===============================================
+   LT My Account - Estilos del Dashboard
+   =============================================== */
+
+/* Contenedor principal: Sidebar y Contenido */
+.account-layout {
+  display: flex;
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding-top: 150px; /* Espacio para navbar */
+  background-color: var(--lt-background-color);
+}
+
+/* ===============================================
+   SIDEBAR
+   =============================================== */
+
+.sidebar {
+  width: 280px;
+  background-color: var(--lt-background-color);
+  box-shadow: var(--lt-shadow-sm);
+  padding-top: var(--lt-spacing-lg);
+  flex-shrink: 0;
+  transition: width 0.3s ease, transform 0.3s ease;
+  position: sticky;
+  left: 0;
+  top: 150px;
+  height: auto;
+  min-height: calc(100vh - 150px);
+  overflow: visible;
+  padding-bottom: var(--lt-spacing-2xl);
+  z-index: 100;
+  border-right: 1px solid #e5e5e5;
+}
+
+/* Sidebar oculto */
+.sidebar.hidden {
+  transform: translateX(-280px);
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Botón toggle sidebar - Posicionado en el borde derecho del sidebar */
+.sidebar-toggle {
+  position: fixed;
+  left: 240px; /* Borde derecho del sidebar (280px) menos ancho del botón (30px) y espacio (10px) */
+  top: 160px;
+  z-index: 200;
+  background: var(--lt-accent-color-dark);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--lt-shadow-md);
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.sidebar-toggle:hover {
+  background: var(--lt-accent-color-variant);
+  transform: scale(1.1);
+}
+
+.sidebar-toggle.sidebar-hidden {
+  left: 10px;
+}
+
+/* Profile Section */
+.sidebar-profile {
+  text-align: center;
+  padding: 0 var(--lt-spacing-md) var(--lt-spacing-lg);
+  margin-bottom: var(--lt-spacing-md);
+}
+
+.sidebar-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-variant2-dark),
+    var(--lt-accent-color-variant2)
+  );
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: var(--lt-font-weight-bold);
+  margin: 0 auto var(--lt-spacing-md);
+  box-shadow: var(--lt-shadow-md);
+}
+
+.sidebar-username {
+  font-size: 1.1rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-big-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.sidebar-useremail {
+  font-size: 0.85rem;
+  color: var(--lt-muted-text-color);
+}
+
+/* Logout Button Section */
+.cierre-cuenta-wrapper {
+  width: 100%;
+  padding: var(--lt-spacing-lg) var(--lt-spacing-md);
+  text-align: center;
+  margin-top: auto;
+}
+
+.lt-cancel-button {
+  background: transparent;
+  border: none;
+  color: var(--lt-error-color);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: var(--lt-font-weight-normal);
+  padding: var(--lt-spacing-xs) var(--lt-spacing-sm);
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lt-spacing-xs);
+}
+
+.lt-cancel-button:hover {
+  color: #dc2626;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: var(--lt-border-radius);
+}
+
+/* Navigation Items */
+.sidebar-nav {
+  padding: 0 var(--lt-spacing-sm);
+}
+
+.lt-nav-item {
+  transition: all 0.2s;
+}
+
+.lt-nav-item button {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: var(--lt-spacing-sm) var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-normal);
+  color: var(--lt-small-text-color);
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+  transition: all 0.2s;
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+/* Hover para items principales (excepto Mi Cuenta) */
+.lt-main-item-hover:hover {
+  background-color: var(--lt-accent-color-dark) !important;
+  color: var(--lt-white-text-color) !important;
+}
+
+/* Activo para items principales (excepto Mi Cuenta) */
+.lt-main-item-active {
+  background-color: var(--lt-accent-color-dark) !important;
+  color: var(--lt-white-text-color) !important;
+  font-weight: var(--lt-font-weight-semibold) !important;
+}
+
+/* Hover para subitems */
+.lt-subitem-hover:hover {
+  background-color: var(--lt-accent-color) !important;
+  color: var(--lt-white-text-color) !important;
+  padding-left: var(--lt-spacing-lg) !important;
+}
+
+/* Activo para subitems */
+.lt-subitem-active {
+  background-color: var(--lt-accent-color-dark) !important;
+  color: var(--lt-white-text-color) !important;
+  font-weight: var(--lt-font-weight-semibold) !important;
+  padding-left: var(--lt-spacing-lg) !important;
+}
+
+/* Mi Cuenta - Siempre Naranja cuando está activo */
+.lt-mi-cuenta-active {
+  background-color: var(--lt-accent-color-variant2-dark) !important;
+  color: var(--lt-white-text-color) !important;
+  font-weight: var(--lt-font-weight-semibold) !important;
+}
+
+/* Mi Cuenta Hover (Naranja claro) */
+.lt-mi-cuenta-hover:hover {
+  background-color: var(--lt-accent-color-variant2) !important;
+  color: var(--lt-white-text-color) !important;
+}
+
+/* Estilos para la animación de Sub-ítems (Acordeón) */
+.sidebar-subitems {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+  padding-left: var(--lt-spacing-lg);
+  margin-top: var(--lt-spacing-xs);
+  margin-bottom: var(--lt-spacing-md);
+  border-left: 2px solid transparent;
+  margin-left: var(--lt-spacing-md);
+}
+
+.sidebar-subitems.open {
+  max-height: 800px;
+  border-left-color: var(--lt-accent-color);
+}
+
+/* Estilo para el Caret (Flecha) */
+.caret-icon {
+  transition: all 0.3s ease;
+  margin-left: auto;
+}
+
+/* Hover en items - los íconos se pintan de blanco */
+.lt-main-item-hover:hover .lt-icon,
+.lt-mi-cuenta-hover:hover .lt-icon,
+.lt-subitem-hover:hover .lt-icon {
+  color: var(--lt-white-text-color) !important;
+}
+
+/* Hover en items - los carets se pintan de blanco */
+.lt-main-item-hover:hover .caret-icon,
+.lt-mi-cuenta-hover:hover .caret-icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+/* ===============================================
+   CONTENIDO PRINCIPAL
+   =============================================== */
+
+.main-content {
+  flex-grow: 1;
+  margin-left: 0;
+  padding: var(--lt-spacing-md) var(--lt-spacing-xl);
+  width: 100%;
+  min-height: calc(100vh - 150px);
+  background-color: var(--lt-background-color);
+  transition: margin-left 0.3s ease, width 0.3s ease, padding 0.3s ease;
+}
+
+.main-content.sidebar-visible {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  padding: var(--lt-spacing-md) var(--lt-spacing-xl) var(--lt-spacing-md)
+    var(--lt-spacing-xs);
+  margin-left: 100px;
+}
+
+/* ===============================================
+   DASHBOARD
+   =============================================== */
+
+.dashboard-header {
+  margin-bottom: var(--lt-spacing-xl);
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-big-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.dashboard-subtitle {
+  font-size: 1rem;
+  color: var(--lt-muted-text-color);
+  font-weight: var(--lt-font-weight-normal);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--lt-spacing-lg);
+}
+
+.dashboard-grid.full-width {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: var(--lt-border-radius-lg);
+  padding: var(--lt-spacing-sm) var(--lt-spacing-md);
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-md);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--lt-shadow-sm);
+  height: 65px;
+}
+
+.dashboard-card:hover {
+  box-shadow: var(--lt-shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--lt-accent-color);
+}
+
+.dashboard-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--lt-accent-color-dark);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dashboard-card-content {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.dashboard-card-title {
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-small-text-color);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dashboard-card-description {
+  font-size: 0.8rem;
+  color: var(--lt-muted-text-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===============================================
+   SECCIONES DE CONTENIDO
+   =============================================== */
+
+.content-section {
+  background: white;
+  border-radius: var(--lt-border-radius-lg);
+  padding: var(--lt-spacing-xl);
+  box-shadow: var(--lt-shadow-sm);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-big-text-color);
+  margin-bottom: var(--lt-spacing-md);
+  padding-bottom: var(--lt-spacing-sm);
+  border-bottom: 2px solid var(--lt-accent-color);
+}
+
+.section-description {
+  font-size: 1rem;
+  color: var(--lt-muted-text-color);
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: var(--lt-font-weight-medium);
+  color: var(--lt-small-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--lt-spacing-sm) var(--lt-spacing-md);
+  border: 1px solid #e5e5e5;
+  border-radius: var(--lt-border-radius);
+  font-size: 0.95rem;
+  font-family: var(--lt-font-family);
+  color: var(--lt-small-text-color);
+  transition: all 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--lt-accent-color-dark);
+  box-shadow: 0 0 0 3px rgba(116, 123, 191, 0.1);
+}
+
+.form-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+/* Buttons */
+.btn {
+  padding: var(--lt-spacing-sm) var(--lt-spacing-lg);
+  border: none;
+  border-radius: var(--lt-border-radius);
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-medium);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--lt-font-family);
+}
+
+.btn-primary {
+  background-color: var(--lt-accent-color-dark);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--lt-accent-color-variant);
+  transform: translateY(-1px);
+  box-shadow: var(--lt-shadow-md);
+}
+
+.btn-secondary {
+  background-color: #e5e5e5;
+  color: var(--lt-small-text-color);
+}
+
+.btn-secondary:hover {
+  background-color: #d4d4d4;
+}
+
+.btn-danger {
+  background-color: var(--lt-error-color, #ef4444);
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #dc2626;
+}
+
+.button-group {
+  display: flex;
+  gap: var(--lt-spacing-md);
+  margin-top: var(--lt-spacing-xl);
+}
+
+/* ===============================================
+   RESPONSIVE
+   =============================================== */
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 260px;
+  }
+  .main-content.sidebar-visible {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+  }
+  .sidebar-toggle {
+    left: 220px; /* Ajuste para sidebar más angosto (260px - 30px botón - 10px espacio) */
+  }
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .account-layout {
+    flex-direction: column;
+    padding-top: 0;
+  }
+  .sidebar {
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding-bottom: var(--lt-spacing-md);
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+  .sidebar.hidden {
+    display: none;
+  }
+  .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: var(--lt-spacing-md);
+  }
+  .sidebar-toggle {
+    top: 70px;
+    left: 10px;
+  }
+  .sidebar-toggle.sidebar-hidden {
+    left: 10px;
+  }
+  .dashboard-grid,
+  .dashboard-grid.full-width {
+    grid-template-columns: 1fr;
+  }
+  .content-section {
+    padding: var(--lt-spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+  .section-title {
+    font-size: 1.25rem;
+  }
+  .dashboard-card {
+    height: auto;
+    padding: var(--lt-spacing-md);
+  }
+  .button-group {
+    flex-direction: column;
+  }
+  .btn {
+    width: 100%;
+  }
+}

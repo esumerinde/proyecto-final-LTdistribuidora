@@ -1,0 +1,40 @@
+/* SimpleHeader - Header simplificado solo con logo */
+
+.SimpleHeaderWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: var(--lt-accent-color-dark);
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.SimpleHeaderSticky {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.SimpleHeaderContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-lg);
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SimpleHeaderLogoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SimpleHeaderLogoImg {
+  display: block;
+  object-fit: contain;
+}
+
+.SimpleHeaderLogoImg:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}

@@ -1,0 +1,15 @@
+/* Solo logo visible cuando el header tiene la clase LTHeaderOnlyLogo */
+/* Ocultar barra de búsqueda y menú manteniendo el espacio */
+.LTHeaderOnlyLogo .LTHeaderDivSearchBar,
+.LTHeaderOnlyLogo .LTHeaderDivMenu {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Ocultar barra de ofertas completamente */
+.LTHeaderOnlyLogo .LTHeaderOffer {
+  display: none !important;
+}
+
+/* El logo mantiene su posición original, no se centra */

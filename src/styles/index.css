@@ -15,6 +15,7 @@
   --lt-muted-text-color: #7c828f;
   --lt-white-text-color: #fefefe;
   --lt-black-text-color: #0d0d0d;
+  --lt-error-color: #ef4444;
   --lt-svg-light: #fefefe;
   --lt-svg-dark: #0d0d0d;
   --lt-button-light: #9fa3cf;
@@ -70,6 +71,7 @@
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll; /* Forzar scrollbar siempre visible para evitar saltos */
 }
 
 body {

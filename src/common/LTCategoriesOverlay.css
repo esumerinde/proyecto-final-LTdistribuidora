@@ -81,16 +81,16 @@ body.lt-overlay-open {
   position: fixed;
   top: 0;
   left: 0;
-  width: 90vw;
-  max-width: 350px;
+  right: 0;
   height: 100vh;
   background: var(--lt-background-color);
   z-index: 200000;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
   animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
+  overscroll-behavior: contain;
 }
 .LTCategoriesOverlay.slideOutLeft {
   animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;

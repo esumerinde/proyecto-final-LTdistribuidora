@@ -1,0 +1,500 @@
+/* ===================
+   LTLogin - Modal de Inicio de Sesión
+   =================== */
+
+/* Animación Fade In para el modal */
+@keyframes LTLoginFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animación Slide Up para el contenido */
+@keyframes LTLoginSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Overlay */
+.LTLoginModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: var(--lt-spacing-md);
+  box-sizing: border-box;
+  animation: LTLoginFadeIn 0.3s ease-out forwards;
+  overflow-y: auto;
+}
+
+/* Contenedor del contenido del modal */
+.LTLoginModalContent {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  animation: LTLoginSlideUp 0.4s ease-out forwards;
+  margin: auto;
+}
+
+/* Botón de cerrar modal */
+.LTLoginModalClose {
+  position: absolute;
+  top: -45px;
+  right: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.LTLoginModalClose:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.LTLoginModalClose img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+/* Contenedor para compatibilidad (ya no se usa pero mantener para transición) */
+.LTLoginContainer {
+  min-height: auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: transparent;
+  margin-top: 0;
+}
+
+/* Tarjeta de Contenido Principal */
+.LTLoginCard {
+  background-color: var(--lt-background-color);
+  border-radius: var(--lt-border-radius-lg);
+  box-shadow: var(--lt-shadow-lg);
+  width: 100%;
+  padding: var(--lt-spacing-xl) var(--lt-spacing-lg);
+  box-sizing: border-box;
+  position: relative;
+  animation: LTLoginFadeIn 0.5s ease-out forwards;
+}
+
+/* Título principal de la tarjeta */
+.LTLoginCard__title {
+  color: var(--lt-black-text-color);
+  font-size: 1.6rem;
+  font-weight: var(--lt-font-weight-bold);
+  margin-bottom: var(--lt-spacing-xs);
+  text-align: center;
+  font-family: var(--lt-font-family);
+}
+
+/* Subtítulo de la tarjeta */
+.LTLoginCard__subtitle {
+  font-size: 0.95rem;
+  color: var(--lt-big-text-color);
+  font-weight: var(--lt-font-weight-normal);
+  text-align: center;
+  margin-bottom: var(--lt-spacing-lg);
+  font-family: var(--lt-font-family);
+}
+
+/* ===================
+   Botones de Inicio de Sesión Social
+   =================== */
+
+.LTLoginSocial {
+  padding-bottom: var(--lt-spacing-md);
+  margin-bottom: var(--lt-spacing-md);
+}
+
+.LTLoginSocialButton {
+  /* Usa estilos de lt-button-light del index.css */
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: var(--lt-border-radius-lg);
+  font-size: 0.9rem;
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lt-spacing-sm);
+  margin-bottom: var(--lt-spacing-sm);
+  border: 1px solid var(--lt-border-color);
+  background-color: var(--lt-background-color);
+  color: var(--lt-black-text-color);
+  box-shadow: var(--lt-shadow-sm);
+}
+
+.LTLoginSocialButton:last-child {
+  margin-bottom: 0;
+}
+
+.LTLoginSocialButton:hover {
+  background-color: var(--lt-button-light-hover);
+  box-shadow: var(--lt-shadow-md);
+}
+
+.LTLoginSocialButton:active {
+  transform: scale(0.98);
+}
+
+.LTLoginSocialButton__icon {
+  width: 18px;
+  height: 18px;
+  color: var(--lt-black-text-color);
+  transition: color 0.2s ease;
+}
+
+.LTLoginSocialButton:hover .LTLoginSocialButton__icon {
+  color: white;
+}
+
+/* ===================
+   Divisor "o ingresá manualmente"
+   =================== */
+
+.LTLoginDivider {
+  position: relative;
+  text-align: center;
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+.LTLoginDivider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #eee;
+  z-index: 0;
+}
+
+.LTLoginDivider__text {
+  font-size: 0.85rem;
+  color: var(--lt-muted-text-color);
+  background-color: var(--lt-background-color);
+  padding: 0 10px;
+  position: relative;
+  z-index: 1;
+  font-weight: var(--lt-font-weight-light);
+  font-family: var(--lt-font-family);
+}
+
+/* ===================
+   Formulario de Login
+   =================== */
+
+.LTLoginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grupo de input (label + input) */
+.LTLoginFormGroup {
+  margin-bottom: var(--lt-spacing-md);
+}
+
+.LTLoginFormGroup__label {
+  font-size: 0.85rem;
+  color: var(--lt-muted-text-color);
+  display: block;
+  margin-bottom: var(--lt-spacing-xs);
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family);
+}
+
+/* Wrapper para el input */
+.LTLoginFormGroup__inputWrapper {
+  position: relative;
+}
+
+.LTLoginFormGroup__inputWrapper--password .LTLoginFormGroup__input {
+  padding-right: 2.5rem;
+}
+
+/* Input estilo minimalista con borde inferior */
+.LTLoginFormGroup__input {
+  width: 100%;
+  padding: 8px 5px;
+  border: none;
+  border-bottom: 2px solid var(--lt-border-color);
+  font-size: 1rem;
+  font-family: var(--lt-font-family);
+  color: var(--lt-black-text-color);
+  outline: none;
+  transition: border-bottom-color 0.2s;
+  box-sizing: border-box;
+  background-color: var(--lt-background-color);
+  font-weight: var(--lt-font-weight-normal);
+}
+
+.LTLoginFormGroup__input:focus {
+  border-bottom-color: var(--lt-accent-color-dark);
+}
+
+.LTLoginFormGroup__input--error {
+  border-bottom-color: #e53935 !important;
+}
+
+.LTLoginFormGroup__input::placeholder {
+  color: var(--lt-muted-text-color);
+  font-weight: var(--lt-font-weight-light);
+}
+
+/* Botón para toggle de contraseña */
+.LTLoginFormGroup__togglePassword {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--lt-muted-text-color);
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTLoginFormGroup__togglePassword:hover {
+  color: var(--lt-accent-color-dark);
+}
+
+.LTLoginFormGroup__toggleIcon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) saturate(100%) invert(50%); /* Color gris medio */
+}
+
+.LTLoginFormGroup__togglePassword:hover .LTLoginFormGroup__toggleIcon {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(25%) saturate(1200%)
+    hue-rotate(210deg) brightness(90%);
+}
+
+/* ===================
+   Mensaje de Error
+   =================== */
+
+.LTLoginFormError {
+  min-height: 18px;
+  margin-bottom: var(--lt-spacing-md);
+}
+
+.LTLoginFormError__text {
+  font-size: 0.75rem;
+  color: #e53935;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family);
+  margin: 0;
+}
+
+.LTLoginFormError__icon {
+  width: 14px;
+  height: 14px;
+  filter: brightness(0) saturate(100%) invert(30%) sepia(80%) saturate(3500%)
+    hue-rotate(350deg);
+}
+
+/* ===================
+   Botón de Envío (Submit)
+   =================== */
+
+.LTLoginFormSubmit {
+  /* Usa estilos de lt-button-variant2 (naranja) del index.css */
+  width: 100%;
+  padding: 0.75rem;
+  text-transform: none;
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-semibold);
+  border: none;
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+.LTLoginFormSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Spinner de carga dentro del botón */
+.LTLoginFormSubmit__spinner {
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  border-top: 3px solid var(--lt-white-text-color);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: LTLoginSpin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes LTLoginSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===================
+   Enlaces Adicionales
+   =================== */
+
+.LTLoginFormLinks {
+  text-align: center;
+  line-height: 1.8;
+}
+
+.LTLoginFormLinks__link {
+  color: var(--lt-accent-color-dark);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family-alt); /* Usa font-family-alt */
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.LTLoginFormLinks__link:hover {
+  opacity: 0.8;
+}
+
+.LTLoginFormLinks__link--primary {
+  color: var(--lt-accent-color-dark);
+}
+
+.LTLoginFormLinks__link--accent {
+  color: var(--lt-accent-color-variant2-dark);
+  font-weight: var(--lt-font-weight-semibold);
+  margin-left: 5px;
+  display: inline;
+}
+
+.LTLoginFormLinks__link--muted {
+  color: var(--lt-muted-text-color);
+  font-size: 0.75rem;
+  margin-top: var(--lt-spacing-sm);
+}
+
+.LTLoginFormLinks__text {
+  font-size: 0.85rem;
+  color: var(--lt-muted-text-color);
+  margin: var(--lt-spacing-xs) 0;
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family-alt); /* Usa font-family-alt */
+}
+
+/* ===================
+   Vista de Éxito de Login
+   =================== */
+
+.LTLoginSuccess {
+  background-color: var(--lt-background-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lt-spacing-2xl);
+  border-radius: var(--lt-border-radius-lg);
+  opacity: 0;
+  animation: LTLoginFadeIn 0.5s ease-out forwards;
+  text-align: center;
+}
+
+.LTLoginSuccess__icon {
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--lt-spacing-md);
+  filter: brightness(0) saturate(100%) invert(60%) sepia(50%) saturate(800%)
+    hue-rotate(0deg) brightness(95%);
+}
+
+.LTLoginSuccess__title {
+  color: var(--lt-black-text-color);
+  font-size: 1.5rem;
+  font-weight: var(--lt-font-weight-medium);
+  font-family: var(--lt-font-family);
+  margin-top: var(--lt-spacing-lg);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.LTLoginSuccess__text {
+  color: var(--lt-muted-text-color);
+  font-size: 1rem;
+  font-weight: var(--lt-font-weight-normal);
+  font-family: var(--lt-font-family);
+  margin-top: var(--lt-spacing-xs);
+}
+
+/* ===================
+   Responsive
+   =================== */
+
+@media (max-width: 500px) {
+  .LTLoginModalContent {
+    max-width: 95%;
+  }
+
+  .LTLoginModalClose {
+    top: -40px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .LTLoginCard {
+    padding: var(--lt-spacing-lg) var(--lt-spacing-md);
+  }
+
+  .LTLoginCard__title {
+    font-size: 1.4rem;
+  }
+
+  .LTLoginCard__subtitle {
+    font-size: 0.9rem;
+  }
+
+  .LTLoginFormGroup__input {
+    font-size: 0.95rem;
+  }
+
+  .LTLoginSocialButton {
+    font-size: 0.85rem;
+    padding: 0.55rem;
+  }
+}

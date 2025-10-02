@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import HamburgerMenuIcon from "../../../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
-import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
+import useHeaderReaccommodation from "@hooks/layout/useHeaderReaccommodation";
 import LTNavbarNavmenu from "./LTNavbarNavmenu/LTNavbarNavmenu";
 import "./LTNavbar.css";
 
-const LTNavbar = ({ hasOfferBar = true }) => {
+const LTNavbar = () => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const submenuRef = useRef(null);
   const { isSticky, navbarTop, animation } = useHeaderReaccommodation({
-    offerHeight: hasOfferBar ? 32 : 0,
+    offerHeight: 32,
     headerHeight: 75,
   });
 

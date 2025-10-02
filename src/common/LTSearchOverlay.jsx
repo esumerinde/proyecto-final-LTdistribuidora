@@ -107,15 +107,7 @@ export default function LTSearchOverlay({ open, onClose, children }) {
       className={`LTSearchBarMobileOverlay${closing ? " slideOutRight" : ""}`}
       role="dialog"
       aria-modal="true"
-      style={{
-        zIndex: 200000,
-        position: "fixed",
-        right: 0,
-        width: "90vw",
-        maxWidth: 350,
-        height: "100vh",
-        ...(closing ? { pointerEvents: "none" } : {}),
-      }}
+      style={closing ? { pointerEvents: "none" } : undefined}
     >
       {/* Header con input de búsqueda y botón de cerrar */}
       <div className="LTSearchBarMobileOverlayHeader">
