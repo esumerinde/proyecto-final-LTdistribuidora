@@ -134,6 +134,26 @@
   stroke: var(--lt-hover-text-menu);
 }
 
+/* Estilos especiales para el botón de login (cuando no está logueado) */
+.LTHeaderMobile__loginBtn {
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.LTHeaderMobile__menuBtnText {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lt-small-text-color);
+  transition: color 0.2s ease;
+}
+
+.LTHeaderMobile__loginBtn:hover .LTHeaderMobile__menuBtnText {
+  color: var(--lt-hover-text-menu);
+}
+
 /* ===================
    Estilos del header y barra de ofertas
    =================== */

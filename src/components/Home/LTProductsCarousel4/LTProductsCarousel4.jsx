@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./LTProductsCarousel2.css"; // <- 3 -> 2
+import "./LTProductsCarousel4.css";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
-import { products } from "../../../mocks/products2"; // dejo tu mock igual
+import { products } from "../../../mocks/products4";
 
-const LTProductsCarousel2 = () => {
+const LTProductsCarousel4 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const itemsPerView = 4;
@@ -28,49 +28,41 @@ const LTProductsCarousel2 = () => {
   };
 
   return (
-    <section className="LTProductsCarousel2Wrapper">
-      <div className="LTProductsCarousel2Container">
-        <h2 className="LTProductsCarousel2Title">
-          Smartphones — Lo último de Apple y Samsung
+    <section className="LTProductsCarousel4Wrapper">
+      <div className="LTProductsCarousel4Container">
+        <h2 className="LTProductsCarousel4Title">
+          Cámaras — Fotografía y Video
         </h2>
 
-        <div className="LTProductsCarousel2Content">
-          {/* Banner promocional - “Lo último en Smartphones” */}
-          <div
-            className="LTProductsCarousel2Banner"
-            style={{
-              // CSS var para el ::before del banner (usalo en tu CSS)
-              "--ltpc2-banner-bg":
-                "url('https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop')",
-            }}
-          >
-            <div className="LTProductsCarousel2BannerContent">
-              <div className="LTProductsCarousel2BannerChips">
-                <span className="LTProductsCarousel2BannerBadge">
-                  CELULARES
-                </span>
-                <span className="LTProductsCarousel2BannerDate">Nuevo</span>
+        <div className="LTProductsCarousel4Content">
+          {/* Banner promocional - “Lo último en Cámaras” */}
+          <div className="LTProductsCarousel4Banner">
+            <div className="LTProductsCarousel4BannerContent">
+              <div className="LTProductsCarousel4BannerChips">
+                <span className="LTProductsCarousel4BannerBadge">CÁMARAS</span>
+                <span className="LTProductsCarousel4BannerDate">Nuevo</span>
               </div>
 
-              <div className="LTProductsCarousel2BannerHeadline">
-                <span className="LTProductsCarousel2BannerKicker">
+              <div className="LTProductsCarousel4BannerHeadline">
+                <span className="LTProductsCarousel4BannerKicker">
                   Descubrí
                 </span>
-                <h3 className="LTProductsCarousel2BannerTitle">
-                  Lo último en <span>Celulares</span>
+                <h3 className="LTProductsCarousel4BannerTitle">
+                  Lo último en <span>Cámaras</span>
                 </h3>
               </div>
 
-              <div className="LTProductsCarousel2BannerBody">
-                <div className="LTProductsCarousel2BannerBrandName">
-                  iPhone 14 Pro
+              <div className="LTProductsCarousel4BannerBody">
+                <div className="LTProductsCarousel4BannerBrandName">
+                  Canon EOS R5
                 </div>
-                <p className="LTProductsCarousel2BannerDescription">
-                  Innovación, diseño y potencia. Descubrí el nuevo iPhone 14 Pro
-                  Max con la mejor tecnología de Apple.
+                <p className="LTProductsCarousel4BannerDescription">
+                  Precisión, calidad y tecnología avanzada. Descubrí la Canon
+                  EOS R5, diseñada para fotógrafos profesionales y creadores
+                  exigentes.
                 </p>
 
-                <button className="LTProductsCarousel2BannerButton lt-button-variant2">
+                <button className="LTProductsCarousel4BannerButton lt-button-variant2">
                   VER MÁS
                 </button>
               </div>
@@ -78,10 +70,10 @@ const LTProductsCarousel2 = () => {
           </div>
 
           {/* Sección de productos */}
-          <div className="LTProductsCarousel2ProductsContainer">
+          <div className="LTProductsCarousel4ProductsContainer">
             {/* Flecha izquierda */}
             <button
-              className={`LTProductsCarousel2Arrow LTProductsCarousel2ArrowLeft ${
+              className={`LTProductsCarousel4Arrow LTProductsCarousel4ArrowLeft ${
                 currentIndex === 0 ? "disabled" : ""
               }`}
               onClick={goToPrevious}
@@ -93,11 +85,11 @@ const LTProductsCarousel2 = () => {
             </button>
 
             <div
-              className="LTProductsCarousel2CardsAndIndicators"
+              className="LTProductsCarousel4CardsAndIndicators"
               style={{ overflow: "hidden", width: "100%" }}
             >
               <div
-                className="LTProductsCarousel2Products"
+                className="LTProductsCarousel4Products"
                 style={{
                   transform: `translateX(-${
                     currentIndex * (100 / totalSlides)
@@ -112,15 +104,15 @@ const LTProductsCarousel2 = () => {
                 }}
               >
                 {products.map((product) => (
-                  <div key={product.id} className="LTProductsCarousel2Card">
+                  <div key={product.id} className="LTProductsCarousel4Card">
                     {/* Badge de descuento */}
-                    <div className="LTProductsCarousel2CardBadge">
+                    <div className="LTProductsCarousel4CardBadge">
                       -{product.discount}%
                     </div>
 
                     {/* Imagen del producto */}
                     <div
-                      className="LTProductsCarousel2CardImage"
+                      className="LTProductsCarousel4CardImage"
                       style={{
                         background: "#fff",
                         borderRadius: "12px",
@@ -136,7 +128,7 @@ const LTProductsCarousel2 = () => {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="LTProductsCarousel2CardImg"
+                        className="LTProductsCarousel4CardImg"
                         style={{
                           maxWidth: "100%",
                           maxHeight: "100%",
@@ -147,30 +139,30 @@ const LTProductsCarousel2 = () => {
                     </div>
 
                     {/* Información del producto */}
-                    <div className="LTProductsCarousel2CardInfo">
-                      <div className="LTProductsCarousel2CardTopContent">
-                        <div className="LTProductsCarousel2CardCategory">
+                    <div className="LTProductsCarousel4CardInfo">
+                      <div className="LTProductsCarousel4CardTopContent">
+                        <div className="LTProductsCarousel4CardCategory">
                           {product.brand}
                         </div>
-                        <h3 className="LTProductsCarousel2CardTitle">
+                        <h3 className="LTProductsCarousel4CardTitle">
                           {product.name}
                         </h3>
 
                         {product.isLaunch && (
-                          <div className="LTProductsCarousel2CardLaunchBadge">
+                          <div className="LTProductsCarousel4CardLaunchBadge">
                             Lanzamiento
                           </div>
                         )}
                       </div>
 
-                      <div className="LTProductsCarousel2CardBottomContent">
-                        <div className="LTProductsCarousel2CardPricing">
-                          <div className="LTProductsCarousel2CardOriginalPrice">
+                      <div className="LTProductsCarousel4CardBottomContent">
+                        <div className="LTProductsCarousel4CardPricing">
+                          <div className="LTProductsCarousel4CardOriginalPrice">
                             $ {product.originalPrice.toFixed(2)}
                           </div>
-                          <div className="LTProductsCarousel2CardFinalPrice">
+                          <div className="LTProductsCarousel4CardFinalPrice">
                             $ {Math.floor(product.discountPrice)}
-                            <span className="LTProductsCarousel2CardPriceDecimals">
+                            <span className="LTProductsCarousel4CardPriceDecimals">
                               .
                               {String(
                                 Math.round((product.discountPrice % 1) * 100)
@@ -179,12 +171,12 @@ const LTProductsCarousel2 = () => {
                           </div>
                         </div>
 
-                        <div className="LTProductsCarousel2CardActions">
-                          <button className="LTProductsCarousel2CardAddToCart">
+                        <div className="LTProductsCarousel4CardActions">
+                          <button className="LTProductsCarousel4CardAddToCart">
                             <img
                               src={ShoppingBagIcon}
                               alt="Agregar"
-                              className="LTProductsCarousel2ActionIcon"
+                              className="LTProductsCarousel4ActionIcon"
                             />
                             Agregar
                           </button>
@@ -202,7 +194,7 @@ const LTProductsCarousel2 = () => {
 
             {/* Flecha derecha */}
             <button
-              className={`LTProductsCarousel2Arrow LTProductsCarousel2ArrowRight ${
+              className={`LTProductsCarousel4Arrow LTProductsCarousel4ArrowRight ${
                 currentIndex === totalSlides - 1 ? "disabled" : ""
               }`}
               onClick={goToNext}
@@ -219,4 +211,4 @@ const LTProductsCarousel2 = () => {
   );
 };
 
-export default LTProductsCarousel2;
+export default LTProductsCarousel4;

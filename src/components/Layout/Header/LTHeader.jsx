@@ -1,38 +1,240 @@
 // Importación de React y dependencias
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthModal } from "../../../context/AuthModalContext";
 import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
 import LTSearchBar from "./LTSearchBar/LTSearchBar";
-import LTHeaderMobile from "./LTHeaderMobile";
 import LTHeaderOffer from "./LTHeaderOffer/LTHeaderOffer";
 import "./LTHeader.css";
 import logoBlanco from "../../../assets/images/logos/logo-blanco.png";
+import {
+  Calendar,
+  Ticket,
+  Mail,
+  Shield,
+  ShoppingBag,
+  Tag,
+  Settings,
+  XCircle,
+} from "lucide-react";
+import { getInitials } from "../../../mocks/users";
+import {
+  getCurrentUser,
+  clearCurrentUser,
+  isLoggedIn as getIsLoggedIn,
+} from "../../../common/authStorage";
 
-const LTHeader = ({ showOfferBar = true, className = "" }) => {
+const LTHeader = ({
+  showOfferBar = true,
+  className = "",
+  forcePinnedOffer = false,
+}) => {
   const navigate = useNavigate();
   const { openLogin } = useAuthModal();
   const [cartCount] = useState(0);
+  const [userInfo, setUserInfo] = useState(null);
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const accountMenuRef = useRef(null);
+  const [loggedIn, setLoggedIn] = useState(() => getIsLoggedIn());
 
   // Verificar si el usuario está logueado desde localStorage
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handleStorageChange = () => {
+      setLoggedIn(getIsLoggedIn());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  useEffect(() => {
+    if (!loggedIn) {
+      setUserInfo(null);
+      setIsAccountMenuOpen(false);
+      return;
+    }
+
+    const storedUser = getCurrentUser();
+    if (!storedUser) {
+      setUserInfo(null);
+      return;
+    }
+
+    const fallbackIdentifier = storedUser.username || "";
+    const displayName = (storedUser.fullName || fallbackIdentifier).trim();
+    const nameParts = displayName.split(/\s+/).filter(Boolean);
+    const fallbackParts = fallbackIdentifier.split(/\s+/).filter(Boolean);
+    const firstNameCandidate = nameParts[0] || fallbackParts[0] || "";
+    const email = storedUser.email || "";
+    const initialsSource = displayName || email || fallbackIdentifier || "";
+    const initials = storedUser.initials || getInitials(initialsSource);
+
+    setUserInfo({
+      username: storedUser.username || "",
+      fullName: displayName || "Mi Cuenta",
+      firstName:
+        firstNameCandidate || displayName || fallbackIdentifier || "Mi Cuenta",
+      email,
+      initials: (initials || "US").toUpperCase(),
+      role: storedUser.role || "usuario",
+    });
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (!isAccountMenuOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        accountMenuRef.current &&
+        !accountMenuRef.current.contains(event.target)
+      ) {
+        setIsAccountMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAccountMenuOpen]);
+
+  const closeAccountMenu = () => setIsAccountMenuOpen(false);
+  const toggleAccountMenu = () =>
+    setIsAccountMenuOpen((previousState) => !previousState);
+
+  const navigateToAccountSection = (mainId, subId) => {
+    if (typeof window !== "undefined" && mainId) {
+      const payload = { main: mainId };
+      if (subId) payload.sub = subId;
+      window.sessionStorage.setItem(
+        "lt-account-target",
+        JSON.stringify(payload)
+      );
+    }
+    navigate("/my-account");
+    closeAccountMenu();
+  };
+
+  const navigateToAccountHome = () => {
+    if (typeof window !== "undefined") {
+      window.sessionStorage.removeItem("lt-account-target");
+    }
+    navigate("/my-account");
+    closeAccountMenu();
+  };
+
+  const handleLogout = () => {
+    closeAccountMenu();
+    clearCurrentUser();
+    if (typeof window !== "undefined") {
+      window.sessionStorage.removeItem("lt-account-target");
+    }
+    setLoggedIn(false);
+    navigate("/");
+    window.location.reload();
+  };
+
+  const isUserLogged = Boolean(userInfo);
+  const isAdmin = userInfo?.role === "admin";
+
+  const adminOfferItems = isAdmin
+    ? [
+        { label: "Panel de Admin" },
+        { label: "Cerrar Sesión", onClick: handleLogout, variant: "danger" },
+        { label: "Estadísticas" },
+      ]
+    : [];
+
+  const accountMenuEntries = [
+    {
+      type: "item",
+      label: "Mis Reservas",
+      icon: Calendar,
+      action: () => navigateToAccountSection("reservas", "mis-reservas"),
+    },
+    {
+      type: "item",
+      label: "Historial de reservas",
+      icon: Ticket,
+      action: () => navigateToAccountSection("reservas", "reservas-anteriores"),
+    },
+    {
+      type: "item",
+      label: "Preguntas",
+      icon: Mail,
+      action: () => navigateToAccountSection("reservas", "preguntas"),
+    },
+    {
+      type: "item",
+      label: "Opiniones",
+      icon: Shield,
+      action: () => navigateToAccountSection("reservas", "opiniones"),
+    },
+    { type: "separator" },
+    {
+      type: "item",
+      label: "Todos los productos",
+      icon: ShoppingBag,
+      action: () => navigateToAccountSection("productos", "todos-productos"),
+    },
+    {
+      type: "item",
+      label: "Todas las marcas",
+      icon: Tag,
+      action: () => navigateToAccountSection("marcas", "todas-marcas"),
+    },
+    {
+      type: "item",
+      label: "Todos los vouchers",
+      icon: Ticket,
+      action: () => navigateToAccountSection("vouchers", "todos-vouchers"),
+    },
+    { type: "separator" },
+    {
+      type: "item",
+      label: "Configuración",
+      icon: Settings,
+      action: () => navigateToAccountSection("configuracion", "configuracion"),
+    },
+    {
+      type: "item",
+      label: "Cerrar Sesión",
+      icon: XCircle,
+      action: handleLogout,
+      variant: "danger",
+    },
+  ];
+
+  const effectiveShowOfferBar = Boolean(
+    showOfferBar || isAdmin || forcePinnedOffer
+  );
 
   const { isSticky, headerTop, animation } = useHeaderReaccommodation({
-    offerHeight: showOfferBar ? 32 : 0,
+    offerHeight: effectiveShowOfferBar ? 32 : 0,
     headerHeight: 75,
+    forceOfferPinned: (isAdmin && effectiveShowOfferBar) || forcePinnedOffer,
   });
+
+  const offerShouldBeHidden = isSticky && !isAdmin && !forcePinnedOffer;
 
   // Renderiza siempre el header desktop
   return (
     <>
       {/* Barra de ofertas animada, se oculta si el header está sticky o si showOfferBar es false */}
-      {showOfferBar && (
+      {effectiveShowOfferBar && (
         <LTHeaderOffer
           className={
-            isSticky ? "LTHeaderOffer LTHeaderOffer--hidden" : "LTHeaderOffer"
+            offerShouldBeHidden
+              ? "LTHeaderOffer LTHeaderOffer--hidden"
+              : "LTHeaderOffer"
           }
           style={{ transition: `top ${animation}, opacity ${animation}` }}
+          isAdmin={isAdmin}
+          isPinned={isAdmin || forcePinnedOffer}
+          adminItems={adminOfferItems}
         />
       )}
       {/* Header principal desktop */}
@@ -61,7 +263,7 @@ const LTHeader = ({ showOfferBar = true, className = "" }) => {
           <div className="LTHeaderDivMenu">
             <div className="LTHeaderMenu">
               {/* Mostrar según estado de login */}
-              {!isLoggedIn ? (
+              {!isUserLogged ? (
                 <>
                   {/* Botón Ingresá */}
                   <button
@@ -120,14 +322,7 @@ const LTHeader = ({ showOfferBar = true, className = "" }) => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M18 9V12M18 12V15M18 12H21M18 12H15"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 15H8C6.13623 15 5.20435 15 4.46927 15.3045C3.48915 15.7105 2.71046 16.4892 2.30448 17.4693C2 18.2044 2 19.1362 2 21M15.5 3.29076C16.9659 3.88415 18 5.32131 18 7C18 8.67869 16.9659 10.1159 15.5 10.7092M13.5 7C13.5 9.20914 11.7091 11 9.5 11C7.29086 11 5.5 9.20914 5.5 7C5.5 4.79086 7.29086 3 9.5 3C11.7091 3 13.5 4.79086 13.5 7Z"
+                          d="M8 5.00005C7.01165 5.00082 6.49359 5.01338 6.09202 5.21799C5.71569 5.40973 5.40973 5.71569 5.21799 6.09202C5 6.51984 5 7.07989 5 8.2V17.8C5 18.9201 5 19.4802 5.21799 19.908C5.40973 20.2843 5.71569 20.5903 6.09202 20.782C6.51984 21 7.07989 21 8.2 21H15.8C16.9201 21 17.4802 21 17.908 20.782C18.2843 20.5903 18.5903 20.2843 18.782 19.908C19 19.4802 19 18.9201 19 17.8V8.2C19 7.07989 19 6.51984 18.782 6.09202C18.5903 5.71569 18.2843 5.40973 17.908 5.21799C17.5064 5.01338 16.9884 5.00082 16 5.00005M8 5.00005V7H16V5.00005M8 5.00005V4.70711C8 4.25435 8.17986 3.82014 8.5 3.5C8.82014 3.17986 9.25435 3 9.70711 3H14.2929C14.7456 3 15.1799 3.17986 15.5 3.5C15.8201 3.82014 16 4.25435 16 4.70711V5.00005M15 18C14.7164 16.8589 13.481 16 12 16C10.519 16 9.28364 16.8589 9 18M12 12H12.01M13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z"
                           stroke="currentColor"
                           strokeWidth="2"
                           strokeLinecap="round"
@@ -141,18 +336,119 @@ const LTHeader = ({ showOfferBar = true, className = "" }) => {
               ) : (
                 <>
                   {/* Botón Mi Cuenta (cuando está logueado) */}
-                  <button
-                    className="LTHeaderMenuButton LTHeaderMenuButtonAccount"
-                    onClick={() => navigate("/my-account")}
-                  >
-                    <span
-                      className="lt-menu-hover"
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "6px",
-                      }}
+                  <div className="LTHeaderAccountWrapper" ref={accountMenuRef}>
+                    <button
+                      type="button"
+                      className={`LTHeaderMenuButton LTHeaderMenuButtonAccount${
+                        isAccountMenuOpen
+                          ? " LTHeaderMenuButtonAccount--open"
+                          : ""
+                      }`}
+                      onClick={toggleAccountMenu}
+                      aria-haspopup="menu"
+                      aria-expanded={isAccountMenuOpen}
                     >
+                      <span
+                        className={`lt-menu-hover${
+                          isAccountMenuOpen ? " lt-menu-hover--active" : ""
+                        }`}
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                        }}
+                      >
+                        <svg
+                          className="LTHeaderMenuIcon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                          <path
+                            d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        {userInfo?.firstName ||
+                          userInfo?.fullName ||
+                          "Mi Cuenta"}
+                      </span>
+                    </button>
+
+                    {isAccountMenuOpen && (
+                      <div className="LTHeaderAccountDropdown" role="menu">
+                        <button
+                          type="button"
+                          className="LTHeaderAccountProfile"
+                          onClick={navigateToAccountHome}
+                        >
+                          <div className="LTHeaderAccountInitials">
+                            {userInfo?.initials || "US"}
+                          </div>
+                          <div className="LTHeaderAccountProfileDetails">
+                            <p className="LTHeaderAccountProfileName">
+                              {userInfo.fullName || "Mi Cuenta"}
+                            </p>
+                            {userInfo.email && (
+                              <span className="LTHeaderAccountProfileEmail">
+                                {userInfo.email}
+                              </span>
+                            )}
+                            <span className="LTHeaderAccountProfileLink">
+                              Mi perfil
+                            </span>
+                          </div>
+                        </button>
+
+                        <div className="LTHeaderAccountList">
+                          {accountMenuEntries.map((entry, index) => {
+                            if (entry.type === "separator") {
+                              return (
+                                <div
+                                  key={`account-separator-${index}`}
+                                  className="LTHeaderAccountSeparator"
+                                />
+                              );
+                            }
+
+                            const IconComponent = entry.icon;
+                            return (
+                              <button
+                                type="button"
+                                key={entry.label}
+                                className={`LTHeaderAccountItem${
+                                  entry.variant === "danger"
+                                    ? " LTHeaderAccountItem--danger"
+                                    : ""
+                                }`}
+                                onClick={entry.action}
+                                role="menuitem"
+                              >
+                                <IconComponent
+                                  className="LTHeaderAccountItemIcon"
+                                  size={18}
+                                />
+                                <span>{entry.label}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  {/* Botón Favoritos */}
+                  <button className="LTHeaderMenuButton LTHeaderMenuButtonFavoritos">
+                    <span className="lt-menu-hover">
                       <svg
                         className="LTHeaderMenuIcon"
                         viewBox="0 0 24 24"
@@ -160,95 +456,68 @@ const LTHeader = ({ showOfferBar = true, className = "" }) => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
+                          fillRule="evenodd"
+                          clipRule="evenodd"
+                          d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
                           stroke="currentColor"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                       </svg>
-                      Mi Cuenta
                     </span>
+                  </button>
+                  {/* Botón Notificaciones */}
+                  <button className="LTHeaderMenuButton LTHeaderMenuButtonNotificaciones">
+                    <span className="lt-menu-hover">
+                      <svg
+                        className="LTHeaderMenuIcon"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M9.00195 17H5.60636C4.34793 17 3.71872 17 3.58633 16.9023C3.4376 16.7925 3.40126 16.7277 3.38515 16.5436C3.37082 16.3797 3.75646 15.7486 4.52776 14.4866C5.32411 13.1835 6.00031 11.2862 6.00031 8.6C6.00031 7.11479 6.63245 5.69041 7.75766 4.6402C8.88288 3.59 10.409 3 12.0003 3C13.5916 3 15.1177 3.59 16.2429 4.6402C17.3682 5.69041 18.0003 7.11479 18.0003 8.6C18.0003 11.2862 18.6765 13.1835 19.4729 14.4866C20.2441 15.7486 20.6298 16.3797 20.6155 16.5436C20.5994 16.7277 20.563 16.7925 20.4143 16.9023C20.2819 17 19.6527 17 18.3943 17H15.0003M9.00195 17L9.00031 18C9.00031 19.6569 10.3435 21 12.0003 21C13.6572 21 15.0003 19.6569 15.0003 18V17M9.00195 17H15.0003"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </button>
+                  {/* Botón Carrito */}
+                  <button className="LTHeaderMenuButton LTHeaderMenuButtonCarrito">
+                    <div className="LTHeaderCartContainer">
+                      <span
+                        className="lt-menu-hover"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "6px",
+                          position: "relative",
+                        }}
+                      >
+                        <svg
+                          className="LTHeaderMenuIcon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9 11V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V10.9673M10.4 21H13.6C15.8402 21 16.9603 21 17.816 20.564C18.5686 20.1805 19.1805 19.5686 19.564 18.816C20 17.9603 20 16.8402 20 14.6V12.2C20 11.0799 20 10.5198 19.782 10.092C19.5903 9.71569 19.2843 9.40973 18.908 9.21799C18.4802 9 17.9201 9 16.8 9H7.2C6.0799 9 5.51984 9 5.09202 9.21799C4.71569 9.40973 4.40973 9.71569 4.21799 10.092C4 10.5198 4 11.0799 4 12.2V14.6C4 16.8402 4 17.9603 4.43597 18.816C4.81947 19.5686 5.43139 20.1805 6.18404 20.564C7.03968 21 8.15979 21 10.4 21Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                        <span className="LTHeaderCartCount">{cartCount}</span>
+                      </span>
+                    </div>
                   </button>
                 </>
               )}
-              {/* Botón Favoritos */}
-              <button className="LTHeaderMenuButton LTHeaderMenuButtonFavoritos">
-                <span className="lt-menu-hover">
-                  <svg
-                    className="LTHeaderMenuIcon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </button>
-              {/* Botón Notificaciones */}
-              <button className="LTHeaderMenuButton LTHeaderMenuButtonNotificaciones">
-                <span className="lt-menu-hover">
-                  <svg
-                    className="LTHeaderMenuIcon"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.00195 17H5.60636C4.34793 17 3.71872 17 3.58633 16.9023C3.4376 16.7925 3.40126 16.7277 3.38515 16.5436C3.37082 16.3797 3.75646 15.7486 4.52776 14.4866C5.32411 13.1835 6.00031 11.2862 6.00031 8.6C6.00031 7.11479 6.63245 5.69041 7.75766 4.6402C8.88288 3.59 10.409 3 12.0003 3C13.5916 3 15.1177 3.59 16.2429 4.6402C17.3682 5.69041 18.0003 7.11479 18.0003 8.6C18.0003 11.2862 18.6765 13.1835 19.4729 14.4866C20.2441 15.7486 20.6298 16.3797 20.6155 16.5436C20.5994 16.7277 20.563 16.7925 20.4143 16.9023C20.2819 17 19.6527 17 18.3943 17H15.0003M9.00195 17L9.00031 18C9.00031 19.6569 10.3435 21 12.0003 21C13.6572 21 15.0003 19.6569 15.0003 18V17M9.00195 17H15.0003"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-              </button>
-              {/* Botón Carrito */}
-              <button className="LTHeaderMenuButton LTHeaderMenuButtonCarrito">
-                <div className="LTHeaderCartContainer">
-                  <span
-                    className="lt-menu-hover"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      position: "relative",
-                    }}
-                  >
-                    <svg
-                      className="LTHeaderMenuIcon"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M9 11V6C9 4.34315 10.3431 3 12 3C13.6569 3 15 4.34315 15 6V10.9673M10.4 21H13.6C15.8402 21 16.9603 21 17.816 20.564C18.5686 20.1805 19.1805 19.5686 19.564 18.816C20 17.9603 20 16.8402 20 14.6V12.2C20 11.0799 20 10.5198 19.782 10.092C19.5903 9.71569 19.2843 9.40973 18.908 9.21799C18.4802 9 17.9201 9 16.8 9H7.2C6.0799 9 5.51984 9 5.09202 9.21799C4.71569 9.40973 4.40973 9.71569 4.21799 10.092C4 10.5198 4 11.0799 4 12.2V14.6C4 16.8402 4 17.9603 4.43597 18.816C4.81947 19.5686 5.43139 20.1805 6.18404 20.564C7.03968 21 8.15979 21 10.4 21Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span className="LTHeaderCartCount">{cartCount}</span>
-                  </span>
-                </div>
-              </button>
             </div>
           </div>
         </div>

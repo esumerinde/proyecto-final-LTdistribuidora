@@ -27,11 +27,15 @@ const AccountLayout = () => {
 
   return (
     <div className="lt-app">
-      {/* Header sin OfferBar */}
-      {isMobile ? <LTHeaderMobile /> : <LTHeader showOfferBar={false} />}
+      {/* Header con OfferBar fija para cuenta */}
+      {isMobile ? (
+        <LTHeaderMobile showOfferBar forcePinnedOffer />
+      ) : (
+        <LTHeader showOfferBar forcePinnedOffer />
+      )}
 
-      {/* Navbar sin offerBar */}
-      <LTNavbar hasOfferBar={false} />
+      {/* Navbar ajustada al offerBar */}
+      <LTNavbar hasOfferBar forcePinnedOffer />
 
       {/* Contenido Principal */}
       <Outlet />

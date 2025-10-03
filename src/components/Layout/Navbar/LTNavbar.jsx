@@ -1,16 +1,52 @@
 import React, { useState, useEffect, useRef } from "react";
-import HamburgerMenuIcon from "../../../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
 import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
 import LTNavbarNavmenu from "./LTNavbarNavmenu/LTNavbarNavmenu";
 import "./LTNavbar.css";
+import {
+  getCurrentUser,
+  isLoggedIn as getIsLoggedIn,
+} from "../../../common/authStorage";
 
-const LTNavbar = ({ hasOfferBar = true }) => {
+const LTNavbar = ({ hasOfferBar = true, forcePinnedOffer = false }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const submenuRef = useRef(null);
+  const [loggedIn, setLoggedIn] = useState(() => getIsLoggedIn());
+  const [isAdmin, setIsAdmin] = useState(() => {
+    const storedUser = getCurrentUser();
+    return storedUser?.role === "admin";
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+
+    const handleStorageChange = () => {
+      const newLoggedIn = getIsLoggedIn();
+      setLoggedIn(newLoggedIn);
+      if (!newLoggedIn) {
+        setIsAdmin(false);
+        return;
+      }
+      const user = getCurrentUser();
+      setIsAdmin(user?.role === "admin");
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
+  useEffect(() => {
+    if (!loggedIn) return;
+    const user = getCurrentUser();
+    setIsAdmin(user?.role === "admin");
+  }, [loggedIn]);
+
+  const offerBarActive = hasOfferBar || isAdmin || forcePinnedOffer;
+
   const { isSticky, navbarTop, animation } = useHeaderReaccommodation({
-    offerHeight: hasOfferBar ? 32 : 0,
+    offerHeight: offerBarActive ? 32 : 0,
     headerHeight: 75,
+    forceOfferPinned: (isAdmin && offerBarActive) || forcePinnedOffer,
   });
 
   useEffect(() => {

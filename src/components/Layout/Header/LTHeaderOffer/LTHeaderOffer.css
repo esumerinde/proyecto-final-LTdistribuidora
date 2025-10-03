@@ -1,5 +1,5 @@
 .LTHeaderOfferBar {
-  width: 100vw;
+  width: 100%;
   min-height: 32px;
   background: var(--lt-accent-color-variant2);
   color: var(--lt-black-text-color);
@@ -15,6 +15,26 @@
   z-index: 1300;
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.12);
   border-bottom: 1px solid rgba(116, 123, 191, 0.18);
+  gap: var(--lt-spacing-lg);
+  padding: 0 var(--lt-spacing-lg);
+}
+
+.LTHeaderOfferBar--pinned {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.LTHeaderOfferBar--hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.LTHeaderOfferBar--admin {
+  justify-content: center;
+  text-align: center;
 }
 
 .LTHeaderOfferText {
@@ -57,4 +77,51 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.LTHeaderOfferAdminMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lt-spacing-lg);
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.LTHeaderOfferAdminButton {
+  background: transparent;
+  border: none;
+  color: var(--lt-black-text-color);
+  font-family: var(--lt-font-family);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  padding: var(--lt-spacing-xs) var(--lt-spacing-sm);
+  border-radius: var(--lt-border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-transform: none;
+  line-height: 1.1;
+}
+
+.LTHeaderOfferAdminButton:hover,
+.LTHeaderOfferAdminButton:focus {
+  background: var(--lt-accent-color-variant2-dark);
+  outline: none;
+}
+
+.LTHeaderOfferAdminButton--danger {
+  color: var(--lt-error-color);
+}
+
+.LTHeaderOfferAdminButton--danger:hover,
+.LTHeaderOfferAdminButton--danger:focus {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--lt-error-color);
 }

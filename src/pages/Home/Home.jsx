@@ -11,6 +11,8 @@ import LTProductsCategoriesMobile from "../../components/Home/LTProductsCategori
 import LTProductsCarousel2 from "../../components/Home/LTProductsCarousel2/LTProductsCarousel2";
 import LTProductsCarousel3 from "../../components/Home/LTProductsCarousel3/LTProductsCarousel3";
 import LTProductsCarousel3Mobile from "../../components/Home/LTProductsCarousel3/LTProductsCarousel3Mobile";
+import LTProductsCarousel4 from "../../components/Home/LTProductsCarousel4/LTProductsCarousel4";
+import LTProductsCarousel4Mobile from "../../components/Home/LTProductsCarousel4/LTProductsCarousel4Mobile";
 import LTPromoBanners from "../../components/Home/LTPromoBanners/LTPromoBanners";
 import LTPromoBannersMobile from "../../components/Home/LTPromoBanners/LTPromoBannersMobile";
 import LTBrandsCarousel from "../../components/Home/LTBrandsCarousel/LTBrandsCarousel";
@@ -42,10 +44,12 @@ const Home = () => {
         {isMobile ? <LTProductsCarousel3Mobile /> : <LTProductsCarousel3 />}
         {/* 7. Banners promocionales */}
         {isMobile ? <LTPromoBannersMobile /> : <LTPromoBanners />}
+        {/* 8. Cuarto carrusel de productos */}
+        {isMobile ? <LTProductsCarousel4Mobile /> : <LTProductsCarousel4 />}
       </main>
-      {/* 8. Carrusel de marcas */}
+      {/* 9. Carrusel de marcas */}
       <LTBrandsCarousel />
-      {/* 9. Sección de newsletter */}
+      {/* 10. Sección de newsletter */}
       <LTNewsletter />
     </div>
   );

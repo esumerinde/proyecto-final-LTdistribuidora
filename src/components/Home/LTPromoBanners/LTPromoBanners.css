@@ -1,3 +1,20 @@
+:root {
+  --ltpb-overlay-gradient: linear-gradient(
+    145deg,
+    rgba(45, 19, 84, 0.55) 0%,
+    rgba(72, 31, 120, 0.62) 46%,
+    rgba(98, 46, 163, 0.68) 100%
+  );
+  --ltpb-highlight-gradient: linear-gradient(
+    120deg,
+    #d8b4fe 0%,
+    #a855f7 45%,
+    #6d28d9 100%
+  );
+  --ltpb-chip-gradient: linear-gradient(135deg, #f4f3ff, #d9d6fe);
+  --ltpb-border-color: rgba(255, 255, 255, 0.18);
+}
+
 /* Wrapper para las cards */
 .LTPromoBannersCards {
   width: 100%;
@@ -5,6 +22,7 @@
   justify-content: center;
   align-items: stretch;
 }
+
 /* LTPromoBanners - Banners promocionales estilo farmaonline */
 .LTPromoBannersWrapper {
   width: 100%;
@@ -15,155 +33,239 @@
 .LTPromoBannersContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--lt-spacing-md);
+  padding: 0 var(--lt-spacing-lg);
 }
 
 .LTPromoBannersTitle {
   font-family: var(--lt-font-family);
-  font-size: var(--lt-font-size-2xl);
+  font-size: clamp(1.8rem, 2.8vw, 2.2rem);
   font-weight: 700;
   color: var(--lt-text-color);
   text-align: center;
-  margin: 0 0 var(--lt-spacing-2xl) 0;
+  margin-bottom: var(--lt-spacing-2xl);
 }
 
 /* Grid de banners */
 .LTPromoBannersGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--lt-spacing-lg);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(18px, 3.2vw, 32px);
+  justify-items: center;
 }
 
 /* Card base */
-.LTPromoBannerCard {
-  border-radius: var(--lt-border-radius-lg);
-  overflow: hidden;
+.LTPromoBanner {
   position: relative;
-  min-height: 200px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--lt-black-text-color);
-  will-change: transform;
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 290px;
+  aspect-ratio: 4 / 5;
+  width: min(100%, 320px);
+  color: var(--lt-white-text-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 50px -28px rgba(67, 0, 125, 0.65);
+  isolation: isolate;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  background: #1f1436;
 }
 
-.LTPromoBannerCard:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: scale(1.03) translateY(-2px);
-  z-index: 2;
+.LTPromoBanner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--ltpb-banner-bg);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.95) saturate(1.05) contrast(1.02);
+  transform: scale(1.05);
+  z-index: -2;
+  transition: transform 0.4s ease;
 }
 
-/* Variaciones de color con nueva paleta */
+.LTPromoBanner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ltpb-overlay-gradient);
+  z-index: -1;
+  opacity: 0.78;
+  transition: opacity 0.35s ease;
+}
+
+.LTPromoBanner:hover::before {
+  transform: scale(1.08);
+}
+
+.LTPromoBanner:hover::after {
+  opacity: 0.88;
+}
 
 /* Contenido del banner */
 .LTPromoBannerContent {
-  padding: var(--lt-spacing-lg);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
-  z-index: 2;
-}
-
-/* Fecha */
-.LTPromoBannerDate {
-  font-family: var(--lt-font-family);
-  font-size: 12px;
-  font-weight: 600;
-  opacity: 0.9;
-  margin-bottom: var(--lt-spacing-sm);
-  color: var(--lt-black-text-color);
-}
-
-/* Contenido principal */
-.LTPromoBannerMain {
-  flex: 1;
+  z-index: 1;
+  height: 100%;
+  padding: clamp(18px, 4vw, 26px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: clamp(10px, 2.4vw, 18px);
+  align-items: stretch;
+}
+
+.LTPromoBannerHeader {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 2.4vw, 18px);
+}
+
+.LTPromoBannerTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(6px, 1.8vw, 12px);
+}
+
+.LTPromoBannerBadge {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #3b0764;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: var(--ltpb-chip-gradient);
+  border: 1px solid rgba(59, 7, 100, 0.2);
+  box-shadow: 0 14px 28px rgba(76, 29, 149, 0.25);
+}
+
+.LTPromoBannerCategory {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  padding: 5px 18px;
+  color: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
+  background: linear-gradient(
+    130deg,
+    rgba(76, 29, 149, 0.9),
+    rgba(55, 0, 117, 0.9)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 26px rgba(68, 0, 149, 0.45);
+  margin-left: auto;
+}
+
+.LTPromoBannerHeadline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-xs);
+}
+
+.LTPromoBannerKicker {
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #ede9fe;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.LTPromoBannerKicker::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(226, 232, 255, 0.8);
 }
 
 .LTPromoBannerTitle {
+  margin: 0;
   font-family: var(--lt-font-family);
-  font-size: var(--lt-font-size-xl);
+  font-size: 24px;
   font-weight: 800;
-  line-height: 1.2;
-  margin-bottom: var(--lt-spacing-xs);
-  color: var(--lt-black-text-color);
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  color: #fdf4ff;
+  text-shadow: 0 12px 30px rgba(12, 0, 41, 0.45);
+  max-width: 20ch;
 }
 
-.LTPromoBannerSubtitle {
-  font-family: var(--lt-font-family);
-  font-size: var(--lt-font-size-lg);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: var(--lt-spacing-sm);
-  color: var(--lt-black-text-color);
+.LTPromoBannerTitle span {
+  display: inline-block;
+  background: var(--ltpb-highlight-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.LTPromoBannerBody {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 1.4vw, 10px);
+  color: rgba(247, 244, 255, 0.9);
+  max-width: 100%;
+  margin-top: clamp(52px, 7vw, 72px);
+  align-items: flex-start;
+  text-align: left;
+}
+
+.LTPromoBannerBrandName {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: rgba(237, 233, 254, 0.95);
+  text-align: left;
 }
 
 .LTPromoBannerDescription {
-  font-family: var(--lt-font-family);
-  font-size: var(--lt-font-size-sm);
-  font-weight: 500;
-  line-height: 1.3;
-  opacity: 0.9;
-  margin-bottom: var(--lt-spacing-md);
-  color: var(--lt-black-text-color);
+  margin: 0;
+  font-size: 11px !important;
+  line-height: 1.6;
+  color: rgba(244, 240, 255, 0.88);
+  text-align: left !important;
 }
 
-/* Placeholder para imagen */
-.LTPromoBannerImagePlaceholder {
-  position: absolute;
-  top: 50%;
-  right: var(--lt-spacing-lg);
-  transform: translateY(-50%);
-  width: 80px;
-  height: 80px;
-  opacity: 0.2;
-  z-index: 1;
-}
-
-.LTPromoBannerImageIcon {
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
+.LTPromoBannerFooter {
+  margin-top: clamp(3px, 0.8vw, 10px);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
-.LTPromoBannerImageIcon svg {
-  width: 40px;
-  height: 40px;
-  fill: currentColor;
-  opacity: 0.6;
+@media (max-width: 960px) {
+  .LTPromoBannersContainer {
+    padding: 0 var(--lt-spacing-md);
+  }
+
+  .LTPromoBanner {
+    min-height: 260px;
+    width: min(100%, 300px);
+  }
 }
 
-/* Elimino estilos específicos del botón de promo banners para que use solo el global lt-button-light */
-/* .LTPromoBannersButton {
-  background: var(--lt-accent-color);
-  color: var(--lt-black-text-color);
-  border: 2px solid var(--lt-black-text-color);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  font-family: "Montserrat", sans-serif;
-  align-self: flex-start;
-}
-.LTPromoBannersButton:hover {
-  background: var(--lt-accent-color-dark);
-  color: var(--lt-background-color);
-}
-*/
-/* Responsive Design */
+@media (max-width: 640px) {
+  .LTPromoBannersWrapper {
+    padding: var(--lt-spacing-xl) 0;
+  }
 
-/* Animación de entrada escalonada */
+  .LTPromoBannersTitle {
+    font-size: clamp(1.7rem, 6vw, 2rem);
+  }
+
+  .LTPromoBannersGrid {
+    gap: var(--lt-spacing-lg);
+  }
+
+  .LTPromoBannerContent {
+    gap: var(--lt-spacing-md);
+    padding: clamp(20px, 6vw, 28px);
+  }
+
+  .LTPromoBannerButton {
+    width: 100%;
+    justify-content: center;
+  }
+}

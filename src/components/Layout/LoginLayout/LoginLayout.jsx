@@ -16,7 +16,7 @@ const LoginLayout = () => {
   return (
     <div className="lt-app">
       {isMobile ? (
-        <LTHeaderMobile />
+        <LTHeaderMobile showOfferBar={false} />
       ) : (
         <LTHeader showOfferBar={false} className="LTHeaderOnlyLogo" />
       )}

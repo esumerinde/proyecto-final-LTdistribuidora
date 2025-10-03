@@ -18,6 +18,7 @@ import {
   EyeOff,
 } from "lucide-react";
 import { useAuthModal } from "../../context/AuthModalContext";
+import { addUser, isEmailTaken, isUsernameTaken } from "../../mocks/users";
 import "./LTRegister.css";
 
 // Hook para simular la demora del servidor (ej. verificar disponibilidad)
@@ -156,14 +157,14 @@ const EmailForm = ({
 
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    if (email.toLowerCase() === "test@inuse.com") {
-      setError("Este e-mail ya está registrado. Intenta iniciar sesión.");
+    if (isEmailTaken(email)) {
+      setError("Este e-mail ya está registrado. Intentá iniciar sesión.");
       setLoading(false);
       return;
     }
 
     setLoading(false);
-    onCompletionUpdate({ email });
+    onCompletionUpdate({ email, isEmailValidated: false });
     onValidationRequired();
   };
 
@@ -594,6 +595,9 @@ const UsernameForm = ({
   const [status, setStatus] = useState("idle");
 
   const debouncedUsername = useDebounce(username, 500);
+  const normalizedInitialUsername = (initialUsername || "")
+    .trim()
+    .toLowerCase();
 
   const USERNAME_REGEX = /^[a-zA-Z0-9_-]+$/;
 
@@ -614,13 +618,20 @@ const UsernameForm = ({
       setStatus("checking");
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (user.toLowerCase() === "admin") {
+      const normalized = user.trim().toLowerCase();
+
+      if (isUsernameTaken(user) && normalized !== normalizedInitialUsername) {
+        setStatus("unavailable");
+        return;
+      }
+
+      if (normalized === "admin") {
         setStatus("unavailable");
       } else {
         setStatus("available");
       }
     },
-    [hasInvalidChars]
+    [hasInvalidChars, normalizedInitialUsername]
   );
 
   useEffect(() => {
@@ -1242,6 +1253,7 @@ const LTRegistrationPage = () => {
     type: "",
   });
   const [isSubmittingFinal, setIsSubmittingFinal] = useState(false);
+  const [registrationError, setRegistrationError] = useState("");
   const [key, setKey] = useState(0);
 
   useEffect(() => {
@@ -1314,12 +1326,14 @@ const LTRegistrationPage = () => {
   const handleStepClick = (stepId) => {
     const status = getStepStatus(stepId);
     if (status !== "locked") {
+      setRegistrationError("");
       setActiveStepId(stepId);
       setCurrentView("form");
     }
   };
 
   const handleEmailValidationRequired = () => {
+    setRegistrationError("");
     setCurrentView("validate_email");
   };
 
@@ -1334,11 +1348,16 @@ const LTRegistrationPage = () => {
   };
 
   const handleCompletionUpdate = (data) => {
+    setRegistrationError("");
     setFormData((prev) => {
       const newState = { ...prev, ...data };
 
       if (data.isEmailValidated !== undefined) {
         newState.isEmailValidated = data.isEmailValidated;
+      }
+
+      if (data.email !== undefined && data.email !== prev.email) {
+        newState.isEmailValidated = false;
       }
 
       return newState;
@@ -1353,10 +1372,45 @@ const LTRegistrationPage = () => {
   };
 
   const handleFinalizeRegistration = async () => {
+    setRegistrationError("");
     setIsSubmittingFinal(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmittingFinal(false);
-    setCurrentView("success");
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      const fullName = `${formData.name} ${formData.lastname}`.trim();
+
+      addUser({
+        email: formData.email,
+        username: formData.username,
+        password: formData.password,
+        fullName,
+        role: "usuario",
+      });
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      setIsSubmittingFinal(false);
+      setCurrentView("success");
+    } catch (error) {
+      console.error("Error creating mock user", error);
+      let message =
+        "Ocurrió un error al crear tu cuenta. Intentalo nuevamente en unos segundos.";
+
+      if (error?.message === "EMAIL_TAKEN") {
+        message =
+          "Este e-mail ya está registrado. Iniciá sesión para continuar.";
+        setActiveStepId(1);
+        setCurrentView("form");
+      } else if (error?.message === "USERNAME_TAKEN") {
+        message = "Ese nombre de usuario ya existe. Elegí otro por favor.";
+        setActiveStepId(2);
+        setCurrentView("form");
+      }
+
+      setRegistrationError(message);
+      setIsSubmittingFinal(false);
+    }
   };
 
   const StepCard = ({ step, nextPendingStepId }) => {
@@ -1622,6 +1676,18 @@ const LTRegistrationPage = () => {
               )}
               {isSubmittingFinal ? "Finalizando..." : "Finalizar Registro"}
             </button>
+          )}
+          {registrationError && (
+            <p
+              style={{
+                marginTop: "var(--lt-spacing-sm)",
+                color: "var(--lt-error-color)",
+                fontSize: "0.85rem",
+                fontWeight: "var(--lt-font-weight-medium)",
+              }}
+            >
+              {registrationError}
+            </p>
           )}
         </div>
       </div>

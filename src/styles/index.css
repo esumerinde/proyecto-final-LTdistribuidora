@@ -7,7 +7,7 @@
   --lt-small-text-color: #4a5155;
   --lt-hover-text-menu: #05125f;
   --lt-border-color: #4a5155;
-  --lt-accent-color: #9fa3cf;
+  --lt-accent-color: #b3b8e6;
   --lt-accent-color-dark: #747bbf;
   --lt-accent-color-variant: #8a8fc7;
   --lt-accent-color-variant2: #ffd6a5;
@@ -15,7 +15,8 @@
   --lt-muted-text-color: #7c828f;
   --lt-white-text-color: #fefefe;
   --lt-black-text-color: #0d0d0d;
-  --lt-error-color: #ef4444;
+  --lt-error-color: #e45353;
+  --lt-offer-height: 32px;
   --lt-svg-light: #fefefe;
   --lt-svg-dark: #0d0d0d;
   --lt-button-light: #9fa3cf;
@@ -39,6 +40,7 @@
   --lt-spacing-lg: 1.5rem;
   --lt-spacing-xl: 2rem;
   --lt-spacing-2xl: 3rem;
+  --lt-spacing-3xl: 4rem;
 
   /* Pesos de fuente más gruesos */
   --lt-font-weight-light: 400;
@@ -160,6 +162,23 @@ a {
 }
 .lt-menu-hover:hover::after {
   transform: translateX(-50%) scaleX(1);
+}
+
+.lt-menu-hover--active {
+  color: var(--lt-accent-color-variant2-dark);
+}
+
+.lt-menu-hover--active::after {
+  transform: translateX(-50%) scaleX(1);
+  background: var(--lt-accent-color-variant2-dark);
+}
+
+.lt-menu-hover--active:hover {
+  color: var(--lt-accent-color-variant2-dark);
+}
+
+.lt-menu-hover--active:hover::after {
+  background: var(--lt-accent-color-variant2-dark);
 }
 
 /* Botón principal global estilo newsletter */

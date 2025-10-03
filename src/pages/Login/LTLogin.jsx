@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthModal } from "../../context/AuthModalContext";
+import { authenticateUser } from "../../mocks/users";
+import { setCurrentUser } from "../../common/authStorage";
 import "./LTLogin.css";
 
 // Importar iconos SVG locales
@@ -52,14 +54,14 @@ const FacebookIcon = () => (
 /**
  * Botón para inicio de sesión social (Google/Facebook)
  */
-const LTLoginSocialButton = ({ icon: Icon, label, onClick }) => {
+const LTLoginSocialButton = ({ icon, label, onClick }) => {
   return (
     <button
       onClick={onClick}
       className="lt-button-light LTLoginSocialButton"
       type="button"
     >
-      <Icon />
+      {icon}
       <span>{label}</span>
     </button>
   );
@@ -76,11 +78,6 @@ const LTLogin = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
-
-  // Credenciales de prueba simuladas
-  const MOCK_USERNAME = "esum26";
-  const MOCK_EMAIL = "esum26@example.com";
-  const MOCK_PASSWORD = "1234";
 
   // Bloquear scroll del body cuando el modal está abierto
   useEffect(() => {
@@ -114,35 +111,25 @@ const LTLogin = () => {
     setLoading(true);
     setError("");
 
-    // Simulación de espera de API (2 segundos)
     await new Promise((resolve) => setTimeout(resolve, 2000));
 
-    // Lógica de inicio de sesión simulada - aceptar username o email
-    const isValidUsername =
-      identifier.toLowerCase() === MOCK_USERNAME.toLowerCase();
-    const isValidEmail = identifier.toLowerCase() === MOCK_EMAIL.toLowerCase();
-    const isValidPassword = password === MOCK_PASSWORD;
+    const user = authenticateUser(identifier.trim(), password);
 
-    if ((isValidUsername || isValidEmail) && isValidPassword) {
+    if (user) {
       setLoginSuccess(true);
-      setError("");
-      console.log("Login Exitoso! Usuario:", identifier);
-
-      // Guardar el estado de login en localStorage
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", MOCK_USERNAME); // Siempre guardar el username, no el email
+      const { password: _password, ...safeUser } = user;
+      setCurrentUser(safeUser);
 
       await new Promise((resolve) => setTimeout(resolve, 1500));
+      setLoading(false);
       closeModal();
-      // Recargar la página para actualizar el header
       window.location.reload();
     } else {
       setError(
         "Credenciales inválidas. Por favor, verificá tu e-mail/usuario y contraseña."
       );
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   // Función para los botones de toggle de contraseña
@@ -199,14 +186,14 @@ const LTLogin = () => {
           {/* Botones de Inicio de Sesión Social */}
           <div className="LTLoginSocial">
             <LTLoginSocialButton
-              icon={GoogleIcon}
+              icon={<GoogleIcon />}
               label="Continuar con Google"
               onClick={() =>
                 console.log("Simulación: Iniciar sesión con Google")
               }
             />
             <LTLoginSocialButton
-              icon={FacebookIcon}
+              icon={<FacebookIcon />}
               label="Continuar con Facebook"
               onClick={() =>
                 console.log("Simulación: Iniciar sesión con Facebook")

@@ -31,46 +31,40 @@ const LTProductsCarousel3 = () => {
     <section className="LTProductsCarousel3Wrapper">
       <div className="LTProductsCarousel3Container">
         <h2 className="LTProductsCarousel3Title">
-          Electrónica - Dispositivos y Tecnología
+          Gaming — Nuevas consolas de ingreso
         </h2>
 
         <div className="LTProductsCarousel3Content">
-          {/* Banner promocional estilo Farmacity variante electrónica */}
+          {/* Banner promocional - “Lo último en Gaming” */}
           <div className="LTProductsCarousel3Banner">
             <div className="LTProductsCarousel3BannerContent">
-              <div className="LTProductsCarousel3BannerTop">
-                <span className="LTProductsCarousel3BannerBadge">
-                  Electrónica
+              <div className="LTProductsCarousel3BannerChips">
+                <span className="LTProductsCarousel3BannerBadge">Gaming</span>
+                <span className="LTProductsCarousel3BannerDate">Nuevo</span>
+              </div>
+
+              <div className="LTProductsCarousel3BannerHeadline">
+                <span className="LTProductsCarousel3BannerKicker">
+                  Descubrí
                 </span>
-                <div className="LTProductsCarousel3BannerDate">
-                  Válido hasta el 31 de diciembre
-                </div>
-                <div className="LTProductsCarousel3BannerOffer">
-                  <div className="LTProductsCarousel3BannerTitle">HASTA</div>
-                  <div className="LTProductsCarousel3BannerPercent">
-                    40
-                    <span className="LTProductsCarousel3BannerPercentSymbol">
-                      %
-                    </span>
-                  </div>
-                  <div className="LTProductsCarousel3BannerOff">OFF</div>
-                </div>
+                <h3 className="LTProductsCarousel3BannerTitle">
+                  Lo último en <span>Gaming</span>
+                </h3>
               </div>
 
-              <div className="LTProductsCarousel3BannerMiddle">
-                <div className="LTProductsCarousel3BannerBrand">
-                  <div className="LTProductsCarousel3BannerBrandName">
-                    Electrónica
-                  </div>
-                  <div className="LTProductsCarousel3BannerDescription">
-                    Los mejores dispositivos y componentes
-                  </div>
+              <div className="LTProductsCarousel3BannerBody">
+                <div className="LTProductsCarousel3BannerBrandName">
+                  ASUS ROG Strix
                 </div>
-              </div>
+                <p className="LTProductsCarousel3BannerDescription">
+                  Potencia, portabilidad y rendimiento. Descubrí la ASUS ROG
+                  Strix, diseñada para gamers exigentes.
+                </p>
 
-              <button className="LTProductsCarousel3BannerButton lt-button-variant2">
-                Ver Electrónica
-              </button>
+                <button className="LTProductsCarousel3BannerButton lt-button-variant2">
+                  VER MÁS
+                </button>
+              </div>
             </div>
           </div>
 

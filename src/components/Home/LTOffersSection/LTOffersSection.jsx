@@ -159,7 +159,8 @@ const LTOffersSection = () => {
       <div className="LTOffersSectionContainer">
         {/* Título principal. El backend puede personalizar el texto si lo desea. */}
         <h2 className="LTOffersSectionTitle">
-          Las mejores ofertas de LT Electrónica
+          Hola profe, soy Emiliano Sumerinde, estoy muy resfriado, ahora Lucas y
+          Nahuel le van a mostrar la pagina y yo la carpeta el lunes, saludos!
         </h2>
         <div className="LTOffersSectionGrid">
           {/* Renderiza cada ítem de oferta. Si el backend quiere cambiar el orden o el contenido, mapear desde la base. */}

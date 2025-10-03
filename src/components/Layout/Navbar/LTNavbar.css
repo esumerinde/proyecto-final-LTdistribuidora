@@ -81,25 +81,29 @@
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 250px;
+  min-width: 260px;
   background: var(--lt-background-color);
-  border: 1px solid var(--lt-border-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(116, 123, 191, 0.15);
+  border: 1px solid rgba(9, 23, 71, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 35px rgba(7, 22, 57, 0.18);
   z-index: 1000;
-  margin-top: 4px;
+  margin-top: 8px;
   pointer-events: auto;
+  padding: var(--lt-spacing-sm);
   animation: fadeInMenu 0.28s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
 .LTNavbarSubmenuContent {
-  padding: 12px 0;
+  padding: 0;
 }
 
 .LTNavbarSubmenuList {
   list-style: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-xs);
 }
 
 .LTNavbarSubmenuItem {
@@ -110,13 +114,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  color: var(--lt-text-color);
+  gap: var(--lt-spacing-sm);
+  padding: 10px var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius-lg);
+  background: transparent;
+  color: var(--lt-small-text-color);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 0.95rem;
+  font-weight: var(--lt-font-weight-medium);
   font-family: var(--lt-font-family);
-  transition: all 0.2s ease;
-  /* El subrayado animado se maneja por la clase global lt-menu-hover */
+  transition: background-color 0.2s ease, color 0.2s ease;
   border-bottom: none !important;
   text-decoration: none !important;
 }
@@ -124,19 +131,17 @@
 .LTNavbarSubmenuLink:hover {
   background: var(--lt-accent-color-dark);
   color: var(--lt-white-text-color);
-  transition: background 0.2s, color 0.2s;
-  /* El subrayado animado se maneja por la clase global lt-menu-hover */
 }
 
 .LTNavbarSubmenuArrow {
-  width: 12px;
-  height: 12px;
-  fill: var(--lt-text-light);
+  width: 14px;
+  height: 14px;
+  fill: var(--lt-muted-text-color);
   transition: fill 0.2s ease;
 }
 
 .LTNavbarSubmenuLink:hover .LTNavbarSubmenuArrow {
-  fill: var(--lt-primary-color);
+  fill: var(--lt-white-text-color);
 }
 
 /* Expanded Submenu */
@@ -146,47 +151,49 @@
   left: 100%;
   min-width: 280px;
   background: var(--lt-background-color);
-  border: 1px solid var(--lt-border-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(116, 123, 191, 0.15);
+  border: 1px solid rgba(9, 23, 71, 0.08);
+  border-radius: 16px;
+  box-shadow: 0 18px 35px rgba(7, 22, 57, 0.18);
   z-index: 1001;
-  margin-left: 8px;
+  margin-left: 12px;
   pointer-events: auto;
+  padding: var(--lt-spacing-sm);
 }
 
 .LTNavbarSubmenuExpandedContent {
-  padding: 16px;
+  padding: var(--lt-spacing-md);
+  background: var(--lt-background-color);
+  border-radius: calc(var(--lt-border-radius-lg) + 2px);
 }
 
 .LTNavbarSubmenuExpandedTitle {
   font-family: var(--lt-font-family);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--lt-primary-color);
-  margin: 0 0 12px 0;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--lt-border-color);
+  font-size: 1rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-small-text-color);
+  margin: 0 0 var(--lt-spacing-sm) 0;
 }
 
 .LTNavbarSubmenuExpandedList {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-xs);
 }
 
 .LTNavbarSubmenuExpandedLink {
   display: block;
-  padding: 8px 12px;
-  color: var(--lt-text-color);
+  padding: 10px var(--lt-spacing-md);
+  color: var(--lt-small-text-color);
   text-decoration: none;
-  font-size: 13px;
+  font-size: 0.9rem;
   font-family: var(--lt-font-family);
-  border-radius: 4px;
-  /* El subrayado animado se maneja por la clase global lt-menu-hover */
-  /* El subrayado animado se maneja solo por la clase global lt-menu-hover */
+  font-weight: var(--lt-font-weight-medium);
+  border-radius: var(--lt-border-radius-lg);
+  background: transparent;
+  transition: background-color 0.2s ease, color 0.2s ease;
   border-bottom: none !important;
   text-decoration: none !important;
 }
@@ -194,10 +201,6 @@
 .LTNavbarSubmenuExpandedLink:hover {
   background: var(--lt-accent-color-dark);
   color: var(--lt-white-text-color);
-  transition: background 0.2s, color 0.2s;
-  border-bottom: none !important;
-  text-decoration: none !important;
-  /* El subrayado animado se maneja por la clase global lt-menu-hover */
 }
 
 /* Special Badge */

@@ -1,27 +1,27 @@
 /* =========================================
-   LTProductsCarousel3 - Estilos completos
+   LTProductsCarousel4 - Estilos completos
    (incluye banner adaptado a “Lo último en Gaming”)
    ========================================= */
 
 /* Imagen de fondo del banner (cambiá la URL si querés) */
 :root {
-  --ltpc3-banner-bg: url("https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop");
+  --ltpc4-banner-bg: url("https://images.pexels.com/photos/12366700/pexels-photo-12366700.jpeg");
 }
 
-/* LTProductsCarousel3 - Diseño estilo Farmacity con paleta natural */
-.LTProductsCarousel3Wrapper {
+/* LTProductsCarousel4 - Diseño estilo Farmacity con paleta natural */
+.LTProductsCarousel4Wrapper {
   width: 100%;
   padding: 60px 0; /* Aumentado de 40px a 60px */
   background-color: var(--lt-background-color); /* Usa el beige del tema */
 }
 
-.LTProductsCarousel3Container {
+.LTProductsCarousel4Container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px 20px;
 }
 
-.LTProductsCarousel3Title {
+.LTProductsCarousel4Title {
   font-family: "Inter", sans-serif;
   font-size: 2rem;
   font-weight: 700;
@@ -31,7 +31,7 @@
 }
 
 /* Layout principal - Banner + 4 cards */
-.LTProductsCarousel3Content {
+.LTProductsCarousel4Content {
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: 24px;
@@ -42,7 +42,7 @@
    BANNER “Lo último en Gaming”
    (card con imagen + overlay)
    =========================== */
-.LTProductsCarousel3Banner {
+.LTProductsCarousel4Banner {
   position: relative;
   height: 450px;
   border-radius: 16px;
@@ -56,11 +56,11 @@
 }
 
 /* Fondo con imagen */
-.LTProductsCarousel3Banner::before {
+.LTProductsCarousel4Banner::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: var(--ltpc3-banner-bg);
+  background-image: var(--ltpc4-banner-bg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,7 +70,7 @@
 }
 
 /* Overlay para legibilidad */
-.LTProductsCarousel3Banner::after {
+.LTProductsCarousel4Banner::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -83,7 +83,7 @@
   z-index: -1;
 }
 
-.LTProductsCarousel3BannerContent {
+.LTProductsCarousel4BannerContent {
   position: relative;
   z-index: 1;
   height: 100%;
@@ -93,14 +93,14 @@
   padding: 6px 2px;
 }
 
-.LTProductsCarousel3BannerChips {
+.LTProductsCarousel4BannerChips {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
 }
 
-.LTProductsCarousel3BannerBadge {
+.LTProductsCarousel4BannerBadge {
   background: linear-gradient(
     135deg,
     var(--lt-accent-color-variant2-dark),
@@ -117,7 +117,7 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 }
 
-.LTProductsCarousel3BannerDate {
+.LTProductsCarousel4BannerDate {
   margin-left: auto;
   padding: 6px 16px;
   border-radius: 999px;
@@ -135,13 +135,13 @@
   backdrop-filter: blur(12px);
 }
 
-.LTProductsCarousel3BannerHeadline {
+.LTProductsCarousel4BannerHeadline {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.LTProductsCarousel3BannerKicker {
+.LTProductsCarousel4BannerKicker {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.6px;
@@ -152,7 +152,7 @@
   gap: 6px;
 }
 
-.LTProductsCarousel3BannerKicker::before {
+.LTProductsCarousel4BannerKicker::before {
   content: "";
   width: 32px;
   height: 2px;
@@ -161,7 +161,7 @@
   opacity: 0.8;
 }
 
-.LTProductsCarousel3BannerTitle {
+.LTProductsCarousel4BannerTitle {
   margin: 0;
   font-size: 24px;
   font-weight: 800;
@@ -170,7 +170,7 @@
   max-width: 20ch;
 }
 
-.LTProductsCarousel3BannerTitle span {
+.LTProductsCarousel4BannerTitle span {
   display: inline-block;
   background: linear-gradient(135deg, #f8d56b 0%, #ff8f5a 50%, #ff64d2 100%);
   -webkit-background-clip: text;
@@ -178,7 +178,7 @@
   background-clip: text;
 }
 
-.LTProductsCarousel3BannerBody {
+.LTProductsCarousel4BannerBody {
   margin-top: auto;
   display: flex;
   flex-direction: column;
@@ -188,7 +188,7 @@
   text-align: left;
 }
 
-.LTProductsCarousel3BannerBrandName {
+.LTProductsCarousel4BannerBrandName {
   width: 100%;
   font-size: 18px;
   font-weight: 800;
@@ -200,7 +200,7 @@
   line-height: 0;
 }
 
-.LTProductsCarousel3BannerDescription {
+.LTProductsCarousel4BannerDescription {
   margin: 0;
   width: 100%;
   font-size: 11px !important;
@@ -210,12 +210,12 @@
   text-align: left !important;
 }
 
-.LTProductsCarousel3BannerBody > * {
+.LTProductsCarousel4BannerBody > * {
   align-self: flex-start;
   text-align: left;
 }
 
-.LTProductsCarousel3BannerButton {
+.LTProductsCarousel4BannerButton {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
@@ -238,7 +238,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
-.LTProductsCarousel3BannerButton:hover {
+.LTProductsCarousel4BannerButton:hover {
   transform: translateY(-2px);
   filter: brightness(1.05);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
@@ -247,13 +247,13 @@
 /* ===========================
    Productos (sin cambios visuales mayores)
    =========================== */
-.LTProductsCarousel3ProductsContainer {
+.LTProductsCarousel4ProductsContainer {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.LTProductsCarousel3Arrow {
+.LTProductsCarousel4Arrow {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
@@ -271,20 +271,20 @@
   margin: 0 12px;
 }
 
-.LTProductsCarousel3Arrow:hover {
+.LTProductsCarousel4Arrow:hover {
   background: var(--lt-accent-color-variant2-dark);
   border-color: var(--lt-black-text-color);
   color: var(--lt-black-text-color);
 }
 
-.LTProductsCarousel3Arrow.disabled {
+.LTProductsCarousel4Arrow.disabled {
   opacity: 0.3;
   cursor: default;
   pointer-events: none;
   transition: opacity 0.7s, visibility 0.7s;
 }
 
-.LTProductsCarousel3Arrow svg {
+.LTProductsCarousel4Arrow svg {
   width: 24px;
   height: 24px;
   fill: var(--lt-black-text-color);
@@ -292,7 +292,7 @@
 }
 
 /* Sección de productos */
-.LTProductsCarousel3Products {
+.LTProductsCarousel4Products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2.2rem;
@@ -304,8 +304,8 @@
   padding-bottom: 32px;
 }
 
-/* Restaurar grid original para .LTProductsCarousel3Products */
-.LTProductsCarousel3Products {
+/* Restaurar grid original para .LTProductsCarousel4Products */
+.LTProductsCarousel4Products {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
@@ -316,14 +316,14 @@
 }
 
 /* Eliminar estilos de track y slide animado */
-.LTProductsCarousel3Track {
+.LTProductsCarousel4Track {
   display: unset;
   width: unset;
   will-change: unset;
   transition: unset;
 }
 
-.LTProductsCarousel3Slide {
+.LTProductsCarousel4Slide {
   display: unset;
   gap: unset;
   width: unset;
@@ -333,7 +333,7 @@
 }
 
 /* Cards de productos */
-.LTProductsCarousel3Card {
+.LTProductsCarousel4Card {
   background: var(--lt-background-color);
   border: 1px solid var(--lt-black-text-color);
   border-radius: 12px;
@@ -348,17 +348,17 @@
   height: 100%;
 }
 
-.LTProductsCarousel3Card:hover {
+.LTProductsCarousel4Card:hover {
   transform: scale(1.03) translateY(-2px);
   z-index: 2;
 }
 
-.LTProductsCarousel3Card:hover .LTProductsCarousel3ActionIcon {
+.LTProductsCarousel4Card:hover .LTProductsCarousel4ActionIcon {
   transform: scale(1.08);
 }
 
 /* Badge de descuento */
-.LTProductsCarousel3CardBadge {
+.LTProductsCarousel4CardBadge {
   position: absolute;
   top: 12px;
   right: 12px;
@@ -373,7 +373,7 @@
 }
 
 /* Imagen del producto */
-.LTProductsCarousel3CardImage {
+.LTProductsCarousel4CardImage {
   width: 100%;
   height: 180px;
   display: flex;
@@ -386,7 +386,7 @@
   margin-top: 15px;
 }
 
-.LTProductsCarousel3CardImagePlaceholder {
+.LTProductsCarousel4CardImagePlaceholder {
   width: 80px;
   height: 80px;
   background: rgba(255, 255, 255, 0.8);
@@ -396,7 +396,7 @@
   justify-content: center;
 }
 
-.LTProductsCarousel3CardImagePlaceholder svg {
+.LTProductsCarousel4CardImagePlaceholder svg {
   width: 40px;
   height: 40px;
   fill: var(--lt-text-color); /* Icono con color de texto principal */
@@ -404,7 +404,7 @@
 }
 
 /* Información del producto */
-.LTProductsCarousel3CardInfo {
+.LTProductsCarousel4CardInfo {
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -412,7 +412,7 @@
   justify-content: flex-end;
 }
 
-.LTProductsCarousel3CardCategory {
+.LTProductsCarousel4CardCategory {
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -422,7 +422,7 @@
   margin-bottom: 8px;
 }
 
-.LTProductsCarousel3CardTitle {
+.LTProductsCarousel4CardTitle {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -435,7 +435,7 @@
   overflow: hidden;
 }
 
-.LTProductsCarousel3CardLaunchBadge {
+.LTProductsCarousel4CardLaunchBadge {
   background: var(--lt-secondary-color); /* Violeta medio para badge */
   color: white;
   font-size: 14px;
@@ -449,11 +449,11 @@
 }
 
 /* Precios */
-.LTProductsCarousel3CardPricing {
+.LTProductsCarousel4CardPricing {
   margin-bottom: 0;
 }
 
-.LTProductsCarousel3CardOriginalPrice {
+.LTProductsCarousel4CardOriginalPrice {
   font-family: "Inter", sans-serif;
   font-size: 14px;
   color: var(--lt-text-muted);
@@ -461,7 +461,7 @@
   margin-bottom: 2px;
 }
 
-.LTProductsCarousel3CardFinalPrice {
+.LTProductsCarousel4CardFinalPrice {
   font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 700;
@@ -470,17 +470,17 @@
   align-items: baseline;
 }
 
-.LTProductsCarousel3CardPriceDecimals {
+.LTProductsCarousel4CardPriceDecimals {
   font-size: 14px;
   font-weight: 400;
 }
 
 /* Organización del contenido */
-.LTProductsCarousel3CardTopContent {
+.LTProductsCarousel4CardTopContent {
   flex: 0 0 auto;
 }
 
-.LTProductsCarousel3CardBottomContent {
+.LTProductsCarousel4CardBottomContent {
   margin-top: auto;
   flex: 0 0 auto;
   display: flex;
@@ -490,14 +490,14 @@
 }
 
 /* Botones de acción */
-.LTProductsCarousel3CardActions {
+.LTProductsCarousel4CardActions {
   display: flex;
   gap: 8px;
   align-items: center;
   margin-top: 8px;
 }
 
-.LTProductsCarousel3CardAddToCart {
+.LTProductsCarousel4CardAddToCart {
   flex: 0 0 auto;
   width: 85px;
   height: 40px;
@@ -518,18 +518,18 @@
   border: var(--lt-border-color) solid 1px;
 }
 
-.LTProductsCarousel3CardAddToCart:hover {
+.LTProductsCarousel4CardAddToCart:hover {
   background: var(--lt-accent-color-variant2-dark);
   transform: translateY(-1px);
 }
 
-.LTProductsCarousel3CardAddToCart svg {
+.LTProductsCarousel4CardAddToCart svg {
   width: 16px;
   height: 16px;
   fill: white;
 }
 
-.LTProductsCarousel3ActionIcon {
+.LTProductsCarousel4ActionIcon {
   width: 16px;
   height: 16px;
   filter: none;
@@ -537,7 +537,7 @@
   transition: fill 0.3s ease;
 }
 
-.LTProductsCarousel3CardFavorite {
+.LTProductsCarousel4CardFavorite {
   flex: 0 0 auto;
   width: 45px;
   height: 40px;
@@ -551,7 +551,7 @@
   transition: all 0.3s ease;
 }
 
-.LTProductsCarousel3CardFavorite:hover {
+.LTProductsCarousel4CardFavorite:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2); /* Sombra violeta */
 }
@@ -560,38 +560,38 @@
    Responsive
    =========================== */
 @media (max-width: 768px) {
-  .LTProductsCarousel3Content {
+  .LTProductsCarousel4Content {
     grid-template-columns: 1fr;
     gap: 32px;
   }
 
-  .LTProductsCarousel3Banner {
+  .LTProductsCarousel4Banner {
     height: 360px; /* más alto que 200px para respetar el diseño */
     padding: 26px;
   }
 
-  .LTProductsCarousel3BannerTitle {
+  .LTProductsCarousel4BannerTitle {
     font-size: 1.1rem;
   }
-  .LTProductsCarousel3BannerPercent {
+  .LTProductsCarousel4BannerPercent {
     font-size: 1.6rem;
   }
-  .LTPC3BannerBigWord {
+  .LTPC4BannerBigWord {
     font-size: 2rem;
   }
-  .LTProductsCarousel3BannerBrandName {
+  .LTProductsCarousel4BannerBrandName {
     font-size: 1.1rem;
   }
-  .LTProductsCarousel3BannerDescription {
+  .LTProductsCarousel4BannerDescription {
     font-size: 0.95rem;
   }
 }
 
 @media (max-width: 480px) {
-  .LTProductsCarousel3Products {
+  .LTProductsCarousel4Products {
     gap: 8px;
   }
-  .LTProductsCarousel3Arrow {
+  .LTProductsCarousel4Arrow {
     width: 40px;
     height: 40px;
   }

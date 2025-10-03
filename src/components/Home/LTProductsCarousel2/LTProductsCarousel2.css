@@ -28,117 +28,207 @@
   align-items: stretch;
 }
 
-/* Banner promocional estilo Farmacity */
+/* ===========================
+   BANNER “Lo último en Smartphones”
+   =========================== */
+:root {
+  --ltpc2-banner-bg: url("https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop");
+}
+
 .LTProductsCarousel2Banner {
-  background: linear-gradient(
-    135deg,
-    var(--lt-accent-color-variant2) 0%,
-    var(--lt-accent-color-variant2-dark) 100%
-  );
-  border-radius: 12px;
-  padding: 20px;
-  color: var(--lt-black-text-color);
-  height: 450px;
   position: relative;
+  height: 450px;
+  border-radius: 16px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  padding: 24px;
+  color: var(--lt-white-text-color);
+  background: #0e1116;
+  isolation: isolate;
+  box-shadow: var(--lt-shadow-lg);
+  border: 1px solid rgba(13, 13, 13, 0.25);
+}
+
+/* Fondo con imagen */
+.LTProductsCarousel2Banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--ltpc2-banner-bg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0.95) contrast(1.1) saturate(1.1);
+  transform: scale(1.02);
+  z-index: -2;
+}
+
+/* Overlay */
+.LTProductsCarousel2Banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 20, 0.35) 0%,
+    rgba(10, 14, 18, 0.8) 70%,
+    rgba(10, 14, 18, 0.95) 100%
+  );
+  z-index: -1;
 }
 
 .LTProductsCarousel2BannerContent {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 32px;
+  padding: 6px 2px;
 }
 
-.LTProductsCarousel2BannerTop {
+.LTProductsCarousel2BannerChips {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .LTProductsCarousel2BannerBadge {
-  background: var(--lt-accent-color-variant2-dark);
-  color: var(--lt-background-color);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-  display: inline-block;
-  width: fit-content;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-variant2-dark),
+    var(--lt-accent-color-variant2)
+  );
+  color: var(--lt-black-text-color);
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
-  font-family: "Inter", sans-serif;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
 }
 
 .LTProductsCarousel2BannerDate {
-  font-size: 14px;
+  margin-left: auto;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(12, 16, 24, 0.55),
+    rgba(12, 18, 26, 0.4)
+  );
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 11px;
   font-weight: 600;
-  font-family: "Inter", sans-serif;
-  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  backdrop-filter: blur(12px);
 }
 
-.LTProductsCarousel2BannerOffer {
+.LTProductsCarousel2BannerHeadline {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 16px;
+  gap: 12px;
+}
+
+.LTProductsCarousel2BannerKicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--lt-accent-color-variant2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.LTProductsCarousel2BannerKicker::before {
+  content: "";
+  width: 32px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--lt-accent-color-variant2);
+  opacity: 0.8;
 }
 
 .LTProductsCarousel2BannerTitle {
-  font-size: 16px;
-  font-weight: 600;
-  font-family: "Inter", sans-serif;
-  margin-bottom: 4px;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #f5f7ff;
+  max-width: 20ch;
 }
 
-.LTProductsCarousel2BannerPercent {
-  font-size: 72px;
-  font-weight: 900;
-  font-family: "Inter", sans-serif;
-  line-height: 0.8;
-  color: var(--lt-text-color); /* Usar color de texto principal */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.LTProductsCarousel2BannerTitle span {
+  display: inline-block;
+  background: linear-gradient(135deg, #f8d56b 0%, #ff8f5a 50%, #ff64d2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.LTProductsCarousel2BannerPercentSymbol {
-  font-size: 32px;
-}
-
-.LTProductsCarousel2BannerOff {
-  font-size: 20px;
-  font-weight: 700;
-  font-family: "Inter", sans-serif;
-  margin-top: -5px;
-}
-
-.LTProductsCarousel2BannerMiddle {
-  flex: 1;
+.LTProductsCarousel2BannerBody {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.LTProductsCarousel2BannerBrand {
-  margin-bottom: 16px;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
 }
 
 .LTProductsCarousel2BannerBrandName {
+  width: 100%;
   font-size: 18px;
-  font-weight: 400;
-  font-family: "Inter", sans-serif;
-  font-style: italic;
-  margin-bottom: 4px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--lt-accent-color-variant2);
+  text-align: left;
+  margin: 0;
+  line-height: 0;
 }
 
 .LTProductsCarousel2BannerDescription {
+  margin: 0;
+  width: 100%;
+  font-size: 11px !important;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: none;
+  text-align: left !important;
+}
+
+.LTProductsCarousel2BannerButton {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-variant2-dark),
+    var(--lt-accent-color-variant2)
+  );
+  color: var(--lt-black-text-color);
+  font-weight: 700;
   font-size: 13px;
-  font-weight: 400;
-  line-height: 1.3;
-  font-family: "Inter", sans-serif;
-  opacity: 0.9;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.LTProductsCarousel2BannerButton:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
 }
 
 /* Contenedor de productos con navegación */

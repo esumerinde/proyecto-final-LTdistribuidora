@@ -1,0 +1,729 @@
+/* --- Estilos copiados de LTProductsCarouselMobile --- */
+.LTProductsCarousel4MobileNav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 480px;
+}
+.LTProductsCarousel4MobileNav__center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.LTProductsCarousel4Mobile__slideTrack {
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  flex-direction: column;
+  padding-bottom: 64px;
+}
+.LTProductsCarousel4Mobile__indicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 0 auto;
+  position: relative;
+  left: unset;
+  right: unset;
+  bottom: unset;
+  z-index: 20;
+}
+/* Flechas de navegación NUEVO SISTEMA */
+.LTProductsCarousel4MobileNavArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+}
+.LTProductsCarousel4MobileNavArrow--left {
+  left: 0.2rem;
+}
+.LTProductsCarousel4MobileNavArrow--right {
+  right: 0.2rem;
+}
+.LTProductsCarousel4MobileArrow {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.LTProductsCarousel4MobileArrow:active {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+.LTProductsCarousel4MobileArrow svg {
+  display: block;
+  width: 28px;
+  height: 28px;
+  fill: #222;
+}
+.LTProductsCarousel4Mobile__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lt-accent-color-variant2);
+  opacity: 0.6;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.2s, box-shadow 0.2s;
+}
+.LTProductsCarousel4Mobile__indicator--active {
+  opacity: 1;
+  background: var(--lt-accent-color-variant2-dark);
+}
+.LTProductsCarousel4Mobile__wrapper {
+  width: 100vw;
+  min-height: 540px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 0 32px 0;
+}
+.LTProductsCarousel4Mobile__container {
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md) 32px var(--lt-spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+.LTProductsCarousel4Mobile__title {
+  text-align: center;
+  font-family: var(--lt-font-family, "Inter", sans-serif);
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--lt-white-text-color, #fff);
+  margin: 32px 0 24px 0;
+  width: 100vw;
+  display: block;
+  line-height: 1.1;
+}
+.LTProductsCarousel4Mobile__nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100vw;
+  gap: 0;
+  min-height: 480px;
+}
+.LTProductsCarousel4Mobile__card {
+  background: var(--lt-background-color, #f7f7f2);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 240px;
+  min-width: 180px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 18px 12px 16px 12px;
+  position: relative;
+  border: 1px solid var(--lt-black-text-color);
+  transition: box-shadow 0.2s, transform 0.5s cubic-bezier(0.7, 0.2, 0.3, 1),
+    opacity 0.5s cubic-bezier(0.7, 0.2, 0.3, 1);
+  will-change: transform, opacity;
+  opacity: 1;
+}
+.LTProductsCarousel4Mobile__discount {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-white-text-color, #fff);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.LTProductsCarousel4Mobile__image {
+  width: 100%;
+  height: 200px;
+  background: var(--lt-accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+.LTProductsCarousel4Mobile__image svg {
+  width: 40px;
+  height: 40px;
+  fill: var(--lt-text-color, #222);
+  opacity: 0.6;
+}
+.LTProductsCarousel4Mobile__info {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+.LTProductsCarousel4Mobile__category {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--lt-primary-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.LTProductsCarousel4Mobile__titleCard {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lt-black-text-color, #222);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.LTProductsCarousel4Mobile__priceOld {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--lt-text-muted, #888);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+}
+.LTProductsCarousel4Mobile__priceNew {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lt-accent-color-variant2-dark);
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.LTProductsCarousel4Mobile__actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+.LTProductsCarousel4Mobile__addBtn {
+  flex: 1;
+  background: var(--lt-accent-color-variant2);
+  color: var(--lt-black-text-color, #222);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  height: 40px;
+  border: var(--lt-border-color, #bfc8f7) solid 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.LTProductsCarousel4Mobile__actionIcon {
+  width: 16px;
+  height: 16px;
+  filter: var(--lt-white-svg-filter);
+}
+.LTProductsCarousel4Mobile__favBtn {
+  background: transparent;
+  border: none;
+  padding: 0 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Banner de propaganda y oferta rediseñado y responsive */
+.LTProductsCarousel4MobileBanner {
+  background: linear-gradient(
+    120deg,
+    var(--lt-accent-color-variant2) 60%,
+    var(--lt-accent-color-variant2-dark) 100%
+  );
+  color: var(--lt-black-text-color);
+  border-radius: 1.2rem;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  padding: 1.5rem 1.1rem 1.2rem 1.1rem;
+  margin-bottom: 1.3rem;
+}
+.LTProductsCarousel4MobileBanner::before {
+  content: "";
+  position: absolute;
+  right: -40px;
+  top: 10px;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  z-index: 0;
+}
+.LTProductsCarousel4MobileBannerTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  background: var(--lt-accent-color-variant2-dark);
+  color: #fff;
+  border-radius: 1rem;
+  display: inline-block;
+  padding: 0.18rem 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+  max-width: 70vw;
+  min-width: 120px;
+  text-align: center;
+}
+.LTProductsCarousel4MobileBannerSubtitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.LTProductsCarousel4MobileBannerOfferMain {
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #222;
+  line-height: 1;
+  letter-spacing: -2px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.LTProductsCarousel4MobileBannerOfferText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+  margin-left: 0.2rem;
+}
+.LTProductsCarousel4MobileBannerCategory {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: #222;
+  position: relative;
+  z-index: 1;
+}
+.LTProductsCarousel4MobileBannerDesc {
+  font-size: 0.98rem;
+  color: #333;
+  margin-bottom: 0.2rem;
+  position: relative;
+  z-index: 1;
+}
+.LTProductsCarousel4MobileBannerButton {
+  margin-top: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-white-text-color);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 500px) {
+  .LTProductsCarousel4MobileBanner {
+    width: 92vw;
+    max-width: 480px;
+    margin: 0 auto 1.2rem auto;
+    box-sizing: border-box;
+    padding: 1.2rem 1rem 1.1rem 1rem;
+    border-radius: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .LTProductsCarousel4MobileBannerTitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  .LTProductsCarousel4MobileBannerSubtitle {
+    font-size: 0.98rem;
+    margin-bottom: 0.3rem;
+    color: #222;
+  }
+  .LTProductsCarousel4MobileBannerOfferMain {
+    font-size: 1.45rem;
+    margin-bottom: 0.2rem;
+  }
+  .LTProductsCarousel4MobileBannerButton {
+    margin-top: 0.5rem;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.98rem;
+    align-self: flex-start;
+  }
+  .LTProductsCarousel4MobileBanner::before {
+    right: -30px;
+    width: 60px;
+    height: 60px;
+  }
+}
+.LTProductsCarousel4MobileBannerTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.LTProductsCarousel4MobileBannerSubtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.LTProductsCarousel4MobileBannerOffer {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--lt-accent-color-variant2-dark);
+  margin-bottom: 0.2rem;
+}
+.LTProductsCarousel4MobileBannerButton {
+  margin-top: 0.7rem;
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-white-text-color);
+  border: none;
+  cursor: pointer;
+}
+
+/* Carrusel de productos mobile: 1 card por vista, responsive */
+/* Carrusel de productos mobile: 1 card por vista, responsive y centrado */
+/* Desktop styles remain unchanged */
+.LTProductsCarousel4MobileCards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  position: relative;
+  min-height: 340px;
+  overflow-x: hidden;
+}
+.LTProductsCarousel4MobileCard {
+  background: var(--lt-background-color);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  padding: 1.1rem 0.7rem 1.1rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+/* SOLO MOBILE: 1 card centrada y ancho total */
+@media (max-width: 500px) {
+  .LTProductsCarousel4MobileBanner {
+    width: 92vw;
+    max-width: 480px;
+    margin: 0 auto 1.2rem auto;
+    box-sizing: border-box;
+    padding: 1.2rem 1rem 1.1rem 1rem;
+    border-radius: 1.1rem;
+    background: linear-gradient(
+      120deg,
+      var(--lt-accent-color-variant2) 60%,
+      var(--lt-accent-color-variant2-dark) 100%
+    );
+    color: var(--lt-black-text-color);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
+  }
+  .LTProductsCarousel4MobileBannerTitle {
+    font-size: 1rem;
+    font-weight: 700;
+    background: var(--lt-accent-color-variant2-dark);
+    color: #fff;
+    border-radius: 1rem;
+    display: inline-block;
+    padding: 0.18rem 1rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .LTProductsCarousel4MobileBannerSubtitle {
+    font-size: 0.98rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #222;
+  }
+  .LTProductsCarousel4MobileBannerOfferMain {
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #222;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 0.2rem;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    display: block;
+  }
+  .LTProductsCarousel4MobileBannerOfferText {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #222;
+    margin-left: 0.1rem;
+  }
+  .LTProductsCarousel4MobileBannerCategory {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.1rem;
+    color: #222;
+    position: relative;
+    z-index: 1;
+  }
+  .LTProductsCarousel4MobileBannerDesc {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 0.1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .LTProductsCarousel4MobileBannerButton {
+    margin-top: 0.5rem;
+    padding: 0.45rem 1.1rem;
+    border-radius: 0.7rem;
+    font-size: 0.98rem;
+    font-weight: 600;
+    background: var(--lt-accent-color-variant2-dark);
+    color: var(--lt-white-text-color);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    align-self: flex-start;
+  }
+  .LTProductsCarousel4MobileBanner::before {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: 10px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    z-index: 0;
+  }
+}
+.LTProductsCarousel4MobileCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  text-align: center;
+}
+.LTProductsCarousel4MobileCardBrand {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--lt-muted-text-color);
+  margin-bottom: 0.2rem;
+}
+.LTProductsCarousel4MobileCardPriceOld {
+  font-size: 0.95rem;
+  color: var(--lt-muted-text-color);
+  text-decoration: line-through;
+}
+.LTProductsCarousel4MobileCardPriceNew {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--lt-accent-color-variant2-dark);
+}
+.LTProductsCarousel4MobileCardActions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Indicadores de navegación */
+.LTProductsCarousel4MobileIndicators {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.LTProductsCarousel4MobileIndicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--lt-accent-color-variant2);
+  opacity: 0.5;
+  transition: opacity 0.2s, background 0.2s;
+}
+.LTProductsCarousel4MobileIndicator--active {
+  opacity: 1;
+  background: var(--lt-accent-color-variant2-dark);
+}
+
+/* --- Responsive: todos los breakpoints al final --- */
+
+@media (max-width: 600px) {
+  .LTProductsCarousel4MobileNavArrow {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+  }
+  .LTProductsCarousel4MobileNavArrow--left {
+    left: 8px;
+  }
+  .LTProductsCarousel4MobileNavArrow--right {
+    right: 8px;
+  }
+}
+
+@media (max-width: 420px) {
+  .LTProductsCarousel4MobileNavArrow {
+    bottom: 18px;
+    width: 34px;
+    height: 34px;
+  }
+  .LTProductsCarousel4MobileNavArrow--left {
+    left: 4px;
+  }
+  .LTProductsCarousel4MobileNavArrow--right {
+    right: 4px;
+  }
+}
+
+@media (max-width: 400px) {
+  .LTProductsCarousel4MobileNavArrow {
+    bottom: 14px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 375px) {
+  .LTProductsCarousel4MobileNavArrow {
+    bottom: 9px;
+    width: 27px;
+    height: 27px;
+  }
+  .LTProductsCarousel4MobileNavArrow--left {
+    left: 3px;
+  }
+  .LTProductsCarousel4MobileNavArrow--right {
+    right: 3px;
+  }
+  .LTProductsCarousel4Mobile__card {
+    max-width: 220px;
+    min-width: 170px;
+    padding: 1.1rem 0.6rem 1.1rem 0.6rem;
+  }
+  .LTProductsCarousel4MobileIndicators,
+  .LTProductsCarousel4Mobile__indicators {
+    gap: 0.35rem;
+    margin-top: 0.7rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel4MobileIndicator,
+  .LTProductsCarousel4Mobile__indicator {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .LTProductsCarousel4MobileNavArrow {
+    bottom: 8px;
+    width: 26px;
+    height: 26px;
+  }
+  .LTProductsCarousel4MobileNavArrow--left {
+    left: 2px;
+  }
+  .LTProductsCarousel4MobileNavArrow--right {
+    right: 2px;
+  }
+  .LTProductsCarousel4Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel4MobileIndicators,
+  .LTProductsCarousel4Mobile__indicators {
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel4MobileIndicator,
+  .LTProductsCarousel4Mobile__indicator {
+    width: 11px;
+    height: 11px;
+  }
+}
+
+@media (max-width: 300px) {
+  .LTProductsCarousel4MobileNavArrow {
+    bottom: 6px;
+    width: 24px;
+    height: 24px;
+  }
+  .LTProductsCarousel4Mobile__card {
+    max-width: 210px;
+    min-width: 160px;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+  .LTProductsCarousel4MobileIndicators,
+  .LTProductsCarousel4Mobile__indicators {
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .LTProductsCarousel4MobileIndicator,
+  .LTProductsCarousel4Mobile__indicator {
+    width: 10px;
+    height: 10px;
+  }
+}
