@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./LTProductsCarousel.css";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
@@ -17,19 +17,30 @@ const LTProductsCarousel = () => {
   // Calcula cuántos slides hay en total
   const totalSlides = Math.ceil(products.length / itemsPerSlide);
 
-  // Navegación: ir al slide anterior
+  // Navegación: ir al slide anterior (infinito)
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
     );
   };
 
-  // Navegación: ir al slide siguiente
+  // Navegación: ir al slide siguiente (infinito)
   const goToNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
     );
   };
+
+  // Autoplay: avanza cada 5 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [totalSlides]);
 
   // Marcar/desmarcar favorito (esto se puede conectar al backend)
   const toggleFavorite = (id) => {
@@ -59,11 +70,8 @@ const LTProductsCarousel = () => {
             </div>
             {/* Flecha para ir al slide anterior */}
             <button
-              className={`LTProductsCarouselGradientArrow${
-                currentIndex === 0 ? " disabled" : ""
-              }`}
+              className="LTProductsCarouselGradientArrow"
               onClick={goToPrevious}
-              disabled={currentIndex === 0}
             >
               <svg viewBox="0 0 24 24">
                 <path d="M14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59L14 6z" />
@@ -179,11 +187,8 @@ const LTProductsCarousel = () => {
             </div>
             {/* Flecha para ir al slide siguiente */}
             <button
-              className={`LTProductsCarouselGradientArrow${
-                currentIndex === totalSlides - 1 ? " disabled" : ""
-              }`}
+              className="LTProductsCarouselGradientArrow"
               onClick={goToNext}
-              disabled={currentIndex === totalSlides - 1}
             >
               <svg viewBox="0 0 24 24">
                 <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />

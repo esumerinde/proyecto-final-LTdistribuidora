@@ -93,30 +93,43 @@ const LTProductsCarousel4Mobile = () => {
   return (
     <section className="LTProductsCarousel4Mobile__wrapper">
       <div className="LTProductsCarousel4Mobile__container">
-        <div className="LTProductsCarousel4MobileBanner">
-          <div className="LTProductsCarousel4MobileBannerTitle">
-            ELECTRÓNICA
+        <div
+          className="LTProductsCarousel4MobileBanner"
+          style={{
+            "--ltpc4-banner-bg":
+              "url('https://images.pexels.com/photos/12366700/pexels-photo-12366700.jpeg')",
+          }}
+        >
+          <div className="LTProductsCarousel4MobileBannerContent">
+            <div className="LTProductsCarousel4MobileBannerChips">
+              <span className="LTProductsCarousel4MobileBannerBadge">
+                CÁMARAS
+              </span>
+              <span className="LTProductsCarousel4MobileBannerDate">Nuevo</span>
+            </div>
+
+            <div className="LTProductsCarousel4MobileBannerHeadline">
+              <span className="LTProductsCarousel4MobileBannerKicker">
+                Descubrí
+              </span>
+              <h3 className="LTProductsCarousel4MobileBannerTitle">
+                Lo último en <span>Cámaras</span>
+              </h3>
+            </div>
+
+            <div className="LTProductsCarousel4MobileBannerBody">
+              <div className="LTProductsCarousel4MobileBannerBrandName">
+                Canon EOS R5
+              </div>
+              <p className="LTProductsCarousel4MobileBannerDescription">
+                Precisión, calidad y tecnología avanzada
+              </p>
+
+              <button className="LTProductsCarousel4MobileBannerButton lt-button-variant2">
+                VER MÁS
+              </button>
+            </div>
           </div>
-          <div className="LTProductsCarousel4MobileBannerSubtitle">
-            Válido hasta el 31 de diciembre
-          </div>
-          <div className="LTProductsCarousel4MobileBannerOffer">
-            <span className="LTProductsCarousel4MobileBannerOfferMain">
-              HASTA 40%
-            </span>
-            <span className="LTProductsCarousel4MobileBannerOfferText">
-              OFF
-            </span>
-          </div>
-          <div className="LTProductsCarousel4MobileBannerCategory">
-            Electrónica
-          </div>
-          <div className="LTProductsCarousel4MobileBannerDesc">
-            Los mejores dispositivos y componentes
-          </div>
-          <button className="LTProductsCarousel4MobileBannerButton">
-            Ver ofertas
-          </button>
         </div>
         <div className="LTProductsCarousel4MobileNav">
           <div className="LTProductsCarousel4MobileNav__arrow LTProductsCarousel4MobileNav__arrow--left">

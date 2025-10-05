@@ -3,77 +3,91 @@
   width: 100%;
   padding: 60px 0; /* Aumentado de 40px a 60px */
   background-color: var(--lt-background-color); /* Usa el beige del tema */
-}
 
-.LTProductsCarousel2Container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 20px;
-}
+  .LTProductsCarousel2Container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
 
-.LTProductsCarousel2Title {
-  font-family: "Inter", sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--lt-text-color); /* Usa el color de texto del tema */
-  text-align: center;
-  margin: 0 0 40px 0;
-}
+  .LTProductsCarousel2Title {
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--lt-text-color); /* Usa el color de texto del tema */
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
 
-/* Layout principal - Banner + 4 cards */
-.LTProductsCarousel2Content {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-  align-items: stretch;
-}
+  /* Layout principal - Banner + 4 cards */
+  .LTProductsCarousel2Content {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
 
-/* ===========================
+  /* ===========================
    BANNER “Lo último en Smartphones”
    =========================== */
-:root {
-  --ltpc2-banner-bg: url("https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop");
-}
+  :root {
+    --ltpc2-banner-bg: url("https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop");
+    --ltpc2-overlay-gradient: linear-gradient(
+      145deg,
+      rgba(84, 45, 19, 0.55) 0%,
+      rgba(120, 72, 31, 0.62) 46%,
+      rgba(163, 98, 46, 0.68) 100%
+    );
+  }
 
-.LTProductsCarousel2Banner {
-  position: relative;
-  height: 450px;
-  border-radius: 16px;
-  overflow: hidden;
-  padding: 24px;
-  color: var(--lt-white-text-color);
-  background: #0e1116;
-  isolation: isolate;
-  box-shadow: var(--lt-shadow-lg);
-  border: 1px solid rgba(13, 13, 13, 0.25);
-}
+  .LTProductsCarousel2Banner {
+    position: relative;
+    height: 450px;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 24px;
+    color: var(--lt-white-text-color);
+    background: #1f1436;
+    isolation: isolate;
+    box-shadow: 0 24px 50px -28px rgba(125, 67, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
 
-/* Fondo con imagen */
-.LTProductsCarousel2Banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--ltpc2-banner-bg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: brightness(0.95) contrast(1.1) saturate(1.1);
-  transform: scale(1.02);
-  z-index: -2;
-}
+  /* Fondo con imagen */
+  .LTProductsCarousel2Banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--ltpc2-banner-bg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(0.95) saturate(1.05) contrast(1.02);
+    z-index: -2;
+    transition: transform 0.4s ease;
+  }
 
-/* Overlay */
-.LTProductsCarousel2Banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 10, 20, 0.35) 0%,
-    rgba(10, 14, 18, 0.8) 70%,
-    rgba(10, 14, 18, 0.95) 100%
-  );
-  z-index: -1;
+  /* Overlay */
+  .LTProductsCarousel2Banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      145deg,
+      rgba(84, 45, 19, 0.55) 0%,
+      rgba(120, 72, 31, 0.62) 46%,
+      rgba(163, 98, 46, 0.68) 100%
+    ) !important;
+    z-index: -1;
+    opacity: 0.92 !important;
+    transition: opacity 0.35s ease;
+  }
+
+  .LTProductsCarousel2Banner:hover {
+    transform: scale(1.04);
+    box-shadow: 0 32px 60px -24px rgba(247, 177, 93, 0.75);
+  }
 }
 
 .LTProductsCarousel2BannerContent {
@@ -337,7 +351,6 @@
   transform: scale(1.03) translateY(-2px);
   z-index: 2;
 }
-
 .LTProductsCarousel2Card:hover .LTProductsCarousel2ActionIcon {
   transform: scale(1.08);
 }

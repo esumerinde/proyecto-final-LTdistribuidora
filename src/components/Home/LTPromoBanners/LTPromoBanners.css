@@ -77,7 +77,6 @@
   background-size: cover;
   background-position: center;
   filter: brightness(0.95) saturate(1.05) contrast(1.02);
-  transform: scale(1.05);
   z-index: -2;
   transition: transform 0.4s ease;
 }
@@ -92,12 +91,9 @@
   transition: opacity 0.35s ease;
 }
 
-.LTPromoBanner:hover::before {
-  transform: scale(1.08);
-}
-
-.LTPromoBanner:hover::after {
-  opacity: 0.88;
+.LTPromoBanner:hover {
+  transform: scale(1.04);
+  box-shadow: 0 32px 60px -24px rgba(67, 0, 125, 0.75);
 }
 
 /* Contenido del banner */

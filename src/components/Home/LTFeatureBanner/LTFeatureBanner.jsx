@@ -1,4 +1,5 @@
 import "./LTFeatureBanner.css";
+import { useEffect } from "react";
 
 // Importa los íconos SVG usados en las cards de features
 // Si se agregan más features, agregar el ícono correspondiente acá
@@ -146,6 +147,17 @@ const LTFeatureBanner = () => {
   const goToSlide = (idx) => {
     setCurrentIndex(idx);
   };
+
+  // Autoplay: avanza cada 3 segundos solo en mobile
+  useEffect(() => {
+    if (!isMobile) return; // Solo en mobile
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % totalSlides);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isMobile, totalSlides, setCurrentIndex]);
 
   // Renderiza el banner de features con carrusel y navegación
   // Cuando se pase a backend, el array de features debe venir de la API

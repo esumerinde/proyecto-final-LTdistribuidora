@@ -93,30 +93,43 @@ const LTProductsCarousel3Mobile = () => {
   return (
     <section className="LTProductsCarousel3Mobile__wrapper">
       <div className="LTProductsCarousel3Mobile__container">
-        <div className="LTProductsCarousel3MobileBanner">
-          <div className="LTProductsCarousel3MobileBannerTitle">
-            ELECTRÓNICA
+        <div
+          className="LTProductsCarousel3MobileBanner"
+          style={{
+            "--ltpc3-banner-bg":
+              "url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?q=80&w=1200&auto=format&fit=crop')",
+          }}
+        >
+          <div className="LTProductsCarousel3MobileBannerContent">
+            <div className="LTProductsCarousel3MobileBannerChips">
+              <span className="LTProductsCarousel3MobileBannerBadge">
+                GAMING
+              </span>
+              <span className="LTProductsCarousel3MobileBannerDate">Nuevo</span>
+            </div>
+
+            <div className="LTProductsCarousel3MobileBannerHeadline">
+              <span className="LTProductsCarousel3MobileBannerKicker">
+                Descubrí
+              </span>
+              <h3 className="LTProductsCarousel3MobileBannerTitle">
+                Lo último en <span>Gaming</span>
+              </h3>
+            </div>
+
+            <div className="LTProductsCarousel3MobileBannerBody">
+              <div className="LTProductsCarousel3MobileBannerBrandName">
+                ASUS ROG Strix
+              </div>
+              <p className="LTProductsCarousel3MobileBannerDescription">
+                Potencia, portabilidad y rendimiento
+              </p>
+
+              <button className="LTProductsCarousel3MobileBannerButton lt-button-variant2">
+                VER MÁS
+              </button>
+            </div>
           </div>
-          <div className="LTProductsCarousel3MobileBannerSubtitle">
-            Válido hasta el 31 de diciembre
-          </div>
-          <div className="LTProductsCarousel3MobileBannerOffer">
-            <span className="LTProductsCarousel3MobileBannerOfferMain">
-              HASTA 40%
-            </span>
-            <span className="LTProductsCarousel3MobileBannerOfferText">
-              OFF
-            </span>
-          </div>
-          <div className="LTProductsCarousel3MobileBannerCategory">
-            Electrónica
-          </div>
-          <div className="LTProductsCarousel3MobileBannerDesc">
-            Los mejores dispositivos y componentes
-          </div>
-          <button className="LTProductsCarousel3MobileBannerButton">
-            Ver ofertas
-          </button>
         </div>
         <div className="LTProductsCarousel3MobileNav">
           <div className="LTProductsCarousel3MobileNav__arrow LTProductsCarousel3MobileNav__arrow--left">

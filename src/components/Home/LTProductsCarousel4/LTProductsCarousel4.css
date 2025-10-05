@@ -1,86 +1,93 @@
-/* =========================================
-   LTProductsCarousel4 - Estilos completos
-   (incluye banner adaptado a “Lo último en Gaming”)
-   ========================================= */
-
-/* Imagen de fondo del banner (cambiá la URL si querés) */
-:root {
-  --ltpc4-banner-bg: url("https://images.pexels.com/photos/12366700/pexels-photo-12366700.jpeg");
-}
-
 /* LTProductsCarousel4 - Diseño estilo Farmacity con paleta natural */
 .LTProductsCarousel4Wrapper {
   width: 100%;
   padding: 60px 0; /* Aumentado de 40px a 60px */
   background-color: var(--lt-background-color); /* Usa el beige del tema */
-}
 
-.LTProductsCarousel4Container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 24px 20px;
-}
+  .LTProductsCarousel4Container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
 
-.LTProductsCarousel4Title {
-  font-family: "Inter", sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--lt-text-color); /* Usa el color de texto del tema */
-  text-align: center;
-  margin: 0 0 40px 0;
-}
+  .LTProductsCarousel4Title {
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--lt-text-color); /* Usa el color de texto del tema */
+    text-align: center;
+    margin: 0 0 40px 0;
+  }
 
-/* Layout principal - Banner + 4 cards */
-.LTProductsCarousel4Content {
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-  align-items: stretch;
-}
+  /* Layout principal - Banner + 4 cards */
+  .LTProductsCarousel4Content {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 24px;
+    align-items: stretch;
+  }
 
-/* ===========================
-   BANNER “Lo último en Gaming”
-   (card con imagen + overlay)
+  /* ===========================
+   BANNER “Lo último en Smartphones”
    =========================== */
-.LTProductsCarousel4Banner {
-  position: relative;
-  height: 450px;
-  border-radius: 16px;
-  overflow: hidden;
-  padding: 24px;
-  color: var(--lt-white-text-color);
-  background: #0e1116; /* fallback */
-  isolation: isolate;
-  box-shadow: var(--lt-shadow-lg);
-  border: 1px solid rgba(13, 13, 13, 0.25);
-}
+  :root {
+    --ltpc4-banner-bg: url("https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop");
+    --ltpc4-overlay-gradient: linear-gradient(
+      145deg,
+      rgba(84, 45, 19, 0.55) 0%,
+      rgba(120, 72, 31, 0.62) 46%,
+      rgba(163, 98, 46, 0.68) 100%
+    );
+  }
 
-/* Fondo con imagen */
-.LTProductsCarousel4Banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: var(--ltpc4-banner-bg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  filter: brightness(0.95) contrast(1.1) saturate(1.1);
-  transform: scale(1.02);
-  z-index: -2;
-}
+  .LTProductsCarousel4Banner {
+    position: relative;
+    height: 450px;
+    border-radius: 16px;
+    overflow: hidden;
+    padding: 24px;
+    color: var(--lt-white-text-color);
+    background: #1f1436;
+    isolation: isolate;
+    box-shadow: 0 24px 50px -28px rgba(125, 67, 0, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+  }
 
-/* Overlay para legibilidad */
-.LTProductsCarousel4Banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(10, 10, 20, 0.35) 0%,
-    rgba(10, 14, 18, 0.8) 70%,
-    rgba(10, 14, 18, 0.95) 100%
-  );
-  z-index: -1;
+  /* Fondo con imagen */
+  .LTProductsCarousel4Banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--ltpc4-banner-bg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: brightness(0.95) saturate(1.05) contrast(1.02);
+    z-index: -2;
+    transition: transform 0.4s ease;
+  }
+
+  /* Overlay */
+  .LTProductsCarousel4Banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      145deg,
+      rgba(84, 45, 19, 0.55) 0%,
+      rgba(120, 72, 31, 0.62) 46%,
+      rgba(163, 98, 46, 0.68) 100%
+    ) !important;
+    z-index: -1;
+    opacity: 0.92 !important;
+    transition: opacity 0.35s ease;
+  }
+
+  .LTProductsCarousel4Banner:hover {
+    transform: scale(1.04);
+    box-shadow: 0 32px 60px -24px rgba(247, 177, 93, 0.75);
+  }
 }
 
 .LTProductsCarousel4BannerContent {
@@ -210,16 +217,10 @@
   text-align: left !important;
 }
 
-.LTProductsCarousel4BannerBody > * {
-  align-self: flex-start;
-  text-align: left;
-}
-
 .LTProductsCarousel4BannerButton {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  margin: 0;
   padding: 10px 20px;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.6);
@@ -244,9 +245,7 @@
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
 }
 
-/* ===========================
-   Productos (sin cambios visuales mayores)
-   =========================== */
+/* Contenedor de productos con navegación */
 .LTProductsCarousel4ProductsContainer {
   display: flex;
   align-items: center;
@@ -352,7 +351,6 @@
   transform: scale(1.03) translateY(-2px);
   z-index: 2;
 }
-
 .LTProductsCarousel4Card:hover .LTProductsCarousel4ActionIcon {
   transform: scale(1.08);
 }
@@ -556,9 +554,7 @@
   box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2); /* Sombra violeta */
 }
 
-/* ===========================
-   Responsive
-   =========================== */
+/* Responsive */
 @media (max-width: 768px) {
   .LTProductsCarousel4Content {
     grid-template-columns: 1fr;
@@ -566,31 +562,27 @@
   }
 
   .LTProductsCarousel4Banner {
-    height: 360px; /* más alto que 200px para respetar el diseño */
-    padding: 26px;
+    height: 200px;
   }
 
-  .LTProductsCarousel4BannerTitle {
-    font-size: 1.1rem;
-  }
   .LTProductsCarousel4BannerPercent {
-    font-size: 1.6rem;
+    font-size: 48px;
   }
-  .LTPC4BannerBigWord {
-    font-size: 2rem;
-  }
-  .LTProductsCarousel4BannerBrandName {
-    font-size: 1.1rem;
-  }
-  .LTProductsCarousel4BannerDescription {
-    font-size: 0.95rem;
+
+  .LTProductsCarousel4Slide {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 480px) {
+  .LTProductsCarousel4Slide {
+    grid-template-columns: 1fr;
+  }
+
   .LTProductsCarousel4Products {
     gap: 8px;
   }
+
   .LTProductsCarousel4Arrow {
     width: 40px;
     height: 40px;

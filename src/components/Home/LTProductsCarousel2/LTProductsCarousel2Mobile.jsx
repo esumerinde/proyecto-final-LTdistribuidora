@@ -93,30 +93,43 @@ const LTProductsCarousel2Mobile = () => {
   return (
     <section className="LTProductsCarousel2Mobile__wrapper">
       <div className="LTProductsCarousel2Mobile__container">
-        <div className="LTProductsCarousel2MobileBanner">
-          <div className="LTProductsCarousel2MobileBannerTitle">
-            ELECTRÓNICA
+        <div
+          className="LTProductsCarousel2MobileBanner"
+          style={{
+            "--ltpc2-banner-bg":
+              "url('https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop')",
+          }}
+        >
+          <div className="LTProductsCarousel2MobileBannerContent">
+            <div className="LTProductsCarousel2MobileBannerChips">
+              <span className="LTProductsCarousel2MobileBannerBadge">
+                CELULARES
+              </span>
+              <span className="LTProductsCarousel2MobileBannerDate">Nuevo</span>
+            </div>
+
+            <div className="LTProductsCarousel2MobileBannerHeadline">
+              <span className="LTProductsCarousel2MobileBannerKicker">
+                Descubrí
+              </span>
+              <h3 className="LTProductsCarousel2MobileBannerTitle">
+                Lo último en <span>Celulares</span>
+              </h3>
+            </div>
+
+            <div className="LTProductsCarousel2MobileBannerBody">
+              <div className="LTProductsCarousel2MobileBannerBrandName">
+                iPhone 14 Pro
+              </div>
+              <p className="LTProductsCarousel2MobileBannerDescription">
+                Innovación, diseño y potencia
+              </p>
+
+              <button className="LTProductsCarousel2MobileBannerButton lt-button-variant2">
+                VER MÁS
+              </button>
+            </div>
           </div>
-          <div className="LTProductsCarousel2MobileBannerSubtitle">
-            Válido hasta el 31 de diciembre
-          </div>
-          <div className="LTProductsCarousel2MobileBannerOffer">
-            <span className="LTProductsCarousel2MobileBannerOfferMain">
-              HASTA 40%
-            </span>
-            <span className="LTProductsCarousel2MobileBannerOfferText">
-              OFF
-            </span>
-          </div>
-          <div className="LTProductsCarousel2MobileBannerCategory">
-            Electrónica
-          </div>
-          <div className="LTProductsCarousel2MobileBannerDesc">
-            Los mejores dispositivos y componentes
-          </div>
-          <button className="LTProductsCarousel2MobileBannerButton">
-            Ver ofertas
-          </button>
         </div>
         <div className="LTProductsCarousel2MobileNav">
           <div className="LTProductsCarousel2MobileNav__arrow LTProductsCarousel2MobileNav__arrow--left">
