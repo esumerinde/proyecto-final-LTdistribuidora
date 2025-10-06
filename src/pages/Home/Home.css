@@ -15,6 +15,9 @@
     margin: 0 !important;
     padding: 0 !important;
   }
+  .lt-hero-with-offers {
+    height: 500px; /* Aumentado de 400px a 500px para hero más alto */
+  }
 }
 /* Estilos de la página Home */
 .lt-home-wrapper {
@@ -29,6 +32,29 @@
   margin-top: 125px; /* 60px navbar + 65px header */
   min-height: calc(100vh - 125px);
   width: 100%;
+}
+
+/* Contenedor del Hero con Ofertas superpuestas */
+.lt-hero-with-offers {
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  /* Reservar espacio para las cards de ofertas que están absolutamente posicionadas */
+  padding-bottom: 200px; /* Ajusta según la altura de tus cards + spacing deseado */
+  margin-bottom: 2rem; /* Separación adicional del siguiente componente */
+}
+
+@media (max-width: 1200px) {
+  .lt-hero-with-offers {
+    padding-bottom: 220px; /* Más espacio en tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .lt-hero-with-offers {
+    padding-bottom: 0; /* En mobile usa el carousel mobile que no es absoluto */
+    margin-bottom: 0;
+  }
 }
 
 .lt-home-main .lt-container,

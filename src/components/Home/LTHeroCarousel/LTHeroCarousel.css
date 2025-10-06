@@ -1,9 +1,9 @@
 ﻿/* Carrusel principal, fondo oscuro y layout centrado. Si el backend quiere cambiar el alto, hacerlo por variable. */
 .lt-hero-carousel-slider {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1600px; /* Hero más ancho que el resto (1200px) */
   margin: 0 auto;
-  height: 540px;
+  height: 740px;
   position: relative;
   display: flex;
   align-items: center;
@@ -42,6 +42,35 @@
     var(--lt-background-color) 0%,
     rgba(0, 0, 0, 0) 100%
   );
+  /* Gradientes radiales en las esquinas inferiores */
+  .lt-hero-carousel-corner-left {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 180px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(
+      ellipse 80% 60% at 0% 100%,
+      var(--lt-background-color) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  .lt-hero-carousel-corner-right {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 180px;
+    height: 120px;
+    pointer-events: none;
+    z-index: 5;
+    background: radial-gradient(
+      ellipse 80% 60% at 100% 100%,
+      var(--lt-background-color) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
 }
 
 /* Cada slide es una imagen de fondo. Solo el activo se ve, los demás quedan ocultos. */
@@ -56,6 +85,24 @@
   background-size: cover;
   background-position: center;
   z-index: 1;
+}
+
+/* Gradient overlay violeta sobre la imagen - con transparencia para ver la imagen */
+.lt-hero-carousel-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--lt-accent-color-dark) 45%, transparent) 0%,
+    color-mix(in srgb, var(--lt-accent-color) 50%, transparent) 46%,
+    color-mix(in srgb, var(--lt-accent-color-dark) 45%, transparent) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* El slide activo se muestra arriba de los demás. */
@@ -88,6 +135,25 @@
   .lt-hero-carousel-gradient {
     height: 180px;
   }
+}
+
+/* Fila de cards superpuestas sobre el carrusel. Si el backend quiere meter cards dinámicas, usar este contenedor. */
+.lt-hero-carousel-cards-row {
+  position: absolute;
+  left: 50%;
+  top: 80%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  gap: 32px;
+  z-index: 1002;
+  width: 100%;
+  justify-content: center;
+}
+/* Wrapper principal del carrusel, asegura stacking y espacio abajo. */
+.lt-hero-carousel-slider-wrapper {
+  position: relative;
+  min-height: 320px;
+  margin-bottom: clamp(200px, 30vw, 400px);
 }
 
 /* Fila de cards superpuestas sobre el carrusel. Si el backend quiere meter cards dinámicas, usar este contenedor. */

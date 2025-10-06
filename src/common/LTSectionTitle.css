@@ -1,0 +1,69 @@
+/* Ajuste para subrayado animado en subtítulo con lt-menu-hover */
+.lt-section-title-subtitle .lt-menu-hover {
+  min-width: 120px;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+/* ====== CONTENEDOR DEL TÍTULO ====== */
+/* Centrado absoluto sin depender del padre - TOTALMENTE RESPONSIVE */
+.brush-wrap {
+  position: relative;
+  display: block;
+  width: max-content;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(1rem, 3vh, 2.5rem) clamp(3rem, 12vw, 8rem);
+  text-align: center;
+  z-index: 0;
+  isolation: isolate;
+}
+
+/* Capa del pincel (fondo animado) detrás del texto */
+.brush-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--brushGradient, black);
+  z-index: 0;
+  clip-path: var(--clipPathRef);
+  -webkit-clip-path: var(--clipPathRef);
+  will-change: clip-path;
+}
+
+/* Título principal encima del pincel - RESPONSIVE */
+.lt-section-title-main {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-size: clamp(0.9rem, 4vw, 1.8rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 0;
+  color: white;
+  font-style: italic;
+  filter: drop-shadow(0 0 2px black);
+  letter-spacing: clamp(0.02em, 0.5vw, 0.05em);
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+  transition: opacity 0.5s;
+}
+
+/* Subtítulo opcional - RESPONSIVE */
+.lt-section-title-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
+  color: white;
+  margin: clamp(0.25rem, 1vw, 0.5rem) 0 0 0;
+  font-weight: 200;
+  letter-spacing: clamp(0.01em, 0.3vw, 0.03em);
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.5s;
+}
+
+.lt-section-title-hidden {
+  opacity: 0;
+  pointer-events: none;
+}

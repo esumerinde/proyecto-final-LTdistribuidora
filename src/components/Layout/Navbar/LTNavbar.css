@@ -21,6 +21,8 @@
 .LTNavbarWrapper {
   width: 100%;
   height: 55px;
+  min-height: 55px;
+  max-height: 55px;
   background: var(--lt-accent-color);
   border-bottom: 1px solid var(--lt-accent-color);
   position: fixed;
@@ -30,10 +32,13 @@
   text-decoration: none !important;
   box-shadow: 0 4px 18px rgba(116, 123, 191, 0.18);
   transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s;
+  margin: 0;
+  padding: 0;
 }
 
 .LTNavbarSticky {
-  /* No opacity, navbar stays solid */
+  /* Navbar sticky maintains solid appearance */
+  opacity: 1;
 }
 
 .LTNavbarContainer {

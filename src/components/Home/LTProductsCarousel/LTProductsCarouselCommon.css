@@ -1,0 +1,365 @@
+﻿/* ========================================
+   LTProductsCarouselCommon.css
+   Estilos compartidos entre LTProductsCarousel 2, 3 y 4
+   Incluye: wrapper, container, title, arrows, cards, pricing, actions
+   Solo cambian: banner específico, mocks, imagen de fondo
+   ======================================== */
+
+/* ===========================
+   WRAPPER Y CONTAINER
+   =========================== */
+.LTProductsCarouselWrapper {
+  width: 100%;
+  /* padding controlado por .lt-section-spacing */
+  background-color: var(--lt-background-color);
+}
+
+.LTProductsCarouselContainer {
+  max-width: var(--lt-container-width);
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+.LTProductsCarouselTitle {
+  font-family: "Inter", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--lt-text-color);
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+/* Layout principal - Banner + 4 cards */
+.LTProductsCarouselContent {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* ===========================
+   NAVIGATION ARROWS
+   =========================== */
+.LTProductsCarouselProductsContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: visible; /* Permitir que las cards se expandan en hover */
+  padding: 16px 0; /* Espacio para hover */
+}
+
+.LTProductsCarouselArrow {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: var(--lt-accent-color-variant2-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: visibility 0.7s, opacity 0.7s, box-shadow 0.3s, background 0.3s,
+    border 0.3s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--lt-black-text-color);
+  margin: 0 12px;
+}
+
+.LTProductsCarouselArrow:hover {
+  background: var(--lt-accent-color-variant2);
+  border-color: var(--lt-black-text-color);
+  color: var(--lt-black-text-color);
+}
+
+.LTProductsCarouselArrow.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+  transition: opacity 0.7s, visibility 0.7s;
+}
+
+.LTProductsCarouselArrow svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--lt-black-text-color);
+  transition: fill 0.3s ease;
+}
+
+/* ===========================
+   PRODUCTS GRID
+   =========================== */
+.LTProductsCarouselProducts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  flex: 1;
+  overflow: visible; /* Permitir que las cards se expandan en hover */
+  padding: 24px 16px; /* Padding arriba/abajo para evitar corte en hover */
+  min-height: 400px; /* Altura mínima para acomodar cards + hover */
+}
+
+/* ===========================
+   PRODUCT CARDS
+   =========================== */
+.LTProductsCarouselCard {
+  background: var(--lt-background-color);
+  border: 1px solid var(--lt-black-text-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.LTProductsCarouselCard:hover {
+  transform: scale(1.03) translateY(-4px);
+  z-index: 10; /* Mayor z-index para estar por encima */
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.LTProductsCarouselCard:hover .LTProductsCarouselActionIcon {
+  transform: scale(1.08);
+}
+
+/* Badge de descuento */
+.LTProductsCarouselCardBadge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 12px;
+  z-index: 10;
+}
+
+/* Imagen del producto */
+.LTProductsCarouselCardImage {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  will-change: transform;
+  margin-top: 10px;
+}
+
+.LTProductsCarouselCardImagePlaceholder {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTProductsCarouselCardImagePlaceholder svg {
+  width: 40px;
+  height: 40px;
+  fill: var(--lt-text-color);
+  opacity: 0.6;
+}
+
+.LTProductsCarouselCardImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Información del producto */
+.LTProductsCarouselCardInfo {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: flex-end;
+}
+
+.LTProductsCarouselCardCategory {
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--lt-text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.LTProductsCarouselCardTitle {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+  height: 40px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.LTProductsCarouselCardLaunchBadge {
+  background: var(--lt-secondary-color);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-family: "Inter", sans-serif;
+}
+
+/* Organización del contenido */
+.LTProductsCarouselCardTopContent {
+  flex: 0 0 auto;
+}
+
+.LTProductsCarouselCardBottomContent {
+  margin-top: auto;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* ===========================
+   PRICING
+   =========================== */
+.LTProductsCarouselCardPricing {
+  margin-bottom: 0;
+}
+
+.LTProductsCarouselCardOriginalPrice {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: var(--lt-text-muted);
+  text-decoration: line-through;
+  margin-bottom: 2px;
+}
+
+.LTProductsCarouselCardFinalPrice {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lt-accent-color-variant2-dark);
+  display: flex;
+  align-items: baseline;
+}
+
+.LTProductsCarouselCardPriceDecimals {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+/* ===========================
+   ACTION BUTTONS
+   =========================== */
+.LTProductsCarouselCardActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.LTProductsCarouselCardAddToCart {
+  flex: 0 0 auto;
+  width: 85px;
+  height: 40px;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  border: none;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+  border: var(--lt-border-color) solid 1px;
+}
+
+.LTProductsCarouselCardAddToCart:hover {
+  background: var(--lt-accent-color-variant2);
+  transform: translateY(-1px);
+}
+
+.LTProductsCarouselCardAddToCart svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+}
+
+.LTProductsCarouselActionIcon {
+  width: 16px;
+  height: 16px;
+  filter: none;
+  fill: var(--lt-black-text-color);
+  transition: fill 0.3s ease;
+}
+
+.LTProductsCarouselCardFavorite {
+  flex: 0 0 auto;
+  width: 45px;
+  height: 40px;
+  background: transparent;
+  border: var(--lt-border-color) solid 1px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.LTProductsCarouselCardFavorite:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(116, 123, 191, 0.2);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+@media (max-width: 768px) {
+  .LTProductsCarouselContent {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .LTProductsCarouselProducts {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .LTProductsCarouselProducts {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .LTProductsCarouselArrow {
+    width: 40px;
+    height: 40px;
+  }
+}

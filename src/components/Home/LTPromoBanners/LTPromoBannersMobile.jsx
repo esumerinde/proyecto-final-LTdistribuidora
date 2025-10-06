@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./LTPromoBannersMobile.css";
 
 const LTPromoBannersMobile = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const trackRef = useRef(null);
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
 
   const promoBanners = [
     {
@@ -48,23 +51,37 @@ const LTPromoBannersMobile = () => {
     },
   ];
 
-  // Autoplay cada 3 segundos
+  // Autoplay cada 5 segundos (más lento para mobile)
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % promoBanners.length);
-    }, 3000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [promoBanners.length]);
 
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % promoBanners.length);
+  // Manejo de swipe táctil
+  const handleTouchStart = (e) => {
+    setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const goToPrevious = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + promoBanners.length) % promoBanners.length
-    );
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStart - touchEnd > 75) {
+      // Swipe izquierda (siguiente)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % promoBanners.length);
+    }
+
+    if (touchStart - touchEnd < -75) {
+      // Swipe derecha (anterior)
+      setCurrentIndex(
+        (prevIndex) =>
+          (prevIndex - 1 + promoBanners.length) % promoBanners.length
+      );
+    }
   };
 
   const goToSlide = (index) => {
@@ -79,18 +96,13 @@ const LTPromoBannersMobile = () => {
         </h2>
 
         <div className="LTPromoBannersMobileNav">
-          {/* Flecha izquierda */}
-          <button
-            className="LTPromoBannersMobileArrow LTPromoBannersMobileArrowLeft"
-            onClick={goToPrevious}
-            aria-label="Banner anterior"
+          <div
+            className="LTPromoBannersMobileSlideTrack"
+            ref={trackRef}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
           >
-            <svg viewBox="0 0 24 24">
-              <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
-            </svg>
-          </button>
-
-          <div className="LTPromoBannersMobileSlideTrack">
             <div
               className="LTPromoBannersMobileCards"
               style={{
@@ -143,17 +155,6 @@ const LTPromoBannersMobile = () => {
               ))}
             </div>
           </div>
-
-          {/* Flecha derecha */}
-          <button
-            className="LTPromoBannersMobileArrow LTPromoBannersMobileArrowRight"
-            onClick={goToNext}
-            aria-label="Siguiente banner"
-          >
-            <svg viewBox="0 0 24 24">
-              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-            </svg>
-          </button>
         </div>
 
         {/* Indicadores */}

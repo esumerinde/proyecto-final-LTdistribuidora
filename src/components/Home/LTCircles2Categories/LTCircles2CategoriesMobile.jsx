@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import "./LTProductsCategoriesMobile.css";
+import "./LTCircles2CategoriesMobile.css";
+import "../LTCircles1Offers/LTCirclesCommon.css";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
-// SVGs iguales a desktop
+// SVG Icons para mobile
 const MobileSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -20,9 +22,10 @@ const MobileSvg = (
     />
   </svg>
 );
+
 const LaptopSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -38,9 +41,10 @@ const LaptopSvg = (
     />
   </svg>
 );
+
 const TvSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -56,9 +60,10 @@ const TvSvg = (
     />
   </svg>
 );
+
 const GamingSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -74,9 +79,10 @@ const GamingSvg = (
     />
   </svg>
 );
+
 const HeadphonesSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -91,9 +97,10 @@ const HeadphonesSvg = (
     />
   </svg>
 );
+
 const HouseSvg = (
   <svg
-    className="LTProductsCategoriesMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -110,21 +117,37 @@ const HouseSvg = (
   </svg>
 );
 
-const categories = [
-  { id: 1, name: "Celulares", icon: MobileSvg },
-  { id: 2, name: "Notebooks", icon: LaptopSvg },
-  { id: 3, name: "Televisores", icon: TvSvg },
-  { id: 4, name: "Gaming", icon: GamingSvg },
-  { id: 5, name: "Audio", icon: HeadphonesSvg },
-  { id: 6, name: "Electrodomésticos", icon: HouseSvg },
-];
+const LTCircles2CategoriesMobile = () => {
+  const gradients = {
+    gaming: "linear-gradient(135deg, #f8d56b 0%, #ff8f5a 50%, #ff64d2 100%)",
+    innova:
+      "linear-gradient(120deg, #7d7cc0ff 0%, #b3b8e6 45%, #d89bfcff 100%)",
+    gaming2: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    sunset: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    ocean: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    forest: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  };
 
-const LTProductsCategoriesMobile = () => {
+  const categories = [
+    { id: 1, name: "Celulares", icon: MobileSvg, gradientType: "innova" },
+    { id: 2, name: "Notebooks", icon: LaptopSvg, gradientType: "innova" },
+    { id: 3, name: "Televisores", icon: TvSvg, gradientType: "innova" },
+    { id: 4, name: "Gaming", icon: GamingSvg, gradientType: "innova" },
+    { id: 5, name: "Audio", icon: HeadphonesSvg, gradientType: "innova" },
+    {
+      id: 6,
+      name: "Electrodomésticos",
+      icon: HouseSvg,
+      gradientType: "innova",
+    },
+  ];
+
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const handlePrev = () => {
     setCurrentIdx((prev) => (prev === 0 ? categories.length - 1 : prev - 1));
   };
+
   const handleNext = () => {
     setCurrentIdx((prev) => (prev === categories.length - 1 ? 0 : prev + 1));
   };
@@ -132,22 +155,19 @@ const LTProductsCategoriesMobile = () => {
   const category = categories[currentIdx];
 
   return (
-    <section className="LTProductsCategoriesMobileWrapper">
-      <div className="LTProductsCategoriesMobileHeader">
-        <h2 className="LTProductsCategoriesMobileTitle lt-big-title">
-          Categorías más vistas
-        </h2>
-        <span
-          className="LTProductsCategoriesMobileShowAll LTProductsCategoriesViewAll lt-menu-hover"
-          style={{ display: "block", textAlign: "center", width: "100%" }}
-        >
-          Mostrar todas las categorías
-        </span>
+    <section className="LTCirclesMobileWrapper lt-section-spacing">
+      <div className="lt-section-title-spacing">
+        <LTSectionTitle
+          title="Categorías más vistas"
+          subtitle="Mostrá todas las categorías"
+          gradientType="gaming2"
+        />
       </div>
-      <div className="LTProductsCategoriesMobileCarousel">
-        <div className="LTProductsCategoriesMobileNav__arrow LTProductsCategoriesMobileNav__arrow--left">
+      <div className="LTCirclesMobileCarousel">
+        {/* Flecha izquierda */}
+        <div className="LTCirclesMobileNav__arrow LTCirclesMobileNav__arrow--left">
           <button
-            className="LTProductsCategoriesMobileArrow"
+            className="LTCirclesMobileArrow"
             onClick={handlePrev}
             aria-label="Anterior"
             type="button"
@@ -157,17 +177,24 @@ const LTProductsCategoriesMobile = () => {
             </svg>
           </button>
         </div>
-        <div className="LTProductsCategoriesMobileItem">
-          <div className="LTProductsCategoriesMobileCircle">
-            <div className="LTProductsCategoriesMobileIconContainer">
-              {category.icon}
-            </div>
+
+        {/* Círculo central */}
+        <div className="LTCirclesMobileItem">
+          <div
+            className="LTCirclesMobileCircle"
+            style={{
+              "--circle-gradient": gradients[category.gradientType],
+            }}
+          >
+            <div className="LTCirclesMobileIconContainer">{category.icon}</div>
           </div>
-          <div className="LTProductsCategoriesMobileLabel">{category.name}</div>
+          <div className="LTCirclesMobileLabel">{category.name}</div>
         </div>
-        <div className="LTProductsCategoriesMobileNav__arrow LTProductsCategoriesMobileNav__arrow--right">
+
+        {/* Flecha derecha */}
+        <div className="LTCirclesMobileNav__arrow LTCirclesMobileNav__arrow--right">
           <button
-            className="LTProductsCategoriesMobileArrow"
+            className="LTCirclesMobileArrow"
             onClick={handleNext}
             aria-label="Siguiente"
             type="button"
@@ -182,4 +209,4 @@ const LTProductsCategoriesMobile = () => {
   );
 };
 
-export default LTProductsCategoriesMobile;
+export default LTCircles2CategoriesMobile;

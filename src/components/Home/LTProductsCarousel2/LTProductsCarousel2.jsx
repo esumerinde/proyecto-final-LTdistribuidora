@@ -1,10 +1,19 @@
-import React, { useState, useEffect } from "react";
-import "./LTProductsCarousel2.css"; // <- 3 -> 2
+﻿import React, { useState, useEffect } from "react";
+import "./LTProductsCarousel2.css";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
-import { products } from "../../../mocks/products2"; // dejo tu mock igual
+import { products } from "../../../mocks/products2";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
-const LTProductsCarousel2 = () => {
+// Función para formatear precios en formato argentino (231.990,00)
+const formatPrice = (price) => {
+  return price.toLocaleString("es-AR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+};
+
+const LTProductsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const itemsPerView = 4;
@@ -41,49 +50,47 @@ const LTProductsCarousel2 = () => {
   };
 
   return (
-    <section className="LTProductsCarousel2Wrapper">
-      <div className="LTProductsCarousel2Container">
-        <h2 className="LTProductsCarousel2Title">
-          Smartphones — Lo último de Apple y Samsung
-        </h2>
+    <section className="LTProductsCarouselWrapper lt-section-spacing">
+      <div className="LTProductsCarouselContainer">
+        <div className="lt-section-title-spacing">
+          <LTSectionTitle
+            title="Smartphones — Apple, Samsung y más"
+            gradientType="gaming"
+          />
+        </div>
 
-        <div className="LTProductsCarousel2Content">
-          {/* Banner promocional - “Lo último en Smartphones” */}
+        <div className="LTProductsCarouselContent">
+          {/* Banner promocional - “Lo último en CELULARES” */}
           <div
-            className="LTProductsCarousel2Banner"
+            className="LTProductsCarouselBanner"
             style={{
-              // CSS var para el ::before del banner (usalo en tu CSS)
               "--ltpc2-banner-bg":
                 "url('https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop')",
             }}
           >
-            <div className="LTProductsCarousel2BannerContent">
-              <div className="LTProductsCarousel2BannerChips">
-                <span className="LTProductsCarousel2BannerBadge">
-                  CELULARES
-                </span>
-                <span className="LTProductsCarousel2BannerDate">Nuevo</span>
+            <div className="LTProductsCarouselBannerContent">
+              <div className="LTProductsCarouselBannerChips">
+                <span className="LTProductsCarouselBannerBadge">CELULARES</span>
+                <span className="LTProductsCarouselBannerDate">Nuevo</span>
               </div>
 
-              <div className="LTProductsCarousel2BannerHeadline">
-                <span className="LTProductsCarousel2BannerKicker">
-                  Descubrí
-                </span>
-                <h3 className="LTProductsCarousel2BannerTitle">
-                  Lo último en <span>Celulares</span>
+              <div className="LTProductsCarouselBannerHeadline">
+                <span className="LTProductsCarouselBannerKicker">Descubrí</span>
+                <h3 className="LTProductsCarouselBannerTitle">
+                  Lo último en <span>CELULARES</span>
                 </h3>
               </div>
 
-              <div className="LTProductsCarousel2BannerBody">
-                <div className="LTProductsCarousel2BannerBrandName">
+              <div className="LTProductsCarouselBannerBody">
+                <div className="LTProductsCarouselBannerBrandName">
                   iPhone 14 Pro
                 </div>
-                <p className="LTProductsCarousel2BannerDescription">
+                <p className="LTProductsCarouselBannerDescription">
                   Innovación, diseño y potencia. Descubrí el nuevo iPhone 14 Pro
                   Max con la mejor tecnología de Apple.
                 </p>
 
-                <button className="LTProductsCarousel2BannerButton lt-button-variant2">
+                <button className="LTProductsCarouselBannerButton lt-button-variant2">
                   VER MÁS
                 </button>
               </div>
@@ -91,10 +98,10 @@ const LTProductsCarousel2 = () => {
           </div>
 
           {/* Sección de productos */}
-          <div className="LTProductsCarousel2ProductsContainer">
+          <div className="LTProductsCarouselProductsContainer">
             {/* Flecha izquierda */}
             <button
-              className="LTProductsCarousel2Arrow LTProductsCarousel2ArrowLeft"
+              className="LTProductsCarouselArrow LTProductsCarouselArrowLeft"
               onClick={goToPrevious}
             >
               <svg viewBox="0 0 24 24">
@@ -103,11 +110,11 @@ const LTProductsCarousel2 = () => {
             </button>
 
             <div
-              className="LTProductsCarousel2CardsAndIndicators"
+              className="LTProductsCarouselCardsAndIndicators"
               style={{ overflow: "hidden", width: "100%" }}
             >
               <div
-                className="LTProductsCarousel2Products"
+                className="LTProductsCarouselProducts"
                 style={{
                   transform: `translateX(-${
                     currentIndex * (100 / totalSlides)
@@ -122,15 +129,15 @@ const LTProductsCarousel2 = () => {
                 }}
               >
                 {products.map((product) => (
-                  <div key={product.id} className="LTProductsCarousel2Card">
+                  <div key={product.id} className="LTProductsCarouselCard">
                     {/* Badge de descuento */}
-                    <div className="LTProductsCarousel2CardBadge">
+                    <div className="LTProductsCarouselCardBadge">
                       -{product.discount}%
                     </div>
 
                     {/* Imagen del producto */}
                     <div
-                      className="LTProductsCarousel2CardImage"
+                      className="LTProductsCarouselCardImage"
                       style={{
                         background: "#fff",
                         borderRadius: "12px",
@@ -146,7 +153,7 @@ const LTProductsCarousel2 = () => {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="LTProductsCarousel2CardImg"
+                        className="LTProductsCarouselCardImg"
                         style={{
                           maxWidth: "100%",
                           maxHeight: "100%",
@@ -157,44 +164,38 @@ const LTProductsCarousel2 = () => {
                     </div>
 
                     {/* Información del producto */}
-                    <div className="LTProductsCarousel2CardInfo">
-                      <div className="LTProductsCarousel2CardTopContent">
-                        <div className="LTProductsCarousel2CardCategory">
+                    <div className="LTProductsCarouselCardInfo">
+                      <div className="LTProductsCarouselCardTopContent">
+                        <div className="LTProductsCarouselCardCategory">
                           {product.brand}
                         </div>
-                        <h3 className="LTProductsCarousel2CardTitle">
+                        <h3 className="LTProductsCarouselCardTitle">
                           {product.name}
                         </h3>
 
                         {product.isLaunch && (
-                          <div className="LTProductsCarousel2CardLaunchBadge">
+                          <div className="LTProductsCarouselCardLaunchBadge">
                             Lanzamiento
                           </div>
                         )}
                       </div>
 
-                      <div className="LTProductsCarousel2CardBottomContent">
-                        <div className="LTProductsCarousel2CardPricing">
-                          <div className="LTProductsCarousel2CardOriginalPrice">
-                            $ {product.originalPrice.toFixed(2)}
+                      <div className="LTProductsCarouselCardBottomContent">
+                        <div className="LTProductsCarouselCardPricing">
+                          <div className="LTProductsCarouselCardOriginalPrice">
+                            $ {formatPrice(product.originalPrice)}
                           </div>
-                          <div className="LTProductsCarousel2CardFinalPrice">
-                            $ {Math.floor(product.discountPrice)}
-                            <span className="LTProductsCarousel2CardPriceDecimals">
-                              .
-                              {String(
-                                Math.round((product.discountPrice % 1) * 100)
-                              ).padStart(2, "0")}
-                            </span>
+                          <div className="LTProductsCarouselCardFinalPrice">
+                            $ {formatPrice(product.discountPrice)}
                           </div>
                         </div>
 
-                        <div className="LTProductsCarousel2CardActions">
-                          <button className="LTProductsCarousel2CardAddToCart">
+                        <div className="LTProductsCarouselCardActions">
+                          <button className="LTProductsCarouselCardAddToCart">
                             <img
                               src={ShoppingBagIcon}
                               alt="Agregar"
-                              className="LTProductsCarousel2ActionIcon"
+                              className="LTProductsCarouselActionIcon"
                             />
                             Agregar
                           </button>
@@ -212,7 +213,7 @@ const LTProductsCarousel2 = () => {
 
             {/* Flecha derecha */}
             <button
-              className="LTProductsCarousel2Arrow LTProductsCarousel2ArrowRight"
+              className="LTProductsCarouselArrow LTProductsCarouselArrowRight"
               onClick={goToNext}
             >
               <svg viewBox="0 0 24 24">
@@ -226,4 +227,4 @@ const LTProductsCarousel2 = () => {
   );
 };
 
-export default LTProductsCarousel2;
+export default LTProductsCarousel;

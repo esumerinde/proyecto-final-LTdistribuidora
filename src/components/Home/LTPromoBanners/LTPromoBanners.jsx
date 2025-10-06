@@ -1,4 +1,5 @@
 import React from "react";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 import "./LTPromoBanners.css";
 
 const LTPromoBanners = () => {
@@ -48,11 +49,11 @@ const LTPromoBanners = () => {
   ];
 
   return (
-    <section className="LTPromoBannersWrapper">
+    <section className="LTPromoBannersWrapper lt-section-spacing">
+      <div className="lt-section-title-spacing">
+        <LTSectionTitle title="Las mejores opciones en tecnología" />
+      </div>
       <div className="LTPromoBannersContainer">
-        <h2 className="LTPromoBannersTitle">
-          Descubrí las mejores opciones en tecnología
-        </h2>
         <div className="LTPromoBannersGrid">
           {promoBanners.map((banner) => (
             <article

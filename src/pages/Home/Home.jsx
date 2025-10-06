@@ -1,13 +1,14 @@
-import LTProductsCarousel1Mobile from "../../components/Home/LTProductsCarousel/LTProductsCarousel1Mobile";
+import LTProductsCarouselOffersMobile from "../../components/Home/LTProductsCarousel/LTProductsCarouselOffersMobile.jsx";
 import { useIsMobile } from "../../common/isMobile";
 import React from "react";
 import LTHeroCarousel from "../../components/Home/LTHeroCarousel/LTHeroCarousel";
-import LTOffersSection from "../../components/Home/LTOffersSection/LTOffersSection";
-import LTOffersSectionMobile from "../../components/Home/LTOffersSection/LTOffersSectionMobile";
+import LTHeroCarouselMobile from "../../components/Home/LTHeroCarousel/LTHeroCarouselMobile";
+import LTCircles1Offers from "../../components/Home/LTCircles1Offers/LTCircles1Offers.jsx";
+import LTCircles1OffersMobile from "../../components/Home/LTCircles1Offers/LTCircles1OffersMobile.jsx";
 import LTFeatureBanner from "../../components/Home/LTFeatureBanner/LTFeatureBanner";
-import LTProductsCarousel from "../../components/Home/LTProductsCarousel/LTProductsCarousel";
-import LTProductsCategories from "../../components/Home/LTProductsCategories/LTProductsCategories";
-import LTProductsCategoriesMobile from "../../components/Home/LTProductsCategories/LTProductsCategoriesMobile";
+import LTProductsCarouselOffers from "../../components/Home/LTProductsCarousel/LTProductsCarouselOffers.jsx";
+import LTCircles2Categories from "../../components/Home/LTCircles2Categories/LTCircles2Categories.jsx";
+import LTCircles2CategoriesMobile from "../../components/Home/LTCircles2Categories/LTCircles2CategoriesMobile.jsx";
 import LTProductsCarousel2 from "../../components/Home/LTProductsCarousel2/LTProductsCarousel2";
 import LTProductsCarousel3 from "../../components/Home/LTProductsCarousel3/LTProductsCarousel3";
 import LTProductsCarousel3Mobile from "../../components/Home/LTProductsCarousel3/LTProductsCarousel3Mobile";
@@ -27,19 +28,25 @@ const Home = () => {
   return (
     <div className="lt-home-wrapper">
       <main className="lt-home-main">
-        {/* 1. Hero y FeatureBanner */}
-        <LTHeroCarousel />
+        {/* 1. Hero con Ofertas superpuestas */}
+        <div className="lt-hero-with-offers">
+          {isMobile ? <LTHeroCarouselMobile /> : <LTHeroCarousel />}
+          {isMobile ? (
+            <LTProductsCarouselOffersMobile />
+          ) : (
+            <LTProductsCarouselOffers />
+          )}
+        </div>
+        {/* 2. FeatureBanner como sección independiente */}
         <CarouselSyncProvider totalSlides={3}>
           <LTFeatureBanner />
         </CarouselSyncProvider>
-        {/* 2. Carrusel principal de productos */}
-        {isMobile ? <LTProductsCarousel1Mobile /> : <LTProductsCarousel />}
         {/* 3. Sección de ofertas */}
-        {isMobile ? <LTOffersSectionMobile /> : <LTOffersSection />}
+        {isMobile ? <LTCircles1OffersMobile /> : <LTCircles1Offers />}
         {/* 4. Segundo carrusel de productos */}
         {isMobile ? <LTProductsCarousel2Mobile /> : <LTProductsCarousel2 />}
         {/* 5. Categorías más vistas */}
-        {isMobile ? <LTProductsCategoriesMobile /> : <LTProductsCategories />}
+        {isMobile ? <LTCircles2CategoriesMobile /> : <LTCircles2Categories />}
         {/* 6. Tercer carrusel de productos */}
         {isMobile ? <LTProductsCarousel3Mobile /> : <LTProductsCarousel3 />}
         {/* 7. Banners promocionales */}

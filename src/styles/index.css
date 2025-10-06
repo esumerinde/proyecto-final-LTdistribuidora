@@ -42,6 +42,9 @@
   --lt-spacing-2xl: 3rem;
   --lt-spacing-3xl: 4rem;
 
+  /* Anchos de contenedores */
+  --lt-container-width: 1200px;
+
   /* Pesos de fuente más gruesos */
   --lt-font-weight-light: 400;
   --lt-font-weight-normal: 500;
@@ -62,12 +65,26 @@
 /* Utilidades globales con prefijo lt- */
 /* Utilidades globales esenciales */
 .lt-container {
-  max-width: 1200px;
+  max-width: var(--lt-container-width);
   margin: 0 auto;
-  padding: 0 var(--lt-spacing-md);
+  padding: 0;
 }
 .lt-hidden {
   display: none;
+}
+
+/* Espaciado consistente para todas las secciones del Home */
+.lt-section-spacing {
+  padding-top: var(--lt-spacing-2xl); /* 3rem = 48px - reducido de 4rem */
+  padding-bottom: var(--lt-spacing-2xl); /* 3rem = 48px - reducido de 4rem */
+  margin-bottom: var(--lt-spacing-xl); /* 2rem = 32px - reducido de 3rem */
+}
+
+/* Espaciado interno entre título y contenido */
+.lt-section-title-spacing {
+  margin-bottom: var(
+    --lt-spacing-2xl
+  ); /* 3rem = 48px - igual que padding de secciones */
 }
 
 /* Smooth scrolling */
@@ -137,10 +154,17 @@ a {
 
 /* Utilidad global para hover en menús y botones */
 .lt-menu-hover {
-  color: var(--lt-small-text-color);
+  color: var(--lt-black-text-color);
   position: relative;
   transition: color 0.2s, transform 0.2s;
   text-decoration: none !important;
+  font-size: 15px;
+  font-family: var(--lt-font-family);
+  font-weight: 500;
+  display: inline-block;
+  padding: 8px 0;
+  white-space: nowrap;
+  background: transparent;
 }
 
 .lt-menu-hover::after {
@@ -166,6 +190,7 @@ a {
 
 .lt-menu-hover--active {
   color: var(--lt-accent-color-variant2-dark);
+  font-weight: 600;
 }
 
 .lt-menu-hover--active::after {

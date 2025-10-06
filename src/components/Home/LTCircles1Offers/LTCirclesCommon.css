@@ -1,0 +1,314 @@
+/* ========================================
+   LTCirclesCommon.css
+   Estilos compartidos entre LTCircles1Offers y LTCircles2Categories
+   Desktop y Mobile
+   ======================================== */
+
+/* ===========================
+   DESKTOP - WRAPPER Y CONTAINER
+   =========================== */
+.LTCirclesWrapper {
+  width: 100%;
+  background-color: var(--lt-background-color);
+  /* padding controlado por .lt-section-spacing */
+}
+
+.LTCirclesContainer {
+  max-width: var(--lt-container-width);
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-md);
+}
+
+/* ===========================
+   DESKTOP - GRID Y ITEMS
+   =========================== */
+.LTCirclesGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--lt-spacing-xl);
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.LTCirclesItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lt-spacing-md);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius-lg);
+}
+
+.LTCirclesItem:hover {
+  transform: translateY(-4px);
+}
+
+/* ===========================
+   DESKTOP - CÍRCULOS CON GRADIENTES
+   =========================== */
+.LTCirclesCircle {
+  /* El background se aplica mediante inline style con el gradient dinámico */
+  background: var(
+    --circle-gradient,
+    var(--lt-accent-color)
+  ); /* Fallback al color sólido */
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Efecto overlay en hover */
+.LTCirclesCircle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.LTCirclesItem:hover .LTCirclesCircle {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(168, 187, 163, 0.3);
+  /* El gradient-hover se aplica mediante inline style */
+  background: var(--circle-gradient-hover, var(--lt-accent-color-dark));
+}
+
+.LTCirclesItem:hover .LTCirclesCircle::before {
+  opacity: 1;
+}
+
+/* ===========================
+   DESKTOP - ICONOS
+   =========================== */
+.LTCirclesIconContainer {
+  position: relative;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTCirclesIcon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  color: var(--lt-black-text-color);
+  fill: var(--lt-black-text-color);
+  stroke: var(--lt-black-text-color);
+  transition: all 0.3s ease;
+}
+
+.LTCirclesItem:hover .LTCirclesIcon {
+  color: var(--lt-white-text-color);
+  transform: scale(1.08);
+}
+
+/* Pintar el contorno blanco en hover */
+.LTCirclesItem:hover .LTCirclesIcon path,
+.LTCirclesItem:hover .LTCirclesIcon rect,
+.LTCirclesItem:hover .LTCirclesIcon circle {
+  stroke: var(--lt-white-text-color) !important;
+  fill: none !important;
+}
+
+/* ===========================
+   DESKTOP - LABELS
+   =========================== */
+.LTCirclesLabel {
+  font-family: var(--lt-font-family);
+  font-size: var(--lt-font-size-md);
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  text-align: center;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+}
+
+.LTCirclesItem:hover .LTCirclesLabel {
+  color: var(--lt-big-text-color);
+}
+
+/* ===========================
+   MOBILE - WRAPPER
+   =========================== */
+.LTCirclesMobileWrapper {
+  width: 100%;
+  background: var(--lt-background-color);
+  /* padding controlado por .lt-section-spacing */
+}
+
+/* ===========================
+   MOBILE - CAROUSEL
+   =========================== */
+.LTCirclesMobileCarousel {
+  position: relative;
+  min-height: 440px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+/* ===========================
+   MOBILE - NAVIGATION ARROWS
+   =========================== */
+.LTCirclesMobileNav__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.LTCirclesMobileNav__arrow--left {
+  left: 50%;
+  transform: translate(-200px, -50%);
+}
+
+.LTCirclesMobileNav__arrow--right {
+  right: 50%;
+  transform: translate(200px, -50%);
+}
+
+.LTCirclesMobileArrow {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+.LTCirclesMobileArrow:active {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.18);
+}
+
+.LTCirclesMobileArrow svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  fill: var(--lt-black-text-color);
+}
+
+/* ===========================
+   MOBILE - ITEMS
+   =========================== */
+.LTCirclesMobileItem {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100vw;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  transition: transform 0.4s cubic-bezier(0.7, 0.2, 0.3, 1),
+    opacity 0.4s cubic-bezier(0.7, 0.2, 0.3, 1);
+  opacity: 1;
+}
+
+/* ===========================
+   MOBILE - CÍRCULOS CON GRADIENTES
+   =========================== */
+.LTCirclesMobileCircle {
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  /* El background se aplica mediante inline style con el gradient dinámico */
+  background: var(--circle-gradient, var(--lt-accent-color));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.LTCirclesMobileIconContainer {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTCirclesMobileIcon {
+  width: 260px;
+  height: 260px;
+  fill: var(--lt-black-text-color);
+  stroke: var(--lt-black-text-color);
+  stroke-width: 3px;
+}
+
+.LTCirclesMobileLabel {
+  font-family: var(--lt-font-family);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 0.2rem;
+}
+
+/* ===========================
+   MOBILE - RESPONSIVE
+   =========================== */
+@media (max-width: 600px) {
+  .LTCirclesMobileCircle {
+    width: 180px;
+    height: 180px;
+  }
+  .LTCirclesMobileIconContainer {
+    width: 100px;
+    height: 100px;
+  }
+  .LTCirclesMobileIcon {
+    width: 260px;
+    height: 260px;
+    fill: var(--lt-black-text-color);
+    stroke: var(--lt-black-text-color);
+  }
+  .LTCirclesMobileLabel {
+    font-size: 1.05rem;
+  }
+  .LTCirclesMobileArrow {
+    width: 40px;
+    height: 40px;
+  }
+  .LTCirclesMobileArrow svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--lt-black-text-color);
+  }
+  .LTCirclesMobileNav__arrow--left {
+    left: 50%;
+    transform: translate(-180px, -50%);
+  }
+  .LTCirclesMobileNav__arrow--right {
+    right: 50%;
+    transform: translate(180px, -50%);
+  }
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import "./LTBrandsCarousel.css";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
 // Acá importamos los logos de las marcas. Si el backend provee rutas dinámicas, reemplazar estos imports por un fetch y mapear los logos que vengan del backend.
 import SamsungLogo from "../../../assets/brands/samsung-8.svg";
@@ -44,12 +45,11 @@ const LTBrandsCarousel = () => {
   // El componente muestra las marcas en un carrusel horizontal. Si el backend trae las marcas, reemplazar el array y mapear la respuesta.
   // El loop infinito se logra duplicando los slides, así el usuario nunca ve el final. No borres la segunda iteración.
   return (
-    <section className="LTBrandsCarouselWrapper">
+    <section className="LTBrandsCarouselWrapper lt-section-spacing">
       <div className="LTBrandsCarouselContainer">
-        <div className="LTBrandsCarouselHeader">
-          <h2 className="LTBrandsCarouselTitle lt-big-title">
-            Las mejores marcas
-          </h2>
+        {/* Título con animación de pinceleada */}
+        <div className="lt-section-title-spacing">
+          <LTSectionTitle title="Las mejores marcas" />
         </div>
 
         <div className="LTBrandsCarouselTrack">

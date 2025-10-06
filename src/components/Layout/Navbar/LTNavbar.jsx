@@ -44,8 +44,7 @@ const LTNavbar = ({ hasOfferBar = true, forcePinnedOffer = false }) => {
   const offerBarActive = hasOfferBar || isAdmin || forcePinnedOffer;
 
   const { isSticky, navbarTop, animation } = useHeaderReaccommodation({
-    offerHeight: offerBarActive ? 32 : 0,
-    headerHeight: 75,
+    showOfferBar: offerBarActive,
     forceOfferPinned: (isAdmin && offerBarActive) || forcePinnedOffer,
   });
 

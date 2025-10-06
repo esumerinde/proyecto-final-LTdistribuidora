@@ -62,6 +62,13 @@ body.lt-overlay-open {
   display: inline-block;
   /* font-size eliminado para heredar de los ítems */
 }
+
+.LTCategoriesOverlay__menuitemText.lt-menu-hover {
+  padding-left: 8px;
+  padding-right: 8px;
+  min-width: 80px;
+  box-sizing: border-box;
+}
 /* Icono SVG dentro del ítem */
 .LTCategoriesOverlay__menuitem img {
   width: 0.94rem;

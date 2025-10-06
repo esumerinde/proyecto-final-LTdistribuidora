@@ -212,13 +212,11 @@ const LTHeader = ({
     showOfferBar || isAdmin || forcePinnedOffer
   );
 
-  const { isSticky, headerTop, animation } = useHeaderReaccommodation({
-    offerHeight: effectiveShowOfferBar ? 32 : 0,
-    headerHeight: 75,
-    forceOfferPinned: (isAdmin && effectiveShowOfferBar) || forcePinnedOffer,
-  });
-
-  const offerShouldBeHidden = isSticky && !isAdmin && !forcePinnedOffer;
+  const { isSticky, headerTop, animation, isOfferVisible } =
+    useHeaderReaccommodation({
+      showOfferBar: effectiveShowOfferBar,
+      forceOfferPinned: (isAdmin && effectiveShowOfferBar) || forcePinnedOffer,
+    });
 
   // Renderiza siempre el header desktop
   return (
@@ -227,7 +225,7 @@ const LTHeader = ({
       {effectiveShowOfferBar && (
         <LTHeaderOffer
           className={
-            offerShouldBeHidden
+            !isOfferVisible
               ? "LTHeaderOffer LTHeaderOffer--hidden"
               : "LTHeaderOffer"
           }

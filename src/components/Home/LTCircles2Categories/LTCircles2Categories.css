@@ -1,0 +1,12 @@
+/* ========================================
+   LTCircles2Categories.css
+   Estilos específicos de Categorías (si se necesitan)
+   Los estilos comunes están en LTCirclesCommon.css
+   ======================================== */
+
+.lt-menu-hover.LTNavmenuLink {
+  min-width: 120px;
+  padding-left: 8px;
+  padding-right: 8px;
+  box-sizing: border-box;
+}

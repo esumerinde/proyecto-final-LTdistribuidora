@@ -10,8 +10,18 @@
 .LTFeatureBannerWrapper {
   width: 100%;
   background-color: var(--lt-background-color);
-  padding: var(--lt-spacing-lg) 0;
+  padding: clamp(120px, 18vw, 200px) 0 var(--lt-spacing-lg) 0; /* Padding superior ENORME */
   min-height: 85px;
+}
+
+/* Título de la sección */
+.LTFeatureBannerSectionTitle {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  text-align: center;
+  margin: 0 0 clamp(24px, 4vw, 40px) 0;
+  padding: 0 var(--lt-spacing-md);
 }
 
 /* Contenedor de las cards de features, layout horizontal y centrado */

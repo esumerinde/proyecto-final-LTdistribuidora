@@ -1,0 +1,111 @@
+/* Hero Carousel Mobile - Con fade transitions */
+
+/* Wrapper principal del carousel mobile */
+.lt-hero-carousel-mobile-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: clamp(280px, 50vh, 400px);
+  margin-bottom: clamp(16px, 4vw, 24px);
+  overflow: hidden;
+}
+
+/* Slider contenedor de los slides */
+.lt-hero-carousel-mobile-slider {
+  width: 100%;
+  height: clamp(300px, 60vh, 450px);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #222;
+  overflow: hidden;
+}
+
+/* Gradientes laterales blancos (como desktop) */
+.lt-hero-carousel-mobile-slider::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: clamp(40px, 10vw, 80px);
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  background: linear-gradient(
+    to right,
+    var(--lt-background-color) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+.lt-hero-carousel-mobile-slider::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: clamp(40px, 10vw, 80px);
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+  background: linear-gradient(
+    to left,
+    var(--lt-background-color) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Cada slide individual - Solo fade, sin slide */
+.lt-hero-carousel-mobile-slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  will-change: opacity;
+}
+
+/* Overlay violeta sobre la imagen - con transparencia */
+.lt-hero-carousel-mobile-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--lt-accent-color-dark) 45%, transparent) 0%,
+    color-mix(in srgb, var(--lt-accent-color) 50%, transparent) 46%,
+    color-mix(in srgb, var(--lt-accent-color-dark) 45%, transparent) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Slide activo */
+.lt-hero-carousel-mobile-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+/* Gradiente inferior para mejorar legibilidad del contenido superpuesto */
+.lt-hero-carousel-mobile-gradient {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: clamp(100px, 20vh, 160px);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    var(--lt-background-color) 100%
+  );
+  z-index: 3;
+}

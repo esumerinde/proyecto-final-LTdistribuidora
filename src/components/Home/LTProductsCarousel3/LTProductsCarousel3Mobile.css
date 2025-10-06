@@ -97,7 +97,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 32px 0 32px 0;
+  /* padding controlado por .lt-section-spacing */
 }
 .LTProductsCarousel3Mobile__container {
   width: 100vw;

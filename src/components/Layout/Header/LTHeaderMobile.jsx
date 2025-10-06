@@ -94,13 +94,10 @@ const LTHeaderMobile = ({
     (isAdmin && effectiveShowOfferBar) || forcePinnedOffer;
 
   // Hook para sincronizar header/navbar/offer (mobile)
-  const { isSticky, headerTop, animation } = useHeaderReaccommodation({
-    offerHeight: effectiveShowOfferBar ? 32 : 0,
-    headerHeight: 70,
+  const { headerTop, animation, isOfferVisible } = useHeaderReaccommodation({
+    showOfferBar: effectiveShowOfferBar,
     forceOfferPinned: effectiveForcePinned,
   });
-
-  const offerShouldBeHidden = isSticky && !isAdmin && !forcePinnedOffer;
 
   const isUserLogged = Boolean(userInfo);
 
@@ -114,7 +111,7 @@ const LTHeaderMobile = ({
           adminItems={adminOfferItems}
           isPinned={effectiveForcePinned}
           className={
-            offerShouldBeHidden
+            !isOfferVisible
               ? "LTHeaderOffer LTHeaderOffer--hidden"
               : "LTHeaderOffer"
           }

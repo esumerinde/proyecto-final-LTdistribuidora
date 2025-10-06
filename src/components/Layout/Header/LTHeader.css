@@ -12,8 +12,12 @@
   background-color: var(--lt-background-color);
   box-shadow: var(--lt-shadow-md);
   height: 75px;
+  min-height: 75px;
+  max-height: 75px;
   display: flex;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 /* Barra de ofertas animada */

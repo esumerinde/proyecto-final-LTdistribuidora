@@ -1,8 +1,7 @@
 ﻿/* LTSearchBar - Barra de búsqueda estilo farmaonline */
 .LTSearchBarWrapper {
-  width: 100%;
   max-width: 600px;
-  margin-left: -10px; /* Mueve la barra de búsqueda a la izquierda para alinear con el navmenu */
+  margin: 0 auto;
 }
 
 .LTSearchBarForm {

@@ -1,5 +1,6 @@
 import "./LTFeatureBanner.css";
 import { useEffect } from "react";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
 // Importa los íconos SVG usados en las cards de features
 // Si se agregan más features, agregar el ícono correspondiente acá
@@ -162,7 +163,10 @@ const LTFeatureBanner = () => {
   // Renderiza el banner de features con carrusel y navegación
   // Cuando se pase a backend, el array de features debe venir de la API
   return (
-    <section className="LTFeatureBannerWrapper">
+    <section className="LTFeatureBannerWrapper lt-section-spacing">
+      <div className="lt-section-title-spacing">
+        <LTSectionTitle title="Nuestras ofertas exclusivas" />
+      </div>
       <div className="LTFeatureBannerCarousel">
         <div className="LTFeatureBannerContainer">
           {/* Renderiza las cards visibles según el slide y si es mobile/desktop */}

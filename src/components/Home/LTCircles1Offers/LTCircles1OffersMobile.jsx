@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import "./LTOffersSectionMobile.css";
+import "./LTCircles1OffersMobile.css";
+import "../LTCircles1Offers/LTCirclesCommon.css";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
-// SVGs de ofertas (copiados de desktop)
+// Iconos SVG iguales al Desktop
 const CirclePercentSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -20,9 +22,10 @@ const CirclePercentSvg = (
     />
   </svg>
 );
+
 const StarSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -38,9 +41,10 @@ const StarSvg = (
     />
   </svg>
 );
+
 const CreditCardSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -56,9 +60,10 @@ const CreditCardSvg = (
     />
   </svg>
 );
+
 const GiftSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -74,9 +79,10 @@ const GiftSvg = (
     />
   </svg>
 );
+
 const LockAltSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -92,9 +98,10 @@ const LockAltSvg = (
     />
   </svg>
 );
+
 const StopwatchSvg = (
   <svg
-    className="LTOffersSectionMobileIcon"
+    className="LTCirclesMobileIcon"
     width="260"
     height="260"
     viewBox="0 0 24 24"
@@ -111,21 +118,39 @@ const StopwatchSvg = (
   </svg>
 );
 
-const offers = [
-  { id: 1, name: "Ofertas", icon: CirclePercentSvg },
-  { id: 2, name: "Exclusivos", icon: StarSvg },
-  { id: 3, name: "Financiaciones", icon: CreditCardSvg },
-  { id: 4, name: "Vouchers", icon: GiftSvg },
-  { id: 5, name: "Privacidad", icon: LockAltSvg },
-  { id: 6, name: "Limitado", icon: StopwatchSvg },
-];
+const LTCircles1OffersMobile = () => {
+  // Gradientes (mismo sistema que Desktop y LTSectionTitle)
+  const gradients = {
+    gaming: "linear-gradient(135deg, #f8d56b 0%, #ff8f5a 50%, #ff64d2 100%)",
+    innova:
+      "linear-gradient(120deg, #7d7cc0ff 0%, #b3b8e6 45%, #d89bfcff 100%)",
+    gaming2: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    sunset: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    ocean: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    forest: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  };
 
-const LTOffersSectionMobile = () => {
+  // Array de ofertas - TODOS usan el mismo gradient "innova"
+  const offers = [
+    { id: 1, name: "Ofertas", icon: CirclePercentSvg, gradientType: "innova" },
+    { id: 2, name: "Exclusivos", icon: StarSvg, gradientType: "innova" },
+    {
+      id: 3,
+      name: "Financiaciones",
+      icon: CreditCardSvg,
+      gradientType: "innova",
+    },
+    { id: 4, name: "Vouchers", icon: GiftSvg, gradientType: "innova" },
+    { id: 5, name: "Privacidad", icon: LockAltSvg, gradientType: "innova" },
+    { id: 6, name: "Limitado", icon: StopwatchSvg, gradientType: "innova" },
+  ];
+
   const [currentIdx, setCurrentIdx] = useState(0);
 
   const handlePrev = () => {
     setCurrentIdx((prev) => (prev === 0 ? offers.length - 1 : prev - 1));
   };
+
   const handleNext = () => {
     setCurrentIdx((prev) => (prev === offers.length - 1 ? 0 : prev + 1));
   };
@@ -133,39 +158,42 @@ const LTOffersSectionMobile = () => {
   const offer = offers[currentIdx];
 
   return (
-    <section className="LTOffersMobileWrapper">
-      <div className="LTOffersMobileHeader">
-        <h2 className="LTOffersMobileTitle lt-big-title">
-          Las mejores ofertas de LT Electrónica
-        </h2>
+    <section className="LTCirclesMobileWrapper lt-section-spacing">
+      <div className="lt-section-title-spacing">
+        <LTSectionTitle title="Las mejores ofertas" gradientType="innova" />
       </div>
-      <div className="LTOffersMobileCarousel">
-        <div className="LTOffersMobileNav__arrow LTOffersMobileNav__arrow--left">
+      <div className="LTCirclesMobileCarousel">
+        <div className="LTCirclesMobileNav__arrow LTCirclesMobileNav__arrow--left">
           <button
-            className="LTOffersMobileArrow"
+            className="LTCirclesMobileArrow"
             onClick={handlePrev}
             aria-label="Anterior"
-            type="button"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24">
+            <svg width="40" height="40" viewBox="0 0 24 24">
               <path d="M15.41,7.41L10.83,12L15.41,16.59L14,18L8,12L14,6L15.41,7.41Z" />
             </svg>
           </button>
         </div>
-        <div className="LTOffersMobileItem">
-          <div className="LTOffersMobileCircle">
-            <div className="LTOffersMobileIconContainer">{offer.icon}</div>
+
+        <div className="LTCirclesMobileItem">
+          <div
+            className="LTCirclesMobileCircle"
+            style={{
+              "--circle-gradient": gradients[offer.gradientType],
+            }}
+          >
+            <div className="LTCirclesMobileIconContainer">{offer.icon}</div>
           </div>
-          <div className="LTOffersMobileLabel">{offer.name}</div>
+          <div className="LTCirclesMobileLabel">{offer.name}</div>
         </div>
-        <div className="LTOffersMobileNav__arrow LTOffersMobileNav__arrow--right">
+
+        <div className="LTCirclesMobileNav__arrow LTCirclesMobileNav__arrow--right">
           <button
-            className="LTOffersMobileArrow"
+            className="LTCirclesMobileArrow"
             onClick={handleNext}
             aria-label="Siguiente"
-            type="button"
           >
-            <svg width="28" height="28" viewBox="0 0 24 24">
+            <svg width="40" height="40" viewBox="0 0 24 24">
               <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.59Z" />
             </svg>
           </button>
@@ -175,4 +203,4 @@ const LTOffersSectionMobile = () => {
   );
 };
 
-export default LTOffersSectionMobile;
+export default LTCircles1OffersMobile;

@@ -147,6 +147,7 @@
 }
 
 /* Link de la lista */
+/* Use global .lt-menu-hover for link style */
 .LTFooterMobileLink {
   font-family: var(--lt-font-family);
   font-size: 0.8rem;

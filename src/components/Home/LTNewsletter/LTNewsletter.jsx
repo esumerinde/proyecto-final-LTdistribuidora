@@ -20,7 +20,7 @@ const LTNewsletter = () => {
   };
 
   return (
-    <section className="LTNewsletterWrapper">
+    <section className="LTNewsletterWrapper lt-section-spacing">
       <div className="LTNewsletterContainer">
         <div className="LTNewsletterContent">
           {/* Icono visual, no hace falta modificar salvo que el diseño lo requiera */}

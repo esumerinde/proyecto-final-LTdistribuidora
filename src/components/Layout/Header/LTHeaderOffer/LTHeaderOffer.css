@@ -1,6 +1,8 @@
 .LTHeaderOfferBar {
   width: 100%;
+  height: 32px;
   min-height: 32px;
+  max-height: 32px;
   background: var(--lt-accent-color-variant2);
   color: var(--lt-black-text-color);
   display: flex;
@@ -17,6 +19,8 @@
   border-bottom: 1px solid rgba(116, 123, 191, 0.18);
   gap: var(--lt-spacing-lg);
   padding: 0 var(--lt-spacing-lg);
+  margin: 0;
+  line-height: 1;
 }
 
 .LTHeaderOfferBar--pinned {

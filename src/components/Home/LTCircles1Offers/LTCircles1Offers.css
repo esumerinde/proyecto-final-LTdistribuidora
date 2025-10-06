@@ -1,0 +1,21 @@
+/* ========================================
+   LTCircles1Offers.css
+   Estilos específicos para la sección de Ofertas (Desktop)
+   Los estilos comunes están en LTCirclesCommon.css
+   ======================================== */
+
+/* Estilos específicos de texto para Ofertas */
+.LTCirclesMain {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  font-family: "Montserrat", var(--lt-font-family), sans-serif;
+  line-height: 1.1;
+}
+
+.LTCirclesSub {
+  font-size: 0.7rem;
+  color: var(--lt-black-text-color);
+  font-family: "Montserrat", var(--lt-font-family), sans-serif;
+  font-weight: 400;
+}

@@ -1,12 +1,13 @@
+// Componente de categorías. Cuando el backend esté, podés mapear los íconos y nombres desde la base de datos.
 import React from "react";
-// Si vas a traer las categorías desde el backend, importá axios o fetch acá
-// import axios from "axios";
-import "./LTProductsCategories.css";
+import "./LTCircles2Categories.css";
+import "../LTCircles1Offers/LTCirclesCommon.css";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 
-// SVGs inline originales, solo outline
+// Iconos SVG usados en la sección. Si el backend quiere cambiar los íconos, reemplazá estos componentes.
 const MobileSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -24,7 +25,7 @@ const MobileSvg = (
 );
 const LaptopSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -42,7 +43,7 @@ const LaptopSvg = (
 );
 const TvSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -60,7 +61,7 @@ const TvSvg = (
 );
 const GamingSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -78,7 +79,7 @@ const GamingSvg = (
 );
 const HeadphonesSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -95,7 +96,7 @@ const HeadphonesSvg = (
 );
 const HouseSvg = (
   <svg
-    className="LTProductsCategoriesIcon"
+    className="LTCirclesIcon"
     width="48"
     height="48"
     viewBox="0 0 24 24"
@@ -112,50 +113,75 @@ const HouseSvg = (
   </svg>
 );
 
-const LTProductsCategories = () => {
+const LTCircles2Categories = () => {
+  // Gradientes disponibles (mismo sistema que LTSectionTitle)
+  const gradients = {
+    gaming: "linear-gradient(135deg, #f8d56b 0%, #ff8f5a 50%, #ff64d2 100%)",
+    innova:
+      "linear-gradient(120deg, #7d7cc0ff 0%, #b3b8e6 45%, #d89bfcff 100%)",
+    gaming2: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+    sunset: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+    ocean: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+    forest: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  };
+
+  const gradientsHover = {
+    gaming: "linear-gradient(135deg, #f5c84f 0%, #ff7a3d 50%, #ff47c7 100%)",
+    innova:
+      "linear-gradient(120deg, #6a69aaff 0%, #9fa4d9 45%, #c87ef0ff 100%)",
+    gaming2: "linear-gradient(135deg, #5568d3 0%, #653a8f 100%)",
+    sunset: "linear-gradient(135deg, #e87ff0 0%, #e4445b 100%)",
+    ocean: "linear-gradient(135deg, #3a99f0 0%, #00d9e8 100%)",
+    forest: "linear-gradient(135deg, #38d46f 0%, #2de5c8 100%)",
+  };
+
   // Si el backend provee las categorías, reemplazá este array por un estado y traelas con useEffect
-  // const [categories, setCategories] = useState([]);
-  // useEffect(() => {
-  //   axios.get("/api/categorias")
-  //     .then(res => setCategories(res.data))
-  //     .catch(err => console.error("Error al traer categorías:", err));
-  // }, []);
-  // Si las categorías tienen íconos personalizados, deberías mapear el nombre o id a cada SVG
   const categories = [
-    { id: 1, name: "Celulares", icon: MobileSvg },
-    { id: 2, name: "Notebooks", icon: LaptopSvg },
-    { id: 3, name: "Televisores", icon: TvSvg },
-    { id: 4, name: "Gaming", icon: GamingSvg },
-    { id: 5, name: "Audio", icon: HeadphonesSvg },
-    { id: 6, name: "Electrodomésticos", icon: HouseSvg },
+    { id: 1, name: "Celulares", icon: MobileSvg, gradientType: "innova" },
+    { id: 2, name: "Notebooks", icon: LaptopSvg, gradientType: "innova" },
+    { id: 3, name: "Televisores", icon: TvSvg, gradientType: "innova" },
+    { id: 4, name: "Gaming", icon: GamingSvg, gradientType: "innova" },
+    { id: 5, name: "Audio", icon: HeadphonesSvg, gradientType: "innova" },
+    {
+      id: 6,
+      name: "Electrodomésticos",
+      icon: HouseSvg,
+      gradientType: "innova",
+    },
   ];
 
   return (
-    <section className="LTProductsCategoriesWrapper">
-      <div className="LTProductsCategoriesContainer">
-        <div className="LTProductsCategoriesHeader">
-          <h2 className="LTProductsCategoriesTitle lt-big-title">
-            Categorías más vistas
-          </h2>
-          <span className="LTProductsCategoriesViewAll lt-menu-hover">
-            Mostrar todas las categorías
-          </span>
-        </div>
-        <div className="LTProductsCategoriesGrid">
+    <section className="LTCirclesWrapper lt-section-spacing">
+      <div className="lt-section-title-spacing">
+        <LTSectionTitle
+          title="Categorías más vistas"
+          subtitle={
+            <a href="#" className="lt-menu-hover LTNavmenuLink">
+              Mostrar todas las categorias
+            </a>
+          }
+          gradientType="gaming2"
+        />
+      </div>
+      <div className="LTCirclesContainer">
+        <div className="LTCirclesGrid">
           {categories.map((category) => (
             <div
               key={category.id}
-              className="LTProductsCategoriesItem"
-              // Cuando integres el backend, este onClick debería navegar a la página de la categoría o hacer un fetch de productos
-              // Ejemplo: onClick={() => navegarACategoria(category.id) }
+              className="LTCirclesItem"
               onClick={() => console.log(`Clicked on ${category.name}`)}
             >
-              <div className="LTProductsCategoriesCircle">
-                <div className="LTProductsCategoriesIconContainer">
-                  {category.icon}
-                </div>
+              <div
+                className="LTCirclesCircle"
+                style={{
+                  "--circle-gradient": gradients[category.gradientType],
+                  "--circle-gradient-hover":
+                    gradientsHover[category.gradientType],
+                }}
+              >
+                <div className="LTCirclesIconContainer">{category.icon}</div>
               </div>
-              <div className="LTProductsCategoriesLabel">{category.name}</div>
+              <div className="LTCirclesLabel">{category.name}</div>
             </div>
           ))}
         </div>
@@ -164,4 +190,4 @@ const LTProductsCategories = () => {
   );
 };
 
-export default LTProductsCategories;
+export default LTCircles2Categories;

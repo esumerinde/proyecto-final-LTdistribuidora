@@ -340,7 +340,11 @@ export default function LTCategoriesOverlay({ open, onClose }) {
                     />
                   )}
                   {/* Texto de la opción */}
-                  <span className="LTCategoriesOverlay__menuitemText">
+                  <span
+                    className={`LTCategoriesOverlay__menuitemText${
+                      idx === 0 ? " lt-menu-hover" : ""
+                    }`}
+                  >
                     {item.label}
                   </span>
                 </div>

@@ -1,136 +1,69 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-// Configuración centralizada de animación
+/**
+ * Configuración centralizada de animación para transiciones del header
+ */
 export const HEADER_ANIMATION = {
   duration: 350, // ms
   css: "0.35s cubic-bezier(0.4, 0, 0.2, 1)",
 };
 
-// Hook para sincronizar el reacomodado animado de header, navbar y offer
+/**
+ * Hook para gestionar el posicionamiento y visibilidad del header y navbar
+ *
+ * @param {Object} options - Opciones de configuración
+ * @param {boolean} options.showOfferBar - Si la barra de ofertas está activa
+ * @param {boolean} options.forceOfferPinned - Si la barra debe permanecer fija (para admins)
+ * @returns {Object} Estado del header y navbar
+ */
 export default function useHeaderReaccommodation({
-  offerHeight = 32,
-  headerHeight = 75,
+  showOfferBar = false,
   forceOfferPinned = false,
 } = {}) {
+  // Estado de scroll: true cuando scrollY > 0
   const [isSticky, setIsSticky] = useState(false);
-  const [isOfferVisible, setIsOfferVisible] = useState(true);
-  const [measuredOfferHeight, setMeasuredOfferHeight] = useState(offerHeight);
-  const [measuredHeaderHeight, setMeasuredHeaderHeight] =
-    useState(headerHeight);
-  const [headerTop, setHeaderTop] = useState(offerHeight);
-  const [navbarTop, setNavbarTop] = useState(headerHeight + offerHeight);
 
-  const resolvedOfferHeight = Number.isFinite(measuredOfferHeight)
-    ? measuredOfferHeight
-    : offerHeight;
-  const resolvedHeaderHeight = Number.isFinite(measuredHeaderHeight)
-    ? measuredHeaderHeight
-    : headerHeight;
+  // Alturas fijas conocidas (en px) - ajustadas para eliminar gaps
+  const OFFER_HEIGHT = 32;
+  const HEADER_HEIGHT = 75;
+  const NAVBAR_HEIGHT = 55;
 
+  /**
+   * Determina si la barra de ofertas debe estar visible
+   * - Si está forzada (admin), siempre visible
+   * - Si no hay scroll y showOfferBar es true, visible
+   * - Si hay scroll y no está forzada, oculta
+   */
+  const isOfferVisible = forceOfferPinned || (showOfferBar && !isSticky);
+
+  /**
+   * Calcula el offset superior del header
+   * - Si la oferta está visible: OFFER_HEIGHT
+   * - Si no: 0
+   */
+  const headerTop = isOfferVisible ? OFFER_HEIGHT : 0;
+
+  /**
+   * Calcula el offset superior del navbar
+   * - Siempre es: headerTop + HEADER_HEIGHT
+   */
+  const navbarTop = headerTop + HEADER_HEIGHT;
+
+  /**
+   * Listener de scroll para actualizar el estado sticky
+   */
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
+      const scrolled = window.scrollY > 0;
+      setIsSticky(scrolled);
     };
-    window.addEventListener("scroll", handleScroll);
+
+    // Verificar estado inicial
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return undefined;
-    if (!forceOfferPinned && offerHeight === 0) {
-      setMeasuredOfferHeight(0);
-      return undefined;
-    }
-
-    const offerElement = document.querySelector(".LTHeaderOfferBar");
-    if (!offerElement) {
-      setMeasuredOfferHeight(offerHeight);
-      return undefined;
-    }
-
-    const applyHeight = () => {
-      const nextHeight = offerElement.getBoundingClientRect().height;
-      if (!Number.isFinite(nextHeight)) return;
-      setMeasuredOfferHeight((previous) => {
-        if (!Number.isFinite(previous)) return nextHeight;
-        return Math.abs(previous - nextHeight) > 0.5 ? nextHeight : previous;
-      });
-    };
-
-    applyHeight();
-
-    if (typeof ResizeObserver === "undefined") {
-      const intervalId = window.setInterval(applyHeight, 250);
-      return () => window.clearInterval(intervalId);
-    }
-
-    const resizeObserver = new ResizeObserver(applyHeight);
-    resizeObserver.observe(offerElement);
-
-    return () => resizeObserver.disconnect();
-  }, [offerHeight, forceOfferPinned]);
-
-  useLayoutEffect(() => {
-    if (typeof window === "undefined") return undefined;
-
-    const headerElement = document.querySelector(".LTHeaderWrapper");
-    if (!headerElement) {
-      setMeasuredHeaderHeight(headerHeight);
-      return undefined;
-    }
-
-    const applyHeight = () => {
-      const nextHeight = headerElement.getBoundingClientRect().height;
-      if (!Number.isFinite(nextHeight)) return;
-      setMeasuredHeaderHeight((previous) => {
-        if (!Number.isFinite(previous)) return nextHeight;
-        return Math.abs(previous - nextHeight) > 0.5 ? nextHeight : previous;
-      });
-    };
-
-    applyHeight();
-
-    if (typeof ResizeObserver === "undefined") {
-      const intervalId = window.setInterval(applyHeight, 250);
-      return () => window.clearInterval(intervalId);
-    }
-
-    const resizeObserver = new ResizeObserver(applyHeight);
-    resizeObserver.observe(headerElement);
-
-    return () => resizeObserver.disconnect();
-  }, [headerHeight]);
-
-  // Simula el estado de la barra de ofertas (puedes conectar con el estado real)
-  useEffect(() => {
-    // Aquí podrías escuchar un evento global, prop, o contexto para saber si la barra está visible
-    // setIsOfferVisible(...)
-    // Por ahora, se mantiene visible si no está sticky
-    setIsOfferVisible(!isSticky);
-  }, [isSticky]);
-
-  useEffect(() => {
-    if (forceOfferPinned) {
-      setHeaderTop(resolvedOfferHeight);
-      setNavbarTop(resolvedHeaderHeight + resolvedOfferHeight);
-      return;
-    }
-
-    // Calcula el top animado para header y navbar
-    if (isSticky) {
-      setHeaderTop(0);
-      setNavbarTop(resolvedHeaderHeight);
-    } else {
-      setHeaderTop(resolvedOfferHeight);
-      setNavbarTop(resolvedHeaderHeight + resolvedOfferHeight);
-    }
-  }, [
-    isSticky,
-    resolvedOfferHeight,
-    resolvedHeaderHeight,
-    headerHeight,
-    forceOfferPinned,
-  ]);
 
   return {
     isSticky,
@@ -138,5 +71,9 @@ export default function useHeaderReaccommodation({
     headerTop,
     navbarTop,
     animation: HEADER_ANIMATION.css,
+    // Valores útiles para debugging o estilos
+    offerHeight: OFFER_HEIGHT,
+    headerHeight: HEADER_HEIGHT,
+    navbarHeight: NAVBAR_HEIGHT,
   };
 }

@@ -7,9 +7,9 @@
   );
   --ltpb-highlight-gradient: linear-gradient(
     120deg,
-    #d8b4fe 0%,
-    #a855f7 45%,
-    #6d28d9 100%
+    #c5baff 0%,
+    #c2a4fa 45%,
+    #afa3e4 100%
   );
   --ltpb-chip-gradient: linear-gradient(135deg, #f4f3ff, #d9d6fe);
   --ltpb-border-color: rgba(255, 255, 255, 0.18);
@@ -135,6 +135,7 @@
 }
 
 .LTPromoBannerCategory {
+  align-items: ri;
   font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 2.2px;

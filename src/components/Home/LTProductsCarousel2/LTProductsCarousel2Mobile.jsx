@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 import "./LTProductsCarousel2Mobile.css";
 import { products as products2 } from "../../../mocks/products2";
 
@@ -91,8 +92,15 @@ const LTProductsCarousel2Mobile = () => {
   if (!products || !products.length) return null;
 
   return (
-    <section className="LTProductsCarousel2Mobile__wrapper">
+    <section className="LTProductsCarousel2Mobile__wrapper lt-section-spacing">
       <div className="LTProductsCarousel2Mobile__container">
+        <div className="lt-section-title-spacing">
+          <LTSectionTitle
+            title="Smartphones — Apple, Samsung y más"
+            gradientType="gaming"
+          />
+        </div>
+
         <div
           className="LTProductsCarousel2MobileBanner"
           style={{

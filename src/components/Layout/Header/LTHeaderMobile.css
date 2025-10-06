@@ -166,6 +166,8 @@
   padding: 0 8px;
   background: var(--lt-background-color);
   height: 70px;
+  min-height: 70px;
+  max-height: 70px;
   position: fixed;
   top: 32px; /* Se posiciona debajo de la barra de ofertas */
   left: 0;
@@ -178,6 +180,7 @@
     0 2px 12px rgba(0, 0, 0, 0.12);
   border-bottom: 2px solid rgba(116, 123, 191, 0.18);
   transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  margin: 0;
 }
 
 /* Barra de ofertas animada */

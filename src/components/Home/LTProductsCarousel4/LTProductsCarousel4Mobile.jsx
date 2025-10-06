@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import FavoriteButton from "../../../common/FavoriteButton";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
+import LTSectionTitle from "../../../common/LTSectionTitle";
 import "./LTProductsCarousel4Mobile.css";
 import { products as products4 } from "../../../mocks/products4";
 
@@ -91,8 +92,15 @@ const LTProductsCarousel4Mobile = () => {
   if (!products || !products.length) return null;
 
   return (
-    <section className="LTProductsCarousel4Mobile__wrapper">
+    <section className="LTProductsCarousel4Mobile__wrapper lt-section-spacing">
       <div className="LTProductsCarousel4Mobile__container">
+        <div className="lt-section-title-spacing">
+          <LTSectionTitle
+            title="Cámaras — Fotografía y Video"
+            gradientType="gaming"
+          />
+        </div>
+
         <div
           className="LTProductsCarousel4MobileBanner"
           style={{
