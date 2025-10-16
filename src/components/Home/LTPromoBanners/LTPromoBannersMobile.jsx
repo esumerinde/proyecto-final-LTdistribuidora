@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./LTPromoBannersMobile.css";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 const LTPromoBannersMobile = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -91,9 +92,9 @@ const LTPromoBannersMobile = () => {
   return (
     <section className="LTPromoBannersMobileWrapper">
       <div className="LTPromoBannersMobileContainer">
-        <h2 className="LTPromoBannersMobileTitle">
-          Descubrí las mejores opciones en tecnología
-        </h2>
+        <div className="lt-section-title-spacing">
+          <LTSectionTitle title="Las mejores opciones en tecnología" />
+        </div>
 
         <div className="LTPromoBannersMobileNav">
           <div
@@ -178,3 +179,4 @@ const LTPromoBannersMobile = () => {
 };
 
 export default LTPromoBannersMobile;
+

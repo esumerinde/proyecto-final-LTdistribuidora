@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LTCircles1OffersMobile.css";
 import "../LTCircles1Offers/LTCirclesCommon.css";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // Iconos SVG iguales al Desktop
 const CirclePercentSvg = (
@@ -160,7 +160,7 @@ const LTCircles1OffersMobile = () => {
   return (
     <section className="LTCirclesMobileWrapper lt-section-spacing">
       <div className="lt-section-title-spacing">
-        <LTSectionTitle title="Las mejores ofertas" gradientType="innova" />
+        <LTSectionTitle title="Las mejores ofertas" />
       </div>
       <div className="LTCirclesMobileCarousel">
         <div className="LTCirclesMobileNav__arrow LTCirclesMobileNav__arrow--left">
@@ -204,3 +204,4 @@ const LTCircles1OffersMobile = () => {
 };
 
 export default LTCircles1OffersMobile;
+

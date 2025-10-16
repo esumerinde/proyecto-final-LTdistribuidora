@@ -1,4 +1,119 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+﻿/* ===========================
+   ACCOUNT CARDS - ESTILOS GLOBALES
+   =========================== */
+.lt-account-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: var(--lt-border-radius-lg);
+  padding: var(--lt-spacing-lg);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: var(--lt-shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Borde superior accent en hover */
+.lt-account-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--lt-accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.lt-account-card:hover::before {
+  transform: scaleX(1);
+}
+
+.lt-account-card:hover {
+  box-shadow: var(--lt-shadow-lg);
+  transform: translateY(-4px);
+  border-color: var(--lt-accent-color);
+}
+
+/* Card con título e ícono */
+.lt-account-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-md);
+  margin-bottom: var(--lt-spacing-sm);
+}
+
+.lt-account-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--lt-border-radius);
+  background: var(--lt-accent-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lt-account-card-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--lt-white-text-color);
+}
+
+.lt-account-card-content {
+  flex: 1;
+}
+
+.lt-account-card-title {
+  font-size: 1rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-big-text-color);
+  margin: 0 0 4px 0;
+}
+
+.lt-account-card-description {
+  font-size: 0.875rem;
+  color: var(--lt-muted-text-color);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.lt-account-card-chevron {
+  flex-shrink: 0;
+  color: var(--lt-accent-color-dark);
+  transition: transform 0.2s ease;
+}
+
+.lt-account-card:hover .lt-account-card-chevron {
+  transform: translateX(4px);
+}
+
+/* Card section title (para cards con secciones internas) */
+.lt-account-card-section-title {
+  font-size: 1.25rem;
+  font-weight: var(--lt-font-weight-bold);
+  color: var(--lt-big-text-color);
+  margin: 0 0 var(--lt-spacing-lg) 0;
+  padding-bottom: var(--lt-spacing-md);
+  border-bottom: 2px solid var(--lt-border-color);
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap");
+
+/* Estilos compartidos de My Account */
+
+/* Variable Font para títulos con efecto 3D */
+@font-face {
+  src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
+    format("woff2");
+  font-family: "Meta";
+  font-style: normal;
+  font-weight: normal;
+}
 
 :root {
   /* Paleta principal */
@@ -206,93 +321,158 @@ a {
   background: var(--lt-accent-color-variant2-dark);
 }
 
-/* Botón principal global estilo newsletter */
+/* ===========================
+   SISTEMA DE BOTONES GLOBAL - MODERNIZADO
+   =========================== */
+
+/* Botón primario - Variante oscura */
 .lt-button-dark {
-  padding: 0.75rem 1.5rem;
-  background: var(--lt-accent-color-dark);
+  padding: 12px 28px;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-dark) 0%,
+    var(--lt-accent-color-variant) 100%
+  );
   color: var(--lt-white-text-color);
-  border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-medium);
+  border: none;
+  font-weight: 600;
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s,
-    transform 0.2s;
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  font-size: 14px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(116, 123, 191, 0.35), 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .lt-button-dark:hover {
-  background: var(--lt-accent-color-variant);
-  color: var(--lt-black-text-color);
-  border-color: var(--lt-black-text-color);
+  box-shadow: 0 8px 25px rgba(116, 123, 191, 0.45),
+    0 4px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
 }
 
-/* Botón secundario global estilo promos banners */
+.lt-button-dark:active {
+  transform: translateY(0px);
+  box-shadow: 0 2px 10px rgba(116, 123, 191, 0.3);
+}
+
+/* Botón secundario - Variante violeta clara */
 .lt-button-light {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 28px;
   background: var(--lt-accent-color);
   color: var(--lt-black-text-color);
-  border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-medium);
+  border: 2px solid transparent;
+  font-weight: 600;
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s, border 0.2s;
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  font-size: 14px;
   cursor: pointer;
-}
-.lt-button-light:focus {
-  background: var(--lt-accent-color-dark);
-  color: var(--lt-black-text-color);
-  border-color: var(--lt-black-text-color);
-  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
-  color: var(--lt-white-text-color);
-  text-shadow: #0d0d0d 0 0 5px;
-  transform: none;
-}
-.lt-button-light:hover {
-  background: var(--lt-accent-color-dark);
-  color: var(--lt-black-text-color);
-  border-color: var(--lt-black-text-color);
-  box-shadow: 0 0 0 1px rgba(13, 13, 13, 0.15);
-  color: var(--lt-white-text-color);
-  text-shadow: #0d0d0d 0 0 5px;
-  transform: none;
+  box-shadow: 0 4px 15px rgba(197, 186, 255, 0.3), 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
 
+.lt-button-light:hover {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+  box-shadow: 0 6px 20px rgba(116, 123, 191, 0.4);
+}
+
+.lt-button-light:active {
+  transform: scale(0.98);
+}
+
+/* Botón terciario - Variante naranja */
 .lt-button-variant2 {
-  padding: 0.75rem 1.5rem;
+  padding: 12px 28px;
   background: var(--lt-accent-color-variant2-dark);
   color: var(--lt-black-text-color);
-  border: 1px solid var(--lt-black-text-color);
-  font-weight: var(--lt-font-weight-medium);
+  border: none;
+  font-weight: 600;
   font-family: var(--lt-font-family);
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s,
-    transform 0.2s;
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  font-size: 14px;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(247, 177, 93, 0.4), 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
-.lt-button-variant2:focus {
-  outline: none;
-  border-color: var(--lt-black-text-color);
-}
+
 .lt-button-variant2:hover {
   background: var(--lt-accent-color-variant2);
-  color: var(--lt-black-text-color);
-  border-color: var(--lt-black-text-color);
-  transform: translateY(-2px);
-  box-shadow: 0 0 0 3px rgba(13, 13, 13, 0.15);
+  box-shadow: 0 6px 20px rgba(247, 177, 93, 0.5);
 }
+
 .lt-button-variant2:active {
-  transform: translateY(0);
+  transform: scale(0.98);
+}
+
+.lt-button-variant2:active {
+  transform: scale(0.98);
+}
+
+/* Botón pequeño para cards - Violeta */
+.lt-button-card {
+  padding: 8px 12px;
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  border: 1px solid var(--lt-border-color);
+  font-weight: 400;
+  font-family: var(--lt-font-family);
+  letter-spacing: 0.2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(197, 186, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lt-button-card:hover {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+  box-shadow: 0 4px 12px rgba(116, 123, 191, 0.3);
+}
+
+.lt-button-card:active {
+  transform: scale(0.97);
+}
+
+/* Botón pequeño para cards - Naranja */
+.lt-button-card-variant2 {
+  padding: 8px 12px;
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  border: 1px solid var(--lt-border-color);
+  font-weight: 400;
+  font-family: var(--lt-font-family);
+  letter-spacing: 0.2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(247, 177, 93, 0.25);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lt-button-card-variant2:hover {
+  background: var(--lt-accent-color-variant2);
+  box-shadow: 0 4px 12px rgba(247, 177, 93, 0.35);
+}
+
+.lt-button-card-variant2:active {
+  transform: scale(0.97);
 }
 
 /* Input global estilo barra de búsqueda */
@@ -320,4 +500,100 @@ a {
 .lt-search-bar::placeholder {
   color: var(--lt-muted-text-color);
   font-weight: 400;
+}
+
+/* ===========================
+   FLECHAS DE NAVEGACIÓN GLOBALES - CONSISTENCIA TOTAL
+   =========================== */
+button.lt-arrow-nav,
+button.lt-arrow-nav--violet {
+  all: unset; /* RESET COMPLETO */
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: var(--lt-accent-color-variant2-dark);
+  padding: 0;
+  margin: 0;
+  position: relative;
+  overflow: visible;
+}
+
+button.lt-arrow-nav:hover,
+button.lt-arrow-nav--violet:hover {
+  background: var(--lt-accent-color-variant2) !important;
+  border-color: var(--lt-black-text-color) !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+  transform: scale(1.05) !important;
+}
+
+button.lt-arrow-nav.disabled,
+button.lt-arrow-nav--violet.disabled {
+  opacity: 0.3 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+}
+
+button.lt-arrow-nav svg,
+button.lt-arrow-nav--violet svg {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  fill: var(--lt-black-text-color) !important;
+  transition: fill 0.3s ease !important;
+  pointer-events: none !important;
+  display: block !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+button.lt-arrow-nav svg path,
+button.lt-arrow-nav--violet svg path {
+  fill: var(--lt-black-text-color) !important;
+  stroke: none !important;
+}
+
+/* Variante violeta para carousels principales */
+button.lt-arrow-nav--violet {
+  background: var(--lt-accent-color) !important;
+  border-color: var(--lt-black-text-color) !important;
+}
+
+button.lt-arrow-nav--violet:hover {
+  background: var(--lt-accent-color-dark) !important;
+  border-color: var(--lt-black-text-color) !important;
+}
+
+/* ========== Global fade-in utility (stable) ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeIn 0.4s ease both;
+  will-change: opacity, transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in {
+    animation: none !important;
+  }
 }

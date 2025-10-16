@@ -1,0 +1,478 @@
+﻿/* ===========================================================================
+   LT PERSONAL INFO - PÁGINA DE INFORMACIÓN PERSONAL
+   Limpieza de sintaxis. Sin cambios de espaciado global ni líneas internas en cards.
+   =========================================================================== */
+
+/* ==================== ANIMACIONES ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.slide-down {
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  overflow: hidden;
+}
+
+/* ==================== CONTENEDOR PRINCIPAL ==================== */
+.LTPersonalInfoContainer {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-lg);
+}
+
+/* ==================== BREADCRUMB ==================== */
+.LTPersonalInfoBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-xs);
+  font-size: 14px;
+  margin-bottom: var(--lt-spacing-xl);
+  padding: var(--lt-spacing-sm);
+  background: white;
+  border-radius: var(--lt-border-radius);
+  box-shadow: 0 1px 3px rgba(197, 186, 255, 0.1);
+}
+
+.LTPersonalInfoBreadcrumbLink {
+  color: var(--lt-accent-color);
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.LTPersonalInfoBreadcrumbLink:hover {
+  color: var(--lt-accent-color-dark);
+}
+.LTPersonalInfoBreadcrumbCurrent {
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+}
+
+/* ==================== HEADER ==================== */
+.LTPersonalInfoHeaderSection {
+  margin-bottom: var(--lt-spacing-xl);
+}
+
+.LTPersonalInfoTitle {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--lt-spacing-sm);
+}
+
+.LTPersonalInfoSubtitle {
+  font-size: 16px;
+  color: var(--lt-text-color);
+  margin: 0;
+}
+
+/* ==================== PHOTO SECTION ==================== */
+.LTPersonalInfoPhotoSection,
+.lt-profile-photo-section {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-xl);
+}
+
+.LTPersonalInfoPhotoWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.LTPersonalInfoPhoto,
+.LTPersonalInfoPhotoPlaceholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.LTPersonalInfoPhoto {
+  object-fit: cover;
+}
+
+.LTPersonalInfoPhotoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  color: white;
+  font-weight: 700;
+}
+
+/* Botón redondo para subir/editar foto */
+.LTPersonalInfoPhotoOverlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--lt-accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: 3px solid white;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.LTPersonalInfoPhotoOverlay:hover {
+  transform: scale(1.1);
+  background: var(--lt-accent-color-dark);
+}
+
+/* Loader sobre foto */
+.LTPersonalInfoPhotoLoader {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bloque de info al lado de la foto */
+.LTPersonalInfoPhotoContent {
+  flex: 1;
+}
+.LTPersonalInfoPhotoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+.LTPersonalInfoPhotoText {
+  font-size: 14px;
+  color: var(--lt-text-color);
+  margin: 0 0 var(--lt-spacing-md);
+}
+.LTPersonalInfoPhotoActions {
+  display: flex;
+  gap: var(--lt-spacing-sm);
+}
+.LTPersonalInfoFileInput {
+  display: none;
+}
+
+/* Botón de subir foto (alternativo) */
+.lt-photo-upload-btn {
+  background: var(--lt-accent-color);
+  color: white;
+  border: none;
+  padding: var(--lt-spacing-sm) var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius);
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.lt-photo-upload-btn:hover {
+  transform: scale(1.03);
+  background: var(--lt-accent-color-dark);
+}
+
+/* ==================== CARDS ==================== */
+/* Nota: no cambiamos espaciado global de .lt-account-card para no afectar layout. */
+/* Tampoco agregamos líneas internas (borders) en títulos de cards. */
+
+/* ==================== INFO ITEMS ==================== */
+.LTPersonalInfoItem {
+  /* SIN border-bottom para evitar la "línea adentro de las cards" */
+  padding: var(--lt-spacing-xl);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  transition: background 0.2s;
+  background: white;
+  border-radius: var(--lt-border-radius);
+}
+
+.LTPersonalInfoItem:hover {
+  background: rgba(197, 186, 255, 0.03);
+}
+.LTPersonalInfoItem--aboutMe {
+  flex-direction: column;
+}
+.LTPersonalInfoItemContent {
+  flex: 1;
+}
+
+.LTPersonalInfoItemLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lt-accent-color-dark);
+  margin-bottom: var(--lt-spacing-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.LTPersonalInfoItemIcon {
+  color: var(--lt-accent-color);
+}
+.LTPersonalInfoItemValue {
+  font-size: 16px;
+  color: var(--lt-black-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+  font-weight: 500;
+}
+.LTPersonalInfoItemHelper {
+  font-size: 13px;
+  color: var(--lt-small-text-color);
+}
+
+.LTPersonalInfoItemActions {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+}
+.LTPersonalInfoItemCheck {
+  color: #10b981;
+}
+
+/* Botón editar en línea */
+.LTPersonalInfoEditButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--lt-accent-color);
+  transition: all 0.2s;
+  padding: var(--lt-spacing-xs);
+  border-radius: var(--lt-border-radius);
+}
+.LTPersonalInfoEditButton:hover {
+  background: rgba(197, 186, 255, 0.1);
+  color: var(--lt-accent-color-dark);
+}
+
+/* Utilidades (sin modificar espaciado global de cards) */
+.lt-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-sm);
+}
+.lt-info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.lt-info-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0 0 0.25rem 0;
+  font-weight: 500;
+}
+.lt-info-value {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 600;
+}
+.lt-info-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.lt-info-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--lt-accent-color-dark);
+}
+
+/* ==================== EDIT FORM ==================== */
+.LTPersonalInfoEditForm {
+  margin-top: var(--lt-spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-md);
+}
+
+.LTPersonalInfoFormInput,
+.LTPersonalInfoInput {
+  width: 100%;
+  padding: 12px var(--lt-spacing-md);
+  border: 2px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  font-size: 14px;
+  transition: all 0.3s;
+  background: white;
+}
+.LTPersonalInfoFormInput:focus,
+.LTPersonalInfoInput:focus {
+  outline: none;
+  border-color: var(--lt-accent-color);
+  box-shadow: 0 0 0 4px rgba(197, 186, 255, 0.15);
+}
+
+.LTPersonalInfoTextarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.LTPersonalInfoPasswordConfirm {
+  background: rgba(197, 186, 255, 0.05);
+  padding: var(--lt-spacing-md);
+  border-radius: var(--lt-border-radius);
+  /* sin border-left ni separadores extras */
+}
+
+/* Utilidades de formulario */
+.lt-form-group {
+  margin-bottom: var(--lt-spacing-lg);
+}
+.lt-form-group label {
+  display: block;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.LTPersonalInfoPasswordField {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+}
+.LTPersonalInfoPasswordToggle {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--lt-text-color);
+  padding: var(--lt-spacing-xs);
+}
+
+/* SIN border-top para evitar líneas internas en cards */
+.LTPersonalInfoFormActions,
+.lt-form-actions {
+  display: flex;
+  gap: var(--lt-spacing-sm);
+  justify-content: flex-end;
+  margin-top: var(--lt-spacing-lg);
+  padding-top: 0;
+  border-top: none;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.LTPersonalInfoEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lt-spacing-xxl);
+  text-align: center;
+}
+.LTPersonalInfoEmptyIcon {
+  width: 64px;
+  height: 64px;
+  color: var(--lt-accent-color);
+  opacity: 0.5;
+  margin-bottom: var(--lt-spacing-lg);
+}
+.LTPersonalInfoEmptyTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+.LTPersonalInfoEmptyText {
+  font-size: 14px;
+  color: var(--lt-text-color);
+  margin-bottom: var(--lt-spacing-lg);
+}
+
+/* ==================== SECURITY NOTICE ==================== */
+.LTPersonalInfoSecurityNotice {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+  padding: var(--lt-spacing-md);
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: var(--lt-border-radius);
+  /* sin border-left para no añadir líneas */
+}
+.LTPersonalInfoSecurityIcon {
+  color: #10b981;
+  flex-shrink: 0;
+}
+.LTPersonalInfoSecurityLink {
+  color: var(--lt-accent-color);
+  text-decoration: underline;
+}
+.LTPersonalInfoSecurityLink:hover {
+  color: var(--lt-accent-color-dark);
+}
+
+/* ==================== INPUT ==================== */
+.LTPersonalInfoInput {
+  width: 100%;
+  padding: 10px var(--lt-spacing-md);
+  border: 2px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  font-size: 14px;
+  transition: all 0.3s;
+}
+.LTPersonalInfoInput:focus {
+  outline: none;
+  border-color: var(--lt-accent-color);
+  box-shadow: 0 0 0 4px rgba(197, 186, 255, 0.15);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .LTPersonalInfoContainer {
+    padding: 0 var(--lt-spacing-md);
+  }
+  .LTPersonalInfoTitle {
+    font-size: 28px;
+  }
+  .LTPersonalInfoPhotoSection {
+    flex-direction: column;
+    text-align: center;
+  }
+  .LTPersonalInfoPhotoActions {
+    justify-content: center;
+  }
+  .LTPersonalInfoItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .LTPersonalInfoItemActions {
+    margin-top: var(--lt-spacing-sm);
+  }
+}

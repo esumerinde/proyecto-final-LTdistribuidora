@@ -1,0 +1,258 @@
+/* Overlay de chat para mobile, igual dimensiones y animaciones que LTCategoriesOverlay */
+.LTChatWidgetMobileOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100dvh;
+  background: #fff;
+  z-index: 200000;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overscroll-behavior: contain;
+}
+.LTChatWidgetMobileOverlay.slideOutLeft {
+  animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.LTChatWidgetMobileOverlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--lt-accent-color);
+  padding: 8px 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.LTChatWidgetMobileOverlay__close {
+  background: var(--lt-accent-color);
+  border-radius: 8px;
+  color: var(--lt-black-text-color);
+  cursor: pointer;
+  padding: 8px 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  min-height: 40px;
+}
+.LTChatWidgetMobileOverlay__closeIcon {
+  width: 1.1rem;
+  height: 1.1rem;
+  stroke: var(--lt-black-text-color);
+  display: block;
+}
+.LTChatWidgetMobileOverlay__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 16px 16px;
+  overflow-y: auto;
+  min-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+.LTChatWidgetMobileOverlay__welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+.LTChatWidgetMobileOverlay__welcomeText {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.LTChatWidgetMobileOverlay__welcomeSubtext {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 8px;
+}
+.LTChatWidgetMobileOverlay__form {
+  margin-bottom: 8px;
+}
+.LTChatWidgetMobileOverlay__inputContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.LTChatWidgetMobileOverlay__input {
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f7f7f7;
+  color: #222;
+}
+.LTChatWidgetMobileOverlay__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.LTChatWidgetMobileOverlay__actionButton {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 1rem;
+  border-radius: 8px;
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.LTChatWidgetMobileOverlay__actionButton:hover {
+  background: var(--lt-accent-color-dark);
+}
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.lt-chat-widget-mobile-title-container h2 {
+  margin: 0;
+  color: #000;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.lt-chat-widget-mobile-title-container p {
+  margin: 5px 0 0;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 0.85rem;
+}
+
+.lt-chat-widget-mobile-close {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lt-chat-widget-mobile-close:active {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.lt-chat-widget-mobile-close svg {
+  width: 24px;
+  height: 24px;
+  fill: #000;
+}
+
+.lt-chat-widget-mobile-body {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.lt-chat-widget-mobile-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.lt-chat-widget-mobile-info-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.lt-chat-widget-mobile-info-icon {
+  width: 40px;
+  height: 40px;
+  background-color: #ffcc00;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lt-chat-widget-mobile-info-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #000;
+}
+
+.lt-chat-widget-mobile-info-text h3 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 600;
+}
+
+.lt-chat-widget-mobile-info-text p {
+  margin: 5px 0 0;
+  font-size: 1rem;
+  color: #000;
+  font-weight: 500;
+}
+
+.lt-chat-widget-mobile-footer {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+.lt-chat-widget-mobile-whatsapp-button {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+.lt-chat-widget-mobile-whatsapp-button:active {
+  transform: scale(0.98);
+}
+
+.lt-chat-widget-mobile-whatsapp-button svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}

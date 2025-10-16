@@ -6,12 +6,19 @@
   }
 }
 
-/* Banner principal de features, fondo y padding vertical */
+/* Banner principal de features, overlay sobre el hero */
 .LTFeatureBannerWrapper {
   width: 100%;
-  background-color: var(--lt-background-color);
-  padding: clamp(120px, 18vw, 200px) 0 var(--lt-spacing-lg) 0; /* Padding superior ENORME */
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  z-index: 5;
+  background: transparent;
+  padding: 0;
+  margin: 0;
   min-height: 85px;
+  /* Transform para centrar y posicionar */
+  transform: translateX(-50%) translateY(-25%);
 }
 
 /* Título de la sección */
@@ -28,11 +35,11 @@
 .LTFeatureBannerContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 var(--lt-spacing-md);
+  padding: 0 clamp(1rem, 3vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2.5rem;
+  gap: 2rem;
   min-height: 50px;
   transition: transform 0.7s cubic-bezier(0.7, 0.2, 0.3, 1),
     opacity 0.7s cubic-bezier(0.7, 0.2, 0.3, 1);
@@ -44,131 +51,166 @@
   opacity: 0;
 }
 
-/* Card de feature individual, layout horizontal, icono, texto y flecha */
+/* Card de feature individual - FONDO BLANCO Y TEXTO A LA IZQUIERDA */
 .LTFeatureBannerItem {
   display: flex;
   align-items: center;
-  gap: var(--lt-spacing-sm);
-  padding: var(--lt-spacing-sm) calc(var(--lt-spacing-md) + 8px);
-  border-radius: var(--lt-border-radius);
-  transition: all 0.3s ease;
+  justify-content: flex-start; /* ALINEACIÓN A LA IZQUIERDA */
+  gap: var(--lt-spacing-md);
+  padding: var(--lt-spacing-md) var(--lt-spacing-lg);
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
   cursor: pointer;
   flex: 1;
   min-width: 0;
-  max-width: 260px;
-  height: 100px;
-  min-height: 100px;
-  max-height: 100px;
+  max-width: 300px; /* Cards más grandes */
+  height: 90px; /* Altura reducida */
+  min-height: 90px;
+  max-height: 90px;
   position: relative;
   opacity: 1;
+  text-align: left; /* FORZAR TEXTO A LA IZQUIERDA */
+  /* MISMO ESTILO QUE LAS CARDS DE PRODUCTSCAROUSEL */
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .LTFeatureBannerContainer .fade-card {
   opacity: 1;
 }
 
-/* Hover: resalta la card y el icono, y muestra sombra */
+/* Hover: LA CARD MANTIENE FONDO BLANCO */
 .LTFeatureBannerItem:hover {
-  background-color: var(--lt-accent-color-variant);
-  transform: scale(1.08);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
 
+/* Hover: CONTENEDOR SVG CON GRADIENTE DE CIRCLES */
+.LTFeatureBannerItem:hover .LTFeatureBannerIconContainer {
+  background: linear-gradient(
+    135deg,
+    #f8d56b 0%,
+    #ff8f5a 50%,
+    #ff64d2 100%
+  ); /* GRADIENTE CIRCLES EN HOVER */
+  transform: scale(1.1);
+}
+
+/* Hover: EL TÍTULO SE PINTA DE VARIANT2-DARK */
 .LTFeatureBannerItem:hover .LTFeatureBannerTitle {
-  color: var(--lt-text-color); /* Mantener el título en negro */
+  color: var(--lt-accent-color-variant2-dark); /* VARIANT2-DARK COMO PEDISTE */
 }
 
-.LTFeatureBannerItem:hover .LTFeatureBannerSubtitle {
-  color: var(--lt-white-text); /* Solo el subtítulo se vuelve beige */
-}
-
+/* Hover: LOS SVG SE MANTIENEN NEGROS - NO SE PINTAN DE BLANCO */
 .LTFeatureBannerItem:hover .LTFeatureBannerIcon {
-  filter: var(--lt-white-svg-filter);
-  transform: scale(1.08);
+  /* SIN FILTER - SE MANTIENEN NEGROS */
+  transform: scale(1.05);
 }
 
+/* Hover: LA FLECHA SE MANTIENE NEGRA */
 .LTFeatureBannerItem:hover .LTFeatureBannerArrow svg {
-  fill: var(--lt-white-text);
+  /* SIN CAMBIO DE COLOR - SE MANTIENE NEGRA */
+  transform: translateX(3px);
 }
 
-/* Contenedor circular del icono */
+/* Contenedor del icono - GRADIENTE INNOVA COMO ANTES */
 .LTFeatureBannerIconContainer {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--lt-accent-color);
-  border-radius: 50%;
+  background: linear-gradient(
+    120deg,
+    #7d7cc0ff 0%,
+    #b3b8e6 45%,
+    #d89bfcff 100%
+  );
+  border-radius: 12px;
   padding: var(--lt-spacing-xs);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(247, 177, 93, 0.3);
 }
 
-/* Icono SVG dentro de la card */
+/* Icono SVG dentro de la card - ESTILO DEL PROYECTO */
 .LTFeatureBannerIcon {
   width: 24px;
   height: 24px;
-  filter: none;
-  fill: var(--lt-white-text-color);
+  filter: brightness(0) saturate(100%) invert(5%) sepia(7%) saturate(1843%)
+    hue-rotate(202deg) brightness(95%) contrast(95%);
+  transition: all 0.3s ease;
 }
 
-/* Contenido textual de la card */
+/* Contenido textual de la card - FORZAR ALINEACIÓN A LA IZQUIERDA */
 .LTFeatureBannerContent {
   flex: 1;
   min-width: 120px;
+  text-align: left !important; /* FORZAR CON !IMPORTANT */
+  align-items: flex-start !important; /* FORZAR ALINEACIÓN */
+  justify-content: flex-start !important; /* FORZAR ALINEACIÓN */
+  display: flex;
+  flex-direction: column;
 }
 
-/* Título de la card */
+/* Título de la card - FORZAR ALINEACIÓN A LA IZQUIERDA */
 .LTFeatureBannerTitle {
   font-family: var(--lt-font-family);
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--lt-text-color);
-  margin: 0 0 2px 0;
-  line-height: 1.2;
-  text-align: left;
+  font-size: 0.9rem;
+  font-weight: var(--lt-font-weight-semibold);
+  color: var(--lt-accent-color-dark); /* COLOR VIOLETA ORIGINAL */
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+  text-align: left !important; /* FORZAR CON !IMPORTANT */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: all 0.3s ease;
+  align-self: flex-start; /* FORZAR ALINEACIÓN */
 }
 
-/* Subtítulo de la card, con máximo 3 líneas */
+/* Subtítulo de la card - FORZAR ALINEACIÓN A LA IZQUIERDA */
 .LTFeatureBannerSubtitle {
-  font-family: var(--lt-font-family);
-  font-size: 0.7rem !important;
-  color: var(--lt-text-light);
+  font-family: var(--lt-font-family-alt);
+  font-size: 0.75rem;
+  color: var(--lt-muted-text-color); /* Color muted del proyecto */
   margin: 0;
-  line-height: 1.3 !important;
+  line-height: 1.4;
   overflow: hidden;
-  text-align: left !important;
+  text-align: left !important; /* FORZAR CON !IMPORTANT */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
+  -webkit-line-clamp: 2; /* Máximo 2 líneas */
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   transition: all 0.3s ease;
+  font-weight: var(--lt-font-weight-normal);
+  align-self: flex-start; /* FORZAR ALINEACIÓN */
 }
 
-/* Flecha decorativa en la card */
+/* Flecha decorativa - ESTILO DEL PROYECTO */
 .LTFeatureBannerArrow {
   flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  opacity: 0.5;
-  transition: all 0.3s ease;
+  width: 18px;
+  height: 18px;
+  opacity: 0.6;
+  transition: all 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
 }
 
-/* SVG de la flecha decorativa */
+/* SVG de la flecha - ESTILO DEL PROYECTO */
 .LTFeatureBannerArrow svg {
   width: 100%;
   height: 100%;
-  fill: var(--lt-text-light);
+  fill: var(--lt-accent-color-dark);
+  transition: all 0.3s ease;
 }
 
-/* Hover: la flecha se mueve y se hace más visible */
+/* Hover: la flecha se mueve con transición suave */
 .LTFeatureBannerItem:hover .LTFeatureBannerArrow {
   opacity: 1;
-  transform: translateX(4px);
 }
 
 /* Carrusel principal del banner */
@@ -181,75 +223,27 @@
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0; /* Sin padding */
 }
 
-/* Indicadores de slide (puntos debajo del carrusel) */
-.LTFeatureBannerIndicators {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--lt-spacing-xs);
-  margin: 18px 0 0 0;
-  width: auto;
-  max-width: none;
-}
-.LTFeatureBannerIndicator {
-  width: 18px;
-  height: 8px;
-  border-radius: 8px;
-  background: var(--lt-background-color);
-  border: 1px solid var(--lt-accent-color);
-  transition: background 0.3s, border-color 0.3s;
-  cursor: pointer;
-  margin: 0 2px;
-  opacity: 0.7;
-}
-.LTFeatureBannerIndicator.active {
-  background: var(--lt-accent-color);
-  border-color: var(--lt-accent-color-dark);
-  opacity: 1;
-}
-
-/* Flechas de navegación del carrusel, estilo circular y animación */
-.LTFeatureBannerArrowNav {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border: none;
-  background: var(--lt-accent-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+/* Flechas de navegación del carrusel - USA CLASE GLOBAL .lt-arrow-nav--violet desde index.css */
+/* Solo posicionamiento específico para desktop */
+.LTFeatureBannerNavRow .lt-arrow-nav--violet {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-50%) !important;
   z-index: 2;
 }
-.LTFeatureBannerArrowNav:first-of-type {
-  left: 8px;
+
+.LTFeatureBannerNavRow .lt-arrow-nav--violet:hover {
+  transform: translateY(-50%) scale(1.05) !important;
 }
-.LTFeatureBannerArrowNav:last-of-type {
-  right: 8px;
+
+.LTFeatureBannerNavRow .lt-arrow-nav--violet:first-child {
+  left: -60px; /* APROVECHAR ESPACIO EXTRA DE 1400px */
 }
-.LTFeatureBannerArrowNav:hover:not(.disabled) {
-  background: var(--lt-accent-color);
-  transform: translateY(-50%);
-}
-.LTFeatureBannerArrowNav.disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
-  transition: opacity 0.7s, visibility 0.7s;
-}
-.LTFeatureBannerArrowNav svg {
-  width: 20px;
-  height: 20px;
-  fill: var(--lt-black-text-color);
-  transition: fill 0.3s ease;
+.LTFeatureBannerNavRow .lt-arrow-nav--violet:last-child {
+  right: -60px; /* APROVECHAR ESPACIO EXTRA DE 1400px */
 }
 
 /* Responsive: oculta flechas y ajusta layout en mobile */
@@ -261,17 +255,17 @@
     margin-top: 16px !important;
   }
 
-  .LTFeatureBannerArrowNav {
+  .LTFeatureBannerNavRow .lt-arrow-nav--violet {
     position: static !important;
     transform: none !important;
     display: flex !important;
   }
 
-  .LTFeatureBannerArrowNav:first-of-type {
+  .LTFeatureBannerNavRow .lt-arrow-nav--violet:first-child {
     left: auto !important;
   }
 
-  .LTFeatureBannerArrowNav:last-of-type {
+  .LTFeatureBannerNavRow .lt-arrow-nav--violet:last-child {
     right: auto !important;
   }
 

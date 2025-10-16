@@ -1,8 +1,8 @@
-/* Importar estilos comunes compartidos por PC2, PC3 y PC4 */
+﻿/* Importar estilos comunes compartidos por PC2, PC3 y PC4 */
 @import "../LTProductsCarousel/LTProductsCarouselCommon.css";
 
 /* ===========================
- BANNER ESPEC�FICO PC2 - Smartphones
+ BANNER ESPECÍFICO PC2 - Smartphones
  =========================== */
 :root {
   --ltpc2-banner-bg: url("https://images.unsplash.com/photo-1598327105666-5b89351aff97?q=80&w=1200&auto=format&fit=crop");
@@ -192,28 +192,5 @@
 
 .LTProductsCarouselBannerButton {
   align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  padding: 10px 20px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.6);
-  background: linear-gradient(
-    135deg,
-    var(--lt-accent-color-variant2-dark),
-    var(--lt-accent-color-variant2)
-  );
-  color: var(--lt-black-text-color);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
-}
-
-.LTProductsCarouselBannerButton:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.05);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.34);
+  /* El resto de estilos vienen de la clase global lt-button-variant2 */
 }

@@ -2,7 +2,7 @@
 import React from "react";
 import "./LTCircles1Offers.css";
 import "./LTCirclesCommon.css";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // Iconos SVG usados en la sección. Si el backend quiere cambiar los íconos, reemplazá estos componentes.
 const CirclePercentSvg = (
@@ -189,7 +189,7 @@ const LTCircles1Offers = () => {
       <div className="LTCirclesContainer">
         {/* Título con animación de pinceleada */}
         <div className="lt-section-title-spacing">
-          <LTSectionTitle title="Las mejores ofertas" gradientType="innova" />
+          <LTSectionTitle title="Las mejores ofertas" />
         </div>
         <div className="LTCirclesGrid">
           {/* Renderiza cada ítem de oferta con gradient dinámico */}
@@ -219,3 +219,4 @@ const LTCircles1Offers = () => {
 
 // Cuando el backend esté, mapear los ítems y los íconos desde la base de datos si se quiere personalizar la sección.
 export default LTCircles1Offers;
+

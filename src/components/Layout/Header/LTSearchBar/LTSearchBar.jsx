@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./LTSearchBar.css";
-import LTSearchDesktop from "../../../../common/LTSearchDesktop";
+import LTSearchDesktop from "../../../../components/common/LTSearchDesktop";
 
 const LTSearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");

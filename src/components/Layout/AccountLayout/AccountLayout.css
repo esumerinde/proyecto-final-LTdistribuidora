@@ -1,0 +1,59 @@
+/* ===============================================
+   Account Layout - Layout compartido para My Account
+   =============================================== */
+
+.account-layout {
+  --lt-account-fixed-offset: calc(var(--lt-offer-height) + 75px + 55px);
+  --lt-account-offset-extra: var(--lt-spacing-sm);
+  --lt-account-sticky-offset: calc(
+    var(--lt-account-fixed-offset) + var(--lt-account-offset-extra)
+  );
+
+  display: flex;
+  min-height: 100vh;
+  max-width: 100%;
+  margin: 0;
+  padding-top: var(--lt-account-sticky-offset);
+  background-color: var(--lt-background-color);
+}
+
+/* Main content area (where Outlet renders) */
+.main-content {
+  flex: 1;
+  padding: var(--lt-spacing-xl);
+  min-width: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.sidebar-visible {
+  margin-left: 0;
+}
+
+/* Clase global para todas las páginas de My Account */
+.account-page-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .account-layout {
+    --lt-account-sticky-offset: 75px;
+    flex-direction: column;
+    padding-top: 75px;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding: var(--lt-spacing-md);
+  }
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

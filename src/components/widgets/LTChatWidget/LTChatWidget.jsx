@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LTChatWidget.css";
 import logoBlancoChico from "../../../assets/images/logos/logo-blanco-chico.png";
-import { isMobile } from "@utils/responsive/isMobile";
+import { isMobile } from "../../../hooks/useIsMobile";
 
 /**
  * Componente de chat flotante para desktop.
@@ -175,3 +175,4 @@ const LTChatWidget = () => {
 };
 
 export default LTChatWidget;
+

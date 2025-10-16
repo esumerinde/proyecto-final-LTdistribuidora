@@ -1,6 +1,6 @@
 import "./LTFeatureBanner.css";
 import { useEffect } from "react";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // Importa los íconos SVG usados en las cards de features
 // Si se agregan más features, agregar el ícono correspondiente acá
@@ -18,7 +18,7 @@ import MapPinIcon from "../../../assets/icons/svg/map-pin-svgrepo-com.svg";
 import {
   useCarouselSync,
   CarouselSyncProvider,
-} from "../../../common/CarouselSyncContext.jsx";
+} from "../../../context/CarouselSyncContext.jsx";
 
 // Cantidad de cards que se muestran por slide en desktop
 const CARDS_PER_SLIDE = 3;
@@ -138,15 +138,12 @@ const LTFeatureBanner = () => {
         currentIndex * CARDS_PER_SLIDE + CARDS_PER_SLIDE
       );
 
-  // Navegación del carrusel: anterior, siguiente y salto a slide específico
+  // Navegación del carrusel: anterior y siguiente
   const goToPrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
   };
   const goToNext = () => {
     setCurrentIndex((prev) => (prev + 1) % totalSlides);
-  };
-  const goToSlide = (idx) => {
-    setCurrentIndex(idx);
   };
 
   // Autoplay: avanza cada 3 segundos solo en mobile
@@ -163,10 +160,7 @@ const LTFeatureBanner = () => {
   // Renderiza el banner de features con carrusel y navegación
   // Cuando se pase a backend, el array de features debe venir de la API
   return (
-    <section className="LTFeatureBannerWrapper lt-section-spacing">
-      <div className="lt-section-title-spacing">
-        <LTSectionTitle title="Nuestras ofertas exclusivas" />
-      </div>
+    <section className="LTFeatureBannerWrapper">
       <div className="LTFeatureBannerCarousel">
         <div className="LTFeatureBannerContainer">
           {/* Renderiza las cards visibles según el slide y si es mobile/desktop */}
@@ -189,40 +183,28 @@ const LTFeatureBanner = () => {
         {/* Botones de navegación del carrusel */}
         <div className="LTFeatureBannerNavRow">
           <button
-            className="LTFeatureBannerArrowNav"
+            className="lt-arrow-nav--violet"
             onClick={goToPrev}
             aria-label="Anterior"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path d="M15.41,7.41L10.83,12L15.41,16.59L14,18L8,12L14,6L15.41,7.41Z" />
+            <svg viewBox="0 0 24 24">
+              <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
             </svg>
           </button>
           <button
-            className="LTFeatureBannerArrowNav"
+            className="lt-arrow-nav--violet"
             onClick={goToNext}
             aria-label="Siguiente"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24">
-              <path d="M8.59,16.59L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.59Z" />
+            <svg viewBox="0 0 24 24">
+              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
             </svg>
           </button>
         </div>
-      </div>
-      {/* Indicadores de slide (puntos abajo del carrusel) */}
-      <div className="LTFeatureBannerIndicators">
-        {[...Array(totalSlides)].map((_, idx) => (
-          <button
-            key={idx}
-            className={`LTFeatureBannerIndicator${
-              idx === currentIndex ? " active" : ""
-            }`}
-            onClick={() => goToSlide(idx)}
-            aria-label={`Ir al slide ${idx + 1}`}
-          />
-        ))}
       </div>
     </section>
   );
 };
 
 export default LTFeatureBanner;
+

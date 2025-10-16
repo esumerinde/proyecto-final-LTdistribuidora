@@ -176,8 +176,10 @@ export const resetUsers = () => {
 };
 
 export const getInitials = (fullName) => {
-  if (!fullName) return "";
-  const parts = fullName.trim().split(/\s+/);
+  if (!fullName || typeof fullName !== "string") return "US";
+  const trimmed = fullName.trim();
+  if (!trimmed) return "US";
+  const parts = trimmed.split(/\s+/);
   const first = parts[0]?.[0] ?? "";
   const second = parts[1]?.[0] ?? parts[0]?.[1] ?? "";
   return `${first}${second}`.toUpperCase();

@@ -3,7 +3,11 @@
   width: 100%;
   max-width: 1600px; /* Hero más ancho que el resto (1200px) */
   margin: 0 auto;
-  height: 740px;
+  height: clamp(
+    520px,
+    70vh,
+    580px
+  ); /* Reducido para que LTFeatureBanners sea visible */
   position: relative;
   display: flex;
   align-items: center;

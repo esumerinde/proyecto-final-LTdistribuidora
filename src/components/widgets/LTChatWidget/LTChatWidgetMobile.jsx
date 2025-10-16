@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./LTChatWidgetMobile.css";
 import LTChatWidgetMobileOverlay from "./LTChatWidgetMobileOverlay";
-import { isMobile } from "@utils/responsive/isMobile";
+import { isMobile } from "../../../hooks/useIsMobile";
 
 // Icono de chat para el botón flotante
 const ChatIcon = () => (
@@ -10,10 +10,6 @@ const ChatIcon = () => (
   </svg>
 );
 
-/**
- * Componente de chat flotante para mobile.
- * Usa el util isMobile para mostrar solo en dispositivos móviles.
- */
 /**
  * Componente de chat flotante para mobile.
  * - El botón de chat sube arriba del botón de scroll-to-top cuando este aparece.

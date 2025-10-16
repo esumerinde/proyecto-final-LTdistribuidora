@@ -1,11 +1,11 @@
-﻿import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./LTProductsCarousel2.css";
-import FavoriteButton from "../../../common/FavoriteButton";
+import FavoriteButton from "../../../components/common/FavoriteButton.jsx";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
 import { products } from "../../../mocks/products2";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
-// Función para formatear precios en formato argentino (231.990,00)
+// Funci�n para formatear precios en formato argentino (231.990,00)
 const formatPrice = (price) => {
   return price.toLocaleString("es-AR", {
     minimumFractionDigits: 2,
@@ -15,7 +15,6 @@ const formatPrice = (price) => {
 
 const LTProductsCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [favorites, setFavorites] = useState([]);
   const itemsPerView = 4;
 
   const totalSlides = Math.ceil(products.length / itemsPerView);
@@ -43,24 +42,18 @@ const LTProductsCarousel = () => {
     return () => clearInterval(interval);
   }, [totalSlides]);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
-    );
-  };
-
   return (
     <section className="LTProductsCarouselWrapper lt-section-spacing">
       <div className="LTProductsCarouselContainer">
         <div className="lt-section-title-spacing">
           <LTSectionTitle
-            title="Smartphones — Apple, Samsung y más"
+            title="Smartphones � Apple, Samsung y m�s"
             gradientType="gaming"
           />
         </div>
 
         <div className="LTProductsCarouselContent">
-          {/* Banner promocional - “Lo último en CELULARES” */}
+          {/* Banner promocional - �Lo �ltimo en CELULARES� */}
           <div
             className="LTProductsCarouselBanner"
             style={{
@@ -75,9 +68,9 @@ const LTProductsCarousel = () => {
               </div>
 
               <div className="LTProductsCarouselBannerHeadline">
-                <span className="LTProductsCarouselBannerKicker">Descubrí</span>
+                <span className="LTProductsCarouselBannerKicker">Descubr�</span>
                 <h3 className="LTProductsCarouselBannerTitle">
-                  Lo último en <span>CELULARES</span>
+                  Lo �ltimo en <span>CELULARES</span>
                 </h3>
               </div>
 
@@ -86,24 +79,21 @@ const LTProductsCarousel = () => {
                   iPhone 14 Pro
                 </div>
                 <p className="LTProductsCarouselBannerDescription">
-                  Innovación, diseño y potencia. Descubrí el nuevo iPhone 14 Pro
-                  Max con la mejor tecnología de Apple.
+                  Innovaci�n, dise�o y potencia. Descubr� el nuevo iPhone 14 Pro
+                  Max con la mejor tecnolog�a de Apple.
                 </p>
 
                 <button className="LTProductsCarouselBannerButton lt-button-variant2">
-                  VER MÁS
+                  VER M�S
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Sección de productos */}
+          {/* Secci�n de productos */}
           <div className="LTProductsCarouselProductsContainer">
             {/* Flecha izquierda */}
-            <button
-              className="LTProductsCarouselArrow LTProductsCarouselArrowLeft"
-              onClick={goToPrevious}
-            >
+            <button className="lt-arrow-nav" onClick={goToPrevious}>
               <svg viewBox="0 0 24 24">
                 <path d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
               </svg>
@@ -163,7 +153,7 @@ const LTProductsCarousel = () => {
                       />
                     </div>
 
-                    {/* Información del producto */}
+                    {/* Informaci�n del producto */}
                     <div className="LTProductsCarouselCardInfo">
                       <div className="LTProductsCarouselCardTopContent">
                         <div className="LTProductsCarouselCardCategory">
@@ -191,7 +181,7 @@ const LTProductsCarousel = () => {
                         </div>
 
                         <div className="LTProductsCarouselCardActions">
-                          <button className="LTProductsCarouselCardAddToCart">
+                          <button className="LTProductsCarouselCardAddToCart lt-button-card-variant2">
                             <img
                               src={ShoppingBagIcon}
                               alt="Agregar"
@@ -199,10 +189,7 @@ const LTProductsCarousel = () => {
                             />
                             Agregar
                           </button>
-                          <FavoriteButton
-                            isFavorite={favorites.includes(product.id)}
-                            onClick={() => toggleFavorite(product.id)}
-                          />
+                          <FavoriteButton product={product} />
                         </div>
                       </div>
                     </div>
@@ -212,10 +199,7 @@ const LTProductsCarousel = () => {
             </div>
 
             {/* Flecha derecha */}
-            <button
-              className="LTProductsCarouselArrow LTProductsCarouselArrowRight"
-              onClick={goToNext}
-            >
+            <button className="lt-arrow-nav" onClick={goToNext}>
               <svg viewBox="0 0 24 24">
                 <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
               </svg>

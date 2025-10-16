@@ -1,6 +1,6 @@
 import React from "react";
 import "./LTBrandsCarousel.css";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // Acá importamos los logos de las marcas. Si el backend provee rutas dinámicas, reemplazar estos imports por un fetch y mapear los logos que vengan del backend.
 import SamsungLogo from "../../../assets/brands/samsung-8.svg";
@@ -114,3 +114,4 @@ const LTBrandsCarousel = () => {
 
 // Si migrás esto al backend, solo cambiá el array y asegurate de mantener el loop duplicado para el efecto infinito.
 export default LTBrandsCarousel;
+

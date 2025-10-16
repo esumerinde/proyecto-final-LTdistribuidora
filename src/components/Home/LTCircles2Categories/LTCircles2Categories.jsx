@@ -2,7 +2,7 @@
 import React from "react";
 import "./LTCircles2Categories.css";
 import "../LTCircles1Offers/LTCirclesCommon.css";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // Iconos SVG usados en la sección. Si el backend quiere cambiar los íconos, reemplazá estos componentes.
 const MobileSvg = (
@@ -160,7 +160,6 @@ const LTCircles2Categories = () => {
               Mostrar todas las categorias
             </a>
           }
-          gradientType="gaming2"
         />
       </div>
       <div className="LTCirclesContainer">
@@ -191,3 +190,4 @@ const LTCircles2Categories = () => {
 };
 
 export default LTCircles2Categories;
+

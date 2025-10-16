@@ -3,7 +3,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthModal } from "../../../context/AuthModalContext";
-import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
+import { useFavorites } from "../../../hooks/useFavorites";
+import { useToast } from "../../../hooks/useToast";
+import useHeaderReaccommodation from "../../../hooks/useHeaderReaccommodation";
 import LTSearchBar from "./LTSearchBar/LTSearchBar";
 import LTHeaderOffer from "./LTHeaderOffer/LTHeaderOffer";
 import "./LTHeader.css";
@@ -17,13 +19,15 @@ import {
   Tag,
   Settings,
   XCircle,
+  Heart,
+  Bell,
 } from "lucide-react";
 import { getInitials } from "../../../mocks/users";
 import {
   getCurrentUser,
   clearCurrentUser,
   isLoggedIn as getIsLoggedIn,
-} from "../../../common/authStorage";
+} from "../../../utils/authStorage";
 
 const LTHeader = ({
   showOfferBar = true,
@@ -35,7 +39,11 @@ const LTHeader = ({
   const [cartCount] = useState(0);
   const [userInfo, setUserInfo] = useState(null);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false);
+  const [isFavoritesMenuOpen, setIsFavoritesMenuOpen] = useState(false);
   const accountMenuRef = useRef(null);
+  const notificationsMenuRef = useRef(null);
+  const favoritesMenuRef = useRef(null);
   const [loggedIn, setLoggedIn] = useState(() => getIsLoggedIn());
 
   // Verificar si el usuario está logueado desde localStorage
@@ -101,9 +109,64 @@ const LTHeader = ({
     };
   }, [isAccountMenuOpen]);
 
+  // Efecto para cerrar menú de notificaciones al hacer clic fuera
+  useEffect(() => {
+    if (!isNotificationsMenuOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        notificationsMenuRef.current &&
+        !notificationsMenuRef.current.contains(event.target)
+      ) {
+        setIsNotificationsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isNotificationsMenuOpen]);
+
+  // Efecto para cerrar menú de favoritos al hacer clic fuera
+  useEffect(() => {
+    if (!isFavoritesMenuOpen) return;
+
+    const handleClickOutside = (event) => {
+      if (
+        favoritesMenuRef.current &&
+        !favoritesMenuRef.current.contains(event.target)
+      ) {
+        setIsFavoritesMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isFavoritesMenuOpen]);
+
   const closeAccountMenu = () => setIsAccountMenuOpen(false);
-  const toggleAccountMenu = () =>
+  const toggleAccountMenu = () => {
     setIsAccountMenuOpen((previousState) => !previousState);
+    setIsNotificationsMenuOpen(false);
+    setIsFavoritesMenuOpen(false);
+  };
+
+  const closeNotificationsMenu = () => setIsNotificationsMenuOpen(false);
+  const toggleNotificationsMenu = () => {
+    setIsNotificationsMenuOpen((prev) => !prev);
+    setIsAccountMenuOpen(false);
+    setIsFavoritesMenuOpen(false);
+  };
+
+  const closeFavoritesMenu = () => setIsFavoritesMenuOpen(false);
+  const toggleFavoritesMenu = () => {
+    setIsFavoritesMenuOpen((prev) => !prev);
+    setIsAccountMenuOpen(false);
+    setIsNotificationsMenuOpen(false);
+  };
 
   const navigateToAccountSection = (mainId, subId) => {
     if (typeof window !== "undefined" && mainId) {
@@ -123,6 +186,16 @@ const LTHeader = ({
       window.sessionStorage.removeItem("lt-account-target");
     }
     navigate("/my-account");
+    closeAccountMenu();
+  };
+
+  const navigateToFavorites = () => {
+    navigate("/my-account/favorites");
+    closeAccountMenu();
+  };
+
+  const navigateToNotifications = () => {
+    navigate("/my-account/notifications");
     closeAccountMenu();
   };
 
@@ -172,6 +245,19 @@ const LTHeader = ({
       label: "Opiniones",
       icon: Shield,
       action: () => navigateToAccountSection("reservas", "opiniones"),
+    },
+    { type: "separator" },
+    {
+      type: "item",
+      label: "Mis Favoritos",
+      icon: Heart,
+      action: navigateToFavorites,
+    },
+    {
+      type: "item",
+      label: "Notificaciones",
+      icon: Bell,
+      action: navigateToNotifications,
     },
     { type: "separator" },
     {
@@ -445,45 +531,145 @@ const LTHeader = ({
                     )}
                   </div>
                   {/* Botón Favoritos */}
-                  <button className="LTHeaderMenuButton LTHeaderMenuButtonFavoritos">
-                    <span className="lt-menu-hover">
-                      <svg
-                        className="LTHeaderMenuIcon"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    className="LTHeaderFavoritesWrapper"
+                    ref={favoritesMenuRef}
+                  >
+                    <button
+                      type="button"
+                      className={`LTHeaderMenuButton LTHeaderMenuButtonFavorites${
+                        isFavoritesMenuOpen
+                          ? " LTHeaderMenuButtonFavorites--open"
+                          : ""
+                      }`}
+                      onClick={toggleFavoritesMenu}
+                      aria-haspopup="menu"
+                      aria-expanded={isFavoritesMenuOpen}
+                    >
+                      <span
+                        className={`lt-menu-hover${
+                          isFavoritesMenuOpen ? " lt-menu-hover--active" : ""
+                        }`}
                       >
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                        <svg
+                          className="LTHeaderMenuIcon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+
+                    {isFavoritesMenuOpen && (
+                      <div className="LTHeaderFavoritesDropdown" role="menu">
+                        <FavoritesDropdownContent
+                          onClose={closeFavoritesMenu}
+                          navigate={navigate}
                         />
-                      </svg>
-                    </span>
-                  </button>
+                      </div>
+                    )}
+                  </div>
                   {/* Botón Notificaciones */}
-                  <button className="LTHeaderMenuButton LTHeaderMenuButtonNotificaciones">
-                    <span className="lt-menu-hover">
-                      <svg
-                        className="LTHeaderMenuIcon"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                  <div
+                    className="LTHeaderNotificationsWrapper"
+                    ref={notificationsMenuRef}
+                  >
+                    <button
+                      type="button"
+                      className={`LTHeaderMenuButton LTHeaderMenuButtonNotifications${
+                        isNotificationsMenuOpen
+                          ? " LTHeaderMenuButtonNotifications--open"
+                          : ""
+                      }`}
+                      onClick={toggleNotificationsMenu}
+                      aria-haspopup="menu"
+                      aria-expanded={isNotificationsMenuOpen}
+                    >
+                      <span
+                        className={`lt-menu-hover${
+                          isNotificationsMenuOpen
+                            ? " lt-menu-hover--active"
+                            : ""
+                        }`}
                       >
-                        <path
-                          d="M9.00195 17H5.60636C4.34793 17 3.71872 17 3.58633 16.9023C3.4376 16.7925 3.40126 16.7277 3.38515 16.5436C3.37082 16.3797 3.75646 15.7486 4.52776 14.4866C5.32411 13.1835 6.00031 11.2862 6.00031 8.6C6.00031 7.11479 6.63245 5.69041 7.75766 4.6402C8.88288 3.59 10.409 3 12.0003 3C13.5916 3 15.1177 3.59 16.2429 4.6402C17.3682 5.69041 18.0003 7.11479 18.0003 8.6C18.0003 11.2862 18.6765 13.1835 19.4729 14.4866C20.2441 15.7486 20.6298 16.3797 20.6155 16.5436C20.5994 16.7277 20.563 16.7925 20.4143 16.9023C20.2819 17 19.6527 17 18.3943 17H15.0003M9.00195 17L9.00031 18C9.00031 19.6569 10.3435 21 12.0003 21C13.6572 21 15.0003 19.6569 15.0003 18V17M9.00195 17H15.0003"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
-                  </button>
+                        <svg
+                          className="LTHeaderMenuIcon"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M9.00195 17H5.60636C4.34793 17 3.71872 17 3.58633 16.9023C3.4376 16.7925 3.40126 16.7277 3.38515 16.5436C3.37082 16.3797 3.75646 15.7486 4.52776 14.4866C5.32411 13.1835 6.00031 11.2862 6.00031 8.6C6.00031 7.11479 6.63245 5.69041 7.75766 4.6402C8.88288 3.59 10.409 3 12.0003 3C13.5916 3 15.1177 3.59 16.2429 4.6402C17.3682 5.69041 18.0003 7.11479 18.0003 8.6C18.0003 11.2862 18.6765 13.1835 19.4729 14.4866C20.2441 15.7486 20.6298 16.3797 20.6155 16.5436C20.5994 16.7277 20.563 16.7925 20.4143 16.9023C20.2819 17 19.6527 17 18.3943 17H15.0003M9.00195 17L9.00031 18C9.00031 19.6569 10.3435 21 12.0003 21C13.6572 21 15.0003 19.6569 15.0003 18V17M9.00195 17H15.0003"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    </button>
+
+                    {isNotificationsMenuOpen && (
+                      <div
+                        className="LTHeaderNotificationsDropdown"
+                        role="menu"
+                      >
+                        <div className="LTHeaderNotificationsHeader">
+                          <h3 className="LTHeaderNotificationsTitle">
+                            Notificaciones
+                          </h3>
+                          <button
+                            type="button"
+                            className="LTHeaderNotificationsMarkAll"
+                            onClick={() => {
+                              // Aquí irá la lógica para marcar todas como leídas
+                              console.log("Marcar todas como leídas");
+                            }}
+                          >
+                            Marcar como leídas
+                          </button>
+                        </div>
+
+                        <div className="LTHeaderNotificationsEmpty">
+                          <svg
+                            className="LTHeaderNotificationsEmptyIcon"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <path
+                              d="M9.00195 17H5.60636C4.34793 17 3.71872 17 3.58633 16.9023C3.4376 16.7925 3.40126 16.7277 3.38515 16.5436C3.37082 16.3797 3.75646 15.7486 4.52776 14.4866C5.32411 13.1835 6.00031 11.2862 6.00031 8.6C6.00031 7.11479 6.63245 5.69041 7.75766 4.6402C8.88288 3.59 10.409 3 12.0003 3C13.5916 3 15.1177 3.59 16.2429 4.6402C17.3682 5.69041 18.0003 7.11479 18.0003 8.6C18.0003 11.2862 18.6765 13.1835 19.4729 14.4866C20.2441 15.7486 20.6298 16.3797 20.6155 16.5436C20.5994 16.7277 20.563 16.7925 20.4143 16.9023C20.2819 17 19.6527 17 18.3943 17H15.0003M9.00195 17L9.00031 18C9.00031 19.6569 10.3435 21 12.0003 21C13.6572 21 15.0003 19.6569 15.0003 18V17M9.00195 17H15.0003"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            />
+                          </svg>
+                          <p>No tenés notificaciones nuevas</p>
+                        </div>
+
+                        <div className="LTHeaderNotificationsFooter">
+                          <button
+                            type="button"
+                            className="LTHeaderNotificationsViewAll"
+                            onClick={() => {
+                              navigate("/notifications");
+                              closeNotificationsMenu();
+                            }}
+                          >
+                            Ver todas las notificaciones
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                   {/* Botón Carrito */}
                   <button className="LTHeaderMenuButton LTHeaderMenuButtonCarrito">
                     <div className="LTHeaderCartContainer">
@@ -520,6 +706,118 @@ const LTHeader = ({
           </div>
         </div>
       </header>
+    </>
+  );
+};
+
+// Componente interno: Contenido del dropdown de Favoritos
+const FavoritesDropdownContent = ({ onClose, navigate }) => {
+  const { getRecent, removeFromFavorites } = useFavorites();
+  const { success } = useToast();
+  const [recentFavorites, setRecentFavorites] = useState([]);
+
+  useEffect(() => {
+    setRecentFavorites(getRecent(3));
+  }, [getRecent]);
+
+  const handleRemove = (e, productId) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const result = removeFromFavorites(productId);
+    if (result.success) {
+      setRecentFavorites(getRecent(3));
+      success("Producto eliminado de favoritos");
+    }
+  };
+
+  const handleViewAll = () => {
+    navigate("/my-account");
+    onClose();
+  };
+
+  const isEmpty = recentFavorites.length === 0;
+
+  return (
+    <>
+      <div className="LTHeaderFavoritesHeader">
+        <h3 className="LTHeaderFavoritesTitle">Favoritos</h3>
+        <span className="LTHeaderFavoritesCount">
+          {recentFavorites.length}{" "}
+          {recentFavorites.length === 1 ? "producto" : "productos"}
+        </span>
+      </div>
+
+      {isEmpty ? (
+        <div className="LTHeaderFavoritesEmpty">
+          <svg
+            className="LTHeaderFavoritesEmptyIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+          >
+            <path
+              d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
+              stroke="currentColor"
+              strokeWidth="2"
+            />
+          </svg>
+          <p>No tenés productos favoritos aún</p>
+        </div>
+      ) : (
+        <div className="LTHeaderFavoritesList">
+          {recentFavorites.map((product) => (
+            <div key={product.id} className="LTHeaderFavoriteCard">
+              <img
+                src={product.image}
+                alt={product.name}
+                className="LTHeaderFavoriteCardImg"
+              />
+              <div className="LTHeaderFavoriteCardInfo">
+                <div className="LTHeaderFavoriteCardBrand">{product.brand}</div>
+                <div className="LTHeaderFavoriteCardTitle">{product.name}</div>
+                <div className="LTHeaderFavoriteCardPriceRow">
+                  {product.originalPrice && (
+                    <span className="LTHeaderFavoriteCardOldPrice">
+                      ${product.originalPrice}
+                    </span>
+                  )}
+                  {product.discountPrice && (
+                    <span className="LTHeaderFavoriteCardPrice">
+                      ${product.discountPrice}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <button
+                type="button"
+                className="LTHeaderFavoriteCardRemove"
+                onClick={(e) => handleRemove(e, product.id)}
+                aria-label="Eliminar de favoritos"
+              >
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M18 6L6 18M6 6l12 12"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="LTHeaderFavoritesFooter">
+        <button
+          type="button"
+          className="LTHeaderFavoritesViewAll"
+          onClick={handleViewAll}
+        >
+          Ver todos tus productos favoritos
+        </button>
+      </div>
     </>
   );
 };

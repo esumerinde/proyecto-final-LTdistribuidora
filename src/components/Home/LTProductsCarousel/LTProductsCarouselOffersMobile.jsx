@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import FavoriteButton from "../../../common/FavoriteButton";
+import FavoriteButton from "../../../components/common/FavoriteButton.jsx";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 import "./LTProductsCarouselOffersMobile.css";
 import { products } from "../../../mocks/products";
 
@@ -14,7 +15,6 @@ const formatPrice = (price) => {
 
 const LTProductsCarouselOffersMobile = () => {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [favorites, setFavorites] = useState([]);
 
   // Mostrar solo las primeras 6 cards (igual que desktop)
   const displayedProducts = products.slice(0, 6);
@@ -27,12 +27,6 @@ const LTProductsCarouselOffersMobile = () => {
     return () => clearInterval(interval);
   }, [displayedProducts.length]);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
-    );
-  };
-
   const handleIndicatorClick = (index) => {
     setCurrentIdx(index);
   };
@@ -42,11 +36,9 @@ const LTProductsCarouselOffersMobile = () => {
   return (
     <div className="LTProductsCarouselOffersMobile__wrapper">
       <div className="LTProductsCarouselOffersMobile__container">
-        {/* Texto "Nuestras ofertas exclusivas" */}
+        {/* Título de la sección */}
         <div className="LTProductsCarouselOffersMobile__header">
-          <h3 className="LTProductsCarouselOffersMobile__title">
-            Nuestras ofertas exclusivas
-          </h3>
+          <LTSectionTitle title="NUESTRAS OFERTAS" />
         </div>
 
         {/* Contenedor de cards con fade */}
@@ -98,10 +90,7 @@ const LTProductsCarouselOffersMobile = () => {
                   />
                   Agregar
                 </button>
-                <FavoriteButton
-                  isFavorite={favorites.includes(product.id)}
-                  onClick={() => toggleFavorite(product.id)}
-                />
+                <FavoriteButton product={product} />
               </div>
             </div>
           ))}

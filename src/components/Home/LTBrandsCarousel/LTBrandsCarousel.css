@@ -2,7 +2,6 @@
 .LTBrandsCarouselWrapper {
   width: 100%;
   background-color: var(--lt-background-color);
-  padding: 3rem 0;
 }
 
 .LTBrandsCarouselContainer {
@@ -10,20 +9,6 @@
   margin: 0 auto;
   padding: 0 var(--lt-spacing-md);
   overflow: visible;
-}
-
-/* Header del carrusel */
-.LTBrandsCarouselHeader {
-  text-align: center;
-  margin-bottom: var(--lt-spacing-2xl);
-}
-
-.LTBrandsCarouselTitle {
-  font-family: var(--lt-font-family);
-  font-size: var(--lt-font-size-2xl);
-  font-weight: 700;
-  color: var(--lt-text-color);
-  margin: 0;
 }
 
 /* Contenedor del carrusel */
@@ -50,7 +35,7 @@
   background: linear-gradient(
     to right,
     var(--lt-background-color) 0%,
-    rgba(252, 248, 245, 0) 100%
+    rgba(254, 254, 254, 0) 100%
   );
 }
 
@@ -59,7 +44,7 @@
   background: linear-gradient(
     to left,
     var(--lt-background-color) 0%,
-    rgba(252, 248, 245, 0) 100%
+    rgba(254, 254, 254, 0) 100%
   );
 }
 
@@ -86,7 +71,7 @@
   }
 }
 
-/* Item individual de marca */
+/* Item individual de marca - ESTILO ACTUALIZADO */
 .LTBrandsCarouselItem {
   flex-shrink: 0;
   display: flex;
@@ -94,14 +79,16 @@
   justify-content: center;
   width: 150px; /* Aumentado de 120px a 150px */
   height: 72px;
-  background: white;
-  border: 1px solid var(--lt-border-color);
-  border-radius: var(--lt-border-radius);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--lt-black-text-color);
+  border-radius: 12px;
   padding: var(--lt-spacing-sm);
   margin: 0 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 /* Espaciador invisible para crear separación */
@@ -122,9 +109,9 @@
 }
 
 .LTBrandsCarouselItem:hover {
-  transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-color: var(--lt-primary-color);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  border-color: var(--lt-accent-color-dark);
 }
 
 /* Logo de la marca */
@@ -134,11 +121,13 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.4, 0.2, 0.2, 1);
+  filter: grayscale(0.2) brightness(0.95);
 }
 
 .LTBrandsCarouselItem:hover .LTBrandsCarouselLogo {
   transform: none;
+  filter: grayscale(0) brightness(1);
 }
 
 /* Ajustes específicos para logos pequeños */

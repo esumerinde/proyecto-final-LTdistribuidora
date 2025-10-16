@@ -1,9 +1,9 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import LTHeader from "../Header/LTHeader";
-import SimpleHeader from "../Header/SimpleHeader/SimpleHeader";
+import SimpleHeader from "../Header/SimpleHeader/SimpleHeader.jsx";
 import LTHeaderMobile from "../Header/LTHeaderMobile";
-import { useIsMobile } from "../../../common/isMobile";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 import "../Header/LTHeader.onlylogo.css";
 
 /**

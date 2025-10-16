@@ -1,0 +1,446 @@
+/* ==================== ANIMATIONS ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bellRing {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: rotate(-10deg);
+  }
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  will-change: opacity, transform;
+}
+
+/* ==================== WRAPPER ==================== */
+/* Removido - Ahora usa account-layout del componente padre */
+
+.LTNotificationsContainer {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--lt-spacing-lg);
+}
+
+/* ==================== BREADCRUMB ==================== */
+.LTNotificationsBreadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--lt-spacing-xs);
+  font-size: 13px;
+  color: var(--lt-text-color);
+  margin-bottom: var(--lt-spacing-xl);
+  padding: var(--lt-spacing-sm);
+  background: white;
+  border-radius: var(--lt-border-radius);
+  box-shadow: 0 1px 3px rgba(197, 186, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.LTNotificationsBreadcrumb:hover {
+  box-shadow: 0 4px 12px rgba(197, 186, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.LTNotificationsBreadcrumbLink {
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--lt-accent-color);
+  font-weight: 500;
+}
+
+.LTNotificationsBreadcrumbLink:hover {
+  color: var(--lt-accent-color-dark);
+}
+
+.LTNotificationsBreadcrumbCurrent {
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+}
+
+/* ==================== HEADER ==================== */
+.LTNotificationsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--lt-spacing-xl);
+  gap: var(--lt-spacing-lg);
+  max-width: 1000px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.LTNotificationsTitle {
+  font-size: 36px;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--lt-spacing-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+}
+
+.LTNotificationsTitleIcon {
+  color: var(--lt-accent-color);
+  width: 36px;
+  height: 36px;
+}
+
+.LTNotificationsTitleIcon:hover {
+  animation: bellRing 0.5s ease-in-out;
+}
+
+.LTNotificationsBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 10px;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-variant2) 0%,
+    var(--lt-accent-color-variant2-dark) 100%
+  );
+  color: var(--lt-black-text-color);
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(247, 177, 93, 0.3);
+}
+
+.LTNotificationsSubtitle {
+  font-size: 15px;
+  color: var(--lt-text-color);
+  line-height: 1.6;
+}
+
+.LTNotificationsMarkAllBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lt-spacing-sm);
+  white-space: nowrap;
+}
+
+.LTNotificationsMarkAllBtn svg {
+  flex-shrink: 0;
+}
+
+/* ==================== EMPTY STATE ==================== */
+.LTNotificationsEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--lt-spacing-xxl) var(--lt-spacing-lg);
+  text-align: center;
+  background: white;
+  border-radius: var(--lt-border-radius);
+  box-shadow: 0 2px 8px rgba(197, 186, 255, 0.08);
+  border: 1px solid rgba(197, 186, 255, 0.1);
+  margin-top: var(--lt-spacing-xl);
+}
+
+.LTNotificationsEmptyIcon {
+  width: 80px;
+  height: 80px;
+  color: var(--lt-accent-color);
+  margin-bottom: var(--lt-spacing-lg);
+  opacity: 0.6;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.LTNotificationsEmpty:hover .LTNotificationsEmptyIcon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.LTNotificationsEmptyTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--lt-black-text-color);
+  margin-bottom: var(--lt-spacing-xs);
+}
+
+.LTNotificationsEmptyText {
+  font-size: 15px;
+  color: var(--lt-text-color);
+}
+
+/* ==================== LISTA DE NOTIFICACIONES ==================== */
+.LTNotificationsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-md);
+  margin-top: var(--lt-spacing-xl);
+}
+
+/* ==================== ITEM DE NOTIFICACIÓN ==================== */
+.LTNotificationItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lt-spacing-md);
+  padding: var(--lt-spacing-lg);
+  background: white;
+  border: 1px solid rgba(197, 186, 255, 0.1);
+  border-left: 4px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.LTNotificationItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    180deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  transform: scaleY(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.LTNotificationItem:hover {
+  box-shadow: 0 8px 24px rgba(197, 186, 255, 0.15);
+  transform: translateX(4px);
+  border-color: var(--lt-accent-color);
+}
+
+.LTNotificationItem:hover::before {
+  transform: scaleY(1);
+}
+
+/* ==================== ESTADOS DE NOTIFICACIÓN ==================== */
+.LTNotificationItem--unread {
+  background: linear-gradient(
+    135deg,
+    rgba(197, 186, 255, 0.05) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-left-color: var(--lt-accent-color);
+}
+
+.LTNotificationItem--new {
+  border-left-color: var(--lt-accent-color);
+}
+
+.LTNotificationItem--update {
+  border-left-color: var(--lt-accent-color-variant2);
+}
+
+.LTNotificationItem--alert {
+  border-left-color: #f44;
+}
+
+/* ==================== ICONO DE NOTIFICACIÓN ==================== */
+.LTNotificationIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+  color: white;
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(197, 186, 255, 0.3);
+}
+
+.LTNotificationItem:hover .LTNotificationIcon {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(197, 186, 255, 0.4);
+}
+
+.LTNotificationItem--new .LTNotificationIcon {
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color) 0%,
+    var(--lt-accent-color-dark) 100%
+  );
+}
+
+.LTNotificationItem--update .LTNotificationIcon {
+  background: linear-gradient(
+    135deg,
+    var(--lt-accent-color-variant2) 0%,
+    var(--lt-accent-color-variant2-dark) 100%
+  );
+  box-shadow: 0 4px 12px rgba(247, 177, 93, 0.3);
+}
+
+.LTNotificationItem--alert .LTNotificationIcon {
+  background: linear-gradient(135deg, #ff6b6b 0%, #f44 100%);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+/* ==================== CONTENIDO DE NOTIFICACIÓN ==================== */
+.LTNotificationContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.LTNotificationMessage {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--lt-black-text-color);
+  line-height: 1.5;
+  margin: 0 0 var(--lt-spacing-xs) 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.LTNotificationItem--unread .LTNotificationMessage {
+  font-weight: 700;
+}
+
+.LTNotificationItem:hover .LTNotificationMessage {
+  color: var(--lt-accent-color);
+}
+
+.LTNotificationDate {
+  font-size: 13px;
+  color: var(--lt-text-color);
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* ==================== ACCIONES DE NOTIFICACIÓN ==================== */
+.LTNotificationActions {
+  display: flex;
+  gap: var(--lt-spacing-xs);
+  align-items: center;
+}
+
+.LTNotificationActionBtn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 2px solid var(--lt-border-color);
+  border-radius: var(--lt-border-radius);
+  color: var(--lt-accent-color);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.LTNotificationActionBtn:hover {
+  background: var(--lt-accent-color);
+  border-color: var(--lt-accent-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.LTNotificationActionBtn--delete {
+  color: var(--lt-text-color);
+}
+
+.LTNotificationActionBtn--delete:hover {
+  background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+  border-color: #f44;
+  color: #f44;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (min-width: 768px) {
+  .LTNotificationsBreadcrumb {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .LTNotificationsWrapper {
+    --lt-account-sticky-offset: calc(75px + var(--lt-spacing-sm));
+    padding-top: var(--lt-account-sticky-offset);
+    padding-left: var(--lt-spacing-sm);
+    padding-right: var(--lt-spacing-sm);
+    padding-bottom: var(--lt-spacing-xl);
+  }
+
+  .LTNotificationsHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .LTNotificationsTitle {
+    font-size: 28px;
+  }
+
+  .LTNotificationsTitleIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .LTNotificationsMarkAllBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .LTNotificationsBreadcrumb {
+    display: none;
+  }
+
+  .LTNotificationItem {
+    padding: var(--lt-spacing-md);
+  }
+
+  .LTNotificationIcon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .LTNotificationMessage {
+    font-size: 14px;
+  }
+
+  .LTNotificationActions {
+    flex-direction: column;
+  }
+}

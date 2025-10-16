@@ -1,0 +1,312 @@
+.LTChatWidgetModalContent--closing {
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.7, 0.2, 0.3, 1);
+}
+/* Animación de salida para el modal del chat desktop */
+@keyframes chatModalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+.LTChatWidgetModal--closing {
+  animation: chatModalOut 0.35s cubic-bezier(0.7, 0.2, 0.3, 1);
+  overflow: hidden;
+}
+/* LTChatWidget - Chat flotante estilo farmaonline */
+
+/* Botón flotante */
+.LTChatWidgetButton {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1050;
+  background: var(--lt-accent-color-variant2);
+  color: var(--lt-black-text-color);
+  border-radius: 24px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 24px rgba(116, 123, 191, 0.22),
+    0 2px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--lt-black-text-color);
+  font-family: var(--lt-font-family);
+  min-width: 140px;
+  /* ===============================
+     Animaciones de cierre y modal
+  =============================== */
+  justify-content: center;
+}
+
+.LTChatWidgetButton:hover {
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(168, 187, 163, 0.4);
+}
+
+.LTChatWidgetIcon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.LTChatWidgetText {
+  font-size: 14px;
+  font-weight: 600;
+  /* ===============================
+     Botón flotante del chat
+  =============================== */
+  white-space: nowrap;
+}
+
+/* Loader animation */
+.LTChatWidgetLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20px;
+}
+
+.LTChatWidgetSpinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Overlay */
+.LTChatWidgetOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(74, 81, 85, 0.18); /* border color con opacidad */
+  z-index: 1040;
+  backdrop-filter: blur(2px);
+}
+
+/* Modal */
+.LTChatWidgetModal {
+  /* ===============================
+     Loader y spinner de carga
+  =============================== */
+  position: fixed;
+  bottom: 100px;
+  right: 24px;
+  z-index: 1060;
+  width: 320px;
+  max-height: 500px;
+  background: var(--lt-background-color);
+  border: 1px solid var(--lt-border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.LTChatWidgetModalContent {
+  /* ===============================
+     Overlay y modal del chat
+  =============================== */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Header */
+.LTChatWidgetHeader {
+  background: #fff;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--lt-border-color);
+  margin-left: -20px;
+}
+
+.LTChatWidgetTitle {
+  font-family: var(--lt-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--lt-big-text-color);
+  margin: 0;
+}
+
+.LTChatWidgetCloseButton {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--lt-accent-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(168, 187, 163, 0.28);
+}
+
+.LTChatWidgetCloseButton:hover {
+  background: var(--lt-accent-color-variant);
+  color: var(--lt-black-text-color);
+  transform: translateY(-2px) scale(1.08);
+  box-shadow: 0 6px 16px rgba(168, 187, 163, 0.28);
+}
+/* ===============================
+     Header del chat
+  =============================== */
+
+.LTChatWidgetCloseButton svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--lt-black-text-color);
+}
+
+/* Content */
+.LTChatWidgetContent {
+  padding: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.LTChatWidgetWelcome {
+  text-align: left;
+}
+
+.LTChatWidgetWelcomeText {
+  font-family: var(--lt-font-family);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--lt-black-text-color);
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.LTChatWidgetWelcomeSubtext {
+  font-family: var(--lt-font-family);
+  font-size: 14px;
+  color: var(--lt-muted-text-color);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Form */
+.LTChatWidgetForm {
+  width: 100%;
+}
+
+.LTChatWidgetInputContainer {
+  position: relative;
+}
+/* ===============================
+     Contenido principal del chat
+  =============================== */
+
+.LTChatWidgetInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--lt-border-color);
+  border-radius: 8px;
+  font-family: var(--lt-font-family);
+  font-size: 14px;
+  color: var(--lt-black-text-color);
+  background: var(--lt-background-color);
+  transition: all 0.2s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.LTChatWidgetInput:focus {
+  border-color: var(--lt-accent-color);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(159, 163, 207, 0.15);
+}
+
+.LTChatWidgetInput::placeholder {
+  color: var(--lt-muted-text-color);
+}
+
+/* Action buttons */
+.LTChatWidgetActions {
+  display: flex;
+  flex-direction: column;
+  /* ===============================
+     Formulario de consulta
+  =============================== */
+  gap: 12px;
+}
+
+.LTChatWidgetActionButton {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--lt-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.LTChatWidgetActionPrimary {
+  background: var(--lt-accent-color-dark);
+  color: var(--lt-white-text-color);
+}
+
+.LTChatWidgetActionPrimary:hover {
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+}
+
+.LTChatWidgetActionSecondary {
+  background: var(--lt-background-color);
+  color: var(--lt-black-text-color);
+  border: 1px solid var(--lt-border-color);
+}
+
+/* ===============================
+     Botones de acción del chat
+  =============================== */
+.LTChatWidgetActionSecondary:hover {
+  background: var(--lt-accent-color-variant);
+  border-color: var(--lt-accent-color);
+  color: var(--lt-accent-color-dark);
+  transform: translateY(-1px);
+}

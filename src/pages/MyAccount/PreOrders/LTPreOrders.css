@@ -1,0 +1,362 @@
+/* ============================================
+   PREORDERS - ESTILOS ESPECÍFICOS
+
+   ============================================ */
+
+/* ============================================
+   TABS
+   ============================================ */
+.lt-preorders-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #eee;
+  overflow-x: auto;
+  padding-bottom: 0;
+}
+
+.lt-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  margin-bottom: -2px;
+}
+
+.lt-tab:hover {
+  color: var(--lt-accent-color-dark, #747bbf);
+  background: rgba(116, 123, 191, 0.05);
+}
+
+.lt-tab-active {
+  color: var(--lt-accent-color-dark, #747bbf);
+  border-bottom-color: var(--lt-accent-color-dark, #747bbf);
+}
+
+/* ============================================
+   LISTA DE PEDIDOS
+   ============================================ */
+.lt-preorders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ============================================
+   TARJETA DE PEDIDO ESPECÍFICO
+   ============================================ */
+.lt-preorder-card {
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.lt-preorder-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.lt-preorder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.lt-status-success {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 167, 69, 0.1) 0%,
+    rgba(40, 167, 69, 0.05) 100%
+  );
+  border-left: 4px solid #28a745;
+}
+
+.lt-status-warning {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 193, 7, 0.1) 0%,
+    rgba(255, 193, 7, 0.05) 100%
+  );
+  border-left: 4px solid #ffc107;
+}
+
+.lt-status-neutral {
+  background: linear-gradient(
+    135deg,
+    rgba(108, 117, 125, 0.1) 0%,
+    rgba(108, 117, 125, 0.05) 100%
+  );
+  border-left: 4px solid #6c757d;
+}
+
+.lt-preorder-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.lt-status-success .lt-preorder-status {
+  color: #28a745;
+}
+
+.lt-status-warning .lt-preorder-status {
+  color: #d39e00;
+}
+
+.lt-status-neutral .lt-preorder-status {
+  color: #6c757d;
+}
+
+.lt-preorder-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.lt-preorder-date-label {
+  font-size: 0.75rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.lt-preorder-date-value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.lt-preorder-info {
+  padding: 1rem 1.5rem;
+  background: #fafafa;
+}
+
+.lt-preorder-id {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.lt-highlight {
+  color: var(--lt-accent-color-dark, #747bbf);
+}
+
+.lt-preorder-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.lt-preorder-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 1rem 0;
+}
+
+.lt-preorder-section-title svg {
+  color: var(--lt-accent-color-dark, #747bbf);
+}
+
+.lt-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lt-product-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.lt-product-item:hover {
+  background: #e9ecef;
+  transform: translateX(4px);
+}
+
+.lt-product-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid #dee2e6;
+}
+
+.lt-product-details {
+  flex: 1;
+}
+
+.lt-product-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+}
+
+.lt-product-info {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
+.lt-preorder-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.lt-summary-section {
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.lt-preorder-total {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--lt-accent-color-dark, #747bbf);
+  margin: 0;
+}
+
+.lt-seller-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.25rem 0;
+}
+
+.lt-seller-contact {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
+.lt-preorder-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: #fafafa;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.lt-preorder-detail-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--lt-accent-color-dark, #747bbf);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.lt-preorder-detail-btn:hover {
+  color: var(--lt-accent-color-variant2-dark, #f7b15d);
+}
+
+.lt-preorder-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .lt-preorder-content {
+    grid-template-columns: 1fr;
+  }
+
+  .lt-preorder-summary {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 768px) {
+  .lt-preorders-tabs {
+    gap: 0.5rem;
+  }
+
+  .lt-tab {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .lt-preorder-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .lt-preorder-date {
+    align-items: flex-start;
+  }
+
+  .lt-preorder-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .lt-preorder-detail-btn {
+    justify-content: center;
+  }
+
+  .lt-preorder-buttons {
+    flex-direction: column;
+  }
+
+  .lt-preorder-buttons button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .lt-preorder-summary {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .lt-preorder-content {
+    padding: 1rem;
+  }
+
+  .lt-product-thumbnail {
+    width: 50px;
+    height: 50px;
+  }
+
+  .lt-preorder-total {
+    font-size: 1.5rem;
+  }
+}

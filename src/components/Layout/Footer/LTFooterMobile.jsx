@@ -2,7 +2,7 @@ import React from "react";
 import "./LTFooterMobile.css";
 import logoBlancoChico from "../../../assets/images/logos/logo-blanco-chico.png";
 import qrLTDistribuidora from "../../../assets/images/qr-LTDistribuidora.png";
-import { isMobile } from "../../../common/isMobile";
+import { isMobile } from "../../../hooks/useIsMobile";
 
 const LTFooterMobile = () => {
   if (!isMobile()) return null;

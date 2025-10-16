@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./LTScrollToTopMobile.css";
-import { isMobile } from "@utils/responsive/isMobile";
+import { isMobile } from "../../../hooks/useIsMobile";
 
 /**
  * Botón Scroll to Top para mobile.
@@ -72,3 +72,4 @@ const LTScrollToTopMobile = () => {
 };
 
 export default LTScrollToTopMobile;
+

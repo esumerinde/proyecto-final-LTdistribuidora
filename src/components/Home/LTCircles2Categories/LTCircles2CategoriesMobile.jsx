@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./LTCircles2CategoriesMobile.css";
 import "../LTCircles1Offers/LTCirclesCommon.css";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
 // SVG Icons para mobile
 const MobileSvg = (
@@ -160,7 +160,6 @@ const LTCircles2CategoriesMobile = () => {
         <LTSectionTitle
           title="Categorías más vistas"
           subtitle="Mostrá todas las categorías"
-          gradientType="gaming2"
         />
       </div>
       <div className="LTCirclesMobileCarousel">
@@ -210,3 +209,4 @@ const LTCircles2CategoriesMobile = () => {
 };
 
 export default LTCircles2CategoriesMobile;
+

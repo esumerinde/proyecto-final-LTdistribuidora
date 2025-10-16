@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
+import useHeaderReaccommodation from "../../../hooks/useHeaderReaccommodation";
 import LTNavbarNavmenu from "./LTNavbarNavmenu/LTNavbarNavmenu";
 import "./LTNavbar.css";
 import {
   getCurrentUser,
   isLoggedIn as getIsLoggedIn,
-} from "../../../common/authStorage";
+} from "../../../utils/authStorage";
 
 const LTNavbar = ({ hasOfferBar = true, forcePinnedOffer = false }) => {
   const [isSubmenuOpen, setIsSubmenuOpen] = useState(false);

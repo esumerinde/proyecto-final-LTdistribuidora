@@ -1,5 +1,5 @@
 import React from "react";
-import useHeaderReaccommodation from "../../../../common/useHeaderReaccommodation";
+import useHeaderReaccommodation from "../../../../hooks/useHeaderReaccommodation";
 import "./SimpleHeader.css";
 import logoBlanco from "../../../../assets/images/logos/logo-blanco.png";
 

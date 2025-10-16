@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthModal } from "../../context/AuthModalContext";
 import { authenticateUser } from "../../mocks/users";
-import { setCurrentUser } from "../../common/authStorage";
+import { setCurrentUser } from "../../utils/authStorage";
 import "./LTLogin.css";
 
 // Importar iconos SVG locales

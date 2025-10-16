@@ -1,5 +1,5 @@
 import LTProductsCarouselOffersMobile from "../../components/Home/LTProductsCarousel/LTProductsCarouselOffersMobile.jsx";
-import { useIsMobile } from "../../common/isMobile";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import React from "react";
 import LTHeroCarousel from "../../components/Home/LTHeroCarousel/LTHeroCarousel";
 import LTHeroCarouselMobile from "../../components/Home/LTHeroCarousel/LTHeroCarouselMobile";
@@ -20,7 +20,7 @@ import LTBrandsCarousel from "../../components/Home/LTBrandsCarousel/LTBrandsCar
 import LTProductsCarousel2Mobile from "../../components/Home/LTProductsCarousel2/LTProductsCarousel2Mobile";
 
 import LTNewsletter from "../../components/Home/LTNewsletter/LTNewsletter";
-import { CarouselSyncProvider } from "../../common/CarouselSyncContext.jsx";
+import { CarouselSyncProvider } from "../../context/CarouselSyncContext.jsx";
 import "./Home.css";
 
 const Home = () => {

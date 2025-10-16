@@ -1,5 +1,5 @@
 import React from "react";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 import "./LTPromoBanners.css";
 
 const LTPromoBanners = () => {
@@ -102,3 +102,4 @@ const LTPromoBanners = () => {
 };
 
 export default LTPromoBanners;
+

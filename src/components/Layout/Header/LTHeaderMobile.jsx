@@ -3,15 +3,15 @@ import React, { useState, useEffect } from "react";
 // Import icon and assets
 import HamburgerMenuIcon from "../../../assets/icons/svg/hamburger-menu-svgrepo-com.svg";
 // Import custom hook for sticky header logic
-import useHeaderReaccommodation from "../../../common/useHeaderReaccommodation";
+import useHeaderReaccommodation from "../../../hooks/useHeaderReaccommodation";
 // Import mobile detection utility
 // Import styles
 import "./LTHeaderMobile.css";
 // Import logo image
 import logoBlancoChico from "../../../assets/images/logos/logo-blanco-chico.png";
 // Import overlays for categories and search
-import LTCategoriesOverlay from "../../../common/LTCategoriesOverlay";
-import LTSearchOverlay from "../../../common/LTSearchOverlay";
+import LTCategoriesOverlay from "../../../components/common/LTCategoriesOverlay.jsx";
+import LTSearchOverlay from "../../../components/common/LTSearchOverlay.jsx";
 // Import offer bar component
 import LTHeaderOffer from "./LTHeaderOffer/LTHeaderOffer";
 // Import auth utilities
@@ -19,7 +19,7 @@ import {
   getCurrentUser,
   clearCurrentUser,
   isLoggedIn as getIsLoggedIn,
-} from "../../../common/authStorage";
+} from "../../../utils/authStorage";
 import { useNavigate } from "react-router-dom";
 import { useAuthModal } from "../../../context/AuthModalContext";
 

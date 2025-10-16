@@ -5,11 +5,11 @@ import LTHeaderMobile from "../Header/LTHeaderMobile";
 import LTNavbar from "../Navbar/LTNavbar";
 import LTFooter from "../Footer/LTFooter";
 import LTFooterMobile from "../Footer/LTFooterMobile";
-import LTScrollToTop from "../LTScrollToTop/LTScrollToTop";
-import LTScrollToTopMobile from "../LTScrollToTop/LTScrollToTopMobile";
-import LTChatWidget from "../LTChatWidget/LTChatWidget";
-import LTChatWidgetMobile from "../LTChatWidget/LTChatWidgetMobile";
-import { useIsMobile } from "../../../common/isMobile";
+import LTScrollToTop from "../../widgets/LTScrollToTop/LTScrollToTop.jsx";
+import LTScrollToTopMobile from "../../widgets/LTScrollToTop/LTScrollToTopMobile.jsx";
+import LTChatWidget from "../../widgets/LTChatWidget/LTChatWidget.jsx";
+import LTChatWidgetMobile from "../../widgets/LTChatWidget/LTChatWidgetMobile.jsx";
+import { useIsMobile } from "../../../hooks/useIsMobile";
 
 /**
  * Layout principal para páginas con Header + Navbar + Footer

@@ -1,0 +1,96 @@
+/* Animación de salida para el botón Scroll to Top Mobile */
+.LTScrollToTopButton--hide {
+  animation: ltScrollToTopFadeOutMobile 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ltScrollToTopFadeOutMobile {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+/* Animación de aparición para el botón Scroll to Top Mobile */
+.LTScrollToTopButton--show {
+  animation: ltScrollToTopFadeInMobile 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes ltScrollToTopFadeInMobile {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Animación de salida eliminada por incompatibilidad en mobile. */
+/* ===============================
+   Botón Scroll to Top para mobile
+   =============================== */
+.LTScrollToTopButton {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--lt-accent-color-variant2);
+  color: var(--lt-black-text-color);
+  border: 1px solid var(--lt-black-text-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* Asegura que esté arriba de la mayoría de elementos, pero debajo del chatwidget (9998 vs 9999) */
+  box-shadow: 0 6px 24px rgba(116, 123, 191, 0.22),
+    0 2px 12px rgba(0, 0, 0, 0.12);
+  transition: bottom 0.35s cubic-bezier(0.7, 0.2, 0.3, 1), background 0.2s,
+    transform 0.2s;
+}
+
+/* Hover state */
+.LTScrollToTopButton:hover {
+  background: var(--lt-accent-color-variant2-dark);
+  color: var(--lt-black-text-color);
+  transform: scale(1.08);
+}
+
+/* Icon */
+.LTScrollToTopIcon {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  transition: transform 0.2s;
+}
+.LTScrollToTopButton:hover .LTScrollToTopIcon {
+  transform: scale(1.1);
+}
+
+/* ===============================
+   Compatibilidad y animación con chatwidget
+   =============================== */
+/* El chatwidget sube cuando aparece el scroll-to-top, ambos comparten la esquina inferior izquierda. */
+/* No se requiere ajuste extra aquí, solo asegurar que ambos usen left: 20px y bottom: 20px por defecto. */
+
+/* ===============================
+   Responsive y prevención de conflictos
+   =============================== */
+@media (max-width: 600px) {
+  .LTScrollToTopMobileButton {
+    width: 45px;
+    height: 45px;
+  }
+}

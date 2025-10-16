@@ -1,0 +1,219 @@
+/* ===========================
+   FAVORITE BRANDS - ESTILOS ESPECÍFICOS
+
+   =========================== */
+
+/* ===========================
+   BRANDS GRID
+   =========================== */
+
+.lt-brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ===========================
+   BRAND CARD
+   =========================== */
+
+.lt-brand-card {
+  position: relative;
+  background: white;
+  padding: 1.75rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.lt-brand-card:hover {
+  border-color: var(--naranja, #f7b15d);
+  box-shadow: 0 4px 16px rgba(247, 177, 93, 0.2);
+  transform: translateY(-4px);
+}
+
+.lt-brand-remove {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  color: var(--text-secondary, #666);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.lt-brand-remove:hover {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #dc2626;
+  transform: rotate(10deg) scale(1.1);
+}
+
+.lt-brand-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  border-radius: 10px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.lt-brand-logo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.lt-brand-card:hover .lt-brand-logo {
+  transform: scale(1.05);
+}
+
+.lt-brand-logo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--naranja, #f7b15d);
+}
+
+.lt-brand-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lt-brand-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #222);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.lt-brand-category {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--naranja, #f7b15d);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lt-brand-description {
+  font-size: 0.9375rem;
+  color: var(--text-secondary, #666);
+  margin: 0.5rem 0 0 0;
+  line-height: 1.5;
+}
+
+.lt-brand-stats {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.lt-brand-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary, #666);
+  font-weight: 500;
+}
+
+.lt-brand-stat svg {
+  flex-shrink: 0;
+}
+
+.lt-brand-stat-new {
+  color: var(--naranja, #f7b15d);
+  font-weight: 600;
+}
+
+.lt-brand-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: var(--naranja, #f7b15d);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(247, 177, 93, 0.3);
+}
+
+.lt-brand-button:hover {
+  background: #e09540;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(247, 177, 93, 0.4);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 768px) {
+  .lt-brands-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .lt-brand-card {
+    padding: 1.5rem;
+  }
+
+  .lt-brand-logo-wrapper {
+    height: 100px;
+  }
+
+  .lt-brand-name {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .lt-brand-card {
+    padding: 1.25rem;
+  }
+
+  .lt-brand-logo-wrapper {
+    height: 80px;
+    padding: 1rem;
+  }
+
+  .lt-brand-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .lt-brand-button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9375rem;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import FavoriteButton from "../../../common/FavoriteButton";
+import FavoriteButton from "../../../components/common/FavoriteButton.jsx";
 import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.svg";
-import LTSectionTitle from "../../../common/LTSectionTitle";
+import LTSectionTitle from "../../../components/common/LTSectionTitle";
 import "./LTProductsCarousel4Mobile.css";
 import { products as products4 } from "../../../mocks/products4";
 
@@ -10,7 +10,6 @@ const LTProductsCarousel4Mobile = () => {
   const [animating, setAnimating] = useState(false);
   const [direction, setDirection] = useState(null);
   const [nextIdx, setNextIdx] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const touch = useRef({ startX: null, endX: null });
   const products = products4;
 
@@ -53,12 +52,6 @@ const LTProductsCarousel4Mobile = () => {
     return () => clearInterval(interval);
   }, [animating, currentIdx, handleNext]);
 
-  const toggleFavorite = (id) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
-    );
-  };
-
   const formatPrice = (price) => {
     return new Intl.NumberFormat("es-AR", {
       style: "currency",
@@ -97,7 +90,7 @@ const LTProductsCarousel4Mobile = () => {
         <div className="lt-section-title-spacing">
           <LTSectionTitle
             title="Cámaras — Fotografía y Video"
-            gradientType="gaming"
+            colorVariant="variant2"
           />
         </div>
 
@@ -242,10 +235,7 @@ const LTProductsCarousel4Mobile = () => {
                     />
                     Agregar
                   </button>
-                  <FavoriteButton
-                    isFavorite={favorites.includes(products[currentIdx].id)}
-                    onClick={() => toggleFavorite(products[currentIdx].id)}
-                  />
+                  <FavoriteButton product={products[currentIdx]} />
                 </div>
               </div>
               {/* Card nueva que entra */}
@@ -330,10 +320,7 @@ const LTProductsCarousel4Mobile = () => {
                       />
                       Agregar
                     </button>
-                    <FavoriteButton
-                      isFavorite={favorites.includes(products[nextIdx].id)}
-                      onClick={() => toggleFavorite(products[nextIdx].id)}
-                    />
+                    <FavoriteButton product={products[nextIdx]} />
                   </div>
                 </div>
               )}

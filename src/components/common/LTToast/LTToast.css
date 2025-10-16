@@ -1,0 +1,116 @@
+/* Toast Notification Component */
+.LTToast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  min-width: 300px;
+  max-width: 400px;
+  background: var(--lt-white-text-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(7, 22, 57, 0.15);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  animation: ltToastSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+.LTToast--hiding {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+@keyframes ltToastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%) translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.LTToastIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LTToast--success .LTToastIcon {
+  background: var(--lt-success-color, #10b981);
+}
+
+.LTToast--error .LTToastIcon {
+  background: var(--lt-error-color, #ef4444);
+}
+
+.LTToast--warning .LTToastIcon {
+  background: var(--lt-warning-color, #f59e0b);
+}
+
+.LTToast--info .LTToastIcon {
+  background: var(--lt-accent-color-dark);
+}
+
+.LTToastIcon svg {
+  width: 14px;
+  height: 14px;
+  color: var(--lt-white-text-color);
+}
+
+.LTToastContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.LTToastMessage {
+  font-family: var(--lt-font-family-alt);
+  font-size: 14px;
+  font-weight: var(--lt-font-weight-medium);
+  color: var(--lt-dark-text-color);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.LTToastClose {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+  padding: 0;
+}
+
+.LTToastClose:hover {
+  background: rgba(7, 22, 57, 0.05);
+}
+
+.LTToastClose svg {
+  width: 16px;
+  height: 16px;
+  color: var(--lt-muted-text-color);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .LTToast {
+    bottom: 16px;
+    right: 16px;
+    left: 16px;
+    min-width: auto;
+    max-width: none;
+  }
+}

@@ -234,4 +234,30 @@ export const products = [
     category: "Componentes",
     isLaunch: false,
   },
+  {
+    id: 19,
+    name: "AAmazfit T Rex 3 Smartwatch",
+    brand: "Amazfit",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_715484-MLA80453079610_112024-F.webp",
+    originalPrice: 495999,
+    discountPrice: 378390,
+    discount: 12,
+    size: "6 núcleos / 12 hilos, Boost 5.1GHz, AM5",
+    category: "Smartwaches",
+    isLaunch: false,
+  },
+  {
+    id: 20,
+    name: "Lenovo V15",
+    brand: "LENOVO",
+    image:
+      "https://http2.mlstatic.com/D_NQ_NP_2X_735629-MLA89361423466_082025-F.webp",
+    originalPrice: 1239999,
+    discountPrice: 1103999,
+    discount: 12,
+    size: "6 núcleos / 12 hilos, Boost 5.1GHz, AM5",
+    category: "Laptops",
+    isLaunch: false,
+  },
 ];
