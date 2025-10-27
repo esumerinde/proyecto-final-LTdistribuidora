@@ -37,6 +37,45 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 var(--lt-spacing-lg);
+  /* Center the inner content while respecting surrounding layout (sidebar/header/footer) */
+  display: flex;
+  justify-content: center;
+}
+
+/* Inner wrapper: makes the visual column narrower and centered inside the page content area */
+.LTPersonalInfoInner {
+  width: 100%;
+  max-width: 760px; /* reduce horizontal width further so the centered column is more evident */
+  display: flex;
+  flex-direction: column;
+  gap: var(--lt-spacing-xxl);
+  margin: 0 auto;
+}
+
+/* Only affect .lt-account-card when placed inside the personal info page.
+   This keeps global .lt-account-card behavior untouched elsewhere. */
+.LTPersonalInfoInner .lt-account-card {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 0 var(--lt-spacing-lg) 0; /* vertical spacing between cards (only on this page) */
+  padding: var(--lt-spacing-lg); /* provide breathing room inside each card */
+  background: white;
+  border-radius: calc(var(--lt-border-radius) + 2px);
+  box-shadow: 0 6px 18px rgba(22, 21, 47, 0.06);
+}
+
+/* Reduce item inner padding inside this page so it doesn't double-pad (cards already have padding) */
+.LTPersonalInfoInner .LTPersonalInfoItem {
+  padding: var(--lt-spacing-md);
+}
+
+/* Remove extra margin from the last card so the page bottom spacing remains consistent */
+.LTPersonalInfoInner .lt-account-card:last-child {
+  margin-bottom: 0;
+}
+
+.LTPersonalInfoInner .lt-account-cardTitle {
+  margin: 0 0 var(--lt-spacing-md) 0;
 }
 
 /* ==================== BREADCRUMB ==================== */
@@ -50,6 +89,266 @@
   background: white;
   border-radius: var(--lt-border-radius);
   box-shadow: 0 1px 3px rgba(197, 186, 255, 0.1);
+}
+
+/* Card header with edit button */
+.LTPersonalInfoCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lt-spacing-sm);
+}
+
+.lt-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--lt-accent-color); /* plain violet accent */
+  color: var(--lt-black-text-color); /* text in black */
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.lt-edit-btn svg {
+  color: var(--lt-black-text-color);
+}
+.lt-edit-btn:hover {
+  background: var(--lt-accent-color-dark);
+}
+
+/* Modal styles (simple) */
+.lt-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 20, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+.lt-modal {
+  width: min(760px, 95%);
+  max-width: 760px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 40px rgba(15, 15, 30, 0.2);
+  box-sizing: border-box;
+  max-height: 80vh;
+  overflow-y: auto; /* allow scrolling inside modal when content is tall */
+}
+.lt-modal {
+  box-sizing: border-box;
+}
+
+/* Ensure modal form inputs don't overflow and provide a two-column layout
+   for wider screens. Textareas and upload buttons span both columns. */
+.lt-modal .lt-modal-body {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px 18px;
+  align-items: start;
+}
+.lt-modal .LTPersonalInfoFormInput,
+.lt-modal .LTPersonalInfoInput {
+  box-sizing: border-box; /* include padding/border in width */
+  width: 100%;
+  max-width: 100%;
+}
+.lt-modal .LTPersonalInfoTextarea {
+  grid-column: 1 / -1; /* textarea spans full width inside modal */
+}
+.lt-modal .lt-button-light,
+.lt-modal .lt-button-variant2 {
+  grid-column: 1 / -1; /* action buttons and upload controls span full width */
+}
+
+@media (max-width: 640px) {
+  .lt-modal {
+    width: 95%;
+    padding: 16px;
+  }
+  .lt-modal .lt-modal-body {
+    grid-template-columns: 1fr; /* single column on small screens */
+    gap: 12px;
+  }
+}
+.lt-modal-title {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+.lt-modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 18px;
+  align-items: start;
+}
+.lt-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* helper: make fields span full width of modal grid */
+.lt-field--full {
+  grid-column: 1 / -1;
+}
+
+/* ensure modal actions (buttons) are placed at the end of the grid and aligned right */
+.lt-modal .lt-modal-actions {
+  grid-column: 1 / -1;
+  justify-content: flex-end;
+}
+
+/* Ensure modal children use border-box so padding doesn't grow inputs beyond container */
+.lt-modal,
+.lt-modal * {
+  box-sizing: border-box;
+}
+
+/* Form inputs inside modal: standard two-column layout, but full-width within column */
+.lt-modal .LTPersonalInfoFormInput,
+.lt-modal .LTPersonalInfoInput {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+/* Make textarea span both columns and be a reasonable height */
+.lt-modal .LTPersonalInfoTextarea {
+  grid-column: 1 / -1;
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* Photo modal improvements */
+.lt-photo-modal .lt-modal-body {
+  padding: 18px 24px;
+}
+.lt-photo-modal .photo-grid {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.lt-photo-modal .photo-preview {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex: 0 0 160px;
+  box-shadow: 0 8px 30px rgba(75, 74, 104, 0.14);
+  border: 6px solid rgba(255, 255, 255, 0.85);
+  background: linear-gradient(135deg, #e6e8fb, #c8c9f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lt-photo-modal .photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lt-photo-modal .photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  font-size: 32px;
+  background: linear-gradient(135deg, #8f86f0, #6b5ce7);
+}
+.lt-photo-modal .photo-controls {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.lt-photo-modal .photo-instruction {
+  margin: 0 0 10px 0;
+  color: #5b5b6b;
+  font-size: 14px;
+}
+.lt-photo-modal .photo-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.lt-photo-modal .lt-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--lt-accent-color, #6b5ce7);
+  color: #000;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+.lt-photo-modal .lt-upload-btn svg {
+  opacity: 0.95;
+}
+.lt-photo-modal .LTPersonalInfoFileInput {
+  display: none;
+}
+.lt-photo-modal .photo-url {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+.lt-photo-modal .photo-url .lt-input {
+  flex: 1 1 auto;
+}
+.lt-photo-modal .lt-modal-actions {
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .lt-photo-modal .photo-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .lt-photo-modal .photo-preview {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 8px;
+  }
+  .lt-photo-modal .photo-actions {
+    justify-content: center;
+  }
+}
+
+/* File upload and single-row controls should span both columns */
+.lt-modal .lt-button-light,
+.lt-modal .lt-button-variant2 {
+  /* keep buttons sized sensibly inside modal */
+  padding: 8px 12px;
+}
+.lt-modal .lt-button-light[aria-hidden],
+.lt-modal .LTPersonalInfoFileInput {
+  display: none;
+}
+
+/* On small screens collapse to single column */
+@media (max-width: 720px) {
+  .lt-modal .lt-modal-body {
+    grid-template-columns: 1fr;
+  }
+  .lt-modal {
+    width: 95%;
+    max-width: 95%;
+    padding: 16px;
+  }
 }
 
 .LTPersonalInfoBreadcrumbLink {
@@ -86,6 +385,12 @@
   margin-bottom: var(--lt-spacing-sm);
 }
 
+.LTPersonalInfoHeaderIcon {
+  vertical-align: middle;
+  margin-right: 10px;
+  color: var(--lt-accent-color);
+}
+
 .LTPersonalInfoSubtitle {
   font-size: 16px;
   color: var(--lt-text-color);
@@ -98,6 +403,12 @@
   display: flex;
   align-items: center;
   gap: var(--lt-spacing-xl);
+}
+
+/* Add extra vertical space between the photo section and the first info item
+   so "Nombre y apellido" doesn't sit too close to the photo block. */
+.LTPersonalInfoPhotoSection + .LTPersonalInfoItem {
+  margin-top: var(--lt-spacing-lg);
 }
 
 .LTPersonalInfoPhotoWrapper {
@@ -182,6 +493,75 @@
 .LTPersonalInfoPhotoActions {
   display: flex;
   gap: var(--lt-spacing-sm);
+}
+.LTPersonalInfoPhotoActions .lt-button-light,
+.LTPersonalInfoPhotoActions .lt-button-variant2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px; /* slightly smaller but still roomy */
+  font-size: 15px; /* a bit bigger text */
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--lt-black-text-color); /* make text black */
+  background: var(--lt-accent-color); /* use plain accent color (violet) */
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(197, 186, 255, 0.08);
+}
+
+/* Make the two small action buttons visually smaller when inside photo actions */
+.LTPersonalInfoPhotoActions .lt-button-light {
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 10px;
+  background: rgba(
+    197,
+    186,
+    255,
+    0.12
+  ); /* smaller secondary buttons use light violet bg */
+  color: var(--lt-accent-color-dark);
+}
+
+/* Ensure the three buttons (header edit + photo actions) look identical
+   when using the shared class `lt-edit-btn`. This overrides prior
+   photo-action button rules and keeps styles scoped to this page. */
+.LTPersonalInfoInner .lt-edit-btn,
+.LTPersonalInfoCardHeader .lt-edit-btn,
+.LTPersonalInfoPhotoActions .lt-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: var(--lt-accent-color);
+  color: var(--lt-black-text-color);
+  border-radius: 12px;
+  border: none;
+  box-shadow: none;
+}
+.LTPersonalInfoInner .lt-edit-btn svg,
+.LTPersonalInfoCardHeader .lt-edit-btn svg,
+.LTPersonalInfoPhotoActions .lt-edit-btn svg {
+  color: var(--lt-black-text-color);
+  width: 18px;
+  height: 18px;
+}
+
+/* Ensure SVG and text align properly inside buttons */
+.LTPersonalInfoPhotoActions .lt-button-light svg,
+.LTPersonalInfoPhotoActions .lt-button-variant2 svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+}
+
+/* Modal upload button smaller */
+.lt-modal .lt-button-light {
+  padding: 8px 12px;
+  font-size: 14px;
 }
 .LTPersonalInfoFileInput {
   display: none;
@@ -458,6 +838,10 @@
   .LTPersonalInfoContainer {
     padding: 0 var(--lt-spacing-md);
   }
+  .LTPersonalInfoInner {
+    max-width: 100%;
+    padding: 0;
+  }
   .LTPersonalInfoTitle {
     font-size: 28px;
   }
@@ -474,5 +858,146 @@
   }
   .LTPersonalInfoItemActions {
     margin-top: var(--lt-spacing-sm);
+  }
+}
+
+/* ====== Personal Info – extras solo para los NUEVOS forms ====== */
+
+/* Modal un poco más ancho solo en esta página */
+.LTPersonalInfoContainer .lt-modal {
+  width: min(880px, 96%);
+}
+
+/* Form moderno (animación de entrada) */
+.lt-form-modern {
+  animation: lt-pop-in 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Grid 2 columnas en desktop (1 en mobile) */
+.lt-grid-2 {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .lt-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Field + floating label */
+.lt-field {
+  position: relative;
+  margin: 8px 0 18px;
+  animation: lt-fade-up 260ms ease both;
+}
+.lt-input {
+  width: 100%;
+  font: inherit;
+  color: var(--lt-small-text-color, #4a5155);
+  background: var(--lt-background-color, #fff);
+  border: 1.5px solid var(--lt-border-color, #d5d7df);
+  border-radius: 12px;
+  padding: 14px;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease,
+    transform 120ms ease;
+  min-height: 48px; /* más cómodos */
+}
+.lt-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.45;
+}
+.lt-label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  padding: 0 6px;
+  background: var(--lt-background-color, #fff);
+  color: var(--lt-small-text-color, #4a5155);
+  font-size: 0.92rem;
+  pointer-events: none;
+  transform-origin: left top;
+  transition: transform 140ms ease, color 140ms ease, top 140ms ease;
+  opacity: 0.9;
+}
+/* usar placeholder=" " en los inputs */
+.lt-input::placeholder {
+  color: transparent;
+}
+/* elevar label en foco o con valor */
+.lt-input:focus + .lt-label,
+.lt-input:not(:placeholder-shown) + .lt-label {
+  transform: translateY(-16px) scale(0.88);
+  color: var(--lt-hover-text-menu, #05125f);
+  top: 8px;
+}
+/* focus ring con tu paleta */
+.lt-input:focus {
+  border-color: var(--lt-accent-color-dark, #747bbf);
+  box-shadow: 0 0 0 4px
+    color-mix(in srgb, var(--lt-accent-color, #b3b8e6) 35%, transparent);
+  animation: lt-focus-pulse 420ms ease-out;
+}
+
+/* Helpers y uploader inline del modal */
+.lt-help {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: color-mix(
+    in srgb,
+    var(--lt-small-text-color, #4a5155) 75%,
+    transparent
+  );
+}
+.lt-inline {
+  margin-top: 2px;
+}
+.lt-uploader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lt-mini-hint {
+  font-size: 0.8rem;
+  color: color-mix(
+    in srgb,
+    var(--lt-small-text-color, #4a5155) 70%,
+    transparent
+  );
+}
+
+/* Animaciones usadas por los forms */
+@keyframes lt-pop-in {
+  from {
+    transform: translateY(6px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+@keyframes lt-fade-up {
+  from {
+    transform: translateY(4px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes lt-focus-pulse {
+  0% {
+    transform: translateZ(0) scale(1);
+  }
+  60% {
+    transform: translateZ(0) scale(1.003);
+  }
+  100% {
+    transform: translateZ(0) scale(1);
   }
 }

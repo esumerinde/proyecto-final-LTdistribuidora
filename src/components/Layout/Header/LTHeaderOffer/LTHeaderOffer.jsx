@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LTHeaderOffer.css";
 
 const offers = [
@@ -16,6 +17,7 @@ const LTHeaderOffer = ({
   className = "",
   style,
 }) => {
+  const navigate = useNavigate();
   const [offerIndex, setOfferIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
@@ -37,14 +39,27 @@ const LTHeaderOffer = ({
 
   const resolvedAdminItems = useMemo(() => {
     if (!isAdmin) return [];
-    if (adminItems && adminItems.length) return adminItems;
+    if (adminItems && adminItems.length) {
+      // Si el item 'Panel de admin' no tiene onClick, lo agrego
+      return adminItems.map((item) =>
+        item.label === "Panel de admin"
+          ? {
+              ...item,
+              onClick: item.onClick || (() => navigate("/adminpanel")),
+            }
+          : item
+      );
+    }
     return [
-      { label: "Panel de admin" },
+      {
+        label: "Panel de admin",
+        onClick: () => navigate("/adminpanel"),
+      },
       { label: "Informes" },
       { label: "Subir producto" },
       { label: "Cerrar sesión" },
     ];
-  }, [isAdmin, adminItems]);
+  }, [isAdmin, adminItems, navigate]);
 
   const baseClassName = [
     "LTHeaderOfferBar",

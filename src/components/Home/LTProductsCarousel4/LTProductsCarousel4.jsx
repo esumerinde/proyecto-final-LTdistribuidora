@@ -5,7 +5,7 @@ import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.
 import { products } from "../../../mocks/products4";
 import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
-// Funci�n para formatear precios en formato argentino (231.990,00)
+// Función para formatear precios en formato argentino (231.990,00)
 const formatPrice = (price) => {
   return price.toLocaleString("es-AR", {
     minimumFractionDigits: 2,
@@ -47,13 +47,13 @@ const LTProductsCarousel = () => {
       <div className="LTProductsCarouselContainer">
         <div className="lt-section-title-spacing">
           <LTSectionTitle
-            title="C�maras � Fotograf�a y Video"
+            title="Cámaras - Fotografía y Video"
             gradientType="gaming"
           />
         </div>
 
         <div className="LTProductsCarouselContent">
-          {/* Banner promocional - “Lo �ltimo en C�maras” */}
+          {/* Banner promocional - “Lo último en Cámaras” */}
           <div
             className="LTProductsCarouselBanner"
             style={{
@@ -63,16 +63,14 @@ const LTProductsCarousel = () => {
           >
             <div className="LTProductsCarouselBannerContent">
               <div className="LTProductsCarouselBannerChips">
-                <span className="LTProductsCarouselBannerBadge">C�MARAS</span>
+                <span className="LTProductsCarouselBannerBadge">CÁMARAS</span>
                 <span className="LTProductsCarouselBannerDate">Nuevo</span>
               </div>
 
               <div className="LTProductsCarouselBannerHeadline">
-                <span className="LTProductsCarouselBannerKicker">
-                  Descubr��
-                </span>
+                <span className="LTProductsCarouselBannerKicker">Descubrí</span>
                 <h3 className="LTProductsCarouselBannerTitle">
-                  Lo �ltimo en <span>C�maras</span>
+                  Lo último en <span>Cámaras</span>
                 </h3>
               </div>
 
@@ -81,13 +79,13 @@ const LTProductsCarousel = () => {
                   Canon EOS R5
                 </div>
                 <p className="LTProductsCarouselBannerDescription">
-                  Precisi�n, calidad y tecnolog�a avanzada. Descubr� la Canon
-                  EOS R5, dise�ada para fot�grafos profesionales y creadores
+                  Precisión, calidad y tecnología avanzada. Descubrí la Canon
+                  EOS R5, diseñada para fotógrafos profesionales y creadores
                   exigentes.
                 </p>
 
                 <button className="LTProductsCarouselBannerButton lt-button-variant2">
-                  VER M�S
+                  VER MÁS
                 </button>
               </div>
             </div>

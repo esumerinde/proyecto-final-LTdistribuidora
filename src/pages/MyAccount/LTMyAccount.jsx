@@ -127,6 +127,7 @@ const DashboardCard = ({
 
 const MiCuentaDashboard = ({ onLogout, user, isLogged, navigate }) => {
   const cards = [
+    // Fila 1
     {
       id: "perfil",
       title: "Información personal",
@@ -135,15 +136,8 @@ const MiCuentaDashboard = ({ onLogout, user, isLogged, navigate }) => {
       main: "micuenta",
     },
     {
-      id: "seguridad",
-      title: "Seguridad",
-      description: "Cambio de contraseña y verificación en 2 pasos.",
-      icon: Lock,
-      main: "micuenta",
-    },
-    {
       id: "medios-de-pago",
-      title: "Medios de pago",
+      title: "Mis medios de pago",
       description: "Gestioná tus tarjetas y métodos de pago.",
       icon: CreditCard,
       main: "micuenta",
@@ -155,6 +149,7 @@ const MiCuentaDashboard = ({ onLogout, user, isLogged, navigate }) => {
       icon: MapPin,
       main: "micuenta",
     },
+    // Fila 2
     {
       id: "reservas-activas",
       title: "Reservas Activas",
@@ -171,31 +166,18 @@ const MiCuentaDashboard = ({ onLogout, user, isLogged, navigate }) => {
     },
     {
       id: "estado-envio",
-      title: "Estado del Envío",
+      title: "Estado del envío",
       description: "Seguí tus pedidos en tiempo real.",
       icon: Truck,
       main: "envios",
     },
+    // Fila 3
     {
       id: "mis-productos-favoritos",
-      title: "Productos favoritos",
+      title: "Favoritos",
       description: "Accedé rápido a tus productos preferidos.",
       icon: Heart,
       main: "productos",
-    },
-    {
-      id: "mis-marcas-favoritas",
-      title: "Marcas favoritas",
-      description: "Gestioná las marcas que más te gustan.",
-      icon: Star,
-      main: "marcas",
-    },
-    {
-      id: "historial-reservas",
-      title: "Historial",
-      description: "Revisá tus reservas anteriores en segundos.",
-      icon: History,
-      main: "reservas",
     },
     {
       id: "notificaciones",

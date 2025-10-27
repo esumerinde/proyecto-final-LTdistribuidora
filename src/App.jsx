@@ -21,7 +21,19 @@ import LTFavoriteBrands from "./pages/MyAccount/FavoriteBrands/LTFavoriteBrands"
 import MainLayout from "./components/Layout/MainLayout/MainLayout";
 import LoginLayout from "./components/Layout/LoginLayout/LoginLayout";
 import AccountLayout from "./components/Layout/AccountLayout/AccountLayout";
+import LTAdminLayout from "./components/Layout/AdminLayout/LTAdminLayout";
 import "./styles/App.css";
+import LTAdminPanel from "./pages/AdminPanel/LTAdminPanel";
+import { getCurrentUser } from "./utils/authStorage";
+
+// Small route guard for admin-only pages. It checks the stored user for an
+// `isAdmin` boolean or `role === 'admin'`. If not present, redirects to login.
+const AdminRoute = ({ children }) => {
+  const user = getCurrentUser();
+  const isAdmin = user && (user.isAdmin || user.role === "admin");
+  if (!isAdmin) return <Navigate to="/login" replace />;
+  return children;
+};
 
 function App() {
   return (
@@ -39,6 +51,18 @@ function App() {
                 <Route path="/home" element={<Navigate to="/" replace />} />
                 {/* Aquí podes agregar más rutas: productos, categorías, etc. */}
               </Route>
+
+              {/* Ruta de Admin Panel con layout minimal propio */}
+              <Route
+                path="/adminpanel"
+                element={
+                  <AdminRoute>
+                    <LTAdminLayout>
+                      <LTAdminPanel />
+                    </LTAdminLayout>
+                  </AdminRoute>
+                }
+              />
 
               {/* Rutas con Layout de Autenticación (Header + Footer, sin Navbar ni HeaderOffer) */}
               <Route element={<LoginLayout />}>

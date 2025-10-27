@@ -5,7 +5,7 @@ import ShoppingBagIcon from "../../../assets/icons/svg/bag-shopping-svgrepo-com.
 import { products } from "../../../mocks/products2";
 import LTSectionTitle from "../../../components/common/LTSectionTitle";
 
-// Funci�n para formatear precios en formato argentino (231.990,00)
+// Función para formatear precios en formato argentino (231.990,00)
 const formatPrice = (price) => {
   return price.toLocaleString("es-AR", {
     minimumFractionDigits: 2,
@@ -47,13 +47,13 @@ const LTProductsCarousel = () => {
       <div className="LTProductsCarouselContainer">
         <div className="lt-section-title-spacing">
           <LTSectionTitle
-            title="Smartphones � Apple, Samsung y m�s"
+            title="Smartphones - Apple, Samsung y más"
             gradientType="gaming"
           />
         </div>
 
         <div className="LTProductsCarouselContent">
-          {/* Banner promocional - �Lo �ltimo en CELULARES� */}
+          {/* Banner promocional - Lo último en CELULARES */}
           <div
             className="LTProductsCarouselBanner"
             style={{
@@ -68,9 +68,9 @@ const LTProductsCarousel = () => {
               </div>
 
               <div className="LTProductsCarouselBannerHeadline">
-                <span className="LTProductsCarouselBannerKicker">Descubr�</span>
+                <span className="LTProductsCarouselBannerKicker">descubrí</span>
                 <h3 className="LTProductsCarouselBannerTitle">
-                  Lo �ltimo en <span>CELULARES</span>
+                  Lo último en <span>CELULARES</span>
                 </h3>
               </div>
 
@@ -79,12 +79,12 @@ const LTProductsCarousel = () => {
                   iPhone 14 Pro
                 </div>
                 <p className="LTProductsCarouselBannerDescription">
-                  Innovaci�n, dise�o y potencia. Descubr� el nuevo iPhone 14 Pro
-                  Max con la mejor tecnolog�a de Apple.
+                  Innovación, diseño y potencia. Descubrí el nuevo iPhone 14 Pro
+                  Max con la mejor tecnología de Apple.
                 </p>
 
                 <button className="LTProductsCarouselBannerButton lt-button-variant2">
-                  VER M�S
+                  VER MÁS
                 </button>
               </div>
             </div>

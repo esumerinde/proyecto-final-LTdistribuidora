@@ -47,13 +47,13 @@ const LTProductsCarousel = () => {
       <div className="LTProductsCarouselContainer">
         <div className="lt-section-title-spacing">
           <LTSectionTitle
-            title="Gaming � Nuevas consolas"
+            title="Gaming - Nuevas consolas"
             gradientType="gaming"
           />
         </div>
 
         <div className="LTProductsCarouselContent">
-          {/* Banner promocional - “Lo �ltimo en Gaming” */}
+          {/* Banner promocional - “Lo último en Gaming” */}
           <div
             className="LTProductsCarouselBanner"
             style={{
@@ -68,11 +68,9 @@ const LTProductsCarousel = () => {
               </div>
 
               <div className="LTProductsCarouselBannerHeadline">
-                <span className="LTProductsCarouselBannerKicker">
-                  Descubr��
-                </span>
+                <span className="LTProductsCarouselBannerKicker">descubrí</span>
                 <h3 className="LTProductsCarouselBannerTitle">
-                  Lo �ltimo en <span>Gaming</span>
+                  Lo último en <span>Gaming</span>
                 </h3>
               </div>
 
@@ -81,12 +79,12 @@ const LTProductsCarousel = () => {
                   ASUS ROG Strix
                 </div>
                 <p className="LTProductsCarouselBannerDescription">
-                  Potencia, portabilidad y rendimiento. Descubr� la ASUS ROG
-                  Strix, dise�ada para gamers exigentes.
+                  Potencia, portabilidad y rendimiento. Descubrí la ASUS ROG
+                  Strix, diseñada para gamers exigentes.
                 </p>
 
                 <button className="LTProductsCarouselBannerButton lt-button-variant2">
-                  VER M�S
+                  VER MÁS
                 </button>
               </div>
             </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import LTHeader from "../Header/LTHeader";
-import SimpleHeader from "../Header/SimpleHeader/SimpleHeader.jsx";
-import LTHeaderMobile from "../Header/LTHeaderMobile";
+import LTSimpleHeader from "../Header/LTSimpleHeader";
 import { useIsMobile } from "../../../hooks/useIsMobile";
 import "../Header/LTHeader.onlylogo.css";
 
@@ -15,11 +13,7 @@ const LoginLayout = () => {
 
   return (
     <div className="lt-app">
-      {isMobile ? (
-        <LTHeaderMobile showOfferBar={false} />
-      ) : (
-        <LTHeader showOfferBar={false} className="LTHeaderOnlyLogo" />
-      )}
+      <LTSimpleHeader />
       <Outlet />
     </div>
   );

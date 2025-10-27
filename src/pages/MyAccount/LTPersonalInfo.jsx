@@ -15,10 +15,7 @@ import {
   ShieldCheck,
   FileText,
   UserCheck,
-  X,
-  Save,
-  Eye,
-  EyeOff,
+  Edit,
 } from "lucide-react";
 import { getCurrentUser } from "../../utils/authStorage";
 import { getInitials } from "../../mocks/users";
@@ -27,7 +24,7 @@ import "./LTPersonalInfo.css";
 const LTPersonalInfo = () => {
   const navigate = useNavigate();
 
-  // --- HOOKS (siempre al tope y en el mismo orden) ---
+  // --- STATE ---
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -36,55 +33,180 @@ const LTPersonalInfo = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [isImageLoading, setIsImageLoading] = useState(false);
 
-  const [editingField, setEditingField] = useState(null);
+  // Modal (datos) + Modal (foto)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalTarget, setModalTarget] = useState(null); // 'personal' | 'account'
+  const [modalPasswordConfirm, setModalPasswordConfirm] = useState("");
+  const [photoModalOpen, setPhotoModalOpen] = useState(false);
+
   const [editForm, setEditForm] = useState({
-    email: "",
-    phone: "",
-    username: "",
+    // personal
     fullName: "",
+    firstName: "",
+    lastName: "",
     aboutMe: "",
+    // account
+    username: "",
+    phone: "",
+    email: "",
+    newPassword: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [currentPassword, setCurrentPassword] = useState("");
 
-  const [userAddresses, setUserAddresses] = useState([]);
-  const [userPaymentMethods, setUserPaymentMethods] = useState([]);
-
-  // Cargar usuario al montar
+  // --- EFFECTS ---
+  // Cargar usuario
   useEffect(() => {
-    const user = getCurrentUser();
-    setCurrentUser(user || null);
+    const u = getCurrentUser() || null;
+    setCurrentUser(u);
+    // foto guardada si existe
+    const savedImage =
+      (u?.id && localStorage.getItem(`profile_image_${u.id}`)) || null;
+    if (savedImage) setProfileImage(savedImage);
     setLoading(false);
   }, []);
 
-  // Redirigir si terminó de cargar y no hay user
+  // Redirigir si no hay user
   useEffect(() => {
     if (!loading && (!currentUser || !currentUser.id)) {
-      navigate("/login", { replace: true });
+      navigate("/login");
     }
   }, [loading, currentUser, navigate]);
 
-  // Cargar data dependiente del user (direcciones, pagos, imagen)
-  useEffect(() => {
-    if (!currentUser?.id) return;
+  // --- HELPERS / HANDLERS ---
+  const openModal = (target) => {
+    setModalTarget(target);
+    if (currentUser) {
+      setEditForm((prev) => ({
+        ...prev,
+        firstName: (currentUser.fullName || "").split(" ")[0] || "",
+        lastName:
+          (currentUser.fullName || "").split(" ").slice(1).join(" ") || "",
+        aboutMe: currentUser.aboutMe || "",
+        username: currentUser.username || "",
+        phone: currentUser.phone || "",
+        email: currentUser.email || "",
+        newPassword: "",
+      }));
+    }
+    setModalPasswordConfirm("");
+    setModalOpen(true);
+  };
 
-    const savedAddresses = JSON.parse(
-      localStorage.getItem(`addresses_${currentUser.id}`) || "[]"
-    );
-    const savedPayments = JSON.parse(
-      localStorage.getItem(`payments_${currentUser.id}`) || "[]"
-    );
-    setUserAddresses(savedAddresses);
-    setUserPaymentMethods(savedPayments);
+  const closeModal = () => {
+    setModalOpen(false);
+    setModalTarget(null);
+  };
 
-    const savedImage =
-      localStorage.getItem(`profile_image_${currentUser.id}`) ||
-      currentUser.profileImage ||
-      null;
-    setProfileImage(savedImage);
-  }, [currentUser?.id]); // solo depende del id
+  const openPhotoModal = () => {
+    setShowUrlInput(false);
+    setImageUrl("");
+    setPhotoModalOpen(true);
+  };
 
-  // --- Early returns (después de declarar hooks) ---
+  const closePhotoModal = () => setPhotoModalOpen(false);
+
+  // Subida de imagen (archivo)
+  const handleFileUpload = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    setIsImageLoading(true);
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const data = ev.target.result;
+      setProfileImage(data);
+      if (currentUser?.id) {
+        localStorage.setItem(`profile_image_${currentUser.id}`, data);
+      }
+      setIsImageLoading(false);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // Subida de imagen (URL)
+  const handleUrlUpload = () => {
+    if (!imageUrl) return;
+    setIsImageLoading(true);
+    const img = new Image();
+    img.onload = () => {
+      setProfileImage(imageUrl);
+      if (currentUser?.id) {
+        localStorage.setItem(`profile_image_${currentUser.id}`, imageUrl);
+      }
+      setIsImageLoading(false);
+      setShowUrlInput(false);
+      setImageUrl("");
+    };
+    img.onerror = () => {
+      setIsImageLoading(false);
+      alert("No se pudo cargar la imagen. Verificá la URL.");
+    };
+    img.src = imageUrl;
+  };
+
+  const validEmail = (v) => /\S+@\S+\.\S+/.test(v);
+
+  const handleSubmitModal = (e) => {
+    e.preventDefault();
+
+    if (!currentUser) return;
+
+    if (modalTarget === "account") {
+      if (!validEmail(editForm.email)) {
+        alert("Ingresá un e-mail válido.");
+        return;
+      }
+      if (!modalPasswordConfirm) {
+        alert("Ingresá tu contraseña actual para confirmar.");
+        return;
+      }
+      if (
+        currentUser.password &&
+        modalPasswordConfirm !== currentUser.password
+      ) {
+        alert("Contraseña actual incorrecta.");
+        return;
+      }
+    }
+
+    const updated = { ...currentUser };
+
+    if (modalTarget === "personal") {
+      const first = (editForm.firstName || "").trim();
+      const last = (editForm.lastName || "").trim();
+      updated.fullName = `${first}${last ? " " + last : ""}`.trim();
+      updated.aboutMe = (editForm.aboutMe || "").trim();
+    }
+
+    if (modalTarget === "account") {
+      updated.username = (editForm.username || "").trim();
+      updated.phone = (editForm.phone || "").trim();
+      updated.email = (editForm.email || "").trim();
+      if (editForm.newPassword?.length >= 6) {
+        updated.password = editForm.newPassword; // (en backend: hash)
+      }
+    }
+
+    localStorage.setItem("currentUser", JSON.stringify(updated));
+    setCurrentUser(updated);
+    closeModal();
+    alert("Cambios guardados exitosamente.");
+  };
+
+  // --- DERIVADOS (después de tener state) ---
+  const userInitials = getInitials(currentUser?.fullName || "US");
+
+  const userInfo = {
+    fullName: currentUser?.fullName || "",
+    aboutMe: currentUser?.aboutMe || "",
+    username: currentUser?.username || "",
+    lastPasswordChange: "-", // si lo tenés en tu storage, reemplazalo aquí
+    email: currentUser?.email || "",
+    phone: currentUser?.phone || "",
+    addressCount: 0,
+    paymentMethodsCount: 0,
+    taxStatus: "-",
+  };
+
+  // --- EARLY UI ---
   if (loading) {
     return (
       <div style={{ minHeight: "50vh", display: "grid", placeItems: "center" }}>
@@ -92,642 +214,587 @@ const LTPersonalInfo = () => {
       </div>
     );
   }
-  if (!currentUser || !currentUser.id) {
-    return (
-      <div style={{ minHeight: "50vh", display: "grid", placeItems: "center" }}>
-        <p>Redirigiendo al inicio de sesión…</p>
-      </div>
-    );
-  }
-
-  const userInitials = getInitials(currentUser.fullName || "Usuario");
-
-  const userInfo = {
-    fullName: currentUser.fullName || "Usuario",
-    email: currentUser.email || "usuario@ejemplo.com",
-    phone: currentUser.phone || "+54 9 11 1234-5678",
-    username: currentUser.username || "usuario123",
-    aboutMe: currentUser.aboutMe || "",
-    taxStatus: "Consumidor Final",
-    addressCount: userAddresses.length,
-    paymentMethodsCount: userPaymentMethods.length,
-    lastPasswordChange: "3 meses",
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setIsImageLoading(true);
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const result = reader.result;
-      setProfileImage(result);
-      setIsImageLoading(false);
-      localStorage.setItem(`profile_image_${currentUser.id}`, result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleUrlUpload = () => {
-    if (!imageUrl) return;
-    setIsImageLoading(true);
-    const img = new Image();
-    img.onload = () => {
-      setProfileImage(imageUrl);
-      setIsImageLoading(false);
-      localStorage.setItem(`profile_image_${currentUser.id}`, imageUrl);
-      setImageUrl("");
-      setShowUrlInput(false);
-    };
-    img.onerror = () => {
-      setIsImageLoading(false);
-      alert("No se pudo cargar la imagen. Verifica la URL.");
-    };
-    img.src = imageUrl;
-  };
-
-  const handleEditClick = (field) => {
-    setEditingField(field);
-    setEditForm((prev) => ({
-      ...prev,
-      [field]: userInfo[field],
-    }));
-    setCurrentPassword("");
-  };
-
-  const handleCancelEdit = () => {
-    setEditingField(null);
-    setCurrentPassword("");
-    setShowPassword(false);
-  };
-
-  const handleSaveEdit = () => {
-    if (!currentPassword) {
-      alert(
-        "Por favor, ingresa tu contraseña actual para confirmar los cambios."
-      );
-      return;
-    }
-    if (currentPassword !== currentUser?.password) {
-      alert("Contraseña incorrecta.");
-      return;
-    }
-
-    const updatedUser = {
-      ...currentUser,
-      [editingField]: editForm[editingField],
-    };
-
-    // Persistir y reflejar en estado (sin recargar la página)
-    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
-    setCurrentUser(updatedUser);
-
-    alert("Cambios guardados exitosamente");
-    handleCancelEdit();
-  };
 
   return (
     <div className="LTPersonalInfoContainer">
-      {/* Breadcrumb */}
-      <div className="LTPersonalInfoBreadcrumb">
-        <span
-          className="LTPersonalInfoBreadcrumbLink"
-          onClick={() => navigate("/my-account")}
-        >
-          Mi cuenta
-        </span>
-        <ChevronRight size={14} />
-        <span className="LTPersonalInfoBreadcrumbCurrent">
-          Información personal
-        </span>
-      </div>
+      <div className="LTPersonalInfoInner">
+        {/* Breadcrumb */}
+        <div className="LTPersonalInfoBreadcrumb">
+          <span
+            className="LTPersonalInfoBreadcrumbLink"
+            onClick={() => navigate("/my-account")}
+          >
+            Mi cuenta
+          </span>
+          <ChevronRight size={14} />
+          <span className="LTPersonalInfoBreadcrumbCurrent">
+            Información personal
+          </span>
+        </div>
 
-      {/* Header */}
-      <header className="LTPersonalInfoHeaderSection">
-        <h1 className="LTPersonalInfoTitle">Información de tu perfil</h1>
-        <p className="LTPersonalInfoSubtitle">
-          Podés agregar, modificar o corregir tu información personal y los
-          datos de la cuenta.
-        </p>
-      </header>
+        {/* Header */}
+        <header className="LTPersonalInfoHeaderSection">
+          <h1 className="LTPersonalInfoTitle">Información personal</h1>
+          <p className="LTPersonalInfoSubtitle">
+            Podés agregar, modificar o corregir tu información personal y los
+            datos de la cuenta.
+          </p>
+        </header>
 
-      {/* Foto de perfil */}
-      <div className="lt-account-card">
-        <div className="LTPersonalInfoPhotoSection">
-          <div className="LTPersonalInfoPhotoWrapper">
-            {profileImage ? (
-              <img
-                src={profileImage}
-                alt="Foto de Perfil"
-                className="LTPersonalInfoPhoto"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                  const placeholder = e.currentTarget.nextSibling;
-                  if (placeholder) placeholder.style.display = "flex";
-                }}
-              />
-            ) : null}
-            <div
-              className="LTPersonalInfoPhotoPlaceholder"
-              style={{ display: profileImage ? "none" : "flex" }}
+        {/* Información personal */}
+        <div className="lt-account-card">
+          <div className="LTPersonalInfoCardHeader">
+            <h3 className="lt-account-cardTitle">Información personal</h3>
+            <button
+              className="lt-edit-btn"
+              onClick={() => openModal("personal")}
+              aria-label="Editar información personal"
             >
-              {userInitials}
-            </div>
-            <div className="LTPersonalInfoPhotoOverlay">
-              <Camera size={20} />
-            </div>
-            {isImageLoading && (
-              <div className="LTPersonalInfoPhotoLoader">
-                <div className="spinner"></div>
-              </div>
-            )}
+              <Edit size={16} /> <span>Editar</span>
+            </button>
           </div>
 
-          <div className="LTPersonalInfoPhotoContent">
-            <h3 className="LTPersonalInfoPhotoTitle">Cambiar foto de perfil</h3>
-            <p className="LTPersonalInfoPhotoText">
-              Usa una imagen clara para identificarte.
-            </p>
-            <div className="LTPersonalInfoPhotoActions">
-              <button
-                onClick={() => document.getElementById("file-upload")?.click()}
-                className="lt-button-light"
-                disabled={isImageLoading}
+          <div className="LTPersonalInfoPhotoSection">
+            <div className="LTPersonalInfoPhotoWrapper">
+              {profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Foto de Perfil"
+                  className="LTPersonalInfoPhoto"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                    const placeholder = e.currentTarget.nextSibling;
+                    if (placeholder) placeholder.style.display = "flex";
+                  }}
+                />
+              ) : null}
+
+              <div
+                className="LTPersonalInfoPhotoPlaceholder"
+                style={{ display: profileImage ? "none" : "flex" }}
               >
-                <Upload size={16} />
-                <span>Subir Archivo</span>
-              </button>
-              <input
-                type="file"
-                id="file-upload"
-                accept="image/*"
-                className="LTPersonalInfoFileInput"
-                onChange={handleFileUpload}
-              />
-              <button
-                onClick={() => setShowUrlInput((v) => !v)}
-                className="lt-button-light"
-                disabled={isImageLoading}
+                {userInitials}
+              </div>
+
+              <div
+                className="LTPersonalInfoPhotoOverlay"
+                role="button"
+                tabIndex={0}
+                onClick={openPhotoModal}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") openPhotoModal();
+                }}
               >
-                <LinkIcon size={16} />
-                <span>Usar URL</span>
-              </button>
+                <Camera size={20} />
+              </div>
+
+              {isImageLoading && (
+                <div className="LTPersonalInfoPhotoLoader">
+                  <div className="spinner"></div>
+                </div>
+              )}
             </div>
 
-            {showUrlInput && (
-              <div className="LTPersonalInfoUrlInput slide-down">
-                <input
-                  type="url"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  placeholder="Pega la URL de la imagen aquí"
-                  className="LTPersonalInfoInput"
-                />
-                <button
-                  onClick={handleUrlUpload}
-                  className="lt-button-variant2"
-                  disabled={!imageUrl || isImageLoading}
-                >
-                  Aplicar
+            <div className="LTPersonalInfoPhotoContent">
+              <h3 className="LTPersonalInfoPhotoTitle">
+                Cambiar foto de perfil
+              </h3>
+              <p className="LTPersonalInfoPhotoText">
+                Usa una imagen clara para identificarte.
+              </p>
+              <div className="LTPersonalInfoPhotoActions">
+                <small>
+                  Hacé click en el ícono de la cámara para cambiar tu foto de
+                  perfil.
+                </small>
+              </div>
+            </div>
+          </div>
+
+          <div className="LTPersonalInfoItem">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <User size={20} className="LTPersonalInfoItemIcon" />
+                Nombre y apellido
+              </div>
+              <div className="LTPersonalInfoItemValue">{userInfo.fullName}</div>
+            </div>
+          </div>
+
+          <div className="LTPersonalInfoItem LTPersonalInfoItem--aboutMe">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <UserCheck size={20} className="LTPersonalInfoItemIcon" />
+                Sobre mí
+              </div>
+              <div className="LTPersonalInfoItemValue">
+                {userInfo.aboutMe || "Aún no agregaste una descripción"}
+              </div>
+              <div className="LTPersonalInfoItemHelper">
+                Agregá una breve descripción sobre vos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Datos de cuenta */}
+        <div className="lt-account-card">
+          <div className="LTPersonalInfoCardHeader">
+            <h3 className="lt-account-cardTitle">Datos de cuenta</h3>
+            <button
+              className="lt-edit-btn"
+              onClick={() => openModal("account")}
+              aria-label="Editar datos de cuenta"
+            >
+              <Edit size={16} /> <span>Editar</span>
+            </button>
+          </div>
+
+          {/* Username */}
+          <div className="LTPersonalInfoItem">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <UserCheck size={20} className="LTPersonalInfoItemIcon" />
+                Nombre de usuario
+              </div>
+              <div className="LTPersonalInfoItemValue">{userInfo.username}</div>
+            </div>
+          </div>
+
+          {/* Contraseña (solo info) */}
+          <div className="LTPersonalInfoItem">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <Lock size={20} className="LTPersonalInfoItemIcon" />
+                Contraseña
+              </div>
+              <div className="LTPersonalInfoItemValue">
+                Último cambio: {userInfo.lastPasswordChange}
+              </div>
+              <div className="LTPersonalInfoItemHelper">
+                Cambiá tu contraseña desde “Editar datos de cuenta”.
+              </div>
+            </div>
+          </div>
+
+          {/* E-mail */}
+          <div className="LTPersonalInfoItem">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <Mail size={20} className="LTPersonalInfoItemIcon" />
+                E-mail
+              </div>
+              <div className="LTPersonalInfoItemValue">{userInfo.email}</div>
+              <div className="LTPersonalInfoItemHelper">
+                E-mail donde recibís comunicaciones.
+              </div>
+            </div>
+          </div>
+
+          {/* Teléfono */}
+          <div className="LTPersonalInfoItem">
+            <div className="LTPersonalInfoItemContent">
+              <div className="LTPersonalInfoItemLabel">
+                <Phone size={20} className="LTPersonalInfoItemIcon" />
+                Teléfono
+              </div>
+              <div className="LTPersonalInfoItemValue">{userInfo.phone}</div>
+              <div className="LTPersonalInfoItemHelper">
+                Número donde recibís códigos de verificación.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Direcciones */}
+        <div className="lt-account-card">
+          <h3 className="lt-account-cardTitle">Mis Direcciones</h3>
+          {userInfo.addressCount > 0 ? (
+            <div className="LTPersonalInfoItem">
+              <div className="LTPersonalInfoItemContent">
+                <div className="LTPersonalInfoItemLabel">
+                  <MapPin size={20} className="LTPersonalInfoItemIcon" />
+                  Direcciones guardadas
+                </div>
+                <div className="LTPersonalInfoItemValue">
+                  {userInfo.addressCount}{" "}
+                  {userInfo.addressCount === 1 ? "dirección" : "direcciones"}
+                </div>
+              </div>
+              <div className="LTPersonalInfoItemActions">
+                <button className="LTPersonalInfoEditButton">
+                  <ChevronRight size={20} />
                 </button>
               </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Datos de la cuenta (sin card anidada) */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Datos de la cuenta</h3>
-
-        {/* Email */}
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <Mail size={20} className="LTPersonalInfoItemIcon" />
-              E-mail
             </div>
-            {editingField === "email" ? (
-              <div className="LTPersonalInfoEditForm slide-down">
-                <input
-                  type="email"
-                  value={editForm.email}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, email: e.target.value })
-                  }
-                  className="LTPersonalInfoFormInput"
-                  placeholder="Nuevo e-mail"
-                />
-                <div className="LTPersonalInfoPasswordConfirm">
-                  <div className="LTPersonalInfoPasswordField">
-                    <Lock size={16} />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="LTPersonalInfoFormInput"
-                      placeholder="Contraseña actual"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="LTPersonalInfoPasswordToggle"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-                <div className="LTPersonalInfoFormActions">
-                  <button
-                    onClick={handleCancelEdit}
-                    className="lt-button-light"
-                  >
-                    <X size={16} /> Cancelar
-                  </button>
-                  <button
-                    onClick={handleSaveEdit}
-                    className="lt-button-variant2"
-                  >
-                    <Save size={16} /> Guardar
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="LTPersonalInfoItemValue">{userInfo.email}</div>
-                <div className="LTPersonalInfoItemHelper">
-                  E-mail donde recibís comunicaciones.
-                </div>
-              </>
-            )}
-          </div>
-          {editingField !== "email" && (
-            <div className="LTPersonalInfoItemActions">
-              <CheckCircle size={20} className="LTPersonalInfoItemCheck" />
-              <button
-                onClick={() => handleEditClick("email")}
-                className="LTPersonalInfoEditButton"
-              >
-                <ChevronRight size={20} />
+          ) : (
+            <div className="LTPersonalInfoEmpty">
+              <MapPin size={32} className="LTPersonalInfoEmptyIcon" />
+              <p className="LTPersonalInfoEmptyTitle">
+                No tenés direcciones registradas
+              </p>
+              <p className="LTPersonalInfoEmptyText">
+                Agregá una dirección para facilitar tus envíos
+              </p>
+              <button className="lt-button-variant2">
+                <MapPin size={16} /> Agregar Dirección
               </button>
             </div>
           )}
         </div>
 
-        {/* Teléfono */}
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <Phone size={20} className="LTPersonalInfoItemIcon" />
-              Teléfono
-            </div>
-            {editingField === "phone" ? (
-              <div className="LTPersonalInfoEditForm slide-down">
-                <input
-                  type="tel"
-                  value={editForm.phone}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, phone: e.target.value })
-                  }
-                  className="LTPersonalInfoFormInput"
-                  placeholder="Nuevo teléfono"
-                />
-                <div className="LTPersonalInfoPasswordConfirm">
-                  <div className="LTPersonalInfoPasswordField">
-                    <Lock size={16} />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="LTPersonalInfoFormInput"
-                      placeholder="Contraseña actual"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="LTPersonalInfoPasswordToggle"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
+        {/* Medios de pago */}
+        <div className="lt-account-card">
+          <h3 className="lt-account-cardTitle">Mis Medios de pago</h3>
+          {userInfo.paymentMethodsCount > 0 ? (
+            <div className="LTPersonalInfoItem">
+              <div className="LTPersonalInfoItemContent">
+                <div className="LTPersonalInfoItemLabel">
+                  <CreditCard size={20} className="LTPersonalInfoItemIcon" />
+                  Tarjetas y cuentas
                 </div>
-                <div className="LTPersonalInfoFormActions">
-                  <button
-                    onClick={handleCancelEdit}
-                    className="lt-button-light"
-                  >
-                    <X size={16} /> Cancelar
-                  </button>
-                  <button
-                    onClick={handleSaveEdit}
-                    className="lt-button-variant2"
-                  >
-                    <Save size={16} /> Guardar
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="LTPersonalInfoItemValue">{userInfo.phone}</div>
-                <div className="LTPersonalInfoItemHelper">
-                  Número donde recibís códigos de verificación.
-                </div>
-              </>
-            )}
-          </div>
-          {editingField !== "phone" && (
-            <div className="LTPersonalInfoItemActions">
-              <CheckCircle size={20} className="LTPersonalInfoItemCheck" />
-              <button
-                onClick={() => handleEditClick("phone")}
-                className="LTPersonalInfoEditButton"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          )}
-        </div>
-
-        {/* Nombre de usuario */}
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <UserCheck size={20} className="LTPersonalInfoItemIcon" />
-              Nombre de usuario
-            </div>
-            {editingField === "username" ? (
-              <div className="LTPersonalInfoEditForm slide-down">
-                <input
-                  type="text"
-                  value={editForm.username}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, username: e.target.value })
-                  }
-                  className="LTPersonalInfoFormInput"
-                  placeholder="Nuevo nombre de usuario"
-                />
-                <div className="LTPersonalInfoPasswordConfirm">
-                  <div className="LTPersonalInfoPasswordField">
-                    <Lock size={16} />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="LTPersonalInfoFormInput"
-                      placeholder="Contraseña actual"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="LTPersonalInfoPasswordToggle"
-                    >
-                      {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-                <div className="LTPersonalInfoFormActions">
-                  <button
-                    onClick={handleCancelEdit}
-                    className="lt-button-light"
-                  >
-                    <X size={16} /> Cancelar
-                  </button>
-                  <button
-                    onClick={handleSaveEdit}
-                    className="lt-button-variant2"
-                  >
-                    <Save size={16} /> Guardar
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="LTPersonalInfoItemValue">{userInfo.username}</div>
-            )}
-          </div>
-          {editingField !== "username" && (
-            <div className="LTPersonalInfoItemActions">
-              <button
-                onClick={() => handleEditClick("username")}
-                className="LTPersonalInfoEditButton"
-              >
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Información personal */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Información personal</h3>
-
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <User size={20} className="LTPersonalInfoItemIcon" />
-              Nombre y apellido
-            </div>
-            <div className="LTPersonalInfoItemValue">{userInfo.fullName}</div>
-          </div>
-          <div className="LTPersonalInfoItemActions">
-            <CheckCircle size={20} className="LTPersonalInfoItemCheck" />
-            <button
-              onClick={() => handleEditClick("fullName")}
-              className="LTPersonalInfoEditButton"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
-
-        <div className="LTPersonalInfoItem LTPersonalInfoItem--aboutMe">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <UserCheck size={20} className="LTPersonalInfoItemIcon" />
-              Sobre mí
-            </div>
-            {editingField === "aboutMe" ? (
-              <div className="LTPersonalInfoEditForm slide-down">
-                <textarea
-                  value={editForm.aboutMe}
-                  onChange={(e) =>
-                    setEditForm({ ...editForm, aboutMe: e.target.value })
-                  }
-                  className="LTPersonalInfoFormInput LTPersonalInfoTextarea"
-                  placeholder="Contanos un poco sobre vos..."
-                  rows="4"
-                />
-                <div className="LTPersonalInfoFormActions">
-                  <button
-                    onClick={handleCancelEdit}
-                    className="lt-button-light"
-                  >
-                    <X size={16} /> Cancelar
-                  </button>
-                  <button
-                    onClick={handleSaveEdit}
-                    className="lt-button-variant2"
-                  >
-                    <Save size={16} /> Guardar
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <>
                 <div className="LTPersonalInfoItemValue">
-                  {userInfo.aboutMe || "Aún no agregaste una descripción"}
+                  {userInfo.paymentMethodsCount}{" "}
+                  {userInfo.paymentMethodsCount === 1
+                    ? "método de pago"
+                    : "métodos de pago"}
                 </div>
-                <div className="LTPersonalInfoItemHelper">
-                  Agregá una breve descripción sobre vos.
-                </div>
-              </>
-            )}
-          </div>
-          {editingField !== "aboutMe" && (
-            <div className="LTPersonalInfoItemActions">
-              <button
-                onClick={() => handleEditClick("aboutMe")}
-                className="LTPersonalInfoEditButton"
-              >
-                <ChevronRight size={20} />
+              </div>
+              <div className="LTPersonalInfoItemActions">
+                <button className="LTPersonalInfoEditButton">
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="LTPersonalInfoEmpty">
+              <CreditCard size={32} className="LTPersonalInfoEmptyIcon" />
+              <p className="LTPersonalInfoEmptyTitle">
+                No tenés medios de pago registrados
+              </p>
+              <p className="LTPersonalInfoEmptyText">
+                Agregá una tarjeta o método de pago para realizar compras
+              </p>
+              <button className="lt-button-variant2">
+                <CreditCard size={16} /> Agregar Método de Pago
               </button>
             </div>
           )}
         </div>
-      </div>
 
-      {/* Seguridad */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Seguridad</h3>
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <Lock size={20} className="LTPersonalInfoItemIcon" />
-              Contraseña
-            </div>
-            <div className="LTPersonalInfoItemValue">
-              Último cambio hace {userInfo.lastPasswordChange}
-            </div>
-            <div className="LTPersonalInfoItemHelper">
-              Mantené tu cuenta segura actualizando tu contraseña regularmente.
-            </div>
-          </div>
-          <div className="LTPersonalInfoItemActions">
-            <button className="LTPersonalInfoEditButton">
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Direcciones */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Mis Direcciones</h3>
-        {userInfo.addressCount > 0 ? (
+        {/* Datos fiscales */}
+        <div className="lt-account-card">
+          <h3 className="lt-account-cardTitle">Datos fiscales</h3>
           <div className="LTPersonalInfoItem">
             <div className="LTPersonalInfoItemContent">
               <div className="LTPersonalInfoItemLabel">
-                <MapPin size={20} className="LTPersonalInfoItemIcon" />
-                Direcciones guardadas
+                <FileText size={20} className="LTPersonalInfoItemIcon" />
+                Condición fiscal
               </div>
               <div className="LTPersonalInfoItemValue">
-                {userInfo.addressCount}{" "}
-                {userInfo.addressCount === 1 ? "dirección" : "direcciones"}
+                {userInfo.taxStatus}
               </div>
             </div>
             <div className="LTPersonalInfoItemActions">
+              <CheckCircle size={20} className="LTPersonalInfoItemCheck" />
               <button className="LTPersonalInfoEditButton">
                 <ChevronRight size={20} />
               </button>
             </div>
           </div>
-        ) : (
-          <div className="LTPersonalInfoEmpty">
-            <MapPin size={32} className="LTPersonalInfoEmptyIcon" />
-            <p className="LTPersonalInfoEmptyTitle">
-              No tenés direcciones registradas
-            </p>
-            <p className="LTPersonalInfoEmptyText">
-              Agregá una dirección para facilitar tus envíos
-            </p>
-            <button className="lt-button-variant2">
-              <MapPin size={16} /> Agregar Dirección
-            </button>
-          </div>
-        )}
-      </div>
+        </div>
 
-      {/* Medios de pago */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Medios de pago</h3>
-        {userInfo.paymentMethodsCount > 0 ? (
-          <div className="LTPersonalInfoItem">
-            <div className="LTPersonalInfoItemContent">
-              <div className="LTPersonalInfoItemLabel">
-                <CreditCard size={20} className="LTPersonalInfoItemIcon" />
-                Tarjetas y cuentas
-              </div>
-              <div className="LTPersonalInfoItemValue">
-                {userInfo.paymentMethodsCount}{" "}
-                {userInfo.paymentMethodsCount === 1
-                  ? "método de pago"
-                  : "métodos de pago"}
-              </div>
-            </div>
-            <div className="LTPersonalInfoItemActions">
-              <button className="LTPersonalInfoEditButton">
-                <ChevronRight size={20} />
-              </button>
-            </div>
-          </div>
-        ) : (
-          <div className="LTPersonalInfoEmpty">
-            <CreditCard size={32} className="LTPersonalInfoEmptyIcon" />
-            <p className="LTPersonalInfoEmptyTitle">
-              No tenés medios de pago registrados
-            </p>
-            <p className="LTPersonalInfoEmptyText">
-              Agregá una tarjeta o método de pago para realizar compras
-            </p>
-            <button className="lt-button-variant2">
-              <CreditCard size={16} /> Agregar Método de Pago
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Datos fiscales */}
-      <div className="lt-account-card">
-        <h3 className="lt-account-cardTitle">Datos fiscales</h3>
-        <div className="LTPersonalInfoItem">
-          <div className="LTPersonalInfoItemContent">
-            <div className="LTPersonalInfoItemLabel">
-              <FileText size={20} className="LTPersonalInfoItemIcon" />
-              Condición fiscal
-            </div>
-            <div className="LTPersonalInfoItemValue">{userInfo.taxStatus}</div>
-          </div>
-          <div className="LTPersonalInfoItemActions">
-            <CheckCircle size={20} className="LTPersonalInfoItemCheck" />
-            <button className="LTPersonalInfoEditButton">
-              <ChevronRight size={20} />
-            </button>
-          </div>
+        {/* Aviso de seguridad */}
+        <div className="LTPersonalInfoSecurityNotice">
+          <ShieldCheck size={18} className="LTPersonalInfoSecurityIcon" />
+          <p>
+            Tu información personal está siempre protegida. Si tenés dudas,
+            podés consultar{" "}
+            <a href="#" className="LTPersonalInfoSecurityLink">
+              cómo cuidamos tus datos
+            </a>
+            .
+          </p>
         </div>
       </div>
 
-      {/* Aviso de seguridad */}
-      <div className="LTPersonalInfoSecurityNotice">
-        <ShieldCheck size={18} className="LTPersonalInfoSecurityIcon" />
-        <p>
-          Tu información personal está siempre protegida. Si tenés dudas, podés
-          consultar{" "}
-          <a href="#" className="LTPersonalInfoSecurityLink">
-            cómo cuidamos tus datos
-          </a>
-          .
-        </p>
-      </div>
+      {/* MODAL — forms modernos */}
+      {modalOpen && (
+        <div className="lt-modal-backdrop" onClick={closeModal}>
+          <div
+            className="lt-modal lt-modal--wide"
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="lt-modal-title">
+              {modalTarget === "personal"
+                ? "Editar información personal"
+                : "Editar datos de cuenta"}
+            </h3>
+
+            <form
+              className="lt-modal-body lt-form-modern"
+              onSubmit={handleSubmitModal}
+            >
+              {modalTarget === "personal" ? (
+                <>
+                  {/* Nombre */}
+                  <div className="lt-field">
+                    <input
+                      className="lt-input"
+                      type="text"
+                      placeholder=" "
+                      value={editForm.firstName}
+                      onChange={(e) =>
+                        setEditForm({ ...editForm, firstName: e.target.value })
+                      }
+                      required
+                    />
+                    <label className="lt-label">Nombre</label>
+                  </div>
+
+                  {/* Apellido */}
+                  <div className="lt-field">
+                    <input
+                      className="lt-input"
+                      type="text"
+                      placeholder=" "
+                      value={editForm.lastName}
+                      onChange={(e) =>
+                        setEditForm({ ...editForm, lastName: e.target.value })
+                      }
+                    />
+                    <label className="lt-label">Apellido</label>
+                    <small className="lt-help">Usá tu apellido real.</small>
+                  </div>
+
+                  {/* Sobre mí */}
+                  <div className="lt-field lt-field--full">
+                    <textarea
+                      className="lt-input lt-textarea"
+                      rows={5}
+                      placeholder=" "
+                      maxLength={280}
+                      value={editForm.aboutMe}
+                      onChange={(e) =>
+                        setEditForm({ ...editForm, aboutMe: e.target.value })
+                      }
+                    />
+                    <label className="lt-label">Sobre mí</label>
+                    <small className="lt-help">Máx. 280 caracteres.</small>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* 2 columnas en desktop, cómodas */}
+                  <div className="lt-grid-2 lt-grid-comfy">
+                    {/* Usuario */}
+                    <div className="lt-field">
+                      <input
+                        className="lt-input"
+                        type="text"
+                        placeholder=" "
+                        value={editForm.username}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, username: e.target.value })
+                        }
+                        required
+                      />
+                      <label className="lt-label">Nombre de usuario</label>
+                      <small className="lt-help">Debe ser único.</small>
+                    </div>
+
+                    {/* Teléfono */}
+                    <div className="lt-field">
+                      <input
+                        className="lt-input"
+                        type="text"
+                        placeholder=" "
+                        value={editForm.phone}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, phone: e.target.value })
+                        }
+                      />
+                      <label className="lt-label">Teléfono</label>
+                      <small className="lt-help">Ej.: +54 9 …</small>
+                    </div>
+
+                    {/* Email */}
+                    <div className="lt-field">
+                      <input
+                        className="lt-input"
+                        type="email"
+                        placeholder=" "
+                        value={editForm.email}
+                        onChange={(e) =>
+                          setEditForm({ ...editForm, email: e.target.value })
+                        }
+                        required
+                      />
+                      <label className="lt-label">E-mail</label>
+                      <small className="lt-help">Donde recibís avisos.</small>
+                    </div>
+
+                    {/* Password nueva (opcional) */}
+                    <div className="lt-field">
+                      <input
+                        className="lt-input"
+                        type="password"
+                        placeholder=" "
+                        value={editForm.newPassword}
+                        onChange={(e) =>
+                          setEditForm({
+                            ...editForm,
+                            newPassword: e.target.value,
+                          })
+                        }
+                        minLength={6}
+                      />
+                      <label className="lt-label">
+                        Contraseña nueva (opcional)
+                      </label>
+                      <small className="lt-help">Mínimo 6 caracteres.</small>
+                    </div>
+
+                    {/* Actual - ocupa todo el ancho */}
+                    <div className="lt-field lt-field--full">
+                      <input
+                        className="lt-input"
+                        type="password"
+                        placeholder=" "
+                        value={modalPasswordConfirm}
+                        onChange={(e) =>
+                          setModalPasswordConfirm(e.target.value)
+                        }
+                        required
+                      />
+                      <label className="lt-label">
+                        Contraseña actual (requerida)
+                      </label>
+                      <small className="lt-help">
+                        Solo se usa para confirmar cambios.
+                      </small>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              <div className="lt-modal-actions">
+                <button
+                  type="button"
+                  className="lt-button-light"
+                  onClick={closeModal}
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="lt-button-variant2">
+                  Guardar cambios
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* PHOTO-MODAL (solo para cambiar foto) */}
+      {photoModalOpen && (
+        <div className="lt-modal-backdrop" onClick={closePhotoModal}>
+          <div
+            className="lt-modal lt-modal--wide"
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="lt-modal-title">Cambiar foto de perfil</h3>
+            <div className="lt-modal-body lt-form-modern">
+              <div className="lt-field">
+                {profileImage ? (
+                  <img
+                    src={profileImage}
+                    alt="Preview"
+                    style={{
+                      width: 96,
+                      height: 96,
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: 96,
+                      height: 96,
+                      borderRadius: "50%",
+                      background: "linear-gradient(135deg,#b3b8e6,#747bbf)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      color: "#fff",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {userInitials}
+                  </div>
+                )}
+              </div>
+
+              <div className="lt-field">
+                <button
+                  type="button"
+                  onClick={() =>
+                    document.getElementById("file-upload-photo-modal")?.click()
+                  }
+                  className="lt-button-light"
+                >
+                  <Upload size={16} /> Subir archivo
+                </button>
+                <input
+                  type="file"
+                  id="file-upload-photo-modal"
+                  accept="image/*"
+                  className="LTPersonalInfoFileInput"
+                  onChange={handleFileUpload}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowUrlInput((v) => !v)}
+                  className="lt-button-light"
+                >
+                  <LinkIcon size={16} /> Usar URL
+                </button>
+              </div>
+
+              {showUrlInput && (
+                <div className="lt-field">
+                  <input
+                    type="url"
+                    value={imageUrl}
+                    onChange={(e) => setImageUrl(e.target.value)}
+                    placeholder="Pega la URL de la imagen aquí"
+                    className="lt-input"
+                  />
+                  <button
+                    onClick={handleUrlUpload}
+                    className="lt-button-variant2"
+                    disabled={!imageUrl || isImageLoading}
+                  >
+                    Aplicar
+                  </button>
+                </div>
+              )}
+            </div>
+            <div className="lt-modal-actions">
+              <button className="lt-button-light" onClick={closePhotoModal}>
+                Cancelar
+              </button>
+              <button className="lt-button-variant2" onClick={closePhotoModal}>
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,42 @@
+.LTAdminLayoutRoot {
+  min-height: 100vh;
+  background: var(--lt-background-color, #fefefe);
+  display: flex;
+  flex-direction: column;
+}
+
+.LTAdminLayoutHeader {
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: white;
+  box-shadow: 0 2px 8px rgba(116, 123, 191, 0.08);
+  padding: 0 2rem;
+  z-index: 100;
+}
+
+.LTAdminLayoutLogoBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.LTAdminLayoutLogo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.LTAdminLayoutMain {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem 1rem;
+  box-sizing: border-box;
+}

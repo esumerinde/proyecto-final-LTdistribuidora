@@ -83,9 +83,8 @@ const LTHeaderMobile = ({
 
   const adminOfferItems = isAdmin
     ? [
-        { label: "Panel de Admin" },
+        { label: "Panel de Admin", onClick: () => navigate("/adminpanel") },
         { label: "Cerrar Sesión", onClick: handleLogout, variant: "danger" },
-        { label: "Estadísticas" },
       ]
     : [];
 
